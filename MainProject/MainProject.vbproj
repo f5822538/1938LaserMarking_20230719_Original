@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="big5"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4D35C756-B2C4-43AA-A4DC-D22A00079AB4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>LaserMarkingX64.AppMgr</StartupObject>
+    <RootNamespace>LaserMarkingX64</RootNamespace>
+    <AssemblyName>LaserMarkingX64</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Iconshow-Hardware-Webcam.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <DocumentationFile>LaserMarkingX64.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisLogFile>bin\Debug\IP.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>ADLinkType64 = "0"</DefineConstants>
+    <DocumentationFile>LaserMarkingX64.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisLogFile>bin\Release\IP.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CLIDelegate">
+      <HintPath>BaseService\CLIDelegate.dll</HintPath>
+    </Reference>
+    <Reference Include="iTVisionAreaCameraX64">
+      <HintPath>BaseService\iTVisionAreaCameraX64.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionButtonLib">
+      <HintPath>BaseService\iTVisionButtonLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionControl">
+      <HintPath>BaseService\iTVisionControl.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionDisplayLib">
+      <HintPath>BaseService\iTVisionDisplayLib.dll</HintPath>
+    </Reference>
+    <Reference Include="iTVisionHandShake">
+      <HintPath>BaseService\iTVisionHandShake.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionImageLib">
+      <HintPath>BaseService\iTVisionImageLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionImageLibMilV10X64">
+      <HintPath>BaseService\iTVisionImageLibMilV10X64.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionInspectLib">
+      <HintPath>BaseService\iTVisionInspectLib.dll</HintPath>
+      <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="iTVisionJSX64">
+      <HintPath>BaseService\iTVisionJSX64.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionService">
+      <HintPath>BaseService\iTVisionService.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVSafeComperiodLib">
+      <HintPath>BaseService\iTVSafeComperiodLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Matrox.MatroxImagingLibrary">
+      <HintPath>BaseService\Matrox.MatroxImagingLibrary.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="ThridLibray">
+      <HintPath>BaseService\ThridLibray.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="ActProgTypeLib" />
+    <Import Include="ConfigLib" />
+    <Import Include="DefectLib" />
+    <Import Include="iTVisionService" />
+    <Import Include="iTVisionService.AreaCameraLib" />
+    <Import Include="iTVisionService.ButtonLib" />
+    <Import Include="iTVisionService.HandShake" />
+    <Import Include="iTVisionService.ImageLibMil" />
+    <Import Include="iTVisionService.iTVControl" />
+    <Import Include="iTVisionService.iTVDelta" />
+    <Import Include="iTVisionService.iTVImageLib" />
+    <Import Include="iTVisionService.iTVJS" />
+    <Import Include="iTVisionService.iTVSafeComperiodLib" />
+    <Import Include="iTVisionService.MotionLib" />
+    <Import Include="iTVisionService.MXServer" />
+    <Import Include="Matrox.MatroxImagingLibrary" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="RecipeLib" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.ComponentModel" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing.Imaging" />
+    <Import Include="System.IO" />
+    <Import Include="System.Reflection" />
+    <Import Include="System.Runtime.CompilerServices" />
+    <Import Include="System.Security.Cryptography" />
+    <Import Include="System.Text" />
+    <Import Include="System.Threading" />
+    <Import Include="System.Threading.Tasks" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Xml.Xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Frm\Sub\frmRecipe.Designer.vb">
+      <DependentUpon>frmRecipe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Sub\frmRecipe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Sub\frmRecipeCodeReader.Designer.vb">
+      <DependentUpon>frmRecipeCodeReader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Sub\frmRecipeCodeReader.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Sub\frmWaferMap.Designer.vb">
+      <DependentUpon>frmWaferMap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Sub\frmWaferMap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HandleClass\Alarm\AlarmCode.vb" />
+    <Compile Include="HandleClass\Alarm\SRAlarmCode.Public.vb">
+      <DependentUpon>SRAlarmCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Alarm\SRAlarmCode.vb" />
+    <Compile Include="HandleClass\AppMgr.vb" />
+    <Compile Include="HandleClass\CHandleLoad.vb" />
+    <Compile Include="HandleClass\Handle\CMyEquipment.Alarm.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Camera.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.CodeReader.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Fast.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Flag.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Handshake.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Image.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Inspect.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Log.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.MetaFileSetting.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.Product.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.ThreadPool.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.UpdateCodeReadResult.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\CMyEquipment.vb" />
+    <Compile Include="HandleClass\Handle\CMyEquipment.WaferMap.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\Sub\CMyCamera.Public.vb">
+      <DependentUpon>CMyCamera.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\Sub\CMyCamera.vb" />
+    <Compile Include="HandleClass\Handle\Sub\CMyHandshake.Public.vb">
+      <DependentUpon>CMyHandshake.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\Sub\CMyIO.vb" />
+    <Compile Include="HandleClass\Handle\Sub\CMyLocater.vb" />
+    <Compile Include="HandleClass\Handle\Sub\CMyLog.vb" />
+    <Compile Include="Frm\Base\frmNoClose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Sub\frmHardwareConfig.Designer.vb">
+      <DependentUpon>frmHardwareConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Sub\frmHardwareConfig.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Sub\frmIntegrateTest.Designer.vb">
+      <DependentUpon>frmIntegrateTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Sub\frmIntegrateTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Sub\frmRecipeList.Designer.vb">
+      <DependentUpon>frmRecipeList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Sub\frmRecipeList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HandleClass\Handle\Sub\CMyModelImage.vb" />
+    <Compile Include="HandleClass\Handle\Sub\CMyHandshake.vb" />
+    <Compile Include="HandleClass\Handle\Sub\CMyPatternMatching.vb" />
+    <Compile Include="HandleClass\Handle\Sub\CMyUpdateStatus.vb" />
+    <Compile Include="HandleClass\Handle\CMyEquipment.DIO3208.vb">
+      <DependentUpon>CMyEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Handle\Sub\CMyCodeReader.vb" />
+    <Compile Include="Module\modEnum.vb" />
+    <Compile Include="Module\modHistory.vb" />
+    <Compile Include="Module\modLibrary.vb" />
+    <Compile Include="Module\modModel.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Thread\CAutoRunThread.Inspect.vb">
+      <DependentUpon>CAutoRunThread.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Thread\CAutoRunThread.Public.vb">
+      <DependentUpon>CAutoRunThread.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Thread\CAutoRunThread.vb" />
+    <Compile Include="Thread\CClearBufferThread.vb" />
+    <Compile Include="Thread\CTowerThread.vb" />
+    <Compile Include="Thread\CInnerThread.Public.vb">
+      <DependentUpon>CInnerThread.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Thread\CInnerThread.vb" />
+    <Compile Include="Thread\CHandshakeThread.vb" />
+    <Compile Include="Thread\Event\CAutoRunFinished.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Frm\frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Sub\frmHardwareConfig.resx">
+      <DependentUpon>frmHardwareConfig.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Sub\frmIntegrateTest.resx">
+      <DependentUpon>frmIntegrateTest.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Sub\frmRecipeList.resx">
+      <DependentUpon>frmRecipeList.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Sub\frmRecipe.resx">
+      <DependentUpon>frmRecipe.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Sub\frmRecipeCodeReader.resx">
+      <DependentUpon>frmRecipeCodeReader.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Sub\frmWaferMap.resx">
+      <DependentUpon>frmWaferMap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\CUserProfile.datasource" />
+    <None Include="My Project\DataSources\DefectLib.CMyProduct.datasource" />
+    <None Include="My Project\DataSources\DefectLib.MarkInfo.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CMainRecipe.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeCamera.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeEdge.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeInspect.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeInspectList.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeMark.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeMarkExtend.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeMarkExtendList.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeModelDiff.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeModelDiffShow.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeProduct.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CStatusCamera.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CStatusCameraForMain.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.EnumHorDirection.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.EnumInspectTypeConverter.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.EnumVerDirection.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.frmNoClose.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.MeasureInfo.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.ModelFinderShift.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigLib\ConfigLib.vbproj">
+      <Project>{0AA751D6-B762-44F5-B438-78F794F64092}</Project>
+      <Name>ConfigLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DefectLib\DefectLib.vbproj">
+      <Project>{EF16073D-9363-4028-B88F-F4E99B723EFD}</Project>
+      <Name>DefectLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\RecipeLib\RecipeLib.vbproj">
+      <Project>{653962ED-6B55-4B75-8029-81B69936C281}</Project>
+      <Name>RecipeLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XML\DefectReport.xslt" />
+    <EmbeddedResource Include="BaseService\Lock\haspdnert.dll" />
+    <EmbeddedResource Include="BaseService\Lock\haspdnert_x64.dll" />
+    <EmbeddedResource Include="BaseService\Lock\haspvlib_114385.dll" />
+    <EmbeddedResource Include="BaseService\Lock\hasp_windows_114385.dll" />
+    <EmbeddedResource Include="BaseService\Lock\hasp_windows_x64_114385.dll" />
+    <EmbeddedResource Include="BaseService\ExtendLib\x64\Release\ComperiodLib.dll" />
+    <EmbeddedResource Include="Resource\ConfigLib.dll" />
+    <EmbeddedResource Include="Resource\DefectLib.dll" />
+    <EmbeddedResource Include="Resource\RecipeLib.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionButtonLib.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionControl.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionHandShake.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionService.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionAreaCameraX64.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionImageLib.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionImageLibCore.dll" />
+    <EmbeddedResource Include="BaseService\iTVSafeComperiodLib.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionImageBaseCore.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionJSX64.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionImageLibMilCoreV10.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionImageLibMilV10X64.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionInspectLib.dll" />
+    <EmbeddedResource Include="BaseService\iTVisionInspectCoreVC2010.dll" />
+    <Content Include="BaseService\CLIDelegate.dll" />
+    <Content Include="BaseService\iTVisionDisplayLib.dll" />
+    <Content Include="BaseService\Matrox.MatroxImagingLibrary.dll" />
+    <Content Include="BaseService\MILPP3\Matrox.MatroxImagingLibrary.dll" />
+    <Content Include="BaseService\ThridLibray.dll" />
+    <Content Include="Iconshow-Hardware-Webcam.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

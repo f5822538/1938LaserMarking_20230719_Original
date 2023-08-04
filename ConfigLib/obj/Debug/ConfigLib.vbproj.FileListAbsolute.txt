@@ -1,0 +1,180 @@
+E:\Code\1938LaserMarking\MainProject\Resource\ConfigLib.dll
+E:\Code\1938LaserMarking\MainProject\Resource\ConfigLib.pdb
+E:\Code\1938LaserMarking\MainProject\Resource\ConfigLib.xml
+E:\Code\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+E:\Code\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+E:\Code\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+E:\Code\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.dll
+E:\Code\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.xml
+E:\Code\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.pdb
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\ConfigLib.dll
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\ConfigLib.pdb
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\ConfigLib.xml
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.dll
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.xml
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.pdb
+D:\Program\1938LaserMarking_0504\1938LaserMarking\MainProject\Resource\ConfigLib.dll
+D:\Program\1938LaserMarking_0504\1938LaserMarking\MainProject\Resource\ConfigLib.pdb
+D:\Program\1938LaserMarking_0504\1938LaserMarking\MainProject\Resource\ConfigLib.xml
+D:\Program\1938LaserMarking_0504\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+D:\Program\1938LaserMarking_0504\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+D:\Program\1938LaserMarking_0504\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking_0504\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.dll
+D:\Program\1938LaserMarking_0504\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.xml
+D:\Program\1938LaserMarking_0504\1938LaserMarking\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\ConfigLib\obj\Debug\ConfigLib.pdb
+D:\Program\1938LaserMarking220726_Final\MainProject\Resource\ConfigLib.dll
+D:\Program\1938LaserMarking220726_Final\MainProject\Resource\ConfigLib.pdb
+D:\Program\1938LaserMarking220726_Final\MainProject\Resource\ConfigLib.xml
+D:\Program\1938LaserMarking220726_Final\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+D:\Program\1938LaserMarking220726_Final\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+D:\Program\1938LaserMarking220726_Final\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking220726_Final\ConfigLib\obj\Debug\ConfigLib.dll
+D:\Program\1938LaserMarking220726_Final\ConfigLib\obj\Debug\ConfigLib.xml
+D:\Program\1938LaserMarking220726_Final\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\ConfigLib\obj\Debug\ConfigLib.pdb
+D:\Program\1938LaserMarking230330\MainProject\Resource\ConfigLib.dll
+D:\Program\1938LaserMarking230330\MainProject\Resource\ConfigLib.pdb
+D:\Program\1938LaserMarking230330\MainProject\Resource\ConfigLib.xml
+D:\Program\1938LaserMarking230330\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+D:\Program\1938LaserMarking230330\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+D:\Program\1938LaserMarking230330\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking230330\ConfigLib\obj\Debug\ConfigLib.dll
+D:\Program\1938LaserMarking230330\ConfigLib\obj\Debug\ConfigLib.xml
+D:\Program\1938LaserMarking230330\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\ConfigLib\obj\Debug\ConfigLib.pdb
+D:\Program\1938LaserMarking230512\MainProject\Resource\ConfigLib.dll
+D:\Program\1938LaserMarking230512\MainProject\Resource\ConfigLib.pdb
+D:\Program\1938LaserMarking230512\MainProject\Resource\ConfigLib.xml
+D:\Program\1938LaserMarking230512\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+D:\Program\1938LaserMarking230512\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+D:\Program\1938LaserMarking230512\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking230512\ConfigLib\obj\Debug\ConfigLib.dll
+D:\Program\1938LaserMarking230512\ConfigLib\obj\Debug\ConfigLib.xml
+D:\Program\1938LaserMarking230512\ConfigLib\obj\Debug\ConfigLib.pdb
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\MainProject\Resource\ConfigLib.dll
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\MainProject\Resource\ConfigLib.pdb
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\MainProject\Resource\ConfigLib.xml
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.dll
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.xml
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.pdb

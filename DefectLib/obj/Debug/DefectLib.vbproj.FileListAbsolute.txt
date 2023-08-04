@@ -1,0 +1,181 @@
+E:\Code\1938LaserMarking\MainProject\Resource\DefectLib.dll
+E:\Code\1938LaserMarking\MainProject\Resource\DefectLib.pdb
+E:\Code\1938LaserMarking\MainProject\Resource\DefectLib.xml
+E:\Code\1938LaserMarking\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+E:\Code\1938LaserMarking\DefectLib\obj\Debug\DefectLib.Resources.resources
+E:\Code\1938LaserMarking\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+E:\Code\1938LaserMarking\DefectLib\obj\Debug\DefectLib.dll
+E:\Code\1938LaserMarking\DefectLib\obj\Debug\DefectLib.xml
+E:\Code\1938LaserMarking\DefectLib\obj\Debug\DefectLib.pdb
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\DefectLib.dll
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\DefectLib.pdb
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\DefectLib.xml
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.Resources.resources
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.dll
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.xml
+D:\1938-新ai交握程式\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\LTE225\有右下讀Code顯示\有右下讀Code顯示\1938LaserMarking\DefectLib\obj\Debug\DefectLib.pdb
+D:\Program\1938LaserMarking_0504\1938LaserMarking\MainProject\Resource\DefectLib.dll
+D:\Program\1938LaserMarking_0504\1938LaserMarking\MainProject\Resource\DefectLib.pdb
+D:\Program\1938LaserMarking_0504\1938LaserMarking\MainProject\Resource\DefectLib.xml
+D:\Program\1938LaserMarking_0504\1938LaserMarking\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+D:\Program\1938LaserMarking_0504\1938LaserMarking\DefectLib\obj\Debug\DefectLib.Resources.resources
+D:\Program\1938LaserMarking_0504\1938LaserMarking\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking_0504\1938LaserMarking\DefectLib\obj\Debug\DefectLib.dll
+D:\Program\1938LaserMarking_0504\1938LaserMarking\DefectLib\obj\Debug\DefectLib.xml
+D:\Program\1938LaserMarking_0504\1938LaserMarking\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_IT_Handshake\ASECL_LTE225_220511\1938LaserMarking220511\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220523\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_1938_merge\1938LaserMarking220727_Temp\DefectLib\obj\Debug\DefectLib.pdb
+D:\Program\1938LaserMarking220726_Final\MainProject\Resource\DefectLib.dll
+D:\Program\1938LaserMarking220726_Final\MainProject\Resource\DefectLib.pdb
+D:\Program\1938LaserMarking220726_Final\MainProject\Resource\DefectLib.xml
+D:\Program\1938LaserMarking220726_Final\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+D:\Program\1938LaserMarking220726_Final\DefectLib\obj\Debug\DefectLib.Resources.resources
+D:\Program\1938LaserMarking220726_Final\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking220726_Final\DefectLib\obj\Debug\DefectLib.dll
+D:\Program\1938LaserMarking220726_Final\DefectLib\obj\Debug\DefectLib.xml
+D:\Program\1938LaserMarking220726_Final\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221102\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking221206_NEWModify\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_Temp\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230109_TestOK2\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE TEMP\1938LaserMarking230202\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\2121_Modify_230206\1938LaserMarking230206\DefectLib\obj\Debug\DefectLib.vbprojResolveAssemblyReference.cache
+D:\Program\1938LaserMarking230330\MainProject\Resource\DefectLib.dll
+D:\Program\1938LaserMarking230330\MainProject\Resource\DefectLib.pdb
+D:\Program\1938LaserMarking230330\MainProject\Resource\DefectLib.xml
+D:\Program\1938LaserMarking230330\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+D:\Program\1938LaserMarking230330\DefectLib\obj\Debug\DefectLib.Resources.resources
+D:\Program\1938LaserMarking230330\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking230330\DefectLib\obj\Debug\DefectLib.dll
+D:\Program\1938LaserMarking230330\DefectLib\obj\Debug\DefectLib.xml
+D:\Program\1938LaserMarking230330\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230418\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\ASE_Code\1938LaserMarking230428\DefectLib\obj\Debug\DefectLib.pdb
+D:\Program\1938LaserMarking230512\MainProject\Resource\DefectLib.dll
+D:\Program\1938LaserMarking230512\MainProject\Resource\DefectLib.pdb
+D:\Program\1938LaserMarking230512\MainProject\Resource\DefectLib.xml
+D:\Program\1938LaserMarking230512\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+D:\Program\1938LaserMarking230512\DefectLib\obj\Debug\DefectLib.Resources.resources
+D:\Program\1938LaserMarking230512\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+D:\Program\1938LaserMarking230512\DefectLib\obj\Debug\DefectLib.dll
+D:\Program\1938LaserMarking230512\DefectLib\obj\Debug\DefectLib.xml
+D:\Program\1938LaserMarking230512\DefectLib\obj\Debug\DefectLib.pdb
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\MainProject\Resource\DefectLib.dll
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\MainProject\Resource\DefectLib.pdb
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\MainProject\Resource\DefectLib.xml
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.Resources.resources
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.dll
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.xml
+C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.pdb

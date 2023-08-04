@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{0AA751D6-B762-44F5-B438-78F794F64092}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ConfigLib</RootNamespace>
+    <AssemblyName>ConfigLib</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\MainProject\Resource\</OutputPath>
+    <DocumentationFile>ConfigLib.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\MainProject\Resource\</OutputPath>
+    <DocumentationFile>ConfigLib.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="iTVisionButtonLib">
+      <HintPath>..\MainProject\BaseService\iTVisionButtonLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionControl, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\MainProject\BaseService\iTVisionControl.dll</HintPath>
+    </Reference>
+    <Reference Include="iTVisionHandShake">
+      <HintPath>..\MainProject\BaseService\iTVisionHandShake.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="iTVisionService">
+      <HintPath>..\MainProject\BaseService\iTVisionService.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="iTVisionService" />
+    <Import Include="iTVisionService.ButtonLib" />
+    <Import Include="iTVisionService.HandShake" />
+    <Import Include="iTVisionService.iTVControl" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.ComponentModel" />
+    <Import Include="System.ComponentModel.DataAnnotations" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Drawing.Design" />
+    <Import Include="System.Globalization" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HandleClass\CHardwareConfig.LoadSave.vb">
+      <DependentUpon>CHardwareConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\CHardwareConfig.vb" />
+    <Compile Include="HandleClass\CYieldConfig.LoadSave.vb">
+      <DependentUpon>CYieldConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\CYieldConfig.vb" />
+    <Compile Include="HandleClass\Sub\CCameraConfig.LoadSave.vb">
+      <DependentUpon>CCameraConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Sub\CCameraConfig.vb" />
+    <Compile Include="HandleClass\Sub\CHandshakeConfig.LoadSave.vb">
+      <DependentUpon>CHandshakeConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Sub\CMiscConfig.LoadSave.vb">
+      <DependentUpon>CMiscConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HandleClass\Sub\CMiscConfig.vb" />
+    <Compile Include="HandleClass\Sub\CHandshakeConfig.vb" />
+    <Compile Include="Module\CExpandConvert.vb" />
+    <Compile Include="Module\modEnum.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\ImageBase.CImageBase.datasource" />
+    <None Include="My Project\DataSources\ImageBase.ImageHeader.datasource" />
+    <None Include="My Project\DataSources\ImageBase.InspectMethodForCombo.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CComp_InspectROIConverter.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CComp_Inspect_Size_DoubleConverter.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CIPHostMainRecipe.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CircleArcPara.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CMainRecipe.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CMainRecipeConverter.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Comp_ConfigData.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Comp_InspectData.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Comp_InspectROI.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Comp_InspectROIData.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Comp_Inspect_Size_Double.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Comp_IRect.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeCircleArc.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeCompareConfig.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeCompareInspect.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeCompareInspectConverter.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeEdge.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeLineMeasure.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeLineMeasureConverter.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeMeasure.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.CRecipeZone.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.ImageHeader.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.MeasureInfo.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.Rect.datasource" />
+    <None Include="My Project\DataSources\RecipeLib.test_structure.datasource" />
+    <None Include="My Project\DataSources\System.IO.File.datasource" />
+    <None Include="My Project\DataSources\System.IO.FileInfo.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeLib\RecipeLib.vbproj">
+      <Project>{653962ED-6B55-4B75-8029-81B69936C281}</Project>
+      <Name>RecipeLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,174 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SafeComperiodLib
+</name>
+</assembly>
+<members>
+<member name="M:SafeComperiodLib.CPeriodLib.CreateObjectExtend(System.Drawing.Size@,SafeComperiodLib.EXTEND_CREATESELECT)">
+	<summary>區域設定，建立延伸檢測處理物件，使用Mask/Color/延伸資料區</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetUpCallBackExtend(System.IntPtr,SafeComperiodLib.AddLog)">
+	<summary>區域設定,將Log透過回呼方式進行處理</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveScanImageExtend(System.IntPtr)">
+	<summary>查詢區域設定，是否存Scan圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveInSpectImageExtend(System.IntPtr)">
+	<summary>查詢區域設定，是否存Inspect圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveBinaryInspectedImageExtend(System.IntPtr)">
+	<summary>查詢區域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveBinaryFilteredImageExtend(System.IntPtr)">
+	<summary>查詢區域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QueryMergeNeededExtend(System.IntPtr)">
+	<summary>查詢區域設定，是否需要合併瑕疵</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveScanImageExtend(System.IntPtr)">
+	<summary>區域設定，存Scan圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveInSpectImageExtend(System.IntPtr)">
+	<summary>區域設定，存Inspect圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveBinaryInspectedImageExtend(System.IntPtr)">
+	<summary>區域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveBinaryFilteredImageExtend(System.IntPtr)">
+	<summary>區域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.Quit_MergeDefectsExtend(System.IntPtr)">
+	<summary>區域設定，關閉Merge Defects</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.RunAsSEE2Extend(System.IntPtr)">
+	<summary>區域設定，使用SEE2，預設SSE2</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.RunAsCPLusPlusExtend(System.IntPtr)">
+	<summary>區域設定，使用C++，預設SSE2</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetSmallImageCountExtend(System.IntPtr,System.Int32)">
+	<summary>區域設定，設定灰階小圖數量</summary>
+</member><member name="T:SafeComperiodLib.ITV_LIGHT_FEEDBACK">
+	<summary>ITV_LIGHT_FEEDBACK 光源灰階資料</summary>
+	<revision></revision>
+</member><member name="T:SafeComperiodLib.ITV_MESSAGEITEM">
+	<summary>ITV_MESSAGEITEM</summary>
+	<revision></revision>
+</member><member name="M:SafeComperiodLib.CPeriodLib.CreateObject(System.Drawing.Size@)">
+	<summary>建立檢測處理物件</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.DeleteObject(System.IntPtr)">
+	<summary>刪除檢測處理物件</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.Inspect(System.Int32,System.IntPtr,SafeComperiodLib.ITV_INSPECT_DATA@,SafeComperiodLib.ITV_DEFECT_RESULT@,System.Int32,System.Int32@,SafeComperiodLib.ITV_LIGHT_FEEDBACK@)">
+	<summary>進行檢測處理</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.Resize(ImageBase.ImageHeader@,ImageBase.ImageHeader@,System.Drawing.Point,System.Drawing.Point,System.Double)">
+	<summary>等效於ImageBaseCore ReSize</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.ReceiveLog">
+	<summary>測試Log是否順利執行</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetUpCallBack(SafeComperiodLib.AddLog)">
+	<summary>全域設定,將Log透過回呼方式進行處理</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.CalculateAverageGrey(System.IntPtr,SafeComperiodLib.ITV_INSPECT_DATA@,SafeComperiodLib.ITV_LIGHT_FEEDBACK@)">
+	<summary>計算平均灰階</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveScanImage">
+	<summary>查詢全域設定，是否存Scan圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveInSpectImage">
+	<summary>查詢全域設定，是否存Inspect圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveBinaryInspectedImage">
+	<summary>查詢全域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QuerySaveBinaryFilteredImage">
+	<summary>查詢全域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.QueryMergeNeeded">
+	<summary>查詢全域設定，是否需要合併瑕疵</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveScanImage">
+	<summary>全域設定，存Scan圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveInSpectImage">
+	<summary>全域設定，存Inspect圖</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveBinaryInspectedImage">
+	<summary>全域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SaveBinaryFilteredImage">
+	<summary>全域設定，目前無作用</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.Quit_MergeDefects">
+	<summary>全域設定，關閉Merge Defects</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.RunAsSEE2">
+	<summary>全域設定，使用SSE2，預設SSE2</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.RunAsCPLusPlus">
+	<summary>全域設定，使用C++，預設SSE2</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetSmallImageCount(System.Int32)">
+	<summary>全域設定，，設定灰階小圖數量</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetColor">
+	<summary>全域設定，設定彩色檢測，預設false</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetParallelExtend(System.IntPtr,System.Int32,System.Boolean)">
+	<summary>區域設定，設定平行計算的規則</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetColorThreshold(System.IntPtr,System.Double)">
+	<summary>區域設定，彩色容差</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetColorThresholdExtend(System.IntPtr,System.Double)">
+	<summary>區域設定，延伸彩色容差</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetColorSmallImageExtend(System.IntPtr,System.Int32)">
+	<summary>區域設定，設定彩色小圖數量</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetPreProcessExtend(System.IntPtr,ImageBase.Comp_PreImageProcessMode,iTVImageLib.KernelSize)">
+	<summary>區域設定，影像前處理模式</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetPreClusterProcessExtend(System.IntPtr,ImageBase.Comp_PreClsuterProcessMode)">
+	<summary>區域設定，Cluster影像前處理模式</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetSupportHeightWidthFilterExtend(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32)">
+	<summary>區域設定，支援高與寬過濾</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.CalculteXValue(SafeComperiodLib.ITV_RGB@,SafeComperiodLib.ITV_RGB@,System.Byte)">
+	<summary>計算RGB X數值</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.EnableJudgeSupport(System.IntPtr)">
+	<summary>區域設定，支援Judge判定處理</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetJudgeGreyExtend(System.IntPtr,System.Byte,System.Byte,System.Byte,System.Byte)">
+	<summary>區域設定，支援灰階Judge判定處理</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetJudgeSizeExtend(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32)">
+	<summary>區域設定，支援尺寸Judge判定處理</summary>
+</member><member name="M:SafeComperiodLib.CPeriodLib.SetJudgeGreySizeExtend(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32)">
+	<summary>區域設定，支援灰階尺寸Judge判定處理</summary>
+</member><member name="T:SafeComperiodLib.CPeriodLib">
+	<summary>CPeriodLib 週期運算庫</summary>
+	<remarks>
+		<para>0.01 2014-06-25 Steve Tsai 強制處理非可抓取異常</para>
+		<para>0.02 2014-08-28 Steve Tsai 此版本對應處理為ExtendComperiodLib_1.2.0.4所生成的資料結構轉換</para>
+		<para>0.03 2016-03-14 Steve Tsai 增加處理高度與寬度過濾</para>
+	</remarks>
+</member><member name="P:SafeComperiodLib.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:SafeComperiodLib.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:SafeComperiodLib.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="T:SafeComperiodLib.ITV_INSPECT_DATA">
+	<summary>Comp_InspectData</summary>
+	<revision></revision>
+</member><member name="T:SafeComperiodLib.ITV_INSPECT_ROI">
+	<summary>Comp_InspectROIData</summary>
+	<revision></revision>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.DefectBoundary">
+	<summary>異常區域邊界</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.DefectCenter">
+	<summary>幾何中心</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.BodyCenter">
+	<summary>實質中心</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.DefectType">
+	<summary>類型</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.BodyArea">
+	<summary>實質面積</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.DefectSize">
+	<summary>尺寸</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.MeanGray">
+	<summary>平均灰階</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.BaseGray">
+	<summary>基礎灰階</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.MaxGray">
+	<summary>最大灰階</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT.MinGray">
+	<summary>最小灰階</summary>
+</member><member name="T:SafeComperiodLib.ITV_DEFECT_RESULT">
+	<summary>ITV_DEFECT_RESULT 標準瑕疵資料結構</summary>
+	<remarks>
+		<para>2016-10-16 0.01 Steve Tsai 檢測資料結構</para>
+	</remarks>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT_EXTEND.ImageDefectCenter">
+	<summary>Defect 在小圖的位置中心點</summary>
+</member><member name="F:SafeComperiodLib.ITV_DEFECT_RESULT_EXTEND.ImageSize">
+	<summary>Defect 小圖的Size</summary>
+</member><member name="T:SafeComperiodLib.ITV_DEFECT_RESULT_EXTEND">
+	<summary>Defect 延伸資料結構</summary>
+	<remarks></remarks>
+</member><member name="T:SafeComperiodLib.ITV_RGB">
+	<summary>ITV_RGB</summary>
+	<revision></revision>
+</member>
+</members>
+</doc>
