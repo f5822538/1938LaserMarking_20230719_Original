@@ -52,4 +52,6 @@ Public Class SRAlarmCode
 
     Public Const IsHandshakeNotConnected As String = "手臂通訊無連線"
     Public Const IsHandshakeFailed As String = "手臂通訊失敗"
+
+    Public Const IsDieLoseLaser As String = "漏雷已扣除No Die"
 End Class

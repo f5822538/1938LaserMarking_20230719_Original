@@ -52,4 +52,6 @@ Public Enum AlarmCode
 
     <Description(SRAlarmCode.IsHandshakeNotConnected)> IsHandshakeNotConnected = 191
     <Description(SRAlarmCode.IsHandshakeFailed)> IsHandshakeFailed = 192
+
+    <Description(SRAlarmCode.IsDieLoseLaser)> IsDieLoseLaser = 8888
 End Enum

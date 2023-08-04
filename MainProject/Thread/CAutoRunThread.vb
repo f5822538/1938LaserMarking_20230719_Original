@@ -598,6 +598,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call .LogAlarm.LogError("Run Inspect 失敗")
                 End If
 
+                '-------------------------漏雷觸發Alarm-開始--------------------------
+                If oAlarmCode = AlarmCode.IsDieLoseLaser Then moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
+                '-------------------------漏雷觸發Alarm-結束--------------------------
+
                 If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
                     Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                     oAlarmCode = oLightVacuumDown.Result '燈源汽缸下降結果(AlarmCode)

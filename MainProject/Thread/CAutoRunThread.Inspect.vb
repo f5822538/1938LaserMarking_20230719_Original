@@ -207,29 +207,33 @@
                     Dim oCopyAIImageFileTask As Task = Task.Factory.StartNew(Sub() CopyAIImageFileForMulti(sPath, oInspectResult, oInspectSum))
                 End If
 
-                Dim bIsShowReport As Boolean = False
                 moMyEquipment.IsNotUpdateMap = False
+                '-------------------------漏雷扣除No Die-開始--------------------------
+                If moMyEquipment.HardwareConfig.HandshakeBypass = False Then
+                    'Die上沒有雷刻字串(漏雷是異常, No Die不是異常)
+                    If oInspectSum.InspectResult.ModleLoseStatus = True AndAlso _
+                        (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > 0 Then
+                        oAlarmCode = AlarmCode.IsDieLoseLaser
+                    End If
 
-                '' Augustin 漏雷扣除NO DIE
-                If moMyEquipment.HardwareConfig.HandshakeBypass = False AndAlso (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap Then
-                    Call .SetEroorOn(moLog)
+                    If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap Then
+                        oAlarmCode = AlarmCode.IsDieLoseLaser
+                    End If
 
-                    Call FinishReoprt(oInspectSum)
-                    RaiseEvent AutoRunFinished(Me, New CAutoRunFinished(oInspectSum))
-                    bIsShowReport = True
+                    moMyEquipment.SetEroorOn(moLog) '輸出Error log
+                    OutputFinalReport(oInspectSum)
 
-                    If MsgBox(String.Format("瑕疵數量：[{0}] (漏雷部分已扣除No Die)，請問是否要上報 Map？", oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.No Then
+                    Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
+                    If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.No Then
                         moMyEquipment.IsNotUpdateMap = True
                     End If
                 End If
+                '-------------------------漏雷扣除No Die-結束--------------------------
 
-                If moMyEquipment.HardwareConfig.HandshakeBypass = False AndAlso moMyEquipment.IsNotUpdateMap = False AndAlso moProductProcess.SubstrateID <> "" Then
+                '-------------------------資料上報 Map-開始--------------------------
+                If moMyEquipment.HardwareConfig.HandshakeBypass = False AndAlso _
+                    moMyEquipment.IsNotUpdateMap = False AndAlso moProductProcess.SubstrateID <> "" Then
                     oAlarmCode = moMyEquipment.SendStripMapUpload(moProductProcess, moMyEquipment.LogHandshake)
-
-                    If oAlarmCode <> AlarmCode.IsOK Then
-                        Call moMyEquipment.SetEroorOn()
-                        Return oAlarmCode
-                    End If
 
                     oAlarmCodeWaitMap = moMyEquipment.WaitMapUploadACK(moProductProcess, Function() moStopRun.IsSet() = True)
 
@@ -242,6 +246,7 @@
                         Return oAlarmCode
                     End If
                 End If
+                '-------------------------資料上報 Map-結束--------------------------
 
                 If moMyEquipment.HardwareConfig.MiscConfig.IsAutoRemoveProduct = False Then UpdateProduct()
                 Call moProductProcess.ClearMark()
@@ -271,10 +276,9 @@
 
                 Call oProductConfig.SaveConfig()
 
-                If bIsShowReport = False Then
-                    Call FinishReoprt(oInspectSum)
-                    RaiseEvent AutoRunFinished(Me, New CAutoRunFinished(oInspectSum))
-                End If
+                '-------------------------輸出檢測結果報表-開始--------------------------
+                OutputFinalReport(oInspectSum)
+                '-------------------------輸出檢測結果報表-結束--------------------------
 
                 If oAlarmCodeWaitMap <> AlarmCode.IsOK Then
                     If oAlarmCodeWaitMap = AlarmCode.IsWaitHandshakeTimeout OrElse oAlarmCodeWaitMap = AlarmCode.IsReadCodeFailed Then
@@ -293,6 +297,19 @@
 
         Return oAlarmCode
     End Function
+
+    ''' <summary>
+    ''' 輸出檢測結果報表
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub OutputFinalReport(ByRef oInspectSum As CInspectSum)
+        Try
+            FinishReoprt(oInspectSum)
+            RaiseEvent AutoRunFinished(Me, New CAutoRunFinished(oInspectSum))
+        Catch ex As Exception
+            Dim msg As String = ex.Message & Environment.NewLine & ex.StackTrace
+        End Try
+    End Sub
 
     Private Sub CalculationShift(ByRef oModelFinderShift As ModelFinderShift, dFindModelX1 As Double, dFindModelY1 As Double, dFindModelX2 As Double, dFindModelY2 As Double)
         Dim dLineX1 As Double = 0.0
