@@ -178,3 +178,12 @@ C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.dll
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.xml
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\ConfigLib\obj\Debug\ConfigLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\ConfigLib.dll
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\ConfigLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\ConfigLib.xml
+D:\GitHub\1938LaserMarking_20230719_Original\ConfigLib\obj\Debug\ConfigLib.vbprojResolveAssemblyReference.cache
+D:\GitHub\1938LaserMarking_20230719_Original\ConfigLib\obj\Debug\ConfigLib.Resources.resources
+D:\GitHub\1938LaserMarking_20230719_Original\ConfigLib\obj\Debug\ConfigLib.vbproj.GenerateResource.Cache
+D:\GitHub\1938LaserMarking_20230719_Original\ConfigLib\obj\Debug\ConfigLib.dll
+D:\GitHub\1938LaserMarking_20230719_Original\ConfigLib\obj\Debug\ConfigLib.xml
+D:\GitHub\1938LaserMarking_20230719_Original\ConfigLib\obj\Debug\ConfigLib.pdb

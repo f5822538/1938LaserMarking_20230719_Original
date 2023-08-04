@@ -164,9 +164,9 @@ Public Class FrmRecipeList
 
                 End Try
             End If
-            moCurrentRecipe.LoadConfig(sOldName)
 
-            Call UpdateRecipeModel()
+            moCurrentRecipe.LoadConfig(sOldName)
+            UpdateRecipeModel()
 
             moFileInfoList = (From o In New DirectoryInfo(msInitialPath & "\Recipe").GetFiles("*.rcp") Order By o.Name).ToList
             BindingSourceFile.DataSource = moFileInfoList

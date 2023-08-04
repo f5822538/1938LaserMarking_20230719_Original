@@ -32,7 +32,7 @@ Public Class CMyLocater
     Private moBlob As II_Blob
     Private moFinder As CMultipleFinder
     Private moCircleFinder As ITVCircleDetector  '' Augustin 221228
-    Private moResult As LocaterResult
+    Private moResult As LocaterResult 'FindModel-的結果
     Private nModelWidth As Integer = 0
     Private nModelHeight As Integer = 0
     Public CircleLocationX As Double  '' Augustin 221228
@@ -46,6 +46,12 @@ Public Class CMyLocater
     Public Locater2CircleY As Double  '' Augustin 230202
     Public Locater2CircleRadius As Double     '' Augustin 230202
 
+    ''' <summary>
+    '''  'FindModel-的結果
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public ReadOnly Property Result As LocaterResult
         Get
             Return moResult
@@ -152,28 +158,48 @@ Public Class CMyLocater
     Public Function Find(oBitmap As Bitmap) As Boolean
         '' Augustin 230109 
         Dim oBinarieImage As New ITVImage
-        Dim oBinarizeBitmap As Bitmap
+        Dim oBinarizeBitmap As Bitmap '二值化Bitmap
         Dim oBinarizeImageHeader As New ImageHeader
         'Dim sSavePath As String = "D:\BIN.Bmp"
 
         '' Binarize
-        oBinarizeBitmap = CType(oBitmap.Clone(), Bitmap)
+        oBinarizeBitmap = CType(oBitmap.Clone(), Bitmap) '二值化Bitmap
         oBinarizeImageHeader = GetImageHeader(oBinarizeBitmap)
         moImagePreprocess.BinarizeForSingle(oBinarizeImageHeader, oBinarizeImageHeader, ImagePreprocessConditionAndThreshMode.GREATER_OR_EQUAL, moMyEquipment.MainRecipe.Threshold)
         oBinarieImage.AssignToImageHeader(oBinarizeImageHeader)
-        oBinarizeBitmap = oBinarieImage.GetBitmap
+        oBinarizeBitmap = oBinarieImage.GetBitmap '二值化Bitmap
         'oBinarizeBitmap.Save(sSavePath, Imaging.ImageFormat.Bmp)
 
         moResult.Clear()
-        If moFinder.ModelCount = 0 Then Return False
-        moResult.Succeed = moFinder.FindModel(oBinarizeBitmap)
+        If moFinder.ModelCount = 0 Then
+            '-------------------------定位孔異常圖片-開始--------------------------
+            Dim holeBinBmpDirPath As String = "D:\img\HoleLocateBinBmp\" '定位孔異常圖片-資料夾路徑
+            If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
+            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
+            oBinarizeBitmap.Save(holeBinBmpFilePath, Imaging.ImageFormat.Bmp) '儲存-定位孔異常圖片(二值化)
+            oBitmap.Save(holeBinBmpFilePath, Imaging.ImageFormat.Bmp) '儲存-定位孔異常圖片(原圖)
+            '-------------------------定位孔異常圖片-結束--------------------------
+            Return False
+        End If
+
+        moResult.Succeed = moFinder.FindModel(oBinarizeBitmap) '設定-FindModel-的結果
         'moResult.Succeed = moFinder.FindModel(oBitmap)
+
         If moResult.Succeed = True Then
             moResult.Angle = If(moFinder.ModelResult(0).Angle > 180, moFinder.ModelResult(0).Angle - 360, moFinder.ModelResult(0).Angle)
             moResult.X = moFinder.ModelResult(0).X
             moResult.Y = moFinder.ModelResult(0).Y
             moResult.Score = moFinder.ModelResult(0).Score
+        Else
+            '-------------------------定位孔異常圖片-開始--------------------------
+            Dim holeBinBmpDirPath As String = "D:\img\HoleLocateBinBmp\" '定位孔異常圖片-資料夾路徑
+            If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
+            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
+            oBinarizeBitmap.Save(holeBinBmpFilePath, Imaging.ImageFormat.Bmp) '儲存-定位孔異常圖片(二值化)
+            oBitmap.Save(holeBinBmpFilePath, Imaging.ImageFormat.Bmp) '儲存-定位孔異常圖片(原圖)
+            '-------------------------定位孔異常圖片-結束--------------------------
         End If
+
         oBinarieImage.Dispose()
         oBinarizeBitmap.Dispose()
         Return True
@@ -183,23 +209,23 @@ Public Class CMyLocater
     Public Function FindChangeModel(oBitmap As Bitmap, oROI As Rectangle, nLocaterNo As Integer) As Boolean
         '' Augustin 230109 
         Dim oBinarieImage As New ITVImage
-        Dim oBinarizeBitmap As Bitmap
+        Dim oBinarizeBitmap As Bitmap '二值化Bitmap
         Dim oBinarizeImageHeader As New ImageHeader
         'Dim sSavePath As String = "D:\BIN.Bmp"
 
         '' Binarize
-        oBinarizeBitmap = CType(oBitmap.Clone(), Bitmap)
+        oBinarizeBitmap = CType(oBitmap.Clone(), Bitmap) '二值化Bitmap
         oBinarizeImageHeader = GetImageHeader(oBinarizeBitmap)
         moImagePreprocess.BinarizeForSingle(oBinarizeImageHeader, oBinarizeImageHeader, ImagePreprocessConditionAndThreshMode.GREATER_OR_EQUAL, moMyEquipment.MainRecipe.Threshold)
         oBinarieImage.AssignToImageHeader(oBinarizeImageHeader)
-        oBinarizeBitmap = oBinarieImage.GetBitmap
+        oBinarizeBitmap = oBinarieImage.GetBitmap '二值化Bitmap
         'oBinarizeBitmap.Save(sSavePath, Imaging.ImageFormat.Bmp)
 
         moResult.Clear()
         'If moFinder.ModelCount = 0 Then Return False
         'moResult.Succeed = moFinder.FindModel(oBinarizeBitmap)
         'moResult.Succeed = moFinder.FindModel(oBitmap)
-        moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo)
+        moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo) '設定-FindModel-的結果
         If moResult.Succeed = True AndAlso nLocaterNo = 0 Then
             'moResult.Angle = If(moFinder.ModelResult(0).Angle > 180, moFinder.ModelResult(0).Angle - 360, moFinder.ModelResult(0).Angle)
             'moResult.X = moFinder.ModelResult(0).X
@@ -211,6 +237,13 @@ Public Class CMyLocater
             moResult.X = Locater2CircleX
             moResult.Y = Locater2CircleY
         Else
+            '-------------------------定位孔異常圖片-開始--------------------------
+            Dim holeBinBmpDirPath As String = "D:\img\HoleLocateBinBmp\" '定位孔異常圖片-資料夾路徑
+            If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
+            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}.bmp", holeBinBmpDirPath, DateTime.Now, nLocaterNo)
+            oBinarizeBitmap.Save(holeBinBmpFilePath, Imaging.ImageFormat.Bmp) '儲存-定位孔異常圖片(二值化)
+            oBitmap.Save(holeBinBmpFilePath, Imaging.ImageFormat.Bmp) '儲存-定位孔異常圖片(原圖)
+            '-------------------------定位孔異常圖片-結束--------------------------
             Return False
         End If
         oBinarieImage.Dispose()
@@ -259,6 +292,14 @@ Public Class CMyLocater
         Return True
     End Function
 
+    ''' <summary>
+    ''' FindCircleChangeModel
+    ''' </summary>
+    ''' <param name="oBitmap"></param>
+    ''' <param name="ROI"></param>
+    ''' <param name="nLocaterNo"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindCircleChangeModel(oBitmap As Bitmap, ROI As Rectangle, nLocaterNo As Integer) As Boolean
         Dim oROI As New ITVImageROI
         Dim oBinarieImage As New ITVImage

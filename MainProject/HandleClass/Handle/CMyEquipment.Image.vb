@@ -18,7 +18,7 @@
     Public FindMark1Y As Double = 0.0
     Public FindMark2X As Double = 0.0
     Public FindMark2Y As Double = 0.0
-    Public SucceedFind As Boolean = False
+    Public SucceedFind As Boolean = False 'FindModel的結果(True:成功, False:失敗)
 
     Public FindEdgeTopY As Integer = -1
     Public FindEdgeBottomY As Integer = -1

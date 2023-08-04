@@ -14,38 +14,45 @@
     Public Shared ProcessDefectListLock As New Object
     Private mnShiftX As Integer = 0
 
+    ''' <summary>
+    ''' 定位及旋轉補正-回傳-SucceedFind-的結果(True:成功, False:失敗)
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function Locate() As Boolean
         With moMyEquipment
             Try
                 Dim oModelFinderShift As ModelFinderShift
                 mnShiftX = 0
 
-                .SucceedFind = If(.HardwareConfig.MiscConfig.IsUseModelFinder = True, .FindModel(moCamera.Camera.BitmapImage(True), mnSequence, moLog), .GetAlign(mnSequence, moLog))
-                If .SucceedFind = True Then CalculationShift(oModelFinderShift, .FindMark1X, .FindMark1Y, .FindMark2X, .FindMark2Y)
+                '取得-FindModel-的結果
+                moMyEquipment.SucceedFind = If(.HardwareConfig.MiscConfig.IsUseModelFinder = True, .FindModel(moCamera.Camera.BitmapImage(True), mnSequence, moLog), .GetAlign(mnSequence, moLog))
 
-                If .SucceedFind = True Then
-                    Call moLog.LogInformation(String.Format("[{0:d4}] Shift：dX = {1}, dY = {2}, dAngle = {3}", mnSequence, oModelFinderShift.shiftX, oModelFinderShift.shiftY, oModelFinderShift.Angle))
+                If moMyEquipment.SucceedFind = True Then 'FindModel-成功
+                    CalculationShift(oModelFinderShift, .FindMark1X, .FindMark1Y, .FindMark2X, .FindMark2Y) '計算旋轉補正角度
+                    moLog.LogInformation(String.Format("[{0:d4}] Shift：dX = {1}, dY = {2}, dAngle = {3}", mnSequence, oModelFinderShift.shiftX, oModelFinderShift.shiftY, oModelFinderShift.Angle))
                     mnShiftX = CInt(oModelFinderShift.shiftX)
+
                     If IsNumeric(oModelFinderShift.Angle) = True Then
-                        If ShiftImageMIL(moImageID, oModelFinderShift) = True Then
-                            mbAlignStatus = False
+                        If ShiftImageMIL(moImageID, oModelFinderShift) = True Then '旋轉補正
+                            mbAlignStatus = False '設定-定位正常
                         Else
-                            mbAlignStatus = True
-                            Call moLog.LogInformation(String.Format("[{0:d4}] Rotate Failed", mnSequence))
+                            mbAlignStatus = True '設定-定位異常
+                            moLog.LogInformation(String.Format("[{0:d4}] Rotate Failed", mnSequence))
                         End If
                     Else
-                        mbAlignStatus = True
-                        Call moLog.LogInformation(String.Format("[{0:d4}] Calculation Angle Failed", mnSequence))
+                        mbAlignStatus = True '設定-定位異常
+                        moLog.LogInformation(String.Format("[{0:d4}] Calculation Angle Failed", mnSequence))
                     End If
-                Else
-                    mbAlignStatus = True
-                    Call moLog.LogInformation(String.Format("[{0:d4}] Find Model Failed", mnSequence))
+                Else 'FindModel-失敗
+                    mbAlignStatus = True '設定-定位異常
+                    moLog.LogInformation(String.Format("[{0:d4}] Find Model Failed", mnSequence))
                 End If
 
-                Return .SucceedFind
+                Return moMyEquipment.SucceedFind
             Catch ex As Exception
-                Call moLog.LogError(String.Format("[{0:d4}] 定位錯誤，Error：{1}", mnSequence, ex.ToString()))
-                Call moMyEquipment.LogAlarm.LogError("定位錯誤")
+                moLog.LogError(String.Format("[{0:d4}] 定位錯誤，Error：{1}", mnSequence, ex.ToString()))
+                moMyEquipment.LogAlarm.LogError("定位錯誤")
                 Return False
             End Try
         End With
@@ -115,7 +122,7 @@
 
                 oInspectResult.Name = String.Format("{0:yyyy-MM-dd_HH_mm_ss_fff}", aDataTime)
                 oInspectResult.Sequnce = mnSequence
-                oInspectResult.AlignStatus = mbAlignStatus
+                oInspectResult.AlignStatus = mbAlignStatus '定位結果-狀態(True:異常, False:正常)
                 oProductConfig = New CMyProductConfig(sPath, oInspectResult.Name, "INI")
                 oInspectSum = New CInspectSum(oInspectResult, aDataTime, oMyDefectList, oProductConfig)
 
@@ -311,6 +318,15 @@
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 計算旋轉補正角度
+    ''' </summary>
+    ''' <param name="oModelFinderShift"></param>
+    ''' <param name="dFindModelX1"></param>
+    ''' <param name="dFindModelY1"></param>
+    ''' <param name="dFindModelX2"></param>
+    ''' <param name="dFindModelY2"></param>
+    ''' <remarks></remarks>
     Private Sub CalculationShift(ByRef oModelFinderShift As ModelFinderShift, dFindModelX1 As Double, dFindModelY1 As Double, dFindModelX2 As Double, dFindModelY2 As Double)
         Dim dLineX1 As Double = 0.0
         Dim dLineY1 As Double = 0.0
@@ -337,6 +353,13 @@
         oModelFinderShift.Angle = dAngle1 * 180 / Math.PI
     End Sub
 
+    ''' <summary>
+    ''' 旋轉補正
+    ''' </summary>
+    ''' <param name="oSource"></param>
+    ''' <param name="oModelFinderShift"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function ShiftImageMIL(ByVal oSource As MIL_ID, oModelFinderShift As ModelFinderShift) As Boolean
         moLog.LogInformation("旋轉補正開始!")
         MIL.MimRotate(oSource, oSource, -oModelFinderShift.Angle, oModelFinderShift.refX, oModelFinderShift.refY, oModelFinderShift.refX + oModelFinderShift.shiftX, oModelFinderShift.refY + oModelFinderShift.shiftY, MIL.M_BICUBIC + MIL.M_OVERSCAN_CLEAR)

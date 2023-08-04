@@ -179,3 +179,12 @@ C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.dll
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.xml
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\DefectLib\obj\Debug\DefectLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\DefectLib.dll
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\DefectLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\DefectLib.xml
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.usrDefectView.resources
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.Resources.resources
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.vbproj.GenerateResource.Cache
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.dll
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.xml
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.pdb

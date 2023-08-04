@@ -6,15 +6,7 @@ DefectLib
 </name>
 </assembly>
 <members>
-<member name="T:DefectLib.CInspectResult">
-	<summary>CInspectResult</summary>
-	<remarks></remarks>
-</member><member name="T:DefectLib.CDefectViewCamera">
-	<summary>
- CDefectViewCamera
- </summary>
-	<remarks></remarks>
-</member><member name="P:DefectLib.My.Resources.Resources.ResourceManager">
+<member name="P:DefectLib.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
@@ -27,6 +19,14 @@ DefectLib
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
+</member><member name="T:DefectLib.CInspectResult">
+	<summary>CInspectResult</summary>
+	<remarks></remarks>
+</member><member name="T:DefectLib.CDefectViewCamera">
+	<summary>
+ CDefectViewCamera
+ </summary>
+	<remarks></remarks>
 </member>
 </members>
 </doc>

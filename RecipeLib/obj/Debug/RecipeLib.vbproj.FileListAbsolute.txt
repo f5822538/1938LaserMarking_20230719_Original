@@ -178,3 +178,12 @@ C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\RecipeLib
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\RecipeLib\obj\Debug\RecipeLib.dll
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\RecipeLib\obj\Debug\RecipeLib.xml
 C:\Users\Augustin\Desktop\日月光-待解Issue\1938LaserMarking230531\RecipeLib\obj\Debug\RecipeLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\RecipeLib.dll
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\RecipeLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Resource\RecipeLib.xml
+D:\GitHub\1938LaserMarking_20230719_Original\RecipeLib\obj\Debug\RecipeLib.vbprojResolveAssemblyReference.cache
+D:\GitHub\1938LaserMarking_20230719_Original\RecipeLib\obj\Debug\RecipeLib.Resources.resources
+D:\GitHub\1938LaserMarking_20230719_Original\RecipeLib\obj\Debug\RecipeLib.vbproj.GenerateResource.Cache
+D:\GitHub\1938LaserMarking_20230719_Original\RecipeLib\obj\Debug\RecipeLib.dll
+D:\GitHub\1938LaserMarking_20230719_Original\RecipeLib\obj\Debug\RecipeLib.xml
+D:\GitHub\1938LaserMarking_20230719_Original\RecipeLib\obj\Debug\RecipeLib.pdb

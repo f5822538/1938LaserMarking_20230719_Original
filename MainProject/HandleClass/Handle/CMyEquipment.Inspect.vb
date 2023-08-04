@@ -24,8 +24,8 @@ Partial Class CMyEquipment
 
     Private moImageProcess As II_ImageProcess
     Private moImagePreprocess As II_ImagePreprocess  '' Augustin 230109
-    Public Locater1 As CMyLocater
-    Public Locater2 As CMyLocater
+    Public Locater1 As CMyLocater '定位孔-1
+    Public Locater2 As CMyLocater '定位孔-2
     Public IsNotUpdateMap As Boolean
     Public mdCalAngle As Double = 0.0
 
@@ -67,7 +67,7 @@ Partial Class CMyEquipment
         If moMainRecipe.RecipeCamera.Locate1.FindModelZone = Rectangle.Empty Then
             FindMark1X = 0.0
             FindMark1Y = 0.0
-        ElseIf Locater1.Find(oBitmap) = True AndAlso Locater1.Result.Succeed = True Then
+        ElseIf Locater1.Find(oBitmap) = True AndAlso Locater1.Result.Succeed = True Then '定位孔-1
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
             If nSequence = -1 Then
@@ -87,7 +87,7 @@ Partial Class CMyEquipment
         If moMainRecipe.RecipeCamera.Locate2.FindModelZone = Rectangle.Empty Then
             FindMark2X = 0.0
             FindMark2Y = 0.0
-        ElseIf Locater2.Find(oBitmap) = True AndAlso Locater2.Result.Succeed = True Then
+        ElseIf Locater2.Find(oBitmap) = True AndAlso Locater2.Result.Succeed = True Then '定位孔-2
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
             If nSequence = -1 Then
