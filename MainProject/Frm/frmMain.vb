@@ -30,8 +30,17 @@ Public Class frmMain
         Dim aTact As New CTactTimeSpan
 
         Try
-            moSync = SynchronizationContext.Current
+            '-------------------------測試-開始--------------------------
+            If Debugger.IsAttached = True Then
+                Dim locater1 As New CMyLocater(moMyEquipment) '定位孔-1
+                Dim testBitMap1 = New Bitmap("D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp")
+                Dim aRectangle As Rectangle = Rectangle.FromLTRB(0, 0, testBitMap1.Width, testBitMap1.Height)
+                Dim findChangeModelResult1 = locater1.FindChangeModel(testBitMap1, aRectangle, 0)
+                Dim findResult1 = locater1.Find(testBitMap1)
+            End If
+            '-------------------------測試-結束--------------------------
 
+            moSync = SynchronizationContext.Current
             moHardwareConfig = New CHardwareConfig(Application.StartupPath & "\Setup", "HardwareConfig", "INI")
             Call moHardwareConfig.LoadConfig()
 
