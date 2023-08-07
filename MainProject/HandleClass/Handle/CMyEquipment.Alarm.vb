@@ -7,9 +7,22 @@
         SRAlarmCode.TriggerWarning(aAlarmCode, LogAlarm)
     End Sub
 
+    Public Sub TriggerWarning(aAlarmCode As AlarmCode, LogAlarm As II_LogTraceExtend)
+        CurrentAlarmCode = aAlarmCode
+        SRAlarmCode.TriggerWarning(aAlarmCode, LogAlarm)
+    End Sub
+
     Public Sub TriggerAlarm(aAlarmCode As AlarmCode)
         If moIsAlarm.IsSet = False Then
             TriggerWarning(aAlarmCode)
+
+            If aAlarmCode <> AlarmCode.IsStop Then moIsAlarm.Set()
+        End If
+    End Sub
+
+    Public Sub TriggerAlarm(aAlarmCode As AlarmCode, LogAlarm As II_LogTraceExtend)
+        If moIsAlarm.IsSet = False Then
+            TriggerWarning(aAlarmCode, LogAlarm)
 
             If aAlarmCode <> AlarmCode.IsStop Then moIsAlarm.Set()
         End If

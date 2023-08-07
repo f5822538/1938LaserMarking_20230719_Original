@@ -599,7 +599,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 End If
 
                 '-------------------------漏雷觸發Alarm-開始--------------------------
-                If oAlarmCode = AlarmCode.IsDieLoseLaser Then moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
+                If oAlarmCode = AlarmCode.IsDieLoseLaser Then
+                    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:d4}] 漏雷觸發Alarm", mnSequence))
+                    moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
+                End If
                 '-------------------------漏雷觸發Alarm-結束--------------------------
 
                 If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then

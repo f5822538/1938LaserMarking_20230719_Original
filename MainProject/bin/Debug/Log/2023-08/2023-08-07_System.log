@@ -1,0 +1,50 @@
+15:47:16.294 [Info] 載入設定資料，時間：[101026.8275]ms
+15:47:18.367 [Error] 創建 DIO3208 錯誤，Error：System.ApplicationException: 從程式碼的未同步化區塊呼叫物件同步化方法
+   於 System.Threading.Mutex.ReleaseMutex()
+   於 347757864.230644779(347757866 538583092, IntPtr 538583093)
+   於 347757864.230644747(347757868 87047939, 347757873& 87047940)
+   於 347757864.230644768(Int32 144192710)
+   於 347757864.230644773(Byte[] 326449552, Int32 326449553, Boolean 326449554)
+   於 347757848.230644701(Int32 138023256, Boolean 138023257)
+   於 347757848.230644708(Object 542982031, MethodBase 542982032, Boolean 542982033)
+   於 347757848.230644707(Object 93687153, MethodBase 93687154, Boolean 93687155)
+   於 iTVisionService.iTVJS.CDIO3208B..ctor(II_LogTrace oLog, Int16 nCardID)
+   於 iTVisionService.iTVJS.CJSCardCreater.CreateDIO3208B(II_LogTrace oLog, Int16 nCardID)
+   於 LaserMarkingX64.CMyEquipment.CreateDIO3208() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 24
+15:47:46.059 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+15:47:48.636 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+15:47:48.888 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+16:12:30.455 [Error] [2023-08-07 16:12:30:452] 漏雷觸發Alarm
+16:13:05.813 [Info] 載入設定資料，時間：[45563.7595]ms
+16:13:06.612 [Error] 創建 DIO3208 錯誤，Error：System.ApplicationException: 從程式碼的未同步化區塊呼叫物件同步化方法
+   於 System.Threading.Mutex.ReleaseMutex()
+   於 347757864.230644779(347757866 538583092, IntPtr 538583093)
+   於 347757864.230644747(347757868 87047939, 347757873& 87047940)
+   於 347757864.230644768(Int32 144192710)
+   於 347757864.230644773(Byte[] 326449552, Int32 326449553, Boolean 326449554)
+   於 347757848.230644701(Int32 138023256, Boolean 138023257)
+   於 347757848.230644708(Object 542982031, MethodBase 542982032, Boolean 542982033)
+   於 347757848.230644707(Object 93687153, MethodBase 93687154, Boolean 93687155)
+   於 iTVisionService.iTVJS.CDIO3208B..ctor(II_LogTrace oLog, Int16 nCardID)
+   於 iTVisionService.iTVJS.CJSCardCreater.CreateDIO3208B(II_LogTrace oLog, Int16 nCardID)
+   於 LaserMarkingX64.CMyEquipment.CreateDIO3208() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 24
+16:13:33.957 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+16:13:36.035 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+16:13:36.355 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+16:13:39.200 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+16:13:39.596 [Create] Server 開啟成功，IP：192.168.10.1。Port：5002
+16:13:39.742 [Info] 自動化流程啟動
+16:13:39.798 [Error] System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LaserMarkingX64.CMyEquipment.LightVacuumDown(II_LogTraceExtend oLog) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 155
+   於 LaserMarkingX64.CMyEquipment.Initial() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.vb: 行 57
+   於 LaserMarkingX64.frmMain.frmMain_Load(Object sender, EventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\frmMain.vb: 行 76
+16:13:39.799 [Info] 系統啟動完成，時間：[45563.7595]ms

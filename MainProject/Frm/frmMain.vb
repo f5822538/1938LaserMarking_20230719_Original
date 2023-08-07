@@ -30,16 +30,6 @@ Public Class frmMain
         Dim aTact As New CTactTimeSpan
 
         Try
-            '------------------------Debug-測試-開始--------------------------
-            If Debugger.IsAttached = True Then
-                Dim locater1 As New CMyLocater(moMyEquipment) '定位孔-1
-                Dim testBitMap1 = New Bitmap("D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp")
-                Dim aRectangle As Rectangle = Rectangle.FromLTRB(0, 0, testBitMap1.Width, testBitMap1.Height)
-                Dim findChangeModelResult1 = locater1.FindChangeModel(testBitMap1, aRectangle, 0)
-                Dim findResult1 = locater1.Find(testBitMap1)
-            End If
-            '------------------------Debug-測試-結束--------------------------
-
             moSync = SynchronizationContext.Current
             moHardwareConfig = New CHardwareConfig(Application.StartupPath & "\Setup", "HardwareConfig", "INI")
             Call moHardwareConfig.LoadConfig()
@@ -57,6 +47,27 @@ Public Class frmMain
                 .LogInspectCSV = CLogCreateor.CreateCSVFileLog(Application.StartupPath & "\CSV", "Inspect", Nothing)
             End With
             moLog = moMyEquipment.LogSystem
+
+            '------------------------Debug--漏雷觸發Alarm-開始--------------------------
+            If Debugger.IsAttached = True Then
+                Dim oAlarmCode As AlarmCode = AlarmCode.IsDieLoseLaser
+                If oAlarmCode = AlarmCode.IsDieLoseLaser Then
+                    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now))
+                    moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
+                    moMyEquipment.TriggerAlarm(oAlarmCode, moMyEquipment.MyLog.LogAlarm) '漏雷觸發Alarm
+                End If
+            End If
+            '------------------------Debug--漏雷觸發Alarm-結束--------------------------
+
+            '------------------------Debug-測試-開始--------------------------
+            If Debugger.IsAttached = True Then
+                Dim locater1 As New CMyLocater(moMyEquipment) '定位孔-1
+                Dim testBitMap1 As Bitmap = New Bitmap("D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp")
+                Dim aRectangle As Rectangle = Rectangle.FromLTRB(0, 0, testBitMap1.Width, testBitMap1.Height)
+                Dim findChangeModelResult1 As Boolean = locater1.FindChangeModel(testBitMap1, aRectangle, 0)
+                Dim findResult1 As Boolean = locater1.Find(testBitMap1)
+            End If
+            '------------------------Debug-測試-結束--------------------------
 
             Call aTact.CalSpan()
             Call moLog.LogInformation(String.Format("載入設定資料，時間：[{0:F4}]ms", aTact.CurrentSpan))
