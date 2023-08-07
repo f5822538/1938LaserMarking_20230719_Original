@@ -190,11 +190,11 @@ Partial Class CMyEquipment
             Dim nROI As Rectangle = moMainRecipe.RecipeCamera.Locate1.FindModelZone
             '' Augustin 230215 Test
             If moHardwareConfig.OffsetLimitUse AndAlso Math.Abs(nOffset.Y) <= nOffsetLimit Then
-                Call nROI.Offset(nOffset)
+                Call nROI.Offset(nOffset) '位移-矩形的位置
                 moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI
                 nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone
 
-                Call nROI.Offset(nOffset)
+                Call nROI.Offset(nOffset) '位移-矩形的位置
                 moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI
             Else
                 If nOffset.Y > 0 Then
@@ -202,11 +202,11 @@ Partial Class CMyEquipment
                 Else
                     nOffset.Y = -nOffsetLimit
                 End If
-                Call nROI.Offset(nOffset)
+                Call nROI.Offset(nOffset) '位移-矩形的位置
                 moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI
                 nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone
 
-                Call nROI.Offset(nOffset)
+                Call nROI.Offset(nOffset) '位移-矩形的位置
                 moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI
             End If
             'Call nROI.Offset(nOffset)
@@ -215,7 +215,7 @@ Partial Class CMyEquipment
             nOffset.Y = nPatternZone.Y - moMainRecipe.RecipeCamera.Locate1.PatternZone.Y
 
             nROI = moMainRecipe.RecipeCamera.Locate1.PatternZone
-            Call nROI.Offset(nOffset)
+            Call nROI.Offset(nOffset) '位移-矩形的位置
             moMainRecipe.RecipeCamera.Locate1.PatternZone = nROI
 
             'nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone
@@ -223,7 +223,7 @@ Partial Class CMyEquipment
             'moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI
 
             nROI = moMainRecipe.RecipeCamera.Locate2.PatternZone
-            Call nROI.Offset(nOffset)
+            Call nROI.Offset(nOffset) '位移-矩形的位置
             moMainRecipe.RecipeCamera.Locate2.PatternZone = nROI
 
             Call Locater1.UpdateModel(oBitmap, moMainRecipe.RecipeCamera.Locate1.FindModelZone, moMainRecipe.RecipeCamera.Locate1.PatternZone, moMainRecipe.RecipeCamera.Locate1.Score, MainRecipe.RecipeCamera.Locate1.Smoth)

@@ -626,7 +626,7 @@ Public Class frmMain
     End Sub
 
     Private Sub cbxIsAutoChangeModel_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles cbxIsAutoChangeModel.CheckedChanged
-        moMyEquipment.IsChangeModel = cbxIsAutoChangeModel.Checked
+        moMyEquipment.IsChangeModel = cbxIsAutoChangeModel.Checked 'CheckBox-勾選-自動更換樣本
     End Sub
 
     Private Sub bkUpdate_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles bkUpdate.DoWork
@@ -813,7 +813,13 @@ Public Class frmMain
          End Sub, "")
     End Sub
 
+    ''' <summary>
+    ''' EventHandler-更換樣本-事件
+    ''' </summary>
+    ''' <param name="oHandshakeProductList"></param>
+    ''' <remarks></remarks>
     Private Sub moHandshakeThread_ChangeRecipe(oHandshakeProductList As List(Of CMyProduct)) Handles moHandshakeThread.ChangeRecipe
+        '將同步訊息分派至同步處理內容
         moSync.Send(
          Sub()
              If moMyEquipment.ImageHeader.Ptr <> IntPtr.Zero Then
@@ -831,7 +837,7 @@ Public Class frmMain
                  tabView.SelectedTab = tabLocate
              End If
 
-             cbxIsAutoChangeModel.Checked = moMyEquipment.IsChangeModel
+             cbxIsAutoChangeModel.Checked = moMyEquipment.IsChangeModel 'CheckBox-勾選-自動更換樣本
 
              Call moAutoRunThread.UpdateImage()
              Call UpdateTitle()

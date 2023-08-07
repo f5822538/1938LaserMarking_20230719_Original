@@ -1,6 +1,6 @@
 Public Class CHandshakeThread : Inherits CThreadBaseExtend
 
-    Public Event ChangeRecipe(oHandshakeProductList As List(Of CMyProduct))
+    Public Event ChangeRecipe(oHandshakeProductList As List(Of CMyProduct)) '更換樣本-事件
 
     Private moMyEquipment As CMyEquipment
     Private moProductProcess As New CMyProduct
@@ -149,8 +149,8 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
                                     Exit Select
                                 End Try
                             End If
-                            moMyEquipment.IsChangeModel = True
-                            RaiseEvent ChangeRecipe(oProductList)
+                            moMyEquipment.IsChangeModel = True '設定-更換樣本
+                            RaiseEvent ChangeRecipe(oProductList) '觸發-更換樣本-事件
                             oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsOK, "ACK", moLog)
 
                             If oAlarmCode <> AlarmCode.IsOK Then
