@@ -158,7 +158,7 @@ Partial Class CMyEquipment
         Try
             Dim oBitmap As Bitmap = UpdateImage(ImageHeader)
             Dim nRectangle As New Rectangle
-            Dim nPatternZone As Rectangle = moMainRecipe.RecipeCamera.Locate1.PatternZone
+            Dim nPatternZone As Rectangle = moMainRecipe.RecipeCamera.Locate1.PatternZone '取得-定位孔1-樣本區域 (X,Y,W,H)
             Dim nOffset As Point = Point.Empty
             Dim nOffsetLimit As Integer = CInt(moHardwareConfig.OffsetLimitValue / moHardwareConfig.CameraConfig.PixelSize)
 
@@ -167,13 +167,13 @@ Partial Class CMyEquipment
             nRectangle.Y = CInt(FindMark1Y - (moMainRecipe.RecipeCamera.Locate1.PatternZone.Height / 2))
             nRectangle.Width = moMainRecipe.RecipeCamera.Locate1.PatternZone.Width
             nRectangle.Height = moMainRecipe.RecipeCamera.Locate1.PatternZone.Height
-            moMainRecipe.RecipeCamera.Locate1.PatternZone = nRectangle
+            moMainRecipe.RecipeCamera.Locate1.PatternZone = nRectangle '設定-定位孔1-樣本區域 (X,Y,W,H)
 
             nRectangle.X = CInt(FindMark2X - (moMainRecipe.RecipeCamera.Locate2.PatternZone.Width / 2))
             nRectangle.Y = CInt(FindMark2Y - (moMainRecipe.RecipeCamera.Locate2.PatternZone.Height / 2))
             nRectangle.Width = moMainRecipe.RecipeCamera.Locate2.PatternZone.Width
             nRectangle.Height = moMainRecipe.RecipeCamera.Locate2.PatternZone.Height
-            moMainRecipe.RecipeCamera.Locate2.PatternZone = nRectangle
+            moMainRecipe.RecipeCamera.Locate2.PatternZone = nRectangle '設定-定位孔2-樣本區域 (X,Y,W,H)
             moMainRecipe.RecipeCamera.RecipeModelDiff.SummationSquareCount = 0
 
             Call ClearStandardDeviationModel(moMainRecipe.RecipeCamera.RecipeModelDiff)
@@ -182,60 +182,66 @@ Partial Class CMyEquipment
             Call Locater1.UpdateModelCenter(ImageHeader, moMainRecipe.RecipeCamera.Locate1.FindModelZone, moMainRecipe.RecipeCamera.Locate1.PatternZone, MainRecipe.Threshold, MainRecipe.RecipeCamera.Locate1.Area)
             Call Locater2.UpdateModelCenter(ImageHeader, moMainRecipe.RecipeCamera.Locate2.FindModelZone, moMainRecipe.RecipeCamera.Locate2.PatternZone, MainRecipe.Threshold, MainRecipe.RecipeCamera.Locate2.Area)
 
-            nOffset.X = nPatternZone.X - moMainRecipe.RecipeCamera.Locate1.PatternZone.X
-            nOffset.Y = nPatternZone.Y - moMainRecipe.RecipeCamera.Locate1.PatternZone.Y
+            nOffset.X = nPatternZone.X - moMainRecipe.RecipeCamera.Locate1.PatternZone.X '定位孔1-X軸-位移量
+            nOffset.Y = nPatternZone.Y - moMainRecipe.RecipeCamera.Locate1.PatternZone.Y '定位孔1-Y軸-位移量
 
             Call Rotate(ImageHeader, ImageHeader, 0, 0, 0, nOffset.X, nOffset.Y)
 
-            Dim nROI As Rectangle = moMainRecipe.RecipeCamera.Locate1.FindModelZone
+            Dim nROI As Rectangle = moMainRecipe.RecipeCamera.Locate1.FindModelZone '設定nROI-定位孔1-尋找區域 (X,Y,W,H)
+
             '' Augustin 230215 Test
-            If moHardwareConfig.OffsetLimitUse AndAlso Math.Abs(nOffset.Y) <= nOffsetLimit Then
+            If moHardwareConfig.OffsetLimitUse = True AndAlso Math.Abs(nOffset.Y) <= nOffsetLimit Then
                 Call nROI.Offset(nOffset) '位移-矩形的位置
-                moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI
-                nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone
+                moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI '設定-定位孔1-尋找區域 (X,Y,W,H)為nROI
+
+                nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone '設定nROI-定位孔2-尋找區域 (X,Y,W,H)
 
                 Call nROI.Offset(nOffset) '位移-矩形的位置
-                moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI
+                moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI '設定-定位孔2-尋找區域 (X,Y,W,H)為nROI
             Else
                 If nOffset.Y > 0 Then
                     nOffset.Y = nOffsetLimit
                 Else
                     nOffset.Y = -nOffsetLimit
                 End If
-                Call nROI.Offset(nOffset) '位移-矩形的位置
-                moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI
-                nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone
 
-                Call nROI.Offset(nOffset) '位移-矩形的位置
-                moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI
+                '------------------------Debug-定位孔尋找區域位移-開始--------------------------
+                If Debugger.IsAttached = True Then
+                    Call nROI.Offset(nOffset) '位移-矩形的位置(現行執行處)
+                    moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI '設定-定位孔1-尋找區域 (X,Y,W,H)為nROI
+
+                    nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone '設定nROI-定位孔2-尋找區域 (X,Y,W,H)
+
+                    Call nROI.Offset(nOffset) '位移-矩形的位置(現行執行處)
+                    moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI '設定-定位孔2-尋找區域 (X,Y,W,H)為nROI
+                End If
+                '------------------------Debug-定位孔尋找區域位移-結束--------------------------
             End If
-            'Call nROI.Offset(nOffset)
-            'moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI
-            '' Augustin 230215 Test
-            nOffset.Y = nPatternZone.Y - moMainRecipe.RecipeCamera.Locate1.PatternZone.Y
 
-            nROI = moMainRecipe.RecipeCamera.Locate1.PatternZone
-            Call nROI.Offset(nOffset) '位移-矩形的位置
-            moMainRecipe.RecipeCamera.Locate1.PatternZone = nROI
+            nOffset.Y = nPatternZone.Y - moMainRecipe.RecipeCamera.Locate1.PatternZone.Y '定位孔1-Y軸-位移量
 
-            'nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone
-            'Call nROI.Offset(nOffset)
-            'moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI
+            '------------------------Debug-定位孔樣本區域位移-開始--------------------------
+            If Debugger.IsAttached = True Then
+                nROI = moMainRecipe.RecipeCamera.Locate1.PatternZone '設定nROI-定位孔1-樣本區域 (X,Y,W,H)
+                Call nROI.Offset(nOffset) '樣本區域-定位孔1-位移-矩形的位置(現行執行處)
+                moMainRecipe.RecipeCamera.Locate1.PatternZone = nROI '設定-定位孔1-樣本區域 (X,Y,W,H)為nROI
 
-            nROI = moMainRecipe.RecipeCamera.Locate2.PatternZone
-            Call nROI.Offset(nOffset) '位移-矩形的位置
-            moMainRecipe.RecipeCamera.Locate2.PatternZone = nROI
+                nROI = moMainRecipe.RecipeCamera.Locate2.PatternZone '設定nROI-定位孔2-樣本區域 (X,Y,W,H)
+                Call nROI.Offset(nOffset) '樣本區域-定位孔2-位移-矩形的位置(現行執行處)
+                moMainRecipe.RecipeCamera.Locate2.PatternZone = nROI '設定-定位孔2-樣本區域 (X,Y,W,H)為nROI
+            End If
+            '------------------------Debug-定位孔樣本區域位移-結束--------------------------
 
             Call Locater1.UpdateModel(oBitmap, moMainRecipe.RecipeCamera.Locate1.FindModelZone, moMainRecipe.RecipeCamera.Locate1.PatternZone, moMainRecipe.RecipeCamera.Locate1.Score, MainRecipe.RecipeCamera.Locate1.Smoth)
             Call Locater2.UpdateModel(oBitmap, moMainRecipe.RecipeCamera.Locate2.FindModelZone, moMainRecipe.RecipeCamera.Locate2.PatternZone, moMainRecipe.RecipeCamera.Locate2.Score, MainRecipe.RecipeCamera.Locate2.Smoth)
 
             If BuildImageForCopy(oBitmap, RecipeID, RecipeHeader, -1, oLog) = False Then Return False
-            moMainRecipe.RecipeCamera.RecipeModelDiff.IsGatherStandardDeviation = False
+            moMainRecipe.RecipeCamera.RecipeModelDiff.IsGatherStandardDeviation = False '是否收集標準差影像-False
             Call moMainRecipe.SaveConfig(moMainRecipe.RecipeID)
             Call oBitmap.Save(moMainRecipe.RecipeCamera.TempleteImagePath, Imaging.ImageFormat.Bmp)
             Call UpdateModelList(moMainRecipe.RecipeCamera.RecipeModelDiff, RecipeID)
             Call UpdateDefectROI()  '' Augustin 220726 Add for Wafer Map
-            moMainRecipe.RecipeCamera.RecipeModelDiff.IsGatherStandardDeviation = True
+            moMainRecipe.RecipeCamera.RecipeModelDiff.IsGatherStandardDeviation = True '是否收集標準差影像-True
 
             Return True
         Catch ex As Exception

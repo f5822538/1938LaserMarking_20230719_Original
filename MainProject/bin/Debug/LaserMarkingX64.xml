@@ -71,6 +71,12 @@ LaserMarkingX64
 </member><member name="T:LaserMarkingX64.frmRecipe">
 	<summary>frmRecipeCamera</summary>
 	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.moHandshakeThread_ChangeRecipe(System.Collections.Generic.List{DefectLib.CMyProduct})">
+	<summary>
+ EventHandler-更換樣本-事件
+ </summary>
+	<param name="oHandshakeProductList"></param>
+	<remarks></remarks>
 </member><member name="M:LaserMarkingX64.frmMain.frmMain_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
 	<summary>
  表單關閉後的事件

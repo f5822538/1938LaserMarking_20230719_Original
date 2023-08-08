@@ -59,7 +59,7 @@ Public Class frmMain
             End If
             '------------------------Debug--漏雷觸發Alarm-結束--------------------------
 
-            '------------------------Debug-測試-開始--------------------------
+            '------------------------Debug-定位孔異常圖片-開始--------------------------
             If Debugger.IsAttached = True Then
                 Dim locater1 As New CMyLocater(moMyEquipment) '定位孔-1
                 Dim testBitMap1 As Bitmap = New Bitmap("D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp")
@@ -67,7 +67,7 @@ Public Class frmMain
                 Dim findChangeModelResult1 As Boolean = locater1.FindChangeModel(testBitMap1, aRectangle, 0)
                 Dim findResult1 As Boolean = locater1.Find(testBitMap1)
             End If
-            '------------------------Debug-測試-結束--------------------------
+            '------------------------Debug-定位孔異常圖片-結束--------------------------
 
             Call aTact.CalSpan()
             Call moLog.LogInformation(String.Format("載入設定資料，時間：[{0:F4}]ms", aTact.CurrentSpan))
