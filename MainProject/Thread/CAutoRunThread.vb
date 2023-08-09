@@ -599,7 +599,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 End If
 
                 '-------------------------漏雷觸發Alarm-開始--------------------------
-                If oAlarmCode = AlarmCode.IsDieLoseLaser Then
+                If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
                     If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:d4}] 漏雷觸發Alarm", mnSequence))
                     moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
                 End If

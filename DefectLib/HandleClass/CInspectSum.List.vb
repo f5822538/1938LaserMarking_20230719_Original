@@ -46,7 +46,7 @@ Partial Class CInspectSum
                 .SubItems.Add("N")
             End If
 
-            If InspectResult.ModleLoseStatus = True AndAlso (InspectResult.DefectCount - InspectResult.DefectNoDieCount) > 0 Then  '' Augustin 230310
+            If InspectResult.ModleLoseStatus = True AndAlso (InspectResult.DefectCount - InspectResult.DefectNoDieCount) > 0 Then  '' Augustin 230310 'º|¹p(CInspectResult)
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
                 .SubItems.Add("Y")
             Else

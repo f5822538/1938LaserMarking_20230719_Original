@@ -50,8 +50,8 @@ Public Class frmMain
 
             '------------------------Debug--漏雷觸發Alarm-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim oAlarmCode As AlarmCode = AlarmCode.IsDieLoseLaser
-                If oAlarmCode = AlarmCode.IsDieLoseLaser Then
+                Dim oAlarmCode As AlarmCode = AlarmCode.IsDieLoseLaser '漏雷
+                If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
                     If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now))
                     moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
                     moMyEquipment.TriggerAlarm(oAlarmCode, moMyEquipment.MyLog.LogAlarm) '漏雷觸發Alarm

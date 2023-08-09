@@ -218,22 +218,36 @@
                 '-------------------------漏雷扣除No Die-開始--------------------------
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False Then
                     'Die上沒有雷刻字串(漏雷是異常, No Die不是異常)
-                    If oInspectSum.InspectResult.ModleLoseStatus = True AndAlso _
-                        (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > 0 Then
-                        oAlarmCode = AlarmCode.IsDieLoseLaser
+                    If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > 0 AndAlso _
+                        oInspectSum.InspectResult.ModleLoseStatus = True Then '漏雷(CInspectResult)
+                        oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
                     End If
 
                     If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap Then
-                        oAlarmCode = AlarmCode.IsDieLoseLaser
+                        oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
                     End If
 
-                    moMyEquipment.SetEroorOn(moLog) '輸出Error log
-                    OutputFinalReport(oInspectSum)
+                    If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
+                        Dim subStr1 As String = "oInspectSum.InspectResult.DefectCount"
+                        Dim subStr2 As String = "oInspectSum.InspectResult.DefectNoDieCount"
+                        Dim subStr3 As String = "oInspectSum.InspectResult.ModleLoseStatus"
+                        Dim finalStr1 = subStr1 & ":" & oInspectSum.InspectResult.DefectCount & Environment.NewLine &
+                        subStr2 & ":" & oInspectSum.InspectResult.DefectNoDieCount & Environment.NewLine &
+                        subStr3 & ":" & oInspectSum.InspectResult.ModleLoseStatus
 
-                    Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
-                    If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.No Then
-                        moMyEquipment.IsNotUpdateMap = True
+                        If MsgBox(finalStr1, MsgBoxStyle.OkOnly, "漏雷資訊") = MsgBoxResult.Ok Then
+                            Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
+                            If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
+                                moMyEquipment.IsNotUpdateMap = True '資料不上報
+                            End If
+                        End If
+
+                        moMyEquipment.SetEroorOn(moLog) '輸出Error log
                     End If
+
+                    '-------------------------輸出檢測結果報表-開始--------------------------
+                    OutputFinalReport(oInspectSum) '輸出檢測結果報表
+                    '-------------------------輸出檢測結果報表-結束--------------------------
                 End If
                 '-------------------------漏雷扣除No Die-結束--------------------------
 
@@ -284,7 +298,7 @@
                 Call oProductConfig.SaveConfig()
 
                 '-------------------------輸出檢測結果報表-開始--------------------------
-                OutputFinalReport(oInspectSum)
+                OutputFinalReport(oInspectSum) '輸出檢測結果報表
                 '-------------------------輸出檢測結果報表-結束--------------------------
 
                 If oAlarmCodeWaitMap <> AlarmCode.IsOK Then

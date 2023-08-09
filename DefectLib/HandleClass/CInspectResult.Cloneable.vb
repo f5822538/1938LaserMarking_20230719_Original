@@ -38,7 +38,7 @@ Partial Class CInspectResult
             oSB.Append("N" & ",")
         End If
 
-        If ModleLoseStatus = True AndAlso (DefectCount - DefectNoDieCount) > 0 Then
+        If ModleLoseStatus = True AndAlso (DefectCount - DefectNoDieCount) > 0 Then 'º|¹p(CInspectResult)
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")

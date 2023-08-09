@@ -406,7 +406,7 @@ Module modLibrary
                                                             nPositionAngle < oRecipeModelDiff.AngleMin).ToList
 
             If oRecipeMarkList.Count < 1 Then
-                oModelImage.IsLose = True
+                oModelImage.IsLose = True 'º|¹p
                 oModelImage.IsProcess = False
                 oModelImage.MarkX = -1
                 oModelImage.MarkY = -1
@@ -571,12 +571,12 @@ Module modLibrary
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
                         Return False
-                    ElseIf oModelImage.IsLose = True Then
+                    ElseIf oModelImage.IsLose = True Then 'º|¹p
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                             oProduct.MarkList.Item(nIndex).Result = ResultType.OK
                             Return True
                         End If
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.Lose
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.Lose 'º|¹p(CMyMarkInfo)
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
@@ -606,7 +606,10 @@ Module modLibrary
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
-                        If .InspectResult.ModleLoseStatus = False Then .InspectResult.ModleLoseStatus = True
+                        If oInspectSum.InspectResult.ModleLoseStatus = False Then
+                            oInspectSum.InspectResult.ModleLoseStatus = True 'º|¹p(CInspectResult)
+                        End If
+
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             .DefectList.DefectList.Add(oDefect)
                             .DefectListDraw.Add(oDefect)
@@ -1031,10 +1034,14 @@ Module modLibrary
                     End SyncLock
                     'Call oLog.LogInformation(String.Format("[{0:d4}] {1}·å²«¡AMark X¡G{2} ¡FMark Y¡G{3}", nSequence, EnumHelper.GetDescription(.Result), .MarkX, .MarkY))
                 End If
-                'If .IsProcess = False OrElse .Result = ResultType.OK OrElse .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset Then Return True
-                If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then Return True
 
-                If .Result = ResultType.OK Then
+                'If .IsProcess = False OrElse .Result = ResultType.OK OrElse .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset Then Return True
+                If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
+                    Return True
+                End If
+
+                '-------------------------If oMarkInfo.Result = ResultType.OK-¶}©l--------------------------
+                If oMarkInfo.Result = ResultType.OK Then
                     If bIsSaveAIOKImage = True Then
                         Dim oAI As New CMyDefect
                         Dim oAIModelImage As MIL_ID = 0
@@ -1071,11 +1078,14 @@ Module modLibrary
 
                     Return True
                 End If
+                '-------------------------If oMarkInfo.Result = ResultType.OK-µ²§ô--------------------------
 
-                Dim nIndex As Integer = oRecipe.MarkIndex(.MarkX, .MarkY)
-                If .Result = ResultType.NA AndAlso nIndex >= 0 Then
+                Dim nIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
+
+                '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-¶}©l--------------------------
+                If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then
                     If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                        .Result = ResultType.OK
+                        oMarkInfo.Result = ResultType.OK
 
                         If bIsSaveAIOKImage = True Then
                             Dim oAI As New CMyDefect
@@ -1113,7 +1123,7 @@ Module modLibrary
 
                         Return True
                     End If
-                    .Result = ResultType.Lose
+                    oMarkInfo.Result = ResultType.Lose 'º|¹p(CMyMarkInfo)
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.InspectResult.DefectCount += 1
                     End SyncLock
@@ -1146,7 +1156,7 @@ Module modLibrary
 
                     oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
-                    oInspectSum.InspectResult.ModleLoseStatus = True
+                    oInspectSum.InspectResult.ModleLoseStatus = True 'º|¹p(CInspectResult)
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.DefectList.DefectList.Add(oDefect)
@@ -1162,6 +1172,8 @@ Module modLibrary
                 Else
                     Return True
                 End If
+                '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-µ²§ô--------------------------
+
             End With
             Return True
         Catch ex As Exception
