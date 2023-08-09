@@ -105,3 +105,23 @@
    於 LaserMarkingX64.frmMain.frmMain_Load(Object sender, EventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\frmMain.vb: 行 76
 10:46:20.979 [Info] 系統啟動完成，時間：[105.0238]ms
 10:46:29.076 [Info] 結束緒程Buffer Clear Thread 總共計算[0200]次，每次等待[0010]ms
+19:58:14.955 [Info] 載入設定資料，時間：[112.4307]ms
+19:58:15.237 [Error] 創建 DIO3208 失敗
+19:58:15.887 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+19:58:17.522 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+19:58:17.682 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+19:58:18.140 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+19:58:18.475 [Create] Server 開啟成功，IP：192.168.10.1。Port：5002
+19:58:18.962 [Info] 自動化流程啟動
+19:58:18.969 [Error] System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LaserMarkingX64.CMyEquipment.LightVacuumDown(II_LogTraceExtend oLog) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 155
+   於 LaserMarkingX64.CMyEquipment.Initial() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.vb: 行 57
+   於 LaserMarkingX64.frmMain.frmMain_Load(Object sender, EventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\frmMain.vb: 行 76
+19:58:18.969 [Info] 系統啟動完成，時間：[112.4307]ms
+19:58:28.113 [Info] 結束緒程Buffer Clear Thread 總共計算[0200]次，每次等待[0010]ms
