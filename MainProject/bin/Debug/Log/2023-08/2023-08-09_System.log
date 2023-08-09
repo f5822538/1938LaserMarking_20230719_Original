@@ -1,0 +1,68 @@
+09:38:01.371 [Info] 載入設定資料，時間：[163.1384]ms
+09:38:01.655 [Error] 創建 DIO3208 失敗
+09:38:02.274 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+09:38:05.290 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+09:38:05.429 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+09:38:05.861 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+09:38:06.198 [Create] Server 開啟成功，IP：192.168.10.1。Port：5002
+09:38:06.694 [Info] 自動化流程啟動
+09:38:06.704 [Error] System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LaserMarkingX64.CMyEquipment.LightVacuumDown(II_LogTraceExtend oLog) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 155
+   於 LaserMarkingX64.CMyEquipment.Initial() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.vb: 行 57
+   於 LaserMarkingX64.frmMain.frmMain_Load(Object sender, EventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\frmMain.vb: 行 76
+09:38:06.704 [Info] 系統啟動完成，時間：[163.1384]ms
+09:38:13.677 [Info] 按下 [90 - 版本資訊 Version]
+09:38:13.694 [Info] 
+2020-02-25 Initial Release 2.1.0.1
+    2020-02-25 0.01 依瑕疵種類建立開關，位移、字瑕疵、Compound 瑕疵。
+2021-01-04 Initial Release 2.1.0.2
+    2021-01-04 0.01 參數設定，修改建置 Mark 位置之問題。
+    2021-01-04 0.02 取像時間延後至 200 ms。
+    2021-01-04 0.03 檢測結束後延遲 2 s，預防蟲付檢驗。
+2021-01-20 Initial Release 2.1.0.3
+    2021-01-20 0.01 AI 交握新增成員，以及儲存 XML 檔。
+2021-10-08 Initial Release 2.1.0.4
+    2021-10-08 0.01 AOI相機可多讀取一長型條碼區域
+2021-11-15 Initial Release 2.1.0.5
+    2021-11-15 0.01 新增AI交握成員
+    2021-11-15 0.02 下載每條Strip NoDie資訊
+    2021-11-15 0.03 AI存圖圖檔名路徑
+    2021-11-15 0.04 NoDie、漏雷比對
+    2021-11-15 0.05 StripUpLoad上傳時多補上NoDie資訊
+    2021-11-15 0.06 蓋印偏移串修開關
+    2021-11-15 0.07 檢測小圖抓取開關
+2021-11-23 Initial Release 2.1.0.6
+    2021-11-23 0.01 AI存小圖 新增漏雷(角度)分類資料夾
+
+
+09:38:14.989 [Info] 按下 [90 - 版本資訊 Version]
+09:38:14.990 [Info] 
+2020-02-25 Initial Release 2.1.0.1
+    2020-02-25 0.01 依瑕疵種類建立開關，位移、字瑕疵、Compound 瑕疵。
+2021-01-04 Initial Release 2.1.0.2
+    2021-01-04 0.01 參數設定，修改建置 Mark 位置之問題。
+    2021-01-04 0.02 取像時間延後至 200 ms。
+    2021-01-04 0.03 檢測結束後延遲 2 s，預防蟲付檢驗。
+2021-01-20 Initial Release 2.1.0.3
+    2021-01-20 0.01 AI 交握新增成員，以及儲存 XML 檔。
+2021-10-08 Initial Release 2.1.0.4
+    2021-10-08 0.01 AOI相機可多讀取一長型條碼區域
+2021-11-15 Initial Release 2.1.0.5
+    2021-11-15 0.01 新增AI交握成員
+    2021-11-15 0.02 下載每條Strip NoDie資訊
+    2021-11-15 0.03 AI存圖圖檔名路徑
+    2021-11-15 0.04 NoDie、漏雷比對
+    2021-11-15 0.05 StripUpLoad上傳時多補上NoDie資訊
+    2021-11-15 0.06 蓋印偏移串修開關
+    2021-11-15 0.07 檢測小圖抓取開關
+2021-11-23 Initial Release 2.1.0.6
+    2021-11-23 0.01 AI存小圖 新增漏雷(角度)分類資料夾
+
+
+09:38:16.975 [Info] 結束緒程Buffer Clear Thread 總共計算[0200]次，每次等待[0010]ms

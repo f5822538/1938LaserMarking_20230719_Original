@@ -188,3 +188,4 @@ D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.vbpro
 D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.dll
 D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.xml
 D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.pdb
+D:\GitHub\1938LaserMarking_20230719_Original\DefectLib\obj\Debug\DefectLib.vbprojResolveAssemblyReference.cache

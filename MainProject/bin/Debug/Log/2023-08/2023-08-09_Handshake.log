@@ -1,0 +1,185 @@
+09:38:06.197 [Info] 啟動緒程HandShake Connect Server Thread
+09:38:06.201 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:06.205 [Debug] 內容中所要求的位址不正確。
+09:38:06.213 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:06.695 [Create]  Handshake 流程啟動
+09:38:06.743 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:06.744 [Debug] 內容中所要求的位址不正確。
+09:38:06.744 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:07.268 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:07.268 [Debug] 內容中所要求的位址不正確。
+09:38:07.268 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:07.792 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:07.792 [Debug] 內容中所要求的位址不正確。
+09:38:07.792 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:08.319 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:08.319 [Debug] 內容中所要求的位址不正確。
+09:38:08.319 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:08.843 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:08.844 [Debug] 內容中所要求的位址不正確。
+09:38:08.844 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:09.369 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:09.369 [Debug] 內容中所要求的位址不正確。
+09:38:09.369 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:09.889 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:09.889 [Debug] 內容中所要求的位址不正確。
+09:38:09.889 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:10.419 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:10.420 [Debug] 內容中所要求的位址不正確。
+09:38:10.420 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:10.945 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:10.945 [Debug] 內容中所要求的位址不正確。
+09:38:10.945 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:11.471 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:11.471 [Debug] 內容中所要求的位址不正確。
+09:38:11.472 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:11.995 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:11.995 [Debug] 內容中所要求的位址不正確。
+09:38:11.996 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:12.520 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:12.521 [Debug] 內容中所要求的位址不正確。
+09:38:12.521 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:13.043 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:13.043 [Debug] 內容中所要求的位址不正確。
+09:38:13.043 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:13.564 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:13.564 [Debug] 內容中所要求的位址不正確。
+09:38:13.564 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:14.090 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:14.091 [Debug] 內容中所要求的位址不正確。
+09:38:14.091 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:14.617 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:14.618 [Debug] 內容中所要求的位址不正確。
+09:38:14.618 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:15.140 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:15.141 [Debug] 內容中所要求的位址不正確。
+09:38:15.141 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:15.667 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:15.667 [Debug] 內容中所要求的位址不正確。
+09:38:15.667 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:16.192 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:16.192 [Debug] 內容中所要求的位址不正確。
+09:38:16.192 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:16.716 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:16.716 [Debug] 內容中所要求的位址不正確。
+09:38:16.716 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:16.975 [Info] 結束緒程 Handshake 總共計算[0200]次，每次等待[0010]ms
+09:38:17.245 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:17.246 [Debug] 內容中所要求的位址不正確。
+09:38:17.246 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:17.769 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:17.769 [Debug] 內容中所要求的位址不正確。
+09:38:17.769 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:18.295 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:18.295 [Debug] 內容中所要求的位址不正確。
+09:38:18.295 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:18.823 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:18.823 [Debug] 內容中所要求的位址不正確。
+09:38:18.823 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
+09:38:19.354 [Info] 開始接受通訊接入[192.168.10.1]與Port[5002]
+09:38:19.355 [Debug] 內容中所要求的位址不正確。
+09:38:19.355 [Debug] System.Net.Sockets.SocketException (0x80004005): 內容中所要求的位址不正確。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 ListenToClient_(CThreadServerExtend )
