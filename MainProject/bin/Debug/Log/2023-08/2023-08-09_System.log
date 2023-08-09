@@ -66,3 +66,42 @@
 
 
 09:38:16.975 [Info] 結束緒程Buffer Clear Thread 總共計算[0200]次，每次等待[0010]ms
+10:44:23.652 [Info] 載入設定資料，時間：[155.1256]ms
+10:44:23.960 [Error] 創建 DIO3208 失敗
+10:44:24.710 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+10:44:26.794 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+10:44:26.958 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+10:44:27.751 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+10:44:28.089 [Create] Server 開啟成功，IP：192.168.10.1。Port：5002
+10:44:28.921 [Info] 自動化流程啟動
+10:44:28.946 [Error] System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LaserMarkingX64.CMyEquipment.LightVacuumDown(II_LogTraceExtend oLog) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 155
+   於 LaserMarkingX64.CMyEquipment.Initial() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.vb: 行 57
+   於 LaserMarkingX64.frmMain.frmMain_Load(Object sender, EventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\frmMain.vb: 行 76
+10:44:28.946 [Info] 系統啟動完成，時間：[155.1256]ms
+10:46:17.634 [Info] 載入設定資料，時間：[105.0238]ms
+10:46:17.917 [Error] 創建 DIO3208 失敗
+10:46:18.447 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+10:46:19.663 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+10:46:19.813 [Error] 相機 192.168.11.1 開啟失敗，使用 Null Camera
+10:46:20.328 [Error] 相機 192.168.11.1 開啟失敗，Error：System.ArgumentException: 參數無效。
+   於 iTVisionService.AreaCameraLib.CNullCamera..ctor(Int32 nWidth, Int32 nHeight, Int32 nTimer)
+   於 iTVisionService.AreaCameraLib.CCameraCreateSingle.CreateNullCameraSingle(Int32 nWidth, Int32 nHeight, Int32 nTime)
+   於 LaserMarkingX64.CMyCamera.Create() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\Sub\CMyCamera.Public.vb: 行 32
+10:46:20.657 [Create] Server 開啟成功，IP：192.168.10.1。Port：5002
+10:46:20.973 [Info] 自動化流程啟動
+10:46:20.979 [Error] System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LaserMarkingX64.CMyEquipment.LightVacuumDown(II_LogTraceExtend oLog) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.DIO3208.vb: 行 155
+   於 LaserMarkingX64.CMyEquipment.Initial() 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.vb: 行 57
+   於 LaserMarkingX64.frmMain.frmMain_Load(Object sender, EventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\frmMain.vb: 行 76
+10:46:20.979 [Info] 系統啟動完成，時間：[105.0238]ms
+10:46:29.076 [Info] 結束緒程Buffer Clear Thread 總共計算[0200]次，每次等待[0010]ms

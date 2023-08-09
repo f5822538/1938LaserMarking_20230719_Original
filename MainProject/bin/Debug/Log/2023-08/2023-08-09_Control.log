@@ -1,3 +1,8 @@
 09:38:01.655 [Info] DIO 3208B [dio3208b.dll]驅動程式無法使用，請安裝驅動程式
 09:38:06.695 [Create] Tower Thread 流程啟動
 09:38:16.975 [Info] 結束緒程Tower Thread 總共計算[0200]次，每次等待[0010]ms
+10:44:23.960 [Info] DIO 3208B [dio3208b.dll]驅動程式無法使用，請安裝驅動程式
+10:44:28.925 [Create] Tower Thread 流程啟動
+10:46:17.916 [Info] DIO 3208B [dio3208b.dll]驅動程式無法使用，請安裝驅動程式
+10:46:20.974 [Create] Tower Thread 流程啟動
+10:46:29.076 [Info] 結束緒程Tower Thread 總共計算[0200]次，每次等待[0010]ms
