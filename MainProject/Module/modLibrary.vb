@@ -1199,18 +1199,18 @@ Module modLibrary
                     '' 10 18測試修改
                     'If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY AndAlso (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = oProduct.MarkList(i_oProduct).MarkX Then
 
-                    If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY + 1 AndAlso (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then
+                    If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY + 1 AndAlso _
+                       (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then
 
                         If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then
                             oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie
-
-                            oInspectSum.InspectResult.DefectNoDieCount += 1
+                            oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
                         End If
                     Else
                         If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then
                             If oProduct.MarkList(i_oProduct).Result <> ResultType.NoDie Then
                                 oProduct.MarkList(i_oProduct).Result = ResultType.NoDie
-                                oInspectSum.InspectResult.NotDefectNoDieCount += 1
+                                oInspectSum.InspectResult.NotDefectNoDieCount += 1 'No Die數量(NotDefect)
                             End If
                         End If
                     End If
