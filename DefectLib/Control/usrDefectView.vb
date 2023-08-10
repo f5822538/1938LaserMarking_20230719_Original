@@ -4,9 +4,7 @@ Public Class usrDefectView
     Public moBitmap As New Bitmap(10, 10)
 
     Public Sub AddData(oInspectSumCamera As CInspectSum)
-        Dim oInspectSum As CInspectSum = oInspectSumCamera
-
-        oInspectSum.AddItem(DefectViewCamera.Items)
+        oInspectSumCamera.AddItem(DefectViewCamera.Items)
 
         If DefectViewCamera.Items.Count > 1000 Then
             DefectViewCamera.Items.RemoveAt(DefectViewCamera.Items.Count - 1)
