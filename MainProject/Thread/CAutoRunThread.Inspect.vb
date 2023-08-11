@@ -235,8 +235,14 @@
                         subStr2 & ":" & oInspectSum.InspectResult.DefectNoDieCount & Environment.NewLine &
                         subStr3 & ":" & oInspectSum.InspectResult.ModleLoseStatus
 
-                        If MsgBox(finalStr1, MsgBoxStyle.OkOnly, "漏雷資訊") = MsgBoxResult.Ok Then
-                            Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
+                        Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
+                        If Debugger.IsAttached = True Then
+                            If MsgBox(finalStr1, MsgBoxStyle.OkOnly, "漏雷資訊") = MsgBoxResult.Ok Then
+                                If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
+                                    moMyEquipment.IsNotUpdateMap = True '資料不上報
+                                End If
+                            End If
+                        ElseIf Debugger.IsAttached = False Then
                             If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
                                 moMyEquipment.IsNotUpdateMap = True '資料不上報
                             End If
