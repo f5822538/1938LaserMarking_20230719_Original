@@ -177,31 +177,30 @@ Partial Class CAutoRunThread
 
     '' Augustin 220726 Add for Wafer Map
     Private Sub WaferMapAddDefect(oInspectSum As CInspectSum)
-        Dim oDefectList(oInspectSum.DefectListDraw.Count - 1) As iTVisionService.DisplayLib.CMyDefect
-
-        Parallel.For(0, oInspectSum.DefectListDraw.Count, CMyEquipment.ParallelOptions,
-            Sub(nIndex As Integer)
-                With oInspectSum.DefectListDraw.Item(nIndex)
-                    If .DefectCoordinate.X >= moMyEquipment.WaferMap.DieColumnCount OrElse .DefectCoordinate.Y >= moMyEquipment.WaferMap.DieRowCount Then Exit Sub
-                    oDefectList(nIndex) = moMyEquipment.WaferMap.CreateDefect(True)
-                    oDefectList(nIndex).TargetDieCoordinate = CType(.DefectCoordinate, Point)
-                    oDefectList(nIndex).TargetDieFileName = oInspectSum.InspectResult.GetDMFileName
-                    oDefectList(nIndex).DefectBoundary = .DefectBoundary.ToRectangle
-                    oDefectList(nIndex).DefectCenter = CType(.DefectCenter, Point)
-                    oDefectList(nIndex).Bin = DisplayLib.BinType.NGDie
-                    oDefectList(nIndex).DefetDrawType = DisplayLib.DefetDrawType.Circle
-                    oDefectList(nIndex).Area = .BodyArea
-                    oDefectList(nIndex).ZoneName = .ZoneName
-                    oDefectList(nIndex).ReviewFileName = .DefectFileName
-                End With
-            End Sub)
-        ''Augustin 220525 Bypass temp
         Try
+            Dim oDefectList(oInspectSum.DefectListDraw.Count - 1) As iTVisionService.DisplayLib.CMyDefect
+            Parallel.For(0, oInspectSum.DefectListDraw.Count, CMyEquipment.ParallelOptions,
+                Sub(nIndex As Integer)
+                    With oInspectSum.DefectListDraw.Item(nIndex)
+                        If .DefectCoordinate.X >= moMyEquipment.WaferMap.DieColumnCount OrElse .DefectCoordinate.Y >= moMyEquipment.WaferMap.DieRowCount Then Exit Sub
+                        oDefectList(nIndex) = moMyEquipment.WaferMap.CreateDefect(True)
+                        oDefectList(nIndex).TargetDieCoordinate = CType(.DefectCoordinate, Point)
+                        oDefectList(nIndex).TargetDieFileName = oInspectSum.InspectResult.GetDMFileName
+                        oDefectList(nIndex).DefectBoundary = .DefectBoundary.ToRectangle
+                        oDefectList(nIndex).DefectCenter = CType(.DefectCenter, Point)
+                        oDefectList(nIndex).Bin = DisplayLib.BinType.NGDie
+                        oDefectList(nIndex).DefetDrawType = DisplayLib.DefetDrawType.Circle
+                        oDefectList(nIndex).Area = .BodyArea
+                        oDefectList(nIndex).ZoneName = .ZoneName
+                        oDefectList(nIndex).ReviewFileName = .DefectFileName
+                    End With
+                End Sub)
+
+            ''Augustin 220525 Bypass temp
             Call moMyEquipment.WaferMap.AddDefectListByTarget(oDefectList.ToList())
             Call moMyEquipment.WaferMap.UpdateView()
-
         Catch ex1 As Exception
-
+            Dim msg As String = ex1.Message & Environment.NewLine & ex1.StackTrace
         End Try
     End Sub
 
@@ -273,8 +272,6 @@ Partial Class CAutoRunThread
         End If
 
         Try
-            'For i = 0 To oInspectResult.DefectCount - 1
-
             For i = 0 To oInspectSum.DefectList.DefectList.Count - 1
                 Select Case oInspectSum.DefectList.DefectList(i).ResultType
                     Case ResultType.Offset
@@ -305,6 +302,7 @@ Partial Class CAutoRunThread
                 End Select
             Next
         Catch ex As Exception
+            Dim msg = ex.Message & Environment.NewLine & ex.StackTrace
         End Try
 
         Try

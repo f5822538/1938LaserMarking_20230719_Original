@@ -26,7 +26,7 @@ Partial Class CMyEquipment
     Private moImagePreprocess As II_ImagePreprocess  '' Augustin 230109
     Public Locater1 As CMyLocater '定位孔-1
     Public Locater2 As CMyLocater '定位孔-2
-    Public IsNotUpdateMap As Boolean
+    Public IsNotUpdateMap As Boolean = False '預設值-資料上報
     Public mdCalAngle As Double = 0.0
 
     Private Function InitialLocater() As Boolean

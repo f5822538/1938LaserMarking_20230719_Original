@@ -22,7 +22,7 @@ Public Class CInspectResult
 
     Public Name As String = "" '檔案日期{0:yyyy-MM-dd_HH_mm_ss_fff}
     Public TactTime As Double = 0.0 '一個單元開始生產到下一個單元開始生產之間的平均時間間隔
-    Public DefectCount As Integer = 0 '漏雷數量
+    Public DefectCount As Integer = 0 '瑕疵數量(包含-漏雷數量)
     Public DefectNoDieCount As Integer = 0 'No Die數量(Defect)
     Public NotDefectNoDieCount As Integer = 0 'No Die數量(NotDefect)
 End Class

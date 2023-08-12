@@ -1022,22 +1022,27 @@ Module modLibrary
         End Try
     End Function
 
-    Public Function BuildLoseModel(oCameraSourceImage As MIL_ID, oRecipe As CRecipeModelDiff, ByRef oInspectSum As CInspectSum, ByRef oMarkInfo As CMyMarkInfo, oMyEquipment As CMyEquipment, oLog As II_LogTraceExtend, nSequence As Integer, bIsSaveAIOKImage As Boolean) As Boolean
+    Public Sub BuildLoseModel(oCameraSourceImage As MIL_ID, oRecipe As CRecipeModelDiff, ByRef oInspectSum As CInspectSum, ByRef oMarkInfo As CMyMarkInfo, oMyEquipment As CMyEquipment, oLog As II_LogTraceExtend, nSequence As Integer, bIsSaveAIOKImage As Boolean)
         Try
             With oMarkInfo
                 Dim sResult As String = ""
 
-                'If .IsProcess = True AndAlso (.Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset) Then
                 If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.InspectResult.DefectCount += 1
-                    End SyncLock
-                    'Call oLog.LogInformation(String.Format("[{0:d4}] {1}瑕疵，Mark X：{2} ；Mark Y：{3}", nSequence, EnumHelper.GetDescription(.Result), .MarkX, .MarkY))
-                End If
 
-                'If .IsProcess = False OrElse .Result = ResultType.OK OrElse .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset Then Return True
-                If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
-                    Return True
+                        '-------------------------瑕疵結果訊息-開始--------------------------
+                        Dim defectResultMsg As String = String.Empty
+                        For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
+                            If oMarkInfo.Result = value Then
+                                defectResultMsg = frmMain.GetDescriptionText(oMarkInfo.Result)
+                                Exit For
+                            End If
+                        Next
+                        oLog.LogError(String.Format("[{0:d4}] A瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
+                        oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
+                        '-------------------------瑕疵結果訊息-結束--------------------------
+                    End SyncLock
                 End If
 
                 '-------------------------If oMarkInfo.Result = ResultType.OK-開始--------------------------
@@ -1076,7 +1081,7 @@ Module modLibrary
                         End SyncLock
                     End If
 
-                    Return True
+                    'Return True
                 End If
                 '-------------------------If oMarkInfo.Result = ResultType.OK-結束--------------------------
 
@@ -1121,18 +1126,29 @@ Module modLibrary
                             End SyncLock
                         End If
 
-                        Return True
+                        'Return True
                     End If
+
                     oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.InspectResult.DefectCount += 1
+
+                        Dim defectResultMsg As String = String.Empty
+                        For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
+                            If oMarkInfo.Result = value Then
+                                defectResultMsg = frmMain.GetDescriptionText(oMarkInfo.Result)
+                                Exit For
+                            End If
+                        Next
+                        oLog.LogError(String.Format("[{0:d4}] B瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
+                        oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
                     End SyncLock
-                    'Call oLog.LogInformation(String.Format("[{0:d4}] {1}瑕疵，Mark X：{2} ；Mark Y：{3}", nSequence, EnumHelper.GetDescription(.Result), .MarkX, .MarkY))
+
                     Dim oDefect As New CMyDefect
                     oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                     oDefect.InspectType = InspectType.ModelDiff
                     oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                    oDefect.ResultType = .Result
+                    oDefect.ResultType = oMarkInfo.Result
                     oDefect.DefectName = EnumHelper.GetDescription(.Result)
                     oDefect.MeanGray = 0
                     oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
@@ -1161,6 +1177,9 @@ Module modLibrary
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.DefectList.DefectList.Add(oDefect)
                         oInspectSum.DefectListDraw.Add(oDefect)
+
+                        oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)
+                        oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log 日誌(處理 Process)
                     End SyncLock
 
                     Dim oModelImage As MIL_ID = 0
@@ -1168,19 +1187,20 @@ Module modLibrary
                     MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage)
                     MIL.MbufFree(oModelImage)
                     oModelImage = MIL.M_NULL
-                    Return False
+                    'Return False
                 Else
-                    Return True
+                    'Return True
                 End If
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-結束--------------------------
 
             End With
-            Return True
+            'Return True
         Catch ex As Exception
             Call oLog.LogError(String.Format("[{0:d4}] BuildLoseModel Failed！Error：{1}", nSequence, ex.ToString()))
-            Return False
+            'Return False
         End Try
-    End Function
+
+    End Sub
 
     Public Function CameraImageClear(ByRef oModelImage As CMyModelImage) As Boolean
         Try

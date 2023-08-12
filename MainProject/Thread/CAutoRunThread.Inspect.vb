@@ -214,7 +214,7 @@
                     Dim oCopyAIImageFileTask As Task = Task.Factory.StartNew(Sub() CopyAIImageFileForMulti(sPath, oInspectResult, oInspectSum))
                 End If
 
-                moMyEquipment.IsNotUpdateMap = False
+                moMyEquipment.IsNotUpdateMap = False '預設值-資料上報
                 '-------------------------漏雷扣除No Die-開始--------------------------
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False Then
                     'Die上沒有雷刻字串(漏雷是異常, No Die不是異常)
@@ -223,17 +223,27 @@
                         oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
                     End If
 
-                    If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap Then
+                    If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap AndAlso _
+                        oInspectSum.InspectResult.ModleLoseStatus = True Then
                         oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
                     End If
 
                     If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
+
+                        '-------------------------漏雷觸發Alarm-開始--------------------------
+                        moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
+                        If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:d4}] 漏雷觸發Alarm", mnSequence)) 'Log 日誌(處理 Process)
+                        moMyEquipment.LogAlarm.LogError(String.Format("[{0:d4}] 漏雷觸發Alarm", mnSequence)) 'Log 日誌(警報 Alarm)
+                        '-------------------------漏雷觸發Alarm-結束--------------------------
+
                         Dim subStr1 As String = "oInspectSum.InspectResult.DefectCount"
                         Dim subStr2 As String = "oInspectSum.InspectResult.DefectNoDieCount"
                         Dim subStr3 As String = "oInspectSum.InspectResult.ModleLoseStatus"
+                        Dim subStr4 As String = "oInspectSum.InspectResult.NotDefectNoDieCount"
                         Dim finalStr1 = subStr1 & ":" & oInspectSum.InspectResult.DefectCount & Environment.NewLine &
                         subStr2 & ":" & oInspectSum.InspectResult.DefectNoDieCount & Environment.NewLine &
-                        subStr3 & ":" & oInspectSum.InspectResult.ModleLoseStatus
+                        subStr3 & ":" & oInspectSum.InspectResult.ModleLoseStatus & Environment.NewLine &
+                        subStr4 & ":" & oInspectSum.InspectResult.NotDefectNoDieCount
 
                         Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
                         If Debugger.IsAttached = True Then
@@ -249,6 +259,7 @@
                         End If
 
                         moMyEquipment.SetEroorOn(moLog) '輸出Error log
+
                     End If
 
                 End If
@@ -306,7 +317,7 @@
 
                 If oAlarmCodeWaitMap <> AlarmCode.IsOK Then
                     If oAlarmCodeWaitMap = AlarmCode.IsWaitHandshakeTimeout OrElse oAlarmCodeWaitMap = AlarmCode.IsReadCodeFailed Then
-                        oAlarmCodeWaitMap = AlarmCode.IsOK
+                        oAlarmCodeWaitMap = AlarmCode.IsOK '忽略-TCP 等待交握超時,忽略-讀取條碼失敗
                         Return oAlarmCodeWaitMap
                     End If
                     Call moMyEquipment.SetEroorOn()

@@ -33,7 +33,6 @@ Public Class CMyMarkInfo
     <Index2Display(13, SR.MarkY), [ReadOnly](True)> Public Property MarkY As Integer = -1
     <Index2Display(14, SR.Result)> Public Property Result As ResultType = ResultType.NA
     <Index2Display(15, SR.IsGray)> Public Property IsGray As Boolean = False
-
     <Index2Display(20, SR.OriginalBinCode), [ReadOnly](True)> Public Property OriginalBinCode As String = ""
     <Index2Display(21, SR.OriginalType)> Public Property OriginalType As ResultType = ResultType.NA
 

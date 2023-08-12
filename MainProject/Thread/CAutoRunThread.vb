@@ -379,10 +379,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call .SetEroorOn(moLog)
 
                     If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                        Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                        Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                         oAlarmCode = oLightVacuumDown.Result
                         Call oLightVacuumDown.Dispose()
-                        If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                        If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                     End If
 
                     oLightVacuumDown = Nothing
@@ -397,10 +397,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call .SetEroorOn(moLog)
 
                     If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                        Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                        Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                         oAlarmCode = oLightVacuumDown.Result
                         Call oLightVacuumDown.Dispose()
-                        If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                        If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                     End If
 
                     oLightVacuumDown = Nothing
@@ -420,10 +420,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call .SetEroorOn(moLog)
 
                     If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                        Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                        Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                         oAlarmCode = oLightVacuumDown.Result
                         Call oLightVacuumDown.Dispose()
-                        If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                        If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                     End If
 
                     oLightVacuumDown = Nothing
@@ -438,10 +438,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call .SetEroorOn(moLog)
 
                         If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                            Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                            Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                             oAlarmCode = oLightVacuumDown.Result
                             Call oLightVacuumDown.Dispose()
-                            If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                            If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                         End If
 
                         oLightVacuumDown = Nothing
@@ -460,10 +460,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             'Call .SetEroorOn(moLog)
 
                             If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                                Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                                Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                                 oAlarmCode = oLightVacuumDown.Result
                                 Call oLightVacuumDown.Dispose()
-                                If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                                If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                             End If
 
                             oLightVacuumDown = Nothing
@@ -482,10 +482,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                 'Call .SetEroorOn(moLog)
 
                                 If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                                    Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                                    Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                                     oAlarmCode = oLightVacuumDown.Result
                                     Call oLightVacuumDown.Dispose()
-                                    If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                                    If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                                 End If
 
                                 oLightVacuumDown = Nothing
@@ -501,10 +501,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                 'Call .SetEroorOn(moLog)
 
                                 If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                                    Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                                    Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                                     oAlarmCode = oLightVacuumDown.Result
                                     Call oLightVacuumDown.Dispose()
-                                    If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                                    If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                                 End If
 
                                 oLightVacuumDown = Nothing
@@ -533,10 +533,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                     'Call .SetEroorOn(moLog)
 
                                     If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                                        Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                                        Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                                         oAlarmCode = oLightVacuumDown.Result
                                         Call oLightVacuumDown.Dispose()
-                                        If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                                        If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                                     End If
 
                                     oLightVacuumDown = Nothing
@@ -576,14 +576,14 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call .SetEroorOn(moLog)
                     End If
 
-                    .IsChangeModel = False
+                    moMyEquipment.IsChangeModel = False
 
                     If bIsOK = False Then '更換樣本失敗
                         If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                            Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                            Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                             oAlarmCode = oLightVacuumDown.Result
                             Call oLightVacuumDown.Dispose()
-                            If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode)
+                            If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode)
                         End If
 
                         oLightVacuumDown = Nothing
@@ -593,23 +593,26 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 End If
 
                 oAlarmCode = RunInspect() '執行-取像檢測
+                '--------------------------Run Inspect 失敗-開始--------------------------
+                Dim runInspectErrMsg As String = "Run Inspect 失敗"
                 If oAlarmCode <> AlarmCode.IsOK Then '檢測失敗
-                    Call moLog.LogError(String.Format("[{0:d4}] Run Inspect 失敗", mnSequence))
-                    Call .LogAlarm.LogError("Run Inspect 失敗")
+                    For Each value As AlarmCode In [Enum].GetValues(GetType(AlarmCode))
+                        If oAlarmCode = value Then
+                            Dim descriptionText As String = frmMain.GetDescriptionText(oAlarmCode)
+                            runInspectErrMsg += ":在" & descriptionText & "時,發生異常情況"
+                            Exit For
+                        End If
+                    Next
+                    moLog.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(處理 Process)
+                    moMyEquipment.LogAlarm.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(警報 Alarm)
                 End If
-
-                '-------------------------漏雷觸發Alarm-開始--------------------------
-                If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
-                    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:d4}] 漏雷觸發Alarm", mnSequence))
-                    moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
-                End If
-                '-------------------------漏雷觸發Alarm-結束--------------------------
+                '--------------------------Run Inspect 失敗-結束--------------------------
 
                 If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
-                    Call Task.WaitAll({oLightVacuumDown}, .HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
+                    Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
                     oAlarmCode = oLightVacuumDown.Result '燈源汽缸下降結果(AlarmCode)
                     Call oLightVacuumDown.Dispose()
-                    If oAlarmCode <> AlarmCode.IsOK Then .TriggerAlarm(oAlarmCode) '觸發Alarm
+                    If oAlarmCode <> AlarmCode.IsOK Then moMyEquipment.TriggerAlarm(oAlarmCode) '觸發Alarm
                 End If
 
                 oLightVacuumDown = Nothing

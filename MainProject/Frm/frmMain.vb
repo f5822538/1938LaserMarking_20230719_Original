@@ -48,16 +48,52 @@ Public Class frmMain
             End With
             moLog = moMyEquipment.LogSystem
 
+            '------------------------Debug-瑕疵結果訊息-開始--------------------------
+            If Debugger.IsAttached = True Then
+                Dim defectResultMsg As String = String.Empty
+                For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
+                    If ResultType.Lose = value Then
+                        defectResultMsg = frmMain.GetDescriptionText(ResultType.Lose)
+                        Exit For
+                    End If
+                Next
+                moLog.LogError(String.Format("[{0:d4}] A瑕疵:" & defectResultMsg, 0)) 'Log 日誌(處理 Process)
+                moLog.LogError(String.Format("[{0:d4}] DefectCount:" & 11, 0)) 'Log 日誌(處理 Process)
+            End If
+            '------------------------Debug-瑕疵結果訊息-結束--------------------------
+
             '------------------------Debug--漏雷觸發Alarm-開始--------------------------
             If Debugger.IsAttached = True Then
                 Dim oAlarmCode As AlarmCode = AlarmCode.IsDieLoseLaser '漏雷
                 If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
-                    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now))
                     moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
                     moMyEquipment.TriggerAlarm(oAlarmCode, moMyEquipment.MyLog.LogAlarm) '漏雷觸發Alarm
+                    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(處理 Process)
+                    moMyEquipment.LogAlarm.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(警報 Alarm)
                 End If
             End If
             '------------------------Debug--漏雷觸發Alarm-結束--------------------------
+
+            '------------------------Debug--Run Inspect 失敗-開始--------------------------
+            If Debugger.IsAttached = True Then
+                Dim oAlarmCode As AlarmCode = AlarmCode.IsDoorOpen '開門
+                Dim mnSequence As Integer = 0
+                Dim runInspectErrMsg As String = "Run Inspect 失敗"
+
+                If oAlarmCode <> AlarmCode.IsOK Then '檢測失敗
+                    For Each value As AlarmCode In [Enum].GetValues(GetType(AlarmCode))
+                        If oAlarmCode = value Then
+                            Dim descriptionText As String = GetDescriptionText(oAlarmCode)
+                            runInspectErrMsg += ":在" & descriptionText & "時,發生異常情況"
+                            Exit For
+                        End If
+                    Next
+                    moLog.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(處理 Process)
+                    moMyEquipment.LogAlarm.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(警報 Alarm)
+                End If
+
+            End If
+            '------------------------Debug--Run Inspect 失敗-結束--------------------------
 
             '------------------------Debug-定位孔異常圖片-開始--------------------------
             If Debugger.IsAttached = True Then
@@ -116,6 +152,26 @@ Public Class frmMain
         End Try
         Call moLog.LogInformation(String.Format("系統啟動完成，時間：[{0:F4}]ms", aTact.CurrentSpan))
     End Sub
+
+    Public Shared Function GetDescriptionText(source As AlarmCode) As String
+        Dim fi As FieldInfo = source.[GetType]().GetField(source.ToString())
+        Dim attributes As DescriptionAttribute() = DirectCast(fi.GetCustomAttributes(GetType(DescriptionAttribute), False), DescriptionAttribute())
+        If attributes.Length > 0 Then
+            Return attributes(0).Description
+        Else
+            Return source.ToString()
+        End If
+    End Function
+
+    Public Shared Function GetDescriptionText(source As ResultType) As String
+        Dim fi As FieldInfo = source.[GetType]().GetField(source.ToString())
+        Dim attributes As DescriptionAttribute() = DirectCast(fi.GetCustomAttributes(GetType(DescriptionAttribute), False), DescriptionAttribute())
+        If attributes.Length > 0 Then
+            Return attributes(0).Description
+        Else
+            Return source.ToString()
+        End If
+    End Function
 
     Private Sub frmMain_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If MsgBox("是否確定關閉？", MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.No Then

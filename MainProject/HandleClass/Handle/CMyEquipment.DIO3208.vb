@@ -167,14 +167,14 @@ Partial Class CMyEquipment
         Else
             oLog.LogInformation("燈源下降，失敗！")
         End If
+
         '' Augustin 220901 Modify
         Return oAlarmCode
-        'Return AlarmCode.IsOK
 
-        Select Case oAlarmCode
-            Case AlarmCode.IsStop : Return AlarmCode.IsStop
-            Case AlarmCode.IsTimeOut : Return AlarmCode.IsLightMoveDownTimeout
-            Case Else : Return AlarmCode.IsLightMoveDownFailed
-        End Select
+        'Select Case oAlarmCode
+        '    Case AlarmCode.IsStop : Return AlarmCode.IsStop
+        '    Case AlarmCode.IsTimeOut : Return AlarmCode.IsLightMoveDownTimeout
+        '    Case Else : Return AlarmCode.IsLightMoveDownFailed
+        'End Select
     End Function
 End Class
