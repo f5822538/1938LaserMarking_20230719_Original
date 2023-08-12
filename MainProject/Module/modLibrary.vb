@@ -1133,6 +1133,7 @@ Module modLibrary
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.InspectResult.DefectCount += 1
 
+                        '-------------------------瑕疵結果訊息-開始--------------------------
                         Dim defectResultMsg As String = String.Empty
                         For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
                             If oMarkInfo.Result = value Then
@@ -1142,6 +1143,7 @@ Module modLibrary
                         Next
                         oLog.LogError(String.Format("[{0:d4}] B瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
                         oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
+                        '-------------------------瑕疵結果訊息-結束--------------------------
                     End SyncLock
 
                     Dim oDefect As New CMyDefect
@@ -1178,8 +1180,10 @@ Module modLibrary
                         oInspectSum.DefectList.DefectList.Add(oDefect)
                         oInspectSum.DefectListDraw.Add(oDefect)
 
+                        '-------------------------瑕疵結果訊息-開始--------------------------
                         oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)
                         oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log 日誌(處理 Process)
+                        '-------------------------瑕疵結果訊息-結束--------------------------
                     End SyncLock
 
                     Dim oModelImage As MIL_ID = 0
