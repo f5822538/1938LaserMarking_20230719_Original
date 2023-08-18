@@ -171,10 +171,14 @@ Public Class frmIntegrateTest
         mnSendCommand = SendCommand.HandshakeSendStripMapUpload
     End Sub
 
+    ''' <summary>
+    ''' 發送-工具條按鈕發送上傳產品分布
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub Send_ToolStripButtonSendStripMapUpload()
         If moMyEquipment.Handshake IsNot Nothing AndAlso moSelectProduct IsNot Nothing Then
             Try
-                Call moMyEquipment.SendStripMapUpload(moSelectProduct, moLog)
+                moMyEquipment.SendStripMapUpload(moSelectProduct, moLog) 'TCP 發送上傳產品分布
             Catch ex As Exception
                 moLog.LogError(ex.ToString)
             End Try

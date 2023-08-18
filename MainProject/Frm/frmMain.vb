@@ -843,7 +843,7 @@ Public Class frmMain
                  Call usrDefectView.AddToPictureName(e.InspectSum.DefectList.DefectList(nCount - 1).DefectImage.FileName)
              Next
 
-             Call usrDefectView.AddData(e.InspectSum)
+             Call usrDefectView.AddData(e.InspectSum) '序列-Lead Frame-瑕疵檢測結果列表
              Call moMyEquipment.LogInspectCSV.Log(e.InspectSum.InspectResult.TOCSVLine())
 
              If cbxIsAutoChangeModel.Checked = True Then

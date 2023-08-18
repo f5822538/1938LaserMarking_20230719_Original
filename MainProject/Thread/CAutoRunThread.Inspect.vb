@@ -268,7 +268,7 @@
                 '-------------------------資料上報 Map-開始--------------------------
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False AndAlso _
                     moMyEquipment.IsNotUpdateMap = False AndAlso moProductProcess.SubstrateID <> "" Then
-                    oAlarmCode = moMyEquipment.SendStripMapUpload(moProductProcess, moMyEquipment.LogHandshake)
+                    oAlarmCode = moMyEquipment.SendStripMapUpload(moProductProcess, moMyEquipment.LogHandshake) 'TCP 發送上傳產品分布
 
                     oAlarmCodeWaitMap = moMyEquipment.WaitMapUploadACK(moProductProcess, Function() moStopRun.IsSet() = True)
 

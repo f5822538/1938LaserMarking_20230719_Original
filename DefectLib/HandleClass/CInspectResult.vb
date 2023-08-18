@@ -1,4 +1,6 @@
-''' <summary>CInspectResult</summary>
+''' <summary>
+''' 光學瑕疵檢測結果(用於出報表)
+''' </summary>
 ''' <remarks></remarks>
 Public Class CInspectResult
     Public Sequnce As Integer = 0

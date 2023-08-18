@@ -239,6 +239,12 @@ Partial Class CMyHandshake
         Return True
     End Function
 
+    ''' <summary>
+    ''' 發送-Lead Frame上的每個Die映射圖上傳包含原始映射圖資訊
+    ''' </summary>
+    ''' <param name="oProduct"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function SendStripMapUploadIncludeOriginalMapInfo(ByRef oProduct As CMyProduct) As Boolean
 
         If moMyEquipment.HardwareConfig.HandshakeBypass = True Then Return True

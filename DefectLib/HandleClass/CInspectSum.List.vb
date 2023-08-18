@@ -3,7 +3,7 @@ Imports System.Windows.Forms.ListView
 Partial Class CInspectSum
 
     Public Sub AddItem(oItemList As ListViewItemCollection)
-        With oItemList.Insert(0, InspectResult.Sequnce.ToString())
+        With oItemList.Insert(0, InspectResult.Sequnce.ToString()) '¦Cªí§Ç
             .SubItems.Add(Now.ToString())
             .SubItems.Add(InspectResult.RecipeID)
             .SubItems.Add(InspectResult.CodeID)

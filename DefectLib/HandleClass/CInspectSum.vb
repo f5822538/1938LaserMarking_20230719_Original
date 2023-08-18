@@ -1,6 +1,6 @@
 Public Class CInspectSum
 
-    Public InspectResult As CInspectResult
+    Public InspectResult As CInspectResult '光學瑕疵檢測結果(用於出報表)
     Public ReceiveTime As Date
     Public DefectList As CMyDefectList
     Public ProductConfig As CMyProductConfig

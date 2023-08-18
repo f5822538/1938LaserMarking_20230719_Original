@@ -49,14 +49,21 @@
     '    Return AlarmCode.IsOK
     'End Function
 
+    ''' <summary>
+    ''' 發送-Lead Frame上的每個Die映射圖上傳
+    ''' </summary>
+    ''' <param name="oProduct"></param>
+    ''' <param name="moLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function SendStripMapUpload(ByRef oProduct As CMyProduct, moLog As II_LogTraceExtend) As AlarmCode
-
-        If Handshake.SendStripMapUploadIncludeOriginalMapInfo(oProduct) = False Then Return AlarmCode.IsSendStripMapUploadFailed
-
-        'If Handshake.SendStripMapUpload(oProduct) = False Then Return AlarmCode.IsSendStripMapUploadFailed
-        moLog.LogInformation(String.Format("發送{0}，成功！", EnumHelper.GetDescription(HandshakeType.LotInfo)))
-        Return AlarmCode.IsOK
-
+        If Handshake.SendStripMapUploadIncludeOriginalMapInfo(oProduct) = False Then
+            Return AlarmCode.IsSendStripMapUploadFailed  'TCP 發送上傳產品分布失敗
+            'If Handshake.SendStripMapUpload(oProduct) = False Then Return AlarmCode.IsSendStripMapUploadFailed
+        Else
+            moLog.LogInformation(String.Format("發送{0}，成功！", EnumHelper.GetDescription(HandshakeType.LotInfo)))
+            Return AlarmCode.IsOK
+        End If
     End Function
 
     Public Function UpdateAIInfo(oProduct As CMyProduct, oInspectSum As CInspectSum, moLog As II_LogTraceExtend) As AlarmCode
