@@ -13,7 +13,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
     Private moRunInspect As New ManualResetEventSlim(False)
     Private moStopRun As New ManualResetEventSlim(False)
-    Private moStatu As InspectStatu = InspectStatu.StopRun
+    Private moStatu As InspectStatu = InspectStatu.StopRun '程式已暫停
     Private mnSequence As Integer = 0
     Private mnSequence_OK As Integer = 0
     Private LastDate As Date = Now.Date
@@ -26,8 +26,12 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         End Get
         Set(oValue As InspectStatu)
             If moRunInspect Is Nothing Then Exit Property
-            If oValue = InspectStatu.ContinueRun OrElse oValue = InspectStatu.SingleRun OrElse oValue = InspectStatu.TestRun Then
-                If (oValue = InspectStatu.SingleRun AndAlso moStatu <> InspectStatu.StopRun) OrElse (oValue = InspectStatu.TestRun AndAlso moStatu <> InspectStatu.StopRun) OrElse (oValue = InspectStatu.ContinueRun AndAlso moStatu = InspectStatu.ContinueRun) Then Exit Property
+            If oValue = InspectStatu.ContinueRun OrElse oValue = InspectStatu.SingleRun OrElse oValue = InspectStatu.TestRun Then '連續執行 Continus Run
+                If (oValue = InspectStatu.SingleRun AndAlso moStatu <> InspectStatu.StopRun) OrElse _
+                   (oValue = InspectStatu.TestRun AndAlso moStatu <> InspectStatu.StopRun) OrElse _
+                   (oValue = InspectStatu.ContinueRun AndAlso moStatu = InspectStatu.ContinueRun) Then
+                    Exit Property
+                End If
                 moMyEquipment.MaxDefectCountForUpdateMap = moMainRecipe.RecipeCamera.RecipeModelDiff.MarkXCount * moMainRecipe.RecipeCamera.RecipeModelDiff.MarkYCount * moMyEquipment.HardwareConfig.MiscConfig.MaxDefectCountForUpdateMap \ 100
                 moMyEquipment.MaxOffsetCountForUpdateToFttp = moMainRecipe.RecipeCamera.RecipeModelDiff.MarkXCount * moMainRecipe.RecipeCamera.RecipeModelDiff.MarkYCount * moMainRecipe.RecipeCamera.RecipeModelDiff.MaxOffsetPercentForUpdateToFtp \ 100
                 Call moLog.LogInformation(String.Format("上報 Map 最大瑕疵數量：{0}", moMyEquipment.MaxDefectCountForUpdateMap))
@@ -42,7 +46,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 Call moLog.LogInformation(String.Format("蜂鳴器 Bypass：{0}", moMyEquipment.HardwareConfig.BuzzerBypass))
                 Call moRunInspect.Set()
             Else
-                moStatu = InspectStatu.StopRun
+                moStatu = InspectStatu.StopRun '程式已暫停
                 Call moStopRun.Set()
                 Call moRunInspect.Reset()
             End If
@@ -86,7 +90,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
     End Sub
 
     ''' <summary>
-    ''' AutoRunThread = New CAutoRunThread -> AutoRunThread.Process
+    ''' 執行緒工作處理流程:(AutoRunThread = New CAutoRunThread -> AutoRunThread.Process)
     ''' </summary>
     ''' <remarks></remarks>
     Public Overrides Sub Process()
@@ -121,7 +125,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     Try
-                        Call SingleRun(False)
+                        SingleRun(bIsTestRun:=False) '單次執行
                         Call GC.Collect()
                     Catch ex As Exception
 
@@ -129,7 +133,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
                     Call moStopRun.Set()
                     Call moRunInspect.Reset()
-                    moStatu = InspectStatu.StopRun
+                    moStatu = InspectStatu.StopRun '程式已暫停
 
                 Case Statu = InspectStatu.ContinueRun
                     If mbStopSlim.IsSet() = True Then
@@ -148,7 +152,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     Try
-                        Call SingleRun(False)
+                        SingleRun(bIsTestRun:=False) '連續執行
                         Call GC.Collect()
                     Catch ex As Exception
 
@@ -174,7 +178,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     Try
-                        Call SingleRun(True)
+                        SingleRun(bIsTestRun:=True) '測試執行
                         Call GC.Collect()
                     Catch ex As Exception
 
@@ -182,7 +186,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
                     Call moStopRun.Set()
                     Call moRunInspect.Reset()
-                    moStatu = InspectStatu.StopRun
+                    moStatu = InspectStatu.StopRun '程式已暫停
             End Select
 
             Thread.Sleep(50)
@@ -209,14 +213,14 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call moMyEquipment.InnerThread.Inspect.Set()
                     While True
                         If moMyEquipment.InnerThread.HandshakeProcess.IsSet() = False Then Return AlarmCode.IsOK
-                        If mbStopSlim.IsSet() = True OrElse moStopRun.IsSet() = True OrElse moRunInspect.IsSet() = False OrElse moStatu = InspectStatu.StopRun Then Return AlarmCode.IsStop
+                        If mbStopSlim.IsSet() = True OrElse moStopRun.IsSet() = True OrElse moRunInspect.IsSet() = False OrElse moStatu = InspectStatu.StopRun Then Return AlarmCode.IsStop '程式已暫停
                         Thread.Sleep(10)
                     End While
                 End If
             Else
                 Exit While
             End If
-            If mbStopSlim.IsSet() = True OrElse moStopRun.IsSet() = True OrElse moRunInspect.IsSet() = False OrElse moStatu = InspectStatu.StopRun Then Return AlarmCode.IsStop
+            If mbStopSlim.IsSet() = True OrElse moStopRun.IsSet() = True OrElse moRunInspect.IsSet() = False OrElse moStatu = InspectStatu.StopRun Then Return AlarmCode.IsStop '程式已暫停
             Thread.Sleep(10)
         End While
 
@@ -247,6 +251,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         With moMyEquipment
             mbAlignStatus = False
 
+            '-------------------------20230828-開始--------------------------
             If bIsTestRun = False Then '如果不是測試執行
                 If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
                     moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then
@@ -266,6 +271,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 moMyEquipment.YieldConfig.TotalCount += 1
                 moMyEquipment.YieldConfig.TotalCount_Die += moMainRecipe.RecipeCamera.RecipeModelDiff.MarkXCount * moMainRecipe.RecipeCamera.RecipeModelDiff.MarkYCount
             End If
+            '-------------------------20230828-結束--------------------------
+
 
             Dim oRunOnceTact As New CTactTimeSpan '單次執行-TactTimeSpan
             Dim oTact As New CTactTimeSpan '條碼相機/檢測相機取像-TactTimeSpan
@@ -273,6 +280,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
             Try
                 Dim oLightVacuumDown As Task(Of AlarmCode) = New Task(Of AlarmCode)(Function() .LightVacuumDown(moLog))
 
+                '-------------------------20230828-開始--------------------------
                 If bIsTestRun = False Then '如果不是測試執行
                     Call moMyEquipment.Camera.SnapStart(-1, "檢測相機", moLog) '檢測相機-取像開始
                     Call moMyEquipment.CodeReaderCamera.SnapStart(-1, "條碼相機", moLog) '條碼相機-取像開始
@@ -380,6 +388,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call oLightVacuumDown.Start()
                     Call .SetLightOff(moLog)
                 End If
+                '-------------------------20230828-結束--------------------------
 
                 If .BuildImageForCopy(moCamera.Camera.BitmapImage(True), moImageID, moImageHeader, mnSequence, moLog) = False Then
                     Call moLog.LogError(String.Format("[{0:d4}] 取像失敗", mnSequence))
@@ -422,7 +431,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 Call oTact.ReSetTime()
 
                 Dim bIsOK As Boolean = Locate() '定位及旋轉補正
-                If bIsOK = False Then
+                If bIsOK = False Then '定位錯誤/定位失敗
                     Call moLog.LogError(String.Format("[{0:d4}] 定位失敗", mnSequence))
                     Call .LogAlarm.LogError("定位失敗")
                     Call .TriggerAlarm(AlarmCode.IsLocateFailed)

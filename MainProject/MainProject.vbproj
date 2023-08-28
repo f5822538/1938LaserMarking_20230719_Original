@@ -442,7 +442,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="XML\DefectReport.xslt" />
+    <EmbeddedResource Include="XML\DefectReport.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseService\Lock\haspdnert.dll" />
     <EmbeddedResource Include="BaseService\Lock\haspdnert_x64.dll" />
     <EmbeddedResource Include="BaseService\Lock\haspvlib_114385.dll" />

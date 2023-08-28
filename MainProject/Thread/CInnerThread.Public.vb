@@ -7,7 +7,7 @@ Partial Class CInnerThread
 
     Public Sub StartContinusRun()
         If IsCanRunInspect() = False Then Exit Sub '沒有載入製程參數
-        AutoRunThread.Statu = InspectStatu.ContinueRun
+        AutoRunThread.Statu = InspectStatu.ContinueRun '連續執行 Continus Run
     End Sub
 
     Public Sub StartTestRun()
