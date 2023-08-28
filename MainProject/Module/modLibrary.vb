@@ -624,7 +624,7 @@ Module modLibrary
                         oProduct.MarkList.Item(nIndex).Result = ResultType.NA
                         Return True
                     End If
-                Else
+                ElseIf oModelImage.IsProcess = True Then
                     nIndex = oProduct.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
                     If nIndex < 0 Then
                         Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed¡I(Product)", nSequence))
