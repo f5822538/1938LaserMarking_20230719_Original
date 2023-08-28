@@ -41,7 +41,7 @@ Public Class frmMain
             Call moHardwareConfig.LoadConfig()
 
             moMainRecipe = New CMainRecipe(String.Format("{0}\Recipe", Application.StartupPath), moHardwareConfig.MiscConfig.DefectSizeType = DefectSizeType.DefectAnd, moHardwareConfig.CameraConfig.PixelSize)
-            moMyEquipment = New CMyEquipment(moHardwareConfig, moMainRecipe, moSync)
+            moMyEquipment = New CMyEquipment(moHardwareConfig, moMainRecipe, moSync) '初始化-New CMyEquipment(硬體設定, 製程管理, 目前的同步處理內容)
 
             With moMyEquipment.MyLog
                 .LogSystem = CLogCreateorExtend.CreateSimpleDisplayLog(Application.StartupPath, "System", rtxtSystem, Nothing, True)
@@ -123,7 +123,7 @@ Public Class frmMain
 
             moAutoRunThread = moMyEquipment.InnerThread.AutoRunThread
             moHandshakeThread = moMyEquipment.InnerThread.HandshakeThread
-            moMyEquipment.InnerThread.StartThread()
+            moMyEquipment.InnerThread.StartThread() '執行緒(線程)-開始執行
             Call aTact.CalSpan()
             Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("開啟緒程，時間：[{0:F4}]ms", aTact.CurrentSpan))
             Call aTact.ReSetTime()
@@ -184,7 +184,7 @@ Public Class frmMain
             e.Cancel = True
         Else
             On Error Resume Next
-            Call DestoryThread()
+            moMyEquipment.InnerThread.StopThread() '執行緒(線程)-結束執行
             Call bkUpdate.CancelAsync()
             Call bkTime.CancelAsync()
             Call moMyEquipment.Close()
@@ -218,6 +218,12 @@ Public Class frmMain
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 連續執行 Continus Run
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnContinusRun_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnContinusRun.ClickButtonArea
         Try
             moMyEquipment.InnerThread.StartContinusRun()
@@ -943,7 +949,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DestoryThread()
-        moMyEquipment.InnerThread.StopThread()
+        moMyEquipment.InnerThread.StopThread() '執行緒(線程)-結束執行
     End Sub
 
     Private Function InitialLoadImage() As MyHandleResult
