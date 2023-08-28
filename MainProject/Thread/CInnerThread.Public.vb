@@ -1,17 +1,17 @@
 Partial Class CInnerThread
 
     Public Sub StartSingleRun()
-        If IsCanRunInspect() = False Then Exit Sub
+        If IsCanRunInspect() = False Then Exit Sub '⊿Τ更籹祘把计
         AutoRunThread.Statu = InspectStatu.SingleRun
     End Sub
 
     Public Sub StartContinusRun()
-        If IsCanRunInspect() = False Then Exit Sub
+        If IsCanRunInspect() = False Then Exit Sub '⊿Τ更籹祘把计
         AutoRunThread.Statu = InspectStatu.ContinueRun
     End Sub
 
     Public Sub StartTestRun()
-        If IsCanRunInspect() = False Then Exit Sub
+        If IsCanRunInspect() = False Then Exit Sub '⊿Τ更籹祘把计
         AutoRunThread.Statu = InspectStatu.TestRun
     End Sub
 
@@ -19,8 +19,14 @@ Partial Class CInnerThread
         AutoRunThread.Statu = InspectStatu.StopRun
     End Sub
 
+    ''' <summary>
+    ''' 耞琌磅︽厩浪代(耞琌Τ更籹祘把计)
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function IsCanRunInspect() As Boolean
         If moMyEquipment.HardwareConfig.InspectBypass = True Then Return True
+
         If moMyEquipment.MainRecipe.RecipeID.ToUpper = "DEFAULT" Then
             Call MsgBox("叫更籹祘把计", MsgBoxStyle.OkOnly, "煌祇мΤそ")
             Call moMyEquipment.TriggerWarning(AlarmCode.IsNotLoadRecipe)
