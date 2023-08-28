@@ -456,6 +456,12 @@ Public Class frmMain
 
     Private mofrmRecipeCodeReader As frmRecipeCodeReader
 
+    ''' <summary>
+    ''' 點擊(20 - 條碼參數設定 Code)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub mnuRecipeCodeReader_Click(sender As System.Object, e As System.EventArgs) Handles mnuRecipeCodeReader.Click
         moLog.LogInformation("按下 [20 - 條碼參數設定 Code]")
         If moMainRecipe.RecipeID.ToUpper = "DEFAULT" Then
@@ -466,7 +472,7 @@ Public Class frmMain
 
         If MsgBox("是否載入原設定圖檔？", MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.Yes Then
             If File.Exists(moMainRecipe.RecipeCamera.CodeReaderImagePath) = True Then
-                moMainRecipe.RecipeCamera.ImageBeenLoad = True
+                moMainRecipe.RecipeCamera.ImageBeenLoad = True '載入原設定圖檔-是
             Else
                 Dim sInformation As String = "參數圖檔不存在，請檢查圖檔！"
                 Call MsgBox(sInformation, MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
@@ -475,7 +481,7 @@ Public Class frmMain
             End If
         Else
             If moMyEquipment.CodeReaderCamera IsNot Nothing AndAlso moMyEquipment.CodeReaderCamera.Camera IsNot Nothing Then
-                moMainRecipe.RecipeCamera.ImageBeenLoad = False
+                moMainRecipe.RecipeCamera.ImageBeenLoad = False '載入原設定圖檔-否
             Else
                 Dim sInformation As String = "無相機影像！"
                 Call MsgBox(sInformation, MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
@@ -485,10 +491,14 @@ Public Class frmMain
         End If
 
         Try
-            If moMainRecipe.RecipeCamera.ImageBeenLoad = True Then
-                If moMyEquipment.BuildImageForLoad(moMainRecipe.RecipeCamera.CodeReaderImagePath, moMyEquipment.CodeReaderRecipeID, moMyEquipment.CodeReaderRecipeHeader, -1, moMyEquipment.LogSystem) = False Then MsgBox("圖檔載入失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+            If moMainRecipe.RecipeCamera.ImageBeenLoad = True Then '載入原設定圖檔-是
+                If moMyEquipment.BuildImageForLoad(moMainRecipe.RecipeCamera.CodeReaderImagePath, moMyEquipment.CodeReaderRecipeID, moMyEquipment.CodeReaderRecipeHeader, -1, moMyEquipment.LogSystem) = False Then
+                    MsgBox("圖檔載入失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                End If
             Else
-                If moMyEquipment.BuildImageForCopy(moMyEquipment.CodeReaderCamera.Camera.BitmapImage(True), moMyEquipment.CodeReaderRecipeID, moMyEquipment.CodeReaderRecipeHeader, -1, moMyEquipment.LogSystem) = False Then MsgBox("圖檔取得失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                If moMyEquipment.BuildImageForCopy(moMyEquipment.CodeReaderCamera.Camera.BitmapImage(True), moMyEquipment.CodeReaderRecipeID, moMyEquipment.CodeReaderRecipeHeader, -1, moMyEquipment.LogSystem) = False Then
+                    MsgBox("圖檔取得失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                End If
             End If
         Catch ex As Exception
             Call moLog.LogError(ex.ToString)
@@ -1060,6 +1070,12 @@ Public Class frmMain
         'Call moMyEquipment.Handshake.UpdateAIInfo(oProduct, oProductInspectResultSum)
     End Sub
 
+    ''' <summary>
+    ''' 點擊(11 - 參數設定 Inspect)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub mnuRecipeInspect_Click(sender As System.Object, e As System.EventArgs) Handles mnuRecipeInspect.Click
         '' Augustin 220726 Add for Wafer Map
         moLog.LogInformation("按下 [10 - 參數設定 Recipe]")
@@ -1071,7 +1087,7 @@ Public Class frmMain
 
         If MsgBox("是否載入原設定圖檔？", MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.Yes Then
             If File.Exists(moMainRecipe.RecipeCamera.TempleteImagePath) = True Then
-                moMainRecipe.RecipeCamera.ImageBeenLoad = True
+                moMainRecipe.RecipeCamera.ImageBeenLoad = True '載入原設定圖檔-是
             Else
                 Dim sInformation As String = "參數圖檔不存在，請檢查圖檔！"
                 Call MsgBox(sInformation, MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
@@ -1080,7 +1096,7 @@ Public Class frmMain
             End If
         Else
             If moMyEquipment.Camera IsNot Nothing AndAlso moMyEquipment.Camera.Camera IsNot Nothing Then
-                moMainRecipe.RecipeCamera.ImageBeenLoad = False
+                moMainRecipe.RecipeCamera.ImageBeenLoad = False '載入原設定圖檔-否
             Else
                 Dim sInformation As String = "無相機影像！"
                 Call MsgBox(sInformation, MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
@@ -1090,13 +1106,19 @@ Public Class frmMain
         End If
 
         Try
-            If moMainRecipe.RecipeCamera.ImageBeenLoad = True Then
-                If moMyEquipment.BuildImageForLoad(moMainRecipe.RecipeCamera.TempleteImagePath, moMyEquipment.RecipeID, moMyEquipment.RecipeHeader, -1, moMyEquipment.LogSystem) = False Then MsgBox("圖檔載入失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+            If moMainRecipe.RecipeCamera.ImageBeenLoad = True Then '載入原設定圖檔-是
+                If moMyEquipment.BuildImageForLoad(moMainRecipe.RecipeCamera.TempleteImagePath, moMyEquipment.RecipeID, moMyEquipment.RecipeHeader, -1, moMyEquipment.LogSystem) = False Then
+                    MsgBox("圖檔載入失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                End If
             Else
                 If MsgBox("是否使用相機原始影像？", MsgBoxStyle.YesNo, "銓發科技股份有限公司") = MsgBoxResult.Yes Then
-                    If moMyEquipment.BuildImageForCopy(moMyEquipment.Camera.Camera.BitmapImage(True), moMyEquipment.RecipeID, moMyEquipment.RecipeHeader, -1, moMyEquipment.LogSystem) = False Then MsgBox("圖檔取得失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                    If moMyEquipment.BuildImageForCopy(moMyEquipment.Camera.Camera.BitmapImage(True), moMyEquipment.RecipeID, moMyEquipment.RecipeHeader, -1, moMyEquipment.LogSystem) = False Then
+                        MsgBox("圖檔取得失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                    End If
                 Else
-                    If moMyEquipment.BuildImageForCopy(New Bitmap(moMyEquipment.ImageHeader.Width, moMyEquipment.ImageHeader.Height, moMyEquipment.ImageHeader.Stride, PixelFormat.Format8bppIndexed, moMyEquipment.ImageHeader.Ptr), moMyEquipment.RecipeID, moMyEquipment.RecipeHeader, -1, moMyEquipment.LogSystem) = False Then MsgBox("圖檔取得失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                    If moMyEquipment.BuildImageForCopy(New Bitmap(moMyEquipment.ImageHeader.Width, moMyEquipment.ImageHeader.Height, moMyEquipment.ImageHeader.Stride, PixelFormat.Format8bppIndexed, moMyEquipment.ImageHeader.Ptr), moMyEquipment.RecipeID, moMyEquipment.RecipeHeader, -1, moMyEquipment.LogSystem) = False Then
+                        MsgBox("圖檔取得失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+                    End If
                 End If
             End If
         Catch ex As Exception

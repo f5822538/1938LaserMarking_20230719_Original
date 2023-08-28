@@ -37,7 +37,7 @@ Partial Class CRecipeCamera : Inherits CConfigBase
 
     <Browsable(False)> Public Property TempleteImagePath As String = ""
     <Browsable(False)> Public Property CodeReaderImagePath As String = ""
-    <Browsable(False)> Public Property ImageBeenLoad As Boolean = True
+    <Browsable(False)> Public Property ImageBeenLoad As Boolean = True '是否載入原設定圖檔
 
     '<Index2Display(20, SR.MapZone)> Public Property MapZone As Rectangle = Rectangle.Empty
     '<Index2Display(21, SR.ColumnCount), Range(0, Integer.MaxValue)> Public Property ColumnCount As Integer = 10

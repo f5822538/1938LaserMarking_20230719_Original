@@ -70,6 +70,12 @@ Public Class frmRecipe
         moCanvas.UpdateCanvas()
     End Sub
 
+    ''' <summary>
+    ''' 儲存參數       Save Recpe
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSave_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnSave.ClickButtonArea
         If moRecipeCamera.RecipeModelDiff.ModelTopLeft.IsEmpty OrElse moRecipeCamera.RecipeModelDiff.ModelSize.IsEmpty Then
             MsgBox("樣本比對區域未設定！", MsgBoxStyle.OkOnly, "警告")
@@ -82,12 +88,15 @@ Public Class frmRecipe
         End If
         SaveStandardDeviationModel(moRecipeCamera.RecipeModelDiff, Application.StartupPath & "\Recipe", moRecipe.RecipeID)
 
-        If mbSaveImage = True Then moRecipeCamera.ImageBeenLoad = False
+        If mbSaveImage = True Then '旋轉角度不為0
+            moRecipeCamera.ImageBeenLoad = False '載入原設定圖檔-否
+        End If
+
         moRecipe.SaveConfig(moRecipe.RecipeID)
 
         On Error Resume Next
         GC.Collect()
-        If moRecipeCamera.ImageBeenLoad = False Then
+        If moRecipeCamera.ImageBeenLoad = False Then '載入原設定圖檔-否
             moCurrentBitmap.Save(moRecipeCamera.TempleteImagePath, Imaging.ImageFormat.Bmp)
         End If
 
@@ -358,16 +367,22 @@ Public Class frmRecipe
         Call moCanvas.UpdateCanvas()
     End Sub
 
+    ''' <summary>
+    ''' 轉正
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnRotate_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnRotate.ClickButtonArea
         Dim nCurrentX As Double = moCurrentBitmap.Width / 2
         Dim nCurrentY As Double = moCurrentBitmap.Height / 2
         Dim nRotateAngle As Double = nudRotateAngle.Value
         Call MIL.MimRotate(moRotateImageID, moImageID, nRotateAngle, nCurrentX, nCurrentY, nCurrentX, nCurrentY, MIL.M_BILINEAR + MIL.M_OVERSCAN_CLEAR)
 
-        If nudRotateAngle.Value = 0 Then
-            mbSaveImage = False
-        Else
-            mbSaveImage = True
+        If nudRotateAngle.Value = 0 Then '旋轉角度為0
+            mbSaveImage = False '旋轉角度為0
+        Else '旋轉角度不為0
+            mbSaveImage = True '旋轉角度不為0
         End If
 
         Call moCanvas.UpdateCanvas()
