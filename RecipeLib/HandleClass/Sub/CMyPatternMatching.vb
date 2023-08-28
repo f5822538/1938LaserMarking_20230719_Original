@@ -34,6 +34,16 @@ Public Class CMyPatternMatching
         Return moModelID <> 0
     End Function
 
+    ''' <summary>
+    ''' modLibrary.FindModelAll -> CMyPatternMatching.FindModelAll
+    ''' </summary>
+    ''' <param name="nImageHeader"></param>
+    ''' <param name="oRecipe"></param>
+    ''' <param name="nX"></param>
+    ''' <param name="nY"></param>
+    ''' <param name="nAngle"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindModelAll(nImageHeader As MIL_ID, oRecipe As CRecipeModelDiff, ByRef nX As List(Of Double), ByRef nY As List(Of Double), ByRef nAngle As List(Of Double)) As Boolean
         Try
             nX.Clear()

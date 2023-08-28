@@ -342,6 +342,7 @@ Module modLibrary
                 bIsCountDisable = True
             End If
 
+            '-------------------------20230828-開始--------------------------
             For nIndex As Integer = 0 To nRefX.Count - 1
                 Dim oModelImage As New CMyModelImage
                 oModelImage.CenterX = CInt(Math.Round(nRefX.Item(nIndex) + oRecipe.SearchRange.X))
@@ -353,7 +354,7 @@ Module modLibrary
                 If oPatternMatchingType = PatternMatchingType.PatternMatching1St Then
                     MIL.MbufChild2d(oCameraSourceImage, oModelImage.PositionX, oModelImage.PositionY, oRecipe.ModelSize.Width, oRecipe.ModelSize.Height, oModelImage.ModelImage)
                 End If
-                oModelImageList.Add(oModelImage)
+                oModelImageList.Add(oModelImage) 'List(Of CMyModelImage) [oModelImageList] 增加 CMyModelImage [oModelImage]
 
                 If oPatternMatchingType = PatternMatchingType.PatternMatching1St Then
                     If oRecipe.IsGatherStandardDeviation = True AndAlso bIsOK = True Then
@@ -374,6 +375,7 @@ Module modLibrary
                     'moLog.LogInformation(String.Format("[{0:d4}] [Model {1}]：RefX = {2}, RefY = {3}", nSequence, (nRecipeIndex + 1), nRefX.Item(nIndex), nRefY.Item(nIndex)))
                 End If
             Next
+            '-------------------------20230828-結束--------------------------
 
             If oPatternMatchingType = PatternMatchingType.PatternMatching1St Then
                 If bIsSaveImage = True Then MIL.MbufSave(String.Format("{0}\I01Summation.BMP", oInspectSum.InspectResult.InspectPath), oRecipe.SummationID)
