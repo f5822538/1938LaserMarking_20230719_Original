@@ -7,7 +7,7 @@ Public Class CInspectResult
     Public RecipeID As String = ""
     Public CodeID As String = ""
     Public AlignStatus As Boolean = False
-    Public FindStatus As Boolean = False
+    Public FindStatus As Boolean = False '·å²«-N(¹w³]­È/ªì©l­È)
     Public CycleInspectStatus As Boolean = False
     Public ModleInspectStatus As Boolean = False
     Public ModleOffsetStatus As Boolean = False

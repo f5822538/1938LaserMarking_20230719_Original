@@ -16,7 +16,7 @@ Partial Class CInspectSum
                 .SubItems.Add("N")
             End If
 
-            If InspectResult.FindStatus = True Then
+            If InspectResult.FindStatus = True Then '·å²«-Y
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
                 .SubItems.Add("Y")
             Else

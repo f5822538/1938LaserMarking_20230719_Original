@@ -186,7 +186,14 @@ Partial Class CMyHandshake
         Return True
     End Function
 
-    ''注意這裡的spath暫時用自訂設置，以便之後調整
+    ''' <summary>
+    ''' 注意這裡的spath暫時用自訂設置，以便之後調整
+    ''' </summary>
+    ''' <param name="sPath"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="olog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function BuildStripOriginalMapInfo(sPath As String, ByRef oProduct As CMyProduct, olog As II_LogTraceExtend) As Boolean
         'If sPath = "" AndAlso moMyEquipment.HardwareConfig.HandshakeBypass = True Then Return True
 
@@ -550,6 +557,13 @@ Partial Class CMyHandshake
         Return True
     End Function
 
+    ''' <summary>
+    ''' UpdateAIInfo-寫入 AI XML 檔案
+    ''' </summary>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function UpdateAIInfo(oProduct As CMyProduct, oInspectSum As CInspectSum) As Boolean
         If moMyEquipment.HardwareConfig.HandshakeBypass = True Then Return True
         oProduct.StripMap = <?xml version="1.0" encoding="UTF-8"?>

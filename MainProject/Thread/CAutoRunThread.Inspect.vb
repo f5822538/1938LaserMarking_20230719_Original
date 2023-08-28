@@ -75,7 +75,7 @@
                 Dim oMyDefectList As New CMyDefectList
                 Dim oInspectSum As CInspectSum
                 Dim oProductConfig As CMyProductConfig
-                Dim bIsOK As Boolean = False
+                Dim bIsOK As Boolean = False 'MIL-光學AOI檢測卡控用的Flag旗標
 
                 oInspectResult.RecipeID = moMainRecipe.RecipeID
                 oInspectResult.CodeID = moMyEquipment.CodeText
@@ -191,16 +191,22 @@
                 End If
 
                 Call moProductProcess.GetEQPID(oProductConfig)
+
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                 bIsOK = ModelDiffForStandardDeviation(moImageID, moRecipeCamera.RecipeModelDiff, oInspectSum, moProductProcess, moMyEquipment, moLog, mnSequence, moMyEquipment.HardwareConfig.MiscConfig.IsSaveInspectImage, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                 If bIsOK = False Then
-                    oInspectSum.InspectResult.FindStatus = True
+                    oInspectSum.InspectResult.FindStatus = True '瑕疵-Y
                     Call moLog.LogError(String.Format("[{0:d4}] Model Diff Failed", mnSequence))
                 End If
 
-                If moMyEquipment.HardwareConfig.HandshakeBypass = False Then
+                If moMyEquipment.HardwareConfig.HandshakeBypass = False Then '交握-不要Bypass
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     bIsOK = CompareOriginalAndInspectNoDieSection(oInspectSum, moProductProcess, moLog, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     If bIsOK = False Then
-                        oInspectSum.InspectResult.FindStatus = True
+                        oInspectSum.InspectResult.FindStatus = True '瑕疵-Y
                         Call moLog.LogError(String.Format("[{0:d4}] CompareOriginalAndInspectNoDieSection Failed", mnSequence))
                     End If
                 End If
@@ -221,7 +227,7 @@
 
                 moMyEquipment.IsNotUpdateMap = False '預設值-資料上報
                 '-------------------------漏雷扣除No Die-開始--------------------------
-                If moMyEquipment.HardwareConfig.HandshakeBypass = False Then
+                If moMyEquipment.HardwareConfig.HandshakeBypass = False Then '交握-不要Bypass
                     'Die上沒有雷刻字串(漏雷是異常, No Die不是異常)
                     If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > 0 AndAlso _
                         oInspectSum.InspectResult.ModleLoseStatus = True Then '漏雷(CInspectResult)
@@ -272,12 +278,12 @@
 
                 '-------------------------資料上報 Map-開始--------------------------
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False AndAlso _
-                    moMyEquipment.IsNotUpdateMap = False AndAlso moProductProcess.SubstrateID <> "" Then
+                    moMyEquipment.IsNotUpdateMap = False AndAlso moProductProcess.SubstrateID <> "" Then '交握-不要Bypass
                     oAlarmCode = moMyEquipment.SendStripMapUpload(moProductProcess, moMyEquipment.LogHandshake) 'TCP 發送上傳產品分布
 
                     oAlarmCodeWaitMap = moMyEquipment.WaitMapUploadACK(moProductProcess, Function() moStopRun.IsSet() = True)
 
-                    If moMyEquipment.HardwareConfig.AIHandshakeBypass = False Then
+                    If moMyEquipment.HardwareConfig.AIHandshakeBypass = False Then 'AI交握-不要Bypass
                         oAlarmCode = moMyEquipment.UpdateAIInfo(moProductProcess, oInspectSum, moMyEquipment.LogHandshake)
                     End If
 

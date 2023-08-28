@@ -66,6 +66,14 @@
         End If
     End Function
 
+    ''' <summary>
+    ''' 呼叫-Handshake.UpdateAIInfo(寫入 AI XML 檔案)
+    ''' </summary>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="moLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function UpdateAIInfo(oProduct As CMyProduct, oInspectSum As CInspectSum, moLog As II_LogTraceExtend) As AlarmCode
         'If moMainRecipe.RecipeCamera.RecipeModelDiff.IsUpLoadInspectPicture = True Then
         'End If

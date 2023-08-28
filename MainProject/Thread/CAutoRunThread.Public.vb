@@ -238,6 +238,13 @@ Partial Class CAutoRunThread
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 複製 AI 影像
+    ''' </summary>
+    ''' <param name="sSourcePath"></param>
+    ''' <param name="oInspectResult"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <remarks></remarks>
     Public Sub CopyAIImageFileForMulti(sSourcePath As String, oInspectResult As CInspectResult, oInspectSum As CInspectSum)
         Dim oFileInfoNGArrayList As FileInfo()
         Dim oFileInfoNoDieList As FileInfo()
