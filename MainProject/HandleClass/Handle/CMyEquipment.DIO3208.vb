@@ -19,6 +19,11 @@ Partial Class CMyEquipment
         End Get
     End Property
 
+    ''' <summary>
+    ''' "創建-DIO3208
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function CreateDIO3208() As Boolean
         Try
             moDIO3208 = CJSCardCreater.CreateDIO3208B(CLogCreateor.CreateLogToLogExtend(LogControl), 0)
@@ -29,8 +34,8 @@ Partial Class CMyEquipment
                 Return False
             End If
 
-            Call moDIO3208.OpenBoard()
-            Update3208Interface()
+            moDIO3208.OpenBoard() 'DIO3208B-開卡
+            Update3208Interface() '更新-DIO3208B-介面
             Return True
         Catch ex As Exception
             Call LogSystem.LogError(String.Format("創建 DIO3208 錯誤，Error：{0}", ex.ToString))
@@ -39,6 +44,10 @@ Partial Class CMyEquipment
         End Try
     End Function
 
+    ''' <summary>
+    ''' 更新-DIO3208B-介面
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Sub Update3208Interface()
         moDIO3208.UpdateInPutName(0, CMyIO.SR.LightVacuum1UpSensor)
         moDIO3208.UpdateInPutName(1, CMyIO.SR.LightVacuum1DownSensor)
@@ -57,14 +66,15 @@ Partial Class CMyEquipment
         moDIO3208.UpdateOutPutName(5, CMyIO.SR.Error)
         moDIO3208.UpdateOutPutName(7, CMyIO.SR.Buzzer)
 
-        IO.LightVacuum1UpSensor = DIO3208.GetInput(0)
+        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+        IO.LightVacuum1UpSensor = DIO3208.GetInput(0) '燈源汽缸1-上位Sensor
         IO.LightVacuum1DownSensor = DIO3208.GetInput(1)
-        IO.LightVacuum2UpSensor = DIO3208.GetInput(2)
+        IO.LightVacuum2UpSensor = DIO3208.GetInput(2) '燈源汽缸2-上位Sensor
         IO.LightVacuum2DownSensor = DIO3208.GetInput(3)
-        IO.ProductPresentSensor = DIO3208.GetInput(4)
-        IO.SafeSensor1 = New CReverseInput(DIO3208.GetInput(5))
-        IO.SafeSensor2 = New CReverseInput(DIO3208.GetInput(6))
-        IO.HomeSensor = DIO3208.GetInput(7)
+        IO.ProductPresentSensor = DIO3208.GetInput(4) '產品-在席Sensor
+        IO.SafeSensor1 = New CReverseInput(DIO3208.GetInput(5)) '安全Sensor-1
+        IO.SafeSensor2 = New CReverseInput(DIO3208.GetInput(6)) '安全Sensor-2
+        IO.HomeSensor = DIO3208.GetInput(7) 'HomeSensor/原點 Sensor
 
         IO.LightVacuumUp1 = DIO3208.GetOutPut(0)
         IO.LightOn = DIO3208.GetOutPut(1)
@@ -73,13 +83,19 @@ Partial Class CMyEquipment
         IO.LightVacuumUp2 = DIO3208.GetOutPut(4)
         IO.Error = DIO3208.GetOutPut(5)
         IO.Buzzer = DIO3208.GetOutPut(7)
+        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
     End Sub
 
+    ''' <summary>
+    ''' SetEroorOn
+    ''' </summary>
+    ''' <param name="oLog"></param>
+    ''' <remarks></remarks>
     Public Sub SetEroorOn(Optional oLog As II_LogTraceExtend = Nothing)
         If moHardwareConfig.IOBypass = True Then Exit Sub
         If moHardwareConfig.OutputErrorBypass = True Then Exit Sub
 
-        IsErrorOn.Set()
+        IsErrorOn.Set() '將事件的狀態設定為已收到訊號，讓正在等候該事件的一個或多個執行緒繼續執行
 
         If oLog Is Nothing Then
             IO.Error.SetOn()
@@ -103,7 +119,7 @@ Partial Class CMyEquipment
             IO.Error.SetOff(oLog)
         End If
 
-        IsErrorOn.Reset()
+        IsErrorOn.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
     End Sub
 
     Public Sub SetLightOn(Optional oLog As II_LogTraceExtend = Nothing)

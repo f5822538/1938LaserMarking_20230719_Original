@@ -247,6 +247,12 @@ Public Class frmMain
         moMyEquipment.InnerThread.StopProcess()
     End Sub
 
+    ''' <summary>
+    ''' 清除(異常)
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnClearAlarm_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnClearAlarm.ClickButtonArea
         moMyEquipment.ClearAlarm()
     End Sub

@@ -30,9 +30,9 @@
 
     Public Sub ClearAlarm()
         SetEroorOff()
-        moIsAlarm.Reset()
+        moIsAlarm.Reset() 'moIsAlarm-將事件的狀態設定為未收到信號，會造成執行緒封鎖
         Thread.Sleep(500)
-        moIsStop.Reset()
+        moIsStop.Reset() 'moIsStop-將事件的狀態設定為未收到信號，會造成執行緒封鎖
         CurrentAlarmCode = AlarmCode.IsOK
     End Sub
 End Class
