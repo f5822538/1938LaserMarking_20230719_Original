@@ -58,6 +58,11 @@
         End With
     End Function
 
+    ''' <summary>
+    ''' CAutoRunThread.SingleRun -> CAutoRunThread.RunInspect
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function RunInspect() As AlarmCode
         Dim oAlarmCode As AlarmCode = AlarmCode.IsOK
         Dim oAlarmCodeWaitMap As AlarmCode = AlarmCode.IsOK

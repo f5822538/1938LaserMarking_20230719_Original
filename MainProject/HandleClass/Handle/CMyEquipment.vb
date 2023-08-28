@@ -44,6 +44,11 @@ Public Class CMyEquipment
         moIO = New CMyIO
     End Sub
 
+    ''' <summary>
+    ''' frmMain.frmMain_Load -> CMyEquipment.Initial
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function Initial() As Boolean
         Dim IsOk As Boolean = True
 

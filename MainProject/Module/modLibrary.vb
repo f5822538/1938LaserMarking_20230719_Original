@@ -126,6 +126,20 @@ Module modLibrary
         End Try
     End Function
 
+    ''' <summary>
+    ''' CAutoRunThread.RunInspect -> modLibrary.ModelDiffForStandardDeviation
+    ''' </summary>
+    ''' <param name="oCameraSourceImage"></param>
+    ''' <param name="oRecipe"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oMyEquipment"></param>
+    ''' <param name="oLog"></param>
+    ''' <param name="nSequence"></param>
+    ''' <param name="bIsSaveImage"></param>
+    ''' <param name="nDefectMaxCount"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function ModelDiffForStandardDeviation(oCameraSourceImage As MIL_ID, oRecipe As CRecipeModelDiff, oInspectSum As CInspectSum, oProduct As CMyProduct, oMyEquipment As CMyEquipment, oLog As II_LogTraceExtend, nSequence As Integer, bIsSaveImage As Boolean, nDefectMaxCount As Integer) As Boolean
         Try
             Dim nSourceWidth As Integer = CInt(MIL.MbufInquire(oCameraSourceImage, MIL.M_SIZE_X))
@@ -282,6 +296,20 @@ Module modLibrary
         End Try
     End Function
 
+    ''' <summary>
+    ''' modLibrary.ModelDiffForStandardDeviation -> modLibrary.FindModelAll
+    ''' </summary>
+    ''' <param name="oCameraSourceImage"></param>
+    ''' <param name="oModelImageList"></param>
+    ''' <param name="oRecipe"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oLog"></param>
+    ''' <param name="oPatternMatchingType"></param>
+    ''' <param name="nSequence"></param>
+    ''' <param name="bIsSaveImage"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindModelAll(oCameraSourceImage As MIL_ID, ByRef oModelImageList As List(Of CMyModelImage), oRecipe As CRecipeModelDiff, oInspectSum As CInspectSum, oProduct As CMyProduct, oLog As II_LogTraceExtend, oPatternMatchingType As PatternMatchingType, nSequence As Integer, bIsSaveImage As Boolean) As Boolean
         Try
             Dim oTemporaryImage As MIL_ID
@@ -365,6 +393,18 @@ Module modLibrary
         End Try
     End Function
 
+    ''' <summary>
+    ''' modLibrary.FindModelAll -> modLibrary.BuildProductPosition
+    ''' </summary>
+    ''' <param name="oModelImage"></param>
+    ''' <param name="oRecipeModelDiff"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oPatternMatchingType"></param>
+    ''' <param name="oLog"></param>
+    ''' <param name="nSequence"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function BuildProductPosition(ByRef oModelImage As CMyModelImage, oRecipeModelDiff As CRecipeModelDiff, oInspectSum As CInspectSum, oProduct As CMyProduct, oPatternMatchingType As PatternMatchingType, oLog As II_LogTraceExtend, nSequence As Integer) As Boolean
         Try
             Dim nPositionX As Integer = oModelImage.PositionX

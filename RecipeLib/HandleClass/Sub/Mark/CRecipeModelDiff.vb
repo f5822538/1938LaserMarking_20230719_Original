@@ -44,7 +44,7 @@ Public Class CRecipeModelDiff : Inherits CConfigBase
         Public Const MergeTolerance As String = "瑕疵合併之區域"
 
         Public Const IsGatherStandardDeviation As String = "是否收集標準差影像"
-        Public Const InspectSummationSquareCount As String = "標準差收集各數"
+        Public Const InspectSummationSquareCount As String = "標準差收集個數"
 
         Public Const IsExportStripMapXML As String = "是否輸出Mark Out XML檔案"
         Public Const IsUpLoadInspectPicture As String = "是否要求IT抓取檢測小圖"

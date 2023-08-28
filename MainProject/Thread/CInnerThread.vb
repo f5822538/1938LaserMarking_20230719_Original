@@ -14,6 +14,12 @@ Public Class CInnerThread
     Public Inspect As New ManualResetEventSlim(False)
     Public HandshakeProcess As New ManualResetEventSlim(False)
 
+    ''' <summary>
+    ''' moInnerThread = New CInnerThread(Me)
+    ''' CInnerThread -> CAutoRunThread, CHandshakeThread, CTowerThread, CClearBufferThread, CEraseThreadExtend, CEraseThreadExtend
+    ''' </summary>
+    ''' <param name="oMyEquipment"></param>
+    ''' <remarks></remarks>
     Public Sub New(oMyEquipment As CMyEquipment)
         Try
             moMyEquipment = oMyEquipment

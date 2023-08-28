@@ -85,6 +85,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         End Try
     End Sub
 
+    ''' <summary>
+    ''' AutoRunThread = New CAutoRunThread -> AutoRunThread.Process
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Overrides Sub Process()
         While True
             WaitHandle.WaitAny({mbStopSlim.WaitHandle, moRunInspect.WaitHandle})
@@ -220,6 +224,11 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         Return AlarmCode.IsOK
     End Function
 
+    ''' <summary>
+    ''' CAutoRunThread.SingleRun
+    ''' </summary>
+    ''' <param name="bIsTestRun"></param>
+    ''' <remarks></remarks>
     Private Sub SingleRun(bIsTestRun As Boolean)
         If mbStopSlim.IsSet() = True OrElse moStopRun.IsSet() = True OrElse moRunInspect.IsSet() = False OrElse moStatu = InspectStatu.StopRun Then
             Call moStopRun.Set()

@@ -26,6 +26,12 @@ Public Class frmMain
     Private moMap As CMyMap
     Private moSelectedDefect As iTVisionService.DisplayLib.CMyDefect
 
+    ''' <summary>
+    ''' System.Windows.Forms.Form (發生在表單第一次顯示之前)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim aTact As New CTactTimeSpan
 
