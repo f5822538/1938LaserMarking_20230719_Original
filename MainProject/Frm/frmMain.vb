@@ -528,7 +528,10 @@ Public Class frmMain
             Call moMyEquipment.CodeReader.SetParameter(moMainRecipe.RecipeCamera.CodeReader)
         End If
 
-        If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then MsgBox("設定 [條碼相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+        If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
+           moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-1
+            MsgBox("設定 [條碼相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+        End If
 
         moCanvas.UpdateCanvas()
     End Sub
@@ -1162,7 +1165,9 @@ Public Class frmMain
         tabView.SelectedTab = tabLocate
 
         cbxGatherStandardDeviation.Checked = moMainRecipe.RecipeCamera.RecipeModelDiff.IsGatherStandardDeviation
-        If moMyEquipment.Camera.Camera.IsNullCamera() = False AndAlso moMyEquipment.Camera.ChangeExposure(moMainRecipe.ExposureTime, "檢測相機", moLog) = False Then MsgBox("設定 [檢測相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+        If moMyEquipment.Camera.Camera.IsNullCamera() = False AndAlso moMyEquipment.Camera.ChangeExposure(moMainRecipe.ExposureTime, "檢測相機", moLog) = False Then '修改檢測相機曝光時間
+            MsgBox("設定 [檢測相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+        End If
         Call moCanvas.UpdateCanvas()
         Call moCanvasLocate1.UpdateCanvas()
         Call moCanvasLocate2.UpdateCanvas()

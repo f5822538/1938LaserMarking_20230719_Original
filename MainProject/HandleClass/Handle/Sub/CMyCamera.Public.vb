@@ -78,6 +78,14 @@
         Return bIsOpen
     End Function
 
+    ''' <summary>
+    ''' 修改曝光時間
+    ''' </summary>
+    ''' <param name="nExposureTime"></param>
+    ''' <param name="sCameraName"></param>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function ChangeExposure(nExposureTime As Double, sCameraName As String, oLog As II_LogTraceExtend) As Boolean
         Call moMyEquipment.LogControl.LogInformation(String.Format("{0} 修改曝光時間：{1} us", sCameraName, nExposureTime))
 

@@ -254,7 +254,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
             '-------------------------20230828-開始--------------------------
             If bIsTestRun = False Then '如果不是測試執行
                 If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
-                    moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then
+                    moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-1
                     Call moLog.LogError(String.Format("[{0:d4}] 更換條碼相機曝光時間失敗 (1)", mnSequence))
                 End If
 
@@ -268,8 +268,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Exit Sub
                 End If
                 mnSequence += 1
-                moMyEquipment.YieldConfig.TotalCount += 1
-                moMyEquipment.YieldConfig.TotalCount_Die += moMainRecipe.RecipeCamera.RecipeModelDiff.MarkXCount * moMainRecipe.RecipeCamera.RecipeModelDiff.MarkYCount
+                moMyEquipment.YieldConfig.TotalCount += 1 '總數
+                moMyEquipment.YieldConfig.TotalCount_Die += moMainRecipe.RecipeCamera.RecipeModelDiff.MarkXCount * moMainRecipe.RecipeCamera.RecipeModelDiff.MarkYCount 'Die 總數
             End If
             '-------------------------20230828-結束--------------------------
 
@@ -287,8 +287,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call .SetLightOn(moLog) '打開-燈源
                     Call moLog.LogInformation(String.Format("[{0:d4}] Light On", mnSequence))
 
-                    oAlarmCode = .LightVacuumUp(moLog)
-                    If oAlarmCode <> AlarmCode.IsOK Then
+                    oAlarmCode = moMyEquipment.LightVacuumUp(moLog) '燈源上升
+                    If oAlarmCode <> AlarmCode.IsOK Then '檢測AlarmCode不是OK
                         Call .LightVacuumDown(moLog) '燈源汽缸-下降
                         Call .SetLightOff(moLog) '關閉-燈源
                         Call .TriggerAlarm(oAlarmCode) '觸發Alarm
@@ -332,7 +332,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         End If
 
                         If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
-                            moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime2, "條碼相機", moLog) = False Then
+                            moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime2, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-2
                             Call moLog.LogError(String.Format("[{0:d4}] 更換條碼相機曝光時間失敗 (2)", mnSequence))
                         End If
 

@@ -91,6 +91,12 @@ Public Class FrmRecipeList
         End If
     End Sub
 
+    ''' <summary>
+    ''' 載入製程參數 Load Recipe
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnLoadRecipe_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnLoadRecipe.ClickButtonArea
         If BindingSourceFile.Position >= 0 Then
             Dim sName As String = moFileInfoList(BindingSourceFile.Position).Name.ToUpper
@@ -114,8 +120,13 @@ Public Class FrmRecipeList
             End If
 
             Call moMyEquipment.RaiseUpdateTitle()
-            If moMyEquipment.Camera.Camera.IsNullCamera() = False AndAlso moMyEquipment.Camera.ChangeExposure(moCurrentRecipe.ExposureTime, "檢測相機", moLog) = False Then MsgBox("設定 [檢測相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
-            If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso moMyEquipment.CodeReaderCamera.ChangeExposure(moCurrentRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then MsgBox("設定 [條碼相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+            If moMyEquipment.Camera.Camera.IsNullCamera() = False AndAlso moMyEquipment.Camera.ChangeExposure(moCurrentRecipe.ExposureTime, "檢測相機", moLog) = False Then '修改檢測相機曝光時間
+                MsgBox("設定 [檢測相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+            End If
+            If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
+               moMyEquipment.CodeReaderCamera.ChangeExposure(moCurrentRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-1
+                MsgBox("設定 [條碼相機] 曝光時間，失敗！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
+            End If
         End If
         Call Me.Dispose()
     End Sub

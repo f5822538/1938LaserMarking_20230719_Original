@@ -129,14 +129,16 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
 
                                     Call moMyEquipment.InnerThread.AutoRunThread.UpdateImage()
 
-                                    If moMyEquipment.Camera.Camera.IsNullCamera() = False AndAlso moMyEquipment.Camera.ChangeExposure(moMyEquipment.MainRecipe.ExposureTime, "檢測相機", moLog) = False Then
+                                    If moMyEquipment.Camera.Camera.IsNullCamera() = False AndAlso _
+                                       moMyEquipment.Camera.ChangeExposure(moMyEquipment.MainRecipe.ExposureTime, "檢測相機", moLog) = False Then '修改檢測相機曝光時間
                                         moMyEquipment.LogProcess.LogInformation("Lot Info - 修改檢測相機曝光時間失敗")
                                         oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsChangeCameraExposureTimeFailed, "Change Inspect Camera Exposure Time Failed", moLog)
                                         Call moMyEquipment.SetEroorOn()
                                         Exit Select
                                     End If
 
-                                    If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso moMyEquipment.CodeReaderCamera.ChangeExposure(moMyEquipment.MainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then
+                                    If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
+                                       moMyEquipment.CodeReaderCamera.ChangeExposure(moMyEquipment.MainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime1, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-1
                                         moMyEquipment.LogProcess.LogInformation("Lot Info - 修改條碼相機曝光時間失敗")
                                         oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsChangeCodeReaderCameraExposureTimeFailed, "Change Code Reader Camera Exposure Time Failed", moLog)
                                         Call moMyEquipment.SetEroorOn()
