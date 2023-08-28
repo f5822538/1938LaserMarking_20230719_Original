@@ -68,7 +68,7 @@ Public Class CMyEquipment
             End If
         End If
 
-        moInnerThread = New CInnerThread(Me)
+        moInnerThread = New CInnerThread(Me) 'ªì©l¤Æ-CInnerThread
 
         Dim oAlarmCode As AlarmCode = LightVacuumDown(LogSystem) '¿O·½¤U­°
         If oAlarmCode <> AlarmCode.IsOK Then

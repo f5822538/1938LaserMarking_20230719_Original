@@ -3,8 +3,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
     Private moMyEquipment As CMyEquipment
     Private moMainRecipe As CMainRecipe
     Private moRecipeCamera As CRecipeCamera
-    Private moCamera As CMyCamera
-    Private moCodeReaderCamera As CMyCamera
+    Private moCamera As CMyCamera '檢測相機
+    Private moCodeReaderCamera As CMyCamera '條碼相機
     Private moImageID As MIL_ID
     Private moCodeReaderImageID1 As MIL_ID
     Private moCodeReaderImageID2 As MIL_ID
