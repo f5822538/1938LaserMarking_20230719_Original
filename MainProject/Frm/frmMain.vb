@@ -115,15 +115,18 @@ Public Class frmMain
             Call moLog.LogInformation(String.Format("載入設定資料，時間：[{0:F4}]ms", aTact.CurrentSpan))
             Call aTact.ReSetTime()
 
-            Call moMyEquipment.Initial()
+            Call moMyEquipment.Initial() 'CreateDIO3208,InitialCamera,InitialHandshake,InitialLocater,InitialCodeReader,LightVacuumDown,SetLightOff
             Call moMyEquipment.SetSystemCache()
             Call aTact.CalSpan()
             Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("初始化硬體，時間：[{0:F4}]ms", aTact.CurrentSpan))
             Call aTact.ReSetTime()
 
-            moAutoRunThread = moMyEquipment.InnerThread.AutoRunThread
+            '------------------------執行緒(線程)-20230828-開始--------------------------
+            moAutoRunThread = moMyEquipment.InnerThread.AutoRunThread '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
             moHandshakeThread = moMyEquipment.InnerThread.HandshakeThread
             moMyEquipment.InnerThread.StartThread() '執行緒(線程)-開始執行
+            '------------------------執行緒(線程)-20230828-結束--------------------------
+
             Call aTact.CalSpan()
             Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("開啟緒程，時間：[{0:F4}]ms", aTact.CurrentSpan))
             Call aTact.ReSetTime()
@@ -150,8 +153,8 @@ Public Class frmMain
             Call moMyEquipment.UpdateSizeDgvCodeReadResult(dgvCodeReadResult, 1)
             Call UpdateTitle()
             Call moMyEquipment.UpdatePoolSetting() '' Augustin 220726 Add for Wafer Map
-            Call bkUpdate.RunWorkerAsync()
-            Call bkTime.RunWorkerAsync()
+            Call bkUpdate.RunWorkerAsync() '開始執行背景作業
+            Call bkTime.RunWorkerAsync() '開始執行背景作業
             Call moLog.LogInformation(Me.Text)
         Catch ex As System.Exception
             Call moLog.LogError(ex.ToString)
@@ -185,8 +188,8 @@ Public Class frmMain
         Else
             On Error Resume Next
             moMyEquipment.InnerThread.StopThread() '執行緒(線程)-結束執行
-            Call bkUpdate.CancelAsync()
-            Call bkTime.CancelAsync()
+            Call bkUpdate.CancelAsync() '要求取消暫止的背景作業
+            Call bkTime.CancelAsync() '要求取消暫止的背景作業
             Call moMyEquipment.Close()
             Call moMyEquipment.UserProfileFile.SaveConfig("")
             Call moMyEquipment.DisableDisplay()
@@ -270,6 +273,12 @@ Public Class frmMain
 
     Private moFrmRecipeList As FrmRecipeList
 
+    ''' <summary>
+    ''' 製程管理 Recipe Manager
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnRecipeManager_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnRecipeManager.ClickButtonArea
         Try
             If moFrmRecipeList Is Nothing Then moFrmRecipeList = New FrmRecipeList(moMyEquipment, Application.StartupPath)
@@ -567,6 +576,12 @@ Public Class frmMain
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 使用者登入 User Log In
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub mnuLogInOut_Click(sender As System.Object, e As System.EventArgs) Handles mnuLogInOut.Click
         If mnuLogInOut.Text = LOGIN Then
             moLog.LogInformation(String.Format("按下 [{0}]", LOGIN))
@@ -710,6 +725,12 @@ Public Class frmMain
         moMyEquipment.IsChangeModel = cbxIsAutoChangeModel.Checked 'CheckBox-勾選-自動更換樣本
     End Sub
 
+    ''' <summary>
+    ''' 當呼叫 System.ComponentModel.BackgroundWorker.RunWorkerAsync 時發生
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub bkUpdate_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles bkUpdate.DoWork
         Dim oWorker As BackgroundWorker = CType(sender, BackgroundWorker)
 
@@ -728,6 +749,12 @@ Public Class frmMain
         End While
     End Sub
 
+    ''' <summary>
+    ''' 當呼叫 System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32) 時發生
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub bkUpdate_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bkUpdate.ProgressChanged
         Try
             Select Case True
@@ -781,9 +808,11 @@ Public Class frmMain
                     mnuRight.Visible = False
             End Select
 
+            '-------------------------20230822-開始--------------------------
             usrAlarm.RefreshStatus(moMyEquipment.IsAlarm.IsSet() = True OrElse moMyEquipment.IsErrorOn.IsSet() = True)
             usrRunning.RefreshStatus(moMyEquipment.InnerThread.Inspect.IsSet() = True)
             usrExecute.RefreshStatus(moMyEquipment.HardwareConfig.TriggerBypass = True OrElse (moMyEquipment.IO.ProductPresentSensor.IsOn() = True AndAlso moMyEquipment.IO.SafeSensor1.IsOn() = False AndAlso moMyEquipment.IO.SafeSensor2.IsOn() = False))
+            '-------------------------20230822-結束--------------------------
 
             btnClearAlarm.Enabled = moMyEquipment.IsAlarm.IsSet() = True OrElse moMyEquipment.IsErrorOn.IsSet() = True
             btnSingleRun.Enabled = moMyEquipment.IsAlarm.IsSet() = False AndAlso moMyEquipment.IsErrorOn.IsSet() = False AndAlso moAutoRunThread.IsRunning() = False AndAlso moMainRecipe.RecipeID.ToUpper <> "DEFAULT" AndAlso (moHardwareConfig.TriggerBypass = True OrElse moMyEquipment.IO.HomeSensor.IsOn() = True)
@@ -825,6 +854,12 @@ Public Class frmMain
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 當呼叫 System.ComponentModel.BackgroundWorker.RunWorkerAsync 時發生
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub bkTime_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles bkTime.DoWork
         Dim oWorker As BackgroundWorker = CType(sender, BackgroundWorker)
 
@@ -843,6 +878,12 @@ Public Class frmMain
         End While
     End Sub
 
+    ''' <summary>
+    ''' 當呼叫 System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32) 時發生
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub bkTime_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bkTime.ProgressChanged
         With Now
             labStatusDate.Text = .ToString("yyyy-MM-dd")

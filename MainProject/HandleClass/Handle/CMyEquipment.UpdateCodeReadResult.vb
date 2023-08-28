@@ -3,6 +3,13 @@
     Public IsUpdateCodeReadResult As Boolean = False
     Public CodeReadResultList As New List(Of String)
 
+    ''' <summary>
+    ''' MainProject\HandleClass\Handle\CMyEquipment.UpdateCodeReadResult.vb
+    ''' </summary>
+    ''' <param name="oDataGridView"></param>
+    ''' <param name="nColumn"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function UpdateSizeDgvCodeReadResult(oDataGridView As DataGridView, nColumn As Integer) As Boolean
         Try
             oDataGridView.Columns.Clear()
@@ -35,6 +42,12 @@
 
     End Function
 
+    ''' <summary>
+    ''' MainProject\HandleClass\Handle\CMyEquipment.UpdateCodeReadResult.vb
+    ''' </summary>
+    ''' <param name="oDataGridView"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function UpdateValueDgvCodeReadResult(oDataGridView As DataGridView) As Boolean
         Try
             If CodeReadResultList.Count = 0 Then Return False

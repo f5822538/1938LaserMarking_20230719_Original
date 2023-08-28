@@ -55,14 +55,27 @@ Public Class CMyEquipment
         If CreateDIO3208() = False Then IsOk = False
         If InitialCamera() = False Then IsOk = False
         If InitialHandshake() = False Then IsOk = False
-        If moHardwareConfig.MiscConfig.IsUseModelFinder = True Then If InitialLocater() = False Then IsOk = False
-        If moHardwareConfig.CodeReaderBypass = False Then If InitialCodeReader() = False Then IsOk = False
+
+        If moHardwareConfig.MiscConfig.IsUseModelFinder = True Then
+            If InitialLocater() = False Then
+                IsOk = False
+            End If
+        End If
+
+        If moHardwareConfig.CodeReaderBypass = False Then
+            If InitialCodeReader() = False Then
+                IsOk = False
+            End If
+        End If
+
         moInnerThread = New CInnerThread(Me)
 
-        Dim oAlarmCode As AlarmCode = LightVacuumDown(LogSystem)
-        If oAlarmCode <> AlarmCode.IsOK Then TriggerAlarm(oAlarmCode) : Return False
+        Dim oAlarmCode As AlarmCode = LightVacuumDown(LogSystem) '¿O·½¤U­°
+        If oAlarmCode <> AlarmCode.IsOK Then
+            TriggerAlarm(oAlarmCode) : Return False
+        End If
 
-        Call SetLightOff(LogSystem)
+        Call SetLightOff(LogSystem) 'Ãö³¬-¿O·½
 
         Dim sFileName As String = String.Format("{0:yyyy-MM-dd}", Date.Now)
         YieldConfig = New CYieldConfig(Application.StartupPath & "\Yield", sFileName, "INI")
@@ -73,7 +86,7 @@ Public Class CMyEquipment
 
     Public Sub Close()
         Call LightVacuumDown(LogSystem)
-        Call SetLightOff(LogSystem)
+        Call SetLightOff(LogSystem) 'Ãö³¬-¿O·½
 
         Call CameraClose()
         Call CloseHandshake()
