@@ -30,7 +30,7 @@ Partial Class CInspectSum
             '    .SubItems.Add("N")
             'End If
 
-            If InspectResult.ModleInspectStatus = True Then
+            If InspectResult.ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)-異常:True
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
                 .SubItems.Add("Y")
             Else

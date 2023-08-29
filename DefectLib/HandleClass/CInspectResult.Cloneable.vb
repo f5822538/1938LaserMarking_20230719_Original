@@ -8,7 +8,7 @@ Partial Class CInspectResult
         oSB.Append(CodeID & ",")
         oSB.Append((DefectCount - DefectNoDieCount).ToString() & ",")  '' Augustin 230310 
 
-        If AlignStatus = True Then
+        If AlignStatus = True Then '對位異常
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")
@@ -26,26 +26,26 @@ Partial Class CInspectResult
         '    oSB.Append("N" & ",")
         'End If
 
-        If ModleInspectStatus = True Then
+        If ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")
         End If
 
-        If ModleOffsetStatus = True Then
+        If ModleOffsetStatus = True Then '檢測異常 (偏移)
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")
         End If
 
         If ModleLoseStatus = True AndAlso (DefectCount - DefectNoDieCount) > 0 Then '漏雷(CInspectResult)
-            oSB.Append("Y" & ",")
+            oSB.Append("Y" & ",") '檢測異常 (漏雷)
         Else
             oSB.Append("N" & ",")
         End If
 
         '' Augustin 230310
-        If DefectNoDieCount > 0 Then
+        If DefectNoDieCount > 0 Then '檢測異常 (No Die)
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")

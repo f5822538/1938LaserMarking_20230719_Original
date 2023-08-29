@@ -460,7 +460,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 Call moLog.LogInformation(String.Format("[{0:d4}] 影像更新完畢。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
                 Call oTact.ReSetTime()
 
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                 Dim bIsOK As Boolean = Locate() '定位及旋轉補正
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                 If bIsOK = False Then '定位錯誤/定位失敗
                     Call moLog.LogError(String.Format("[{0:d4}] 定位失敗", mnSequence))
                     Call moMyEquipment.LogAlarm.LogError("定位失敗")
@@ -479,8 +482,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Exit Sub
                 End If
 
-                If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
-                    If moMainRecipe.RecipeCamera.CodeReader.SearchRange.Right >= moMyEquipment.CodeReaderCamera.Camera.CameraWidth OrElse moMainRecipe.RecipeCamera.CodeReader.SearchRange.Bottom >= moMyEquipment.CodeReaderCamera.Camera.CameraHeight Then
+                If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
+                    'RecipeCamera-搜尋範圍 (X,Y,W,H) >= CodeReaderCamera
+                    If moMainRecipe.RecipeCamera.CodeReader.SearchRange.Right >= moMyEquipment.CodeReaderCamera.Camera.CameraWidth OrElse _
+                       moMainRecipe.RecipeCamera.CodeReader.SearchRange.Bottom >= moMyEquipment.CodeReaderCamera.Camera.CameraHeight Then
                         Call moLog.LogError(String.Format("[{0:d4}] 條碼參數錯誤 (Barcode)。", mnSequence))
                         Call moMyEquipment.TriggerAlarm(AlarmCode.IsCodeReaderParameterFailed)
                         Call moMyEquipment.SetEroorOn(moLog)
@@ -615,7 +620,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
                 Call moLog.LogInformation(String.Format("[{0:d4}] 條碼：{1}。產品條碼：{2}", mnSequence, moMyEquipment.CodeText, moProductProcess.SubstrateID))
 
-                If moMyEquipment.IsChangeModel = True Then
+                If moMyEquipment.IsChangeModel = True Then '如果要更換樣本
                     bIsOK = moMyEquipment.ChangeModel(moLog) '更換樣本
                     If bIsOK = False Then '更換樣本失敗
                         Call moLog.LogError(String.Format("[{0:d4}] 更換樣本失敗", mnSequence))
@@ -624,7 +629,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call moMyEquipment.SetEroorOn(moLog)
                     End If
 
-                    moMyEquipment.IsChangeModel = False
+                    moMyEquipment.IsChangeModel = False '設定-不更換樣本
 
                     If bIsOK = False Then '更換樣本失敗
                         If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then

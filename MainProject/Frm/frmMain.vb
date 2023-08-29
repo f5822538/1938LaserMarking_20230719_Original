@@ -353,6 +353,12 @@ Public Class frmMain
         cbxGatherStandardDeviation.Checked = True
     End Sub
 
+    ''' <summary>
+    ''' 打開歷史紀錄 Open History
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnOpenHistory_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnOpenHistory.ClickButtonArea
         Try
             Using aOpenFileDialog As New OpenFileDialog
@@ -539,7 +545,7 @@ Public Class frmMain
         End Try
         If mofrmRecipeCodeReader IsNot Nothing Then mofrmRecipeCodeReader.Dispose()
 
-        If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
+        If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
             Call moMyEquipment.CodeReader.SetParameter(moMainRecipe.RecipeCamera.CodeReader)
         End If
 
@@ -900,7 +906,8 @@ Public Class frmMain
     Private Sub moAutoRunThread_AutoRunFinished(sender As Object, e As CAutoRunFinished) Handles moAutoRunThread.AutoRunFinished
         moSync.Send(
          Sub()
-             Call usrDefectView.ClearPicture()
+             '系統執行畫面-結果(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+             Call usrDefectView.ClearPicture() '系統執行畫面
              Call moMainRecipe.RecipeCamera.DefectList.Clear()
              Call moMainRecipe.RecipeCamera.ModelList.Clear()
              Call moMainRecipe.RecipeCamera.ModelCenterListStart.Clear()
@@ -912,11 +919,12 @@ Public Class frmMain
              Call moMainRecipe.RecipeCamera.ModelCenterListEnd.AddRange(e.InspectSum.ModelCenterListEnd1St)
 
              For nCount As Integer = 1 To Math.Min(4, e.InspectSum.DefectList.DefectList.Count)
-                 Call usrDefectView.AddToPictureName(e.InspectSum.DefectList.DefectList(nCount - 1).DefectImage.FileName)
+                 Call usrDefectView.AddToPictureName(e.InspectSum.DefectList.DefectList(nCount - 1).DefectImage.FileName) '系統執行畫面
              Next
 
              Call usrDefectView.AddData(e.InspectSum) '序列-Lead Frame-瑕疵檢測結果列表
              Call moMyEquipment.LogInspectCSV.Log(e.InspectSum.InspectResult.TOCSVLine())
+             '系統執行畫面-結果(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
              If cbxIsAutoChangeModel.Checked = True Then
                  cbxIsAutoChangeModel.Checked = False
@@ -1200,7 +1208,7 @@ Public Class frmMain
 
         Call moAutoRunThread.UpdateImage()
 
-        If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
+        If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
             Call moMyEquipment.CodeReaderForInspect.SetParameter(moMainRecipe.RecipeCamera.CodeReaderForInspect)
             Call moMyEquipment.CodeReaderForInspect2.SetParameter(moMainRecipe.RecipeCamera.CodeReaderForInspect2)
         End If

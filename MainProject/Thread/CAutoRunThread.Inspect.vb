@@ -34,12 +34,14 @@
                     mnShiftX = CInt(oModelFinderShift.shiftX)
 
                     If IsNumeric(oModelFinderShift.Angle) = True Then
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         If ShiftImageMIL(moImageID, oModelFinderShift) = True Then '旋轉補正
                             mbAlignStatus = False '設定-定位正常
                         Else
                             mbAlignStatus = True '設定-定位異常
                             moLog.LogInformation(String.Format("[{0:d4}] Rotate Failed", mnSequence))
                         End If
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     Else
                         mbAlignStatus = True '設定-定位異常
                         moLog.LogInformation(String.Format("[{0:d4}] Calculation Angle Failed", mnSequence))
@@ -192,9 +194,9 @@
 
                 Call moProductProcess.GetEQPID(oProductConfig)
 
-                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                 bIsOK = ModelDiffForStandardDeviation(moImageID, moRecipeCamera.RecipeModelDiff, oInspectSum, moProductProcess, moMyEquipment, moLog, mnSequence, moMyEquipment.HardwareConfig.MiscConfig.IsSaveInspectImage, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
-                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                 If bIsOK = False Then
                     oInspectSum.InspectResult.FindStatus = True '瑕疵-Y
@@ -202,9 +204,9 @@
                 End If
 
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False Then '交握-不要Bypass
-                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                    'No Die(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     bIsOK = CompareOriginalAndInspectNoDieSection(oInspectSum, moProductProcess, moLog, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
-                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                    'No Die(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     If bIsOK = False Then
                         oInspectSum.InspectResult.FindStatus = True '瑕疵-Y
                         Call moLog.LogError(String.Format("[{0:d4}] CompareOriginalAndInspectNoDieSection Failed", mnSequence))

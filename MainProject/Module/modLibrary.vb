@@ -127,7 +127,7 @@ Module modLibrary
     End Function
 
     ''' <summary>
-    ''' CAutoRunThread.RunInspect -> modLibrary.ModelDiffForStandardDeviation
+    ''' 標準差的模型差異(CAutoRunThread.RunInspect -> modLibrary.ModelDiffForStandardDeviation)
     ''' </summary>
     ''' <param name="oCameraSourceImage"></param>
     ''' <param name="oRecipe"></param>
@@ -252,19 +252,25 @@ Module modLibrary
             Dim bIsIndistinct As Boolean = False
             If oModelImageList1St.Count >= 0 Then bIsIndistinct = oModelImageList2Nd.Count < (oModelImageList1St.Count \ 2)
 
+            '標準差(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             oInspectSum.InspectResult.ModleInspectStatus = False
             Parallel.ForEach(oModelImageList1St, Sub(o)
                                                      If StandardDeviation(o, oModelImageList2Nd, oRecipe, oInspectSum, oProduct, oStandardUpperLimitImage, oStandardLowerLimitImage, oMyEquipment, bIsSaveImage, bIsIndistinct, nDefectMaxCount, oLog, nSequence) = False _
-                                                         AndAlso oInspectSum.InspectResult.ModleInspectStatus = False Then oInspectSum.InspectResult.ModleInspectStatus = True
+                                                         AndAlso oInspectSum.InspectResult.ModleInspectStatus = False Then
+                                                         oInspectSum.InspectResult.ModleInspectStatus = True '樣板異常/檢測異常 (樣板)-異常:True
+                                                     End If
                                                  End Sub)
+            '標準差(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
             Call oTact.CalSpan()
             Call oLog.LogInformation(String.Format("[{0:d4}] 標準差檢測完畢！[{1:f4}]ms", nSequence, oTact.CurrentSpan))
             oTact.ReSetTime()
 
+            '漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             Parallel.ForEach(oProduct.MarkList, Sub(o)
                                                     BuildLoseModel(oCameraSourceImage, oRecipe, oInspectSum, o, oMyEquipment, oLog, nSequence, oMyEquipment.HardwareConfig.MiscConfig.IsSaveAIOKImage)
                                                 End Sub)
+            '漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
             Call oTact.CalSpan()
             Call oLog.LogInformation(String.Format("[{0:d4}] 儲存漏雷瑕疵完畢！[{1:f4}]ms", nSequence, oTact.CurrentSpan))
@@ -507,6 +513,24 @@ Module modLibrary
         End Try
     End Function
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="oModelImage"></param>
+    ''' <param name="oModelImageList2Nd"></param>
+    ''' <param name="oRecipe"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oStandardUpperLimitImage"></param>
+    ''' <param name="oStandardLowerLimitImage"></param>
+    ''' <param name="oMyEquipment"></param>
+    ''' <param name="bIsSaveImage"></param>
+    ''' <param name="bIsIndistinct"></param>
+    ''' <param name="nDefectMaxCount"></param>
+    ''' <param name="oLog"></param>
+    ''' <param name="nSequence"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function StandardDeviation(oModelImage As CMyModelImage, oModelImageList2Nd As List(Of CMyModelImage), oRecipe As CRecipeModelDiff, ByRef oInspectSum As CInspectSum, ByRef oProduct As CMyProduct, oStandardUpperLimitImage As MIL_ID, oStandardLowerLimitImage As MIL_ID, oMyEquipment As CMyEquipment, bIsSaveImage As Boolean, bIsIndistinct As Boolean, nDefectMaxCount As Integer, oLog As II_LogTraceExtend, nSequence As Integer) As Boolean
         Try
             With oInspectSum
@@ -895,7 +919,7 @@ Module modLibrary
                                                               End If
 
                                                               If .InspectResult.ModleInspectStatus = False Then
-                                                                  .InspectResult.ModleInspectStatus = True
+                                                                  .InspectResult.ModleInspectStatus = True '樣板異常/檢測異常 (樣板)-異常:True
                                                               End If
                                                               Dim oDefect As New CMyDefect
                                                               oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
@@ -993,7 +1017,7 @@ Module modLibrary
                                                               End If
 
                                                               If .InspectResult.ModleInspectStatus = False Then
-                                                                  .InspectResult.ModleInspectStatus = True
+                                                                  .InspectResult.ModleInspectStatus = True '樣板異常/檢測異常 (樣板)-異常:True
                                                               End If
                                                               Dim oDefect As New CMyDefect
                                                               oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
@@ -1257,6 +1281,15 @@ Module modLibrary
         End Try
     End Function
 
+    ''' <summary>
+    ''' 比較原始版本並檢查NoDie部分(CAutoRunThread.RunInspect -> modLibrary.CompareOriginalAndInspectNoDieSection)
+    ''' </summary>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="oLog"></param>
+    ''' <param name="nDefectMaxCount"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function CompareOriginalAndInspectNoDieSection(ByRef oInspectSum As CInspectSum, ByRef oProduct As CMyProduct, oLog As II_LogTraceExtend, nDefectMaxCount As Integer) As Boolean
         Try
             For i_InspectSum = 0 To oInspectSum.DefectList.DefectList.Count - 1
@@ -1265,21 +1298,23 @@ Module modLibrary
                     '' 10 18測試修改
                     'If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY AndAlso (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = oProduct.MarkList(i_oProduct).MarkX Then
 
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY + 1 AndAlso _
                        (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then
 
-                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then
-                            oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie
+                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記
+                            oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                             oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
                         End If
                     Else
-                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then
+                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記
                             If oProduct.MarkList(i_oProduct).Result <> ResultType.NoDie Then
-                                oProduct.MarkList(i_oProduct).Result = ResultType.NoDie
+                                oProduct.MarkList(i_oProduct).Result = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                                 oInspectSum.InspectResult.NotDefectNoDieCount += 1 'No Die數量(NotDefect)
                             End If
                         End If
                     End If
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                 Next
             Next
         Catch ex As Exception

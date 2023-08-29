@@ -113,7 +113,7 @@ Public Class FrmRecipeList
             Call moCurrentRecipe.LoadConfig(sName)
             Call UpdateRecipeModel()
 
-            If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
+            If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
                 Call moMyEquipment.CodeReader.SetParameter(moCurrentRecipe.RecipeCamera.CodeReader)
                 Call moMyEquipment.CodeReaderForInspect.SetParameter(moCurrentRecipe.RecipeCamera.CodeReaderForInspect)
                 Call moMyEquipment.CodeReaderForInspect2.SetParameter(moCurrentRecipe.RecipeCamera.CodeReaderForInspect2)

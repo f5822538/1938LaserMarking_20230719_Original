@@ -97,7 +97,7 @@
             Try
                 If moCameraConfig.CameraType = CameraType.CaptureCamera Then
                     If moCamera.IsNullCamera() = False Then moCameraLightControl.ChangeExposure(nExposureTime)
-                    Dim nResult As Double = moCameraLightControl.GetExposure
+                    Dim nResult As Double = moCameraLightControl.GetExposure() '取得曝光時間
                     If nResult / nExposureTime > 1.1 OrElse nResult / nExposureTime < 0.9 Then
                         nTimes += 1
                     Else

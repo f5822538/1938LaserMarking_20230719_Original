@@ -121,7 +121,7 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
                                         Exit Select
                                     End If
 
-                                    If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
+                                    If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
                                         Call moMyEquipment.CodeReader.SetParameter(moMyEquipment.MainRecipe.RecipeCamera.CodeReader)
                                         Call moMyEquipment.CodeReaderForInspect.SetParameter(moMyEquipment.MainRecipe.RecipeCamera.CodeReaderForInspect)
                                         Call moMyEquipment.CodeReaderForInspect2.SetParameter(moMyEquipment.MainRecipe.RecipeCamera.CodeReaderForInspect2)

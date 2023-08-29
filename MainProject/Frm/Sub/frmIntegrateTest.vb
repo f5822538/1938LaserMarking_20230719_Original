@@ -71,7 +71,7 @@ Public Class frmIntegrateTest
                     btnCameraExposure.Enabled = False
                     btnCameraGain.Enabled = False
                 Else
-                    mdGetExposCamera = moMyEquipment.Camera.CameraLightControl.GetExposure
+                    mdGetExposCamera = moMyEquipment.Camera.CameraLightControl.GetExposure() '檢測相機-取得曝光時間
                     txtCameraCurrentExpos.Text = mdGetExposCamera.ToString()
                 End If
             End If
@@ -93,7 +93,7 @@ Public Class frmIntegrateTest
                     btnCodeReaderCameraExposure.Enabled = False
                     btnCodeReaderCameraGain.Enabled = False
                 Else
-                    mdGetExposCodeReaderCamera = moMyEquipment.CodeReaderCamera.CameraLightControl.GetExposure
+                    mdGetExposCodeReaderCamera = moMyEquipment.CodeReaderCamera.CameraLightControl.GetExposure() '條碼相機-取得曝光時間
                     txtCodeReaderCameraCurrentExpos.Text = mdGetExposCodeReaderCamera.ToString()
                 End If
             End If
@@ -107,7 +107,7 @@ Public Class frmIntegrateTest
             Call usr8In8Out.UpdateTitleList(moMyEquipment.DIO3208.InPutNameList, moMyEquipment.DIO3208.OutputNameList)
 
             Call bkUpdate.RunWorkerAsync()
-            Call bkCommand.RunWorkerAsync()
+            Call bkCommand.RunWorkerAsync() '開始執行背景作業
         Catch ex As Exception
             Call moLog.LogError(String.Format("整合測試初始錯誤，Error：{0}", ex.ToString))
         End Try
@@ -116,7 +116,7 @@ Public Class frmIntegrateTest
     Private Sub frmIntegrateTest_Disposed(sender As Object, e As System.EventArgs) Handles Me.Disposed
         Call moLogCamera.DisableDisplay()
         Call bkUpdate.CancelAsync()
-        Call bkCommand.CancelAsync()
+        Call bkCommand.CancelAsync() '要求取消暫止的背景作業
     End Sub
 
     Private Sub btnQuit_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnQuit.ClickButtonArea
@@ -316,6 +316,12 @@ Public Class frmIntegrateTest
         dgvMarkInfo.Refresh()
     End Sub
 
+    ''' <summary>
+    ''' 修改曝光時間                      Eposure Time
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnCameraExposure_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnCameraExposure.ClickButtonArea
         mnSendCommand = SendCommand.CameraExposure
     End Sub
@@ -324,7 +330,7 @@ Public Class frmIntegrateTest
         If moMyEquipment.Camera.Camera IsNot Nothing AndAlso moMyEquipment.Camera.CameraLightControl IsNot Nothing AndAlso txtCameraExpos.Text IsNot "" Then
             Try
                 moMyEquipment.Camera.CameraLightControl.ChangeExposure(mdSetExposCamera)
-                mdGetExposCamera = moMyEquipment.Camera.CameraLightControl.GetExposure()
+                mdGetExposCamera = moMyEquipment.Camera.CameraLightControl.GetExposure() '檢測相機-取得曝光時間
             Catch ex As Exception
                 moLogCamera.LogError(ex.ToString)
                 moLog.LogError(ex.ToString)
@@ -332,6 +338,12 @@ Public Class frmIntegrateTest
         End If
     End Sub
 
+    ''' <summary>
+    ''' 修改增益                      Gain
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnCameraGain_ClickButtonArea(Sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles btnCameraGain.ClickButtonArea
         mnSendCommand = SendCommand.CameraGain
     End Sub
@@ -398,7 +410,7 @@ Public Class frmIntegrateTest
                     Exit Sub
                 End If
 
-                If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
+                If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
                     Dim oAlarmCode As AlarmCode = moMyEquipment.FindForInspect(moMyEquipment.ImageID, moMyEquipment.MainRecipe.RecipeCamera.CodeReaderForInspect, moLogCamera)
                     If oAlarmCode <> AlarmCode.IsOK Then
                         oAlarmCode = moMyEquipment.FindForInspect2(moMyEquipment.ImageID, moMyEquipment.MainRecipe.RecipeCamera.CodeReaderForInspect2, moLogCamera)
@@ -423,7 +435,7 @@ Public Class frmIntegrateTest
         If moMyEquipment.CodeReaderCamera.Camera IsNot Nothing AndAlso moMyEquipment.CodeReaderCamera.CameraLightControl IsNot Nothing AndAlso txtCodeReaderCameraExpos.Text IsNot "" Then
             Try
                 moMyEquipment.CodeReaderCamera.CameraLightControl.ChangeExposure(mdSetExposCodeReaderCamera)
-                mdGetExposCodeReaderCamera = moMyEquipment.CodeReaderCamera.CameraLightControl.GetExposure()
+                mdGetExposCodeReaderCamera = moMyEquipment.CodeReaderCamera.CameraLightControl.GetExposure() '條碼相機-取得曝光時間
             Catch ex As Exception
                 moLogCodeReaderCamera.LogError(ex.ToString)
                 moLog.LogError(ex.ToString)
@@ -497,7 +509,7 @@ Public Class frmIntegrateTest
                     Exit Sub
                 End If
 
-                If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then
+                If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
                     Dim oAlarmCode As AlarmCode = moMyEquipment.Find(moCodeReaderImageID, moMyEquipment.MainRecipe.RecipeCamera.CodeReader, moLogCodeReaderCamera)
                     If oAlarmCode <> AlarmCode.IsOK Then
                         Call moLog.LogError("讀取條碼失敗")
@@ -522,6 +534,12 @@ Public Class frmIntegrateTest
         End Select
     End Sub
 
+    ''' <summary>
+    ''' 相機-修改曝光時間
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtCameraExpos_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCameraExpos.TextChanged
         Try
             mdSetExposCamera = CInt(txtCameraExpos.Text)
@@ -530,6 +548,12 @@ Public Class frmIntegrateTest
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 相機-修改增益
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtCameraGain_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCameraGain.TextChanged
         Try
             mdSetGainCamera = CInt(txtCameraGain.Text)
@@ -538,6 +562,12 @@ Public Class frmIntegrateTest
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 條碼相機-修改曝光時間
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtCodeReaderCameraExpos_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCodeReaderCameraExpos.TextChanged
         Try
             mdSetExposCodeReaderCamera = CInt(txtCodeReaderCameraExpos.Text)
@@ -546,6 +576,12 @@ Public Class frmIntegrateTest
         End Try
     End Sub
 
+    ''' <summary>
+    ''' 條碼相機-修改增益
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtCodeReaderCameraGain_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCodeReaderCameraGain.TextChanged
         Try
             mdSetGainCodeReaderCamera = CInt(txtCodeReaderCameraGain.Text)
@@ -575,10 +611,10 @@ Public Class frmIntegrateTest
     Private Sub bkUpdate_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bkUpdate.ProgressChanged
         Try
             Select Case True
-                Case tabIntegrateTest.SelectedTab Is tabIO
+                Case tabIntegrateTest.SelectedTab Is tabIO 'Tab-輸出入監控
                     If moMyEquipment.HardwareConfig.IOBypass = False Then usr8In8Out.UpdateStatus()
 
-                Case tabIntegrateTest.SelectedTab Is tabHandshake
+                Case tabIntegrateTest.SelectedTab Is tabHandshake 'Tab-交握
                     Select Case moHandshakeType
                         Case HandshakeType.NA : ToolStripTextBoxHandshakeType.Text = ""
                         Case HandshakeType.LotInfo : ToolStripTextBoxHandshakeType.Text = EnumHelper.GetDescription(HandshakeType.LotInfo)
@@ -586,11 +622,11 @@ Public Class frmIntegrateTest
                         Case HandshakeType.StripMapUpload : ToolStripTextBoxHandshakeType.Text = EnumHelper.GetDescription(HandshakeType.StripMapUpload)
                     End Select
 
-                Case tabIntegrateTest.SelectedTab Is tabCamera
+                Case tabIntegrateTest.SelectedTab Is tabCamera 'Tab-相機
                     txtCameraCurrentExpos.Text = mdGetExposCamera.ToString()
                     txtCameraCurrentGain.Text = mdGetGainCamera.ToString()
 
-                Case tabIntegrateTest.SelectedTab Is tabCodeReaderCamera
+                Case tabIntegrateTest.SelectedTab Is tabCodeReaderCamera 'Tab-條碼相機
                     txtCodeReaderCameraCurrentExpos.Text = mdGetExposCodeReaderCamera.ToString()
                     txtCodeReaderCameraCurrentGain.Text = mdGetGainCodeReaderCamera.ToString()
             End Select
@@ -600,6 +636,12 @@ Public Class frmIntegrateTest
         End Try
     End Sub
 
+    ''' <summary>
+    ''' BackgroundWorker-執行-相機參數設定
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub bkCommand_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles bkCommand.DoWork
         Dim oWorker As BackgroundWorker = CType(sender, BackgroundWorker)
 
@@ -610,7 +652,9 @@ Public Class frmIntegrateTest
             End If
 
             Try
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                 If ProcessSend() = True Then oWorker.ReportProgress(0)
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
             Catch ex As System.Exception
             End Try
 
@@ -618,6 +662,12 @@ Public Class frmIntegrateTest
         End While
     End Sub
 
+    ''' <summary>
+    ''' BackgroundWorker-進度-相機參數設定
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub bkCommand_ProgressChanged(sender As System.Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bkCommand.ProgressChanged
         Try
             Select Case True

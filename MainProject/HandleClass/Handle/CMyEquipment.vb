@@ -62,7 +62,7 @@ Public Class CMyEquipment
             End If
         End If
 
-        If moHardwareConfig.CodeReaderBypass = False Then
+        If moHardwareConfig.CodeReaderBypass = False Then '±ø½XÅª¨ú¤£Bypass
             If InitialCodeReader() = False Then
                 IsOk = False
             End If

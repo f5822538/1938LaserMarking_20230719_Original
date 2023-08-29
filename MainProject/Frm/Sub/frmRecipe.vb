@@ -158,6 +158,12 @@ Public Class frmRecipe
         Call Me.Close()
     End Sub
 
+    ''' <summary>
+    ''' FindModel-尋找樣本
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub ToolStripButtonFindModel_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButtonFindModel.Click
         Call UpdateModel(moRecipe.RecipeCamera.RecipeModelDiff, moImageID)
         Call Parallel.ForEach(moModelImageList, Sub(o)
@@ -169,6 +175,12 @@ Public Class frmRecipe
         Call MsgBox(String.Format("樣板數量：[{0}]", moModelImageList.Count()), MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
     End Sub
 
+    ''' <summary>
+    ''' BuildMarkPosition-創建標記位置
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub ToolStripButtonBuildMarkPosition_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButtonBuildMarkPosition.Click
         If moModelImageList.Count < 1 Then
             Call MsgBox("樣板數量為 0，請先尋找樣本！", MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
@@ -368,7 +380,7 @@ Public Class frmRecipe
     End Sub
 
     ''' <summary>
-    ''' 轉正
+    ''' btnRotate-轉正
     ''' </summary>
     ''' <param name="Sender"></param>
     ''' <param name="e"></param>
@@ -385,7 +397,7 @@ Public Class frmRecipe
             mbSaveImage = True '旋轉角度不為0
         End If
 
-        Call moCanvas.UpdateCanvas()
+        Call moCanvas.UpdateCanvas() '更新-畫布
     End Sub
 
     Private Sub mnuApplyModelRegion1St_Click(sender As System.Object, e As System.EventArgs) Handles mnuApplyModelRegion1St.Click
