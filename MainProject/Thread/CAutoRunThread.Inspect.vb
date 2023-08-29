@@ -194,7 +194,7 @@
 
                 Call moProductProcess.GetEQPID(oProductConfig)
 
-                '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin)))))))))))))))))))))))))))))) 'CMyPatternMatching.FindModelAll
                 bIsOK = ModelDiffForStandardDeviation(moImageID, moRecipeCamera.RecipeModelDiff, oInspectSum, moProductProcess, moMyEquipment, moLog, mnSequence, moMyEquipment.HardwareConfig.MiscConfig.IsSaveInspectImage, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
                 '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 

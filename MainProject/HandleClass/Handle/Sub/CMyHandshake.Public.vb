@@ -225,11 +225,11 @@ Partial Class CMyHandshake
                         oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4)
 
                         Select Case sBinCodeList.Substring(nIndexX * 4, 4)
-                            Case moHandshakeConfig.IsNoDieCode
+                            Case moHandshakeConfig.IsNoDieCode 'No Die 之代碼
 
                                 'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie
                                 ''10 18 測試修改
-                                oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie
+                                oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie 'No Die-標記
                             Case Else
 
                         End Select
@@ -284,8 +284,8 @@ Partial Class CMyHandshake
                         sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                         nOffsetIndex += 1
                     Else
-                        If oProduct.MarkList.Item(nIndex).Result = ResultType.NoDie Then
-                            sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNoDieCode
+                        If oProduct.MarkList.Item(nIndex).Result = ResultType.NoDie Then 'No Die-標記
+                            sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNoDieCode 'No Die 之代碼
                         Else
                             If oProduct.MarkList.Item(nIndex).IsGray = True Then
                                 sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsGrayCode

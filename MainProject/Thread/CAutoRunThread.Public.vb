@@ -284,7 +284,7 @@ Partial Class CAutoRunThread
                     Case ResultType.Offset
                         oDirectoryOffsetInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
 
-                    Case ResultType.NoDie
+                    Case ResultType.NoDie 'No Die-標記
                         oDirectoryNoDieInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
 
                         'oDirectoryNoDieInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.ProductConfig.DimensionX - oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y+1)))

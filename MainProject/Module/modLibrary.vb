@@ -548,19 +548,21 @@ Module modLibrary
                         Return False
                     End If
 
-                    If oModelImage.IsOffset = True Then
+                    If oModelImage.IsOffset = True Then '位移/偏移
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
                             Return True
                         End If
 
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset '標記-位移/偏移
                         sResult = "NG"
+
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-結果
                         oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
@@ -585,21 +587,25 @@ Module modLibrary
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
                         If .InspectResult.ModleOffsetStatus = False Then .InspectResult.ModleOffsetStatus = True
-                        If oProduct.MarkList.Item(nIndex).OriginalType <> ResultType.NoDie Then
+                        If oProduct.MarkList.Item(nIndex).OriginalType <> ResultType.NoDie Then 'No Die-標記
                             SyncLock CAutoRunThread.ProcessDefectListLock
                                 .DefectList.DefectList.Add(oDefect)
                                 .DefectListDraw.Add(oDefect)
                             End SyncLock
                         End If
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                         Return False
                     ElseIf oModelImage.IsOffsetGray = True Then
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
                             Return True
                         End If
                         oProduct.MarkList.Item(nIndex).IsGray = True
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset '標記-位移/偏移
+
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
@@ -636,13 +642,17 @@ Module modLibrary
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                         Return False
                     ElseIf oModelImage.IsLose = True Then '漏雷
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
                             Return True
                         End If
                         oProduct.MarkList.Item(nIndex).Result = ResultType.Lose '漏雷(CMyMarkInfo)
+
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
@@ -682,12 +692,14 @@ Module modLibrary
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                         Return False
                         'ElseIf oModelImage.IsPass = True Then
                         '    oProduct.MarkList.Item(nIndex).Result = ResultType.Pass
                         '    Return True
                     Else
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.NA
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.NA '標記-NA
                         Return True
                     End If
                 ElseIf oModelImage.IsProcess = True Then
@@ -701,7 +713,9 @@ Module modLibrary
                         Dim oSelectModelImageList2Nd As List(Of CMyModelImage) = (From o In oModelImageList2Nd Where o.MarkX = oModelImage.MarkX AndAlso o.MarkY = oModelImage.MarkY).ToList
 
                         If oSelectModelImageList2Nd.Count < 1 Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.Indistinct
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.Indistinct '標記-蓋印不清
+
+                            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                             Dim oDefect As New CMyDefect
                             oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                             oDefect.InspectType = InspectType.ModelDiff
@@ -738,6 +752,8 @@ Module modLibrary
                             End SyncLock
 
                             MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
+                            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                             Return False
                         End If
                     End If
@@ -802,7 +818,7 @@ Module modLibrary
                 MIL.MblobGetNumber(oBlobResultNegativeResult, nLongResultCountNegative)
 
                 If nLongResultCountPositive = 0 AndAlso nLongResultCountNegative = 0 Then
-                    oProduct.MarkList.Item(nIndex).Result = ResultType.OK
+                    oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
                     MIL.MbufFree(oPositiveDeviationImage)
                     MIL.MbufFree(oNegativeDeviationImage)
                     MIL.MblobFree(oBlobPositiveFeatureList)
@@ -921,6 +937,8 @@ Module modLibrary
                                                               If .InspectResult.ModleInspectStatus = False Then
                                                                   .InspectResult.ModleInspectStatus = True '樣板異常/檢測異常 (樣板)-異常:True
                                                               End If
+
+                                                              '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                                                               Dim oDefect As New CMyDefect
                                                               oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                                                               oDefect.InspectType = InspectType.ModelDiff
@@ -957,6 +975,8 @@ Module modLibrary
                                                               End SyncLock
                                                               bIsAddDefect = True
                                                               'Next
+                                                              '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                                                           End Sub)
 
                 'If bIsAddDefect = False Then
@@ -1019,6 +1039,8 @@ Module modLibrary
                                                               If .InspectResult.ModleInspectStatus = False Then
                                                                   .InspectResult.ModleInspectStatus = True '樣板異常/檢測異常 (樣板)-異常:True
                                                               End If
+
+                                                              '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                                                               Dim oDefect As New CMyDefect
                                                               oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                                                               oDefect.InspectType = InspectType.ModelDiff
@@ -1055,6 +1077,8 @@ Module modLibrary
                                                               End SyncLock
                                                               bIsAddDefect = True
                                                               'Next
+                                                              '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                                                           End Sub)
                 'End If
 
@@ -1063,7 +1087,7 @@ Module modLibrary
                 End SyncLock
 
                 oProduct.MarkList.Item(nIndex).IsGray = bIsGray
-                oProduct.MarkList.Item(nIndex).Result = oResult
+                oProduct.MarkList.Item(nIndex).Result = oResult '標記-結果
 
                 If oProduct.MarkList.Item(nIndex).Result = ResultType.NA Then oProduct.MarkList.Item(nIndex).Result = ResultType.OK
                 If sImageName <> "" AndAlso .DefectList.DefectList.Count < nDefectMaxCount Then MIL.MbufExport(sImageName, MIL.M_BMP, oModelImage.ModelImage)
@@ -1114,6 +1138,7 @@ Module modLibrary
                 '-------------------------If oMarkInfo.Result = ResultType.OK-開始--------------------------
                 If oMarkInfo.Result = ResultType.OK Then
                     If bIsSaveAIOKImage = True Then
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oAI As New CMyDefect
                         Dim oAIModelImage As MIL_ID = 0
                         Dim nAIIndex As Integer = oRecipe.MarkIndex(.MarkX, .MarkY)
@@ -1125,7 +1150,7 @@ Module modLibrary
                         oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - .MarkX, .MarkY + 1)
                         oInspectSum.ReceiveTime = DateTime.Now
 
-                        If oMarkInfo.OriginalType = ResultType.NoDie Then
+                        If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記
                             sResult = "NoDie"
                             oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
@@ -1145,6 +1170,7 @@ Module modLibrary
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.DefectList.OKList.Add(oAI)
                         End SyncLock
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     End If
 
                     'Return True
@@ -1159,6 +1185,7 @@ Module modLibrary
                         oMarkInfo.Result = ResultType.OK
 
                         If bIsSaveAIOKImage = True Then
+                            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                             Dim oAI As New CMyDefect
                             Dim oAIModelImage As MIL_ID = 0
                             Dim nAIIndex As Integer = oRecipe.MarkIndex(.MarkX, .MarkY)
@@ -1170,7 +1197,7 @@ Module modLibrary
                             oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - .MarkX, .MarkY + 1)
                             oInspectSum.ReceiveTime = DateTime.Now
 
-                            If oMarkInfo.OriginalType = ResultType.NoDie Then
+                            If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記
                                 sResult = "NoDie"
                                 oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                    oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
@@ -1190,6 +1217,7 @@ Module modLibrary
                             SyncLock CAutoRunThread.ProcessDefectListLock
                                 oInspectSum.DefectList.OKList.Add(oAI)
                             End SyncLock
+                            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                         End If
 
                         'Return True
@@ -1212,6 +1240,8 @@ Module modLibrary
                         '-------------------------瑕疵結果訊息-結束--------------------------
                     End SyncLock
 
+
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     Dim oDefect As New CMyDefect
                     oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                     oDefect.InspectType = InspectType.ModelDiff
@@ -1257,6 +1287,9 @@ Module modLibrary
                     MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage)
                     MIL.MbufFree(oModelImage)
                     oModelImage = MIL.M_NULL
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
+
                     'Return False
                 Else
                     'Return True
