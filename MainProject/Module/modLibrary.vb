@@ -158,8 +158,8 @@ Module modLibrary
             Dim nLongResultCountPositive As Long = 0
             Dim nLongResultCountNegative As Long = 0
 
-            Dim oFindModelAllTask1St As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList1St, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching1St, nSequence, bIsSaveImage))
-            Dim oFindModelAllTask2Nd As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList2Nd, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching2Nd, nSequence, bIsSaveImage))
+            Dim oFindModelAllTask1St As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList1St, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching1St, nSequence, bIsSaveImage)) '蓋印漏雷/蓋印轉置
+            Dim oFindModelAllTask2Nd As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList2Nd, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching2Nd, nSequence, bIsSaveImage)) '蓋印漏雷/蓋印轉置
 
             Dim oTact As New CTactTimeSpan
             Call oFindModelAllTask1St.Start()
@@ -249,7 +249,7 @@ Module modLibrary
             Call oLog.LogInformation(String.Format("[{0:d4}] 標準差計算完畢！[{1:f4}]ms", nSequence, oTact.CurrentSpan))
             oTact.ReSetTime()
 
-            Dim bIsIndistinct As Boolean = False
+            Dim bIsIndistinct As Boolean = False '標記-蓋印不清
             If oModelImageList1St.Count >= 0 Then bIsIndistinct = oModelImageList2Nd.Count < (oModelImageList1St.Count \ 2)
 
             '標準差(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
@@ -454,7 +454,7 @@ Module modLibrary
                                                             nPositionAngle < oRecipeModelDiff.AngleMin).ToList
 
             If oRecipeMarkList.Count < 1 Then
-                oModelImage.IsLose = True '漏雷
+                oModelImage.IsLose = True '蓋印漏雷/蓋印轉置
                 oModelImage.IsProcess = False
                 oModelImage.MarkX = -1
                 oModelImage.MarkY = -1
@@ -541,7 +541,7 @@ Module modLibrary
                 Dim nIndex As Integer = 0
 
                 Dim sResult As String = ""
-                If oModelImage.IsProcess = False Then
+                If oModelImage.IsProcess = False Then '大部分是走這個流程(oModelImage.IsProcess = False)
                     nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
                     If nIndex < 0 Then
                         Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed！(Recipe)", nSequence))
@@ -597,7 +597,7 @@ Module modLibrary
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                         Return False
-                    ElseIf oModelImage.IsOffsetGray = True Then
+                    ElseIf oModelImage.IsOffsetGray = True Then '標記-位移/偏移(灰階)
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                             oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
                             Return True
@@ -645,11 +645,13 @@ Module modLibrary
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                         Return False
-                    ElseIf oModelImage.IsLose = True Then '漏雷
+                    ElseIf oModelImage.IsLose = True Then '蓋印漏雷/蓋印轉置
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                             oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
                             Return True
                         End If
+
+                        '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.Lose
                         oProduct.MarkList.Item(nIndex).Result = ResultType.Lose '漏雷(CMyMarkInfo)
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
@@ -709,7 +711,7 @@ Module modLibrary
                         Return False
                     End If
 
-                    If bIsIndistinct = True Then
+                    If bIsIndistinct = True Then '標記-蓋印不清
                         Dim oSelectModelImageList2Nd As List(Of CMyModelImage) = (From o In oModelImageList2Nd Where o.MarkX = oModelImage.MarkX AndAlso o.MarkY = oModelImage.MarkY).ToList
 
                         If oSelectModelImageList2Nd.Count < 1 Then
@@ -902,7 +904,7 @@ Module modLibrary
 
                                                               oDefectType = If(nDefectMean < oRecipe.MeanGray, ResultType.NGDark, ResultType.NGBright)
 
-                                                              If oDefectType = ResultType.NGDark Then
+                                                              If oDefectType = ResultType.NGDark Then '表面瑕疵 (背)
                                                                   If oMyEquipment.MainRecipe.CompoundDeafetBypass = True Then Exit Sub
                                                               Else
                                                                   If oMyEquipment.MainRecipe.WordDeafetBypass = True Then Exit Sub
@@ -915,7 +917,7 @@ Module modLibrary
                                                                   nDefectLength = Math.Pow(((nWidth * nWidth) + (nHeight * nHeight)), 0.5)
                                                               End If
 
-                                                              If oDefectType = ResultType.NGDark Then
+                                                              If oDefectType = ResultType.NGDark Then '表面瑕疵 (背)
                                                                   '暗檢亮
                                                                   If nDefectLength < oRecipe.DarkDefectSizeMin Then Exit Sub
                                                                   If nDefectLength < (oRecipe.DarkDefectSizeMin + oRecipe.DarkDefectSizeGrayMin) Then bIsGray = True
@@ -927,10 +929,10 @@ Module modLibrary
                                                               End If
 
                                                               If oResult = ResultType.NA Then
-                                                                  If oDefectType = ResultType.NGDark Then
-                                                                      oResult = ResultType.NGDark
+                                                                  If oDefectType = ResultType.NGDark Then '表面瑕疵 (背)
+                                                                      oResult = ResultType.NGDark '表面瑕疵 (背)
                                                                   Else
-                                                                      oResult = ResultType.NGBright
+                                                                      oResult = ResultType.NGBright '表面瑕疵 (字)
                                                                   End If
                                                               End If
 
@@ -1004,7 +1006,7 @@ Module modLibrary
 
                                                               oDefectType = If(nDefectMean < oRecipe.MeanGray, ResultType.NGDark, ResultType.NGBright)
 
-                                                              If oDefectType = ResultType.NGDark Then
+                                                              If oDefectType = ResultType.NGDark Then '表面瑕疵 (背)
                                                                   If oMyEquipment.MainRecipe.CompoundDeafetBypass = True Then Exit Sub
                                                               Else
                                                                   If oMyEquipment.MainRecipe.WordDeafetBypass = True Then Exit Sub
@@ -1017,7 +1019,7 @@ Module modLibrary
                                                                   nDefectLength = Math.Pow(((nWidth * nWidth) + (nHeight * nHeight)), 0.5)
                                                               End If
 
-                                                              If oDefectType = ResultType.NGDark Then
+                                                              If oDefectType = ResultType.NGDark Then '表面瑕疵 (背)
                                                                   '暗檢暗
                                                                   If nDefectLength < oRecipe.DarkDefectSizeMin Then Exit Sub
                                                                   If nDefectLength < (oRecipe.DarkDefectSizeMin + oRecipe.DarkDefectSizeGrayMin) Then bIsGray = True
@@ -1029,10 +1031,10 @@ Module modLibrary
                                                               End If
 
                                                               If oResult = ResultType.NA Then
-                                                                  If oDefectType = ResultType.NGDark Then
-                                                                      oResult = ResultType.NGDark
+                                                                  If oDefectType = ResultType.NGDark Then '表面瑕疵 (背)
+                                                                      oResult = ResultType.NGDark '表面瑕疵 (背)
                                                                   Else
-                                                                      oResult = ResultType.NGBright
+                                                                      oResult = ResultType.NGBright '表面瑕疵 (字)
                                                                   End If
                                                               End If
 
@@ -1333,8 +1335,9 @@ Module modLibrary
 
                     '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY + 1 AndAlso _
-                       (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then
+                       (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then 'No Die-重要判斷條件
 
+                        '++++++ First judge OriginalType ------> Second judge ResultType ++++++
                         If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記
                             oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                             oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)

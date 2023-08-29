@@ -186,16 +186,18 @@
                     If moProductProcess.SubstrateID = "" Then
                         moProductProcess.SubstrateID = "A123456789"
                     End If
-                    Call moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake)
+                    '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
+                    moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
                 Else
                     '' Augustin 220407 IT HandShake Test
-                    Call moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake)
+                    '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
+                    moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
                 End If
 
                 Call moProductProcess.GetEQPID(oProductConfig)
 
                 '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin)))))))))))))))))))))))))))))) 'CMyPatternMatching.FindModelAll
-                bIsOK = ModelDiffForStandardDeviation(moImageID, moRecipeCamera.RecipeModelDiff, oInspectSum, moProductProcess, moMyEquipment, moLog, mnSequence, moMyEquipment.HardwareConfig.MiscConfig.IsSaveInspectImage, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
+                bIsOK = ModelDiffForStandardDeviation(moImageID, moRecipeCamera.RecipeModelDiff, oInspectSum, moProductProcess, moMyEquipment, moLog, mnSequence, moMyEquipment.HardwareConfig.MiscConfig.IsSaveInspectImage, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount) '蓋印漏雷/蓋印轉置
                 '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                 If bIsOK = False Then

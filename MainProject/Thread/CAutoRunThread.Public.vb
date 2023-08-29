@@ -247,14 +247,14 @@ Partial Class CAutoRunThread
     ''' <remarks></remarks>
     Public Sub CopyAIImageFileForMulti(sSourcePath As String, oInspectResult As CInspectResult, oInspectSum As CInspectSum)
         Dim oFileInfoNGArrayList As FileInfo()
-        Dim oFileInfoNoDieList As FileInfo()
-        Dim oFileInfoOffsetList As FileInfo()
-        Dim oFileInfoLoseAndRotateList As FileInfo()
+        Dim oFileInfoNoDieList As FileInfo() 'No Die
+        Dim oFileInfoOffsetList As FileInfo() '位移
+        Dim oFileInfoLoseAndRotateList As FileInfo() '蓋印漏雷/蓋印轉置
 
         Dim oDirectoryNGInfoList As New ArrayList()
-        Dim oDirectoryNoDieInfoList As New ArrayList()
-        Dim oDirectoryOffsetInfoList As New ArrayList()
-        Dim oDirectoryLoseAndRotateInfoList As New ArrayList()
+        Dim oDirectoryNoDieInfoList As New ArrayList() 'No Die
+        Dim oDirectoryOffsetInfoList As New ArrayList() '位移
+        Dim oDirectoryLoseAndRotateInfoList As New ArrayList() '蓋印漏雷/蓋印轉置
         Dim oDirectoryInfo As DirectoryInfo = New DirectoryInfo(sSourcePath)
 
         If IO.Directory.Exists(sSourcePath) = False Then
@@ -280,7 +280,7 @@ Partial Class CAutoRunThread
 
         Try
             For i = 0 To oInspectSum.DefectList.DefectList.Count - 1
-                Select Case oInspectSum.DefectList.DefectList(i).ResultType
+                Select Case oInspectSum.DefectList.DefectList(i).ResultType '瑕疵-判斷條件
                     Case ResultType.Offset
                         oDirectoryOffsetInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
 
