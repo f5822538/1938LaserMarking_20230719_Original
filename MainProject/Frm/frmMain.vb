@@ -820,11 +820,12 @@ Public Class frmMain
                     mnuRight.Visible = False
             End Select
 
-            '-------------------------20230822-開始--------------------------
-            usrAlarm.RefreshStatus(moMyEquipment.IsAlarm.IsSet() = True OrElse moMyEquipment.IsErrorOn.IsSet() = True)
-            usrRunning.RefreshStatus(moMyEquipment.InnerThread.Inspect.IsSet() = True)
-            usrExecute.RefreshStatus(moMyEquipment.HardwareConfig.TriggerBypass = True OrElse (moMyEquipment.IO.ProductPresentSensor.IsOn() = True AndAlso moMyEquipment.IO.SafeSensor1.IsOn() = False AndAlso moMyEquipment.IO.SafeSensor2.IsOn() = False))
-            '-------------------------20230822-結束--------------------------
+            '------------------------當站資訊 Station-20230822-開始--------------------------
+            usrAlarm.RefreshStatus(moMyEquipment.IsAlarm.IsSet() = True OrElse moMyEquipment.IsErrorOn.IsSet() = True) '當站資訊-Alarm
+            usrRunning.RefreshStatus(moMyEquipment.InnerThread.Inspect.IsSet() = True) '當站資訊-Running
+            usrExecute.RefreshStatus(moMyEquipment.HardwareConfig.TriggerBypass = True OrElse _
+            (moMyEquipment.IO.ProductPresentSensor.IsOn() = True AndAlso moMyEquipment.IO.SafeSensor1.IsOn() = False AndAlso moMyEquipment.IO.SafeSensor2.IsOn() = False)) '當站資訊-Trigger
+            '------------------------當站資訊 Station-20230822-結束--------------------------
 
             btnClearAlarm.Enabled = moMyEquipment.IsAlarm.IsSet() = True OrElse moMyEquipment.IsErrorOn.IsSet() = True
             btnSingleRun.Enabled = moMyEquipment.IsAlarm.IsSet() = False AndAlso moMyEquipment.IsErrorOn.IsSet() = False AndAlso moAutoRunThread.IsRunning() = False AndAlso moMainRecipe.RecipeID.ToUpper <> "DEFAULT" AndAlso (moHardwareConfig.TriggerBypass = True OrElse moMyEquipment.IO.HomeSensor.IsOn() = True)

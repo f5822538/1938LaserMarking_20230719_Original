@@ -142,7 +142,7 @@ Partial Class CMyEquipment
 
     Public Function LightVacuumUp(oLog As II_LogTraceExtend) As AlarmCode
         If moHardwareConfig.IOBypass = True Then Return AlarmCode.IsOK
-        If IO.SafeSensor1.IsOn = True OrElse IO.SafeSensor2.IsOn = True Then Return AlarmCode.IsNotSafe
+        If IO.SafeSensor1.IsOn = True OrElse IO.SafeSensor2.IsOn = True Then Return AlarmCode.IsNotSafe '動作失敗，非安全
         If IO.LightVacuum1UpSensor.IsOn() = True AndAlso IO.LightVacuum1DownSensor.IsOn() = False Then Return AlarmCode.IsOK
 
         Dim oAlarmCode As AlarmCode = AlarmCode.IsOK

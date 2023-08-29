@@ -19,7 +19,9 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
             End If
 
             Try
-                Call ProcessSingleRun()
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                ProcessSingleRun()
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
             Catch ex As System.Exception
                 Call moLog.LogError(ex.ToString)
             End Try
@@ -28,6 +30,10 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
         End While
     End Sub
 
+    ''' <summary>
+    ''' 觸發-更換樣本-事件
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Sub ProcessSingleRun()
         If moMyEquipment.IsHandshakeCanProcess = False Then Exit Sub
         Try
