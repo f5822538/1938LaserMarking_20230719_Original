@@ -270,8 +270,6 @@
                             End If
                         End If
 
-                        moMyEquipment.SetEroorOn(moLog) '輸出Error log
-
                     End If
 
                 End If
