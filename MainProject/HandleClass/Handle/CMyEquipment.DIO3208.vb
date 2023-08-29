@@ -67,22 +67,22 @@ Partial Class CMyEquipment
         moDIO3208.UpdateOutPutName(7, CMyIO.SR.Buzzer)
 
         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-        IO.LightVacuum1UpSensor = DIO3208.GetInput(0) '燈源汽缸1-上位Sensor
-        IO.LightVacuum1DownSensor = DIO3208.GetInput(1)
-        IO.LightVacuum2UpSensor = DIO3208.GetInput(2) '燈源汽缸2-上位Sensor
-        IO.LightVacuum2DownSensor = DIO3208.GetInput(3)
-        IO.ProductPresentSensor = DIO3208.GetInput(4) '產品-在席Sensor
-        IO.SafeSensor1 = New CReverseInput(DIO3208.GetInput(5)) '安全Sensor-1
-        IO.SafeSensor2 = New CReverseInput(DIO3208.GetInput(6)) '安全Sensor-2
-        IO.HomeSensor = DIO3208.GetInput(7) 'HomeSensor/原點 Sensor
+        IO.LightVacuum1UpSensor = DIO3208.GetInput(0) '燈源汽缸1上位檢知
+        IO.LightVacuum1DownSensor = DIO3208.GetInput(1) '燈源汽缸1下位檢知
+        IO.LightVacuum2UpSensor = DIO3208.GetInput(2) '燈源汽缸2上位檢知
+        IO.LightVacuum2DownSensor = DIO3208.GetInput(3) '燈源汽缸2下位檢知
+        IO.ProductPresentSensor = DIO3208.GetInput(4) '產品-在席Sensor(產品在席檢知)
+        IO.SafeSensor1 = New CReverseInput(DIO3208.GetInput(5)) '安全Sensor-1(安全檢知 1)
+        IO.SafeSensor2 = New CReverseInput(DIO3208.GetInput(6)) '安全Sensor-2(安全檢知 2)
+        IO.HomeSensor = DIO3208.GetInput(7) 'HomeSensor/原點 Sensor(原點檢知)
 
-        IO.LightVacuumUp1 = DIO3208.GetOutPut(0)
-        IO.LightOn = DIO3208.GetOutPut(1)
-        IO.StartLight = DIO3208.GetOutPut(2)
-        IO.AlarmLight = DIO3208.GetOutPut(3)
-        IO.LightVacuumUp2 = DIO3208.GetOutPut(4)
-        IO.Error = DIO3208.GetOutPut(5)
-        IO.Buzzer = DIO3208.GetOutPut(7)
+        IO.LightVacuumUp1 = DIO3208.GetOutPut(0) '燈源汽缸1上
+        IO.LightOn = DIO3208.GetOutPut(1) '燈源開關
+        IO.StartLight = DIO3208.GetOutPut(2) '啟動燈號
+        IO.AlarmLight = DIO3208.GetOutPut(3) '警報燈號
+        IO.LightVacuumUp2 = DIO3208.GetOutPut(4) '燈源汽缸2上
+        IO.Error = DIO3208.GetOutPut(5) '緊急停止
+        IO.Buzzer = DIO3208.GetOutPut(7) '蜂鳴器
         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
     End Sub
 

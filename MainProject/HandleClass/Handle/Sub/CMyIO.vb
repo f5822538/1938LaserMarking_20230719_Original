@@ -36,10 +36,20 @@
     <DisplayName(SR.[Error])> Public Property [Error] As II_OutPut
     <DisplayName(SR.Buzzer)> Public Property Buzzer As II_OutPut
 
+    ''' <summary>
+    ''' LightVacuum1UpSensor.IsOn() = True AndAlso LightVacuum2UpSensor.IsOn() = True
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function IsUp() As Boolean
         Return LightVacuum1UpSensor.IsOn() = True AndAlso LightVacuum2UpSensor.IsOn() = True AndAlso LightVacuum1DownSensor.IsOn() = False AndAlso LightVacuum2DownSensor.IsOn() = False
     End Function
 
+    ''' <summary>
+    ''' LightVacuum1DownSensor.IsOn() = True AndAlso LightVacuum2DownSensor.IsOn() = True
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function IsDown() As Boolean
         Return LightVacuum1UpSensor.IsOn() = False AndAlso LightVacuum2UpSensor.IsOn() = False AndAlso LightVacuum1DownSensor.IsOn() = True AndAlso LightVacuum2DownSensor.IsOn() = True
     End Function
