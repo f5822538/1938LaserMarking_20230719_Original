@@ -463,7 +463,7 @@ Module modLibrary
             Else
                 With oRecipeMarkList.Item(0)
                     If nPositionX < .PositionX - nOffsetGrayMin OrElse nPositionX > .PositionX + nOffsetGrayMin OrElse nPositionY < .PositionY - nOffsetGrayMin OrElse nPositionY > .PositionY + nOffsetGrayMin Then
-                        oModelImage.IsOffset = True
+                        oModelImage.IsOffset = True '位移/偏移
                         oModelImage.IsProcess = False
                         Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY)
                         If nIndex < 0 Then
@@ -477,7 +477,7 @@ Module modLibrary
                         Return False
                     End If
                     If nPositionX < .PositionX - nOffsetMin OrElse nPositionX > .PositionX + nOffsetMin OrElse nPositionY < .PositionY - nOffsetMin OrElse nPositionY > .PositionY + nOffsetMin Then
-                        oModelImage.IsOffsetGray = True
+                        oModelImage.IsOffsetGray = True '位移/偏移(灰階)
                         oModelImage.IsProcess = False
                         oModelImage.MarkX = -1
                         oModelImage.MarkY = -1
@@ -495,7 +495,7 @@ Module modLibrary
                     oModelImage.MarkY = -1
                 Else
                     'oModelImage.IsProcess = If(bIsBypass = True, True, oProduct.MarkList.Item(nIndex).IsProcess)
-                    oModelImage.IsProcess = True
+                    oModelImage.IsProcess = True '蓋印不清
                     'oModelImage.IsPass = Not oModelImage.IsProcess
                     oModelImage.MarkX = oProduct.MarkList.Item(nIndex).MarkX
                     oModelImage.MarkY = oProduct.MarkList.Item(nIndex).MarkY
@@ -1143,25 +1143,25 @@ Module modLibrary
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oAI As New CMyDefect
                         Dim oAIModelImage As MIL_ID = 0
-                        Dim nAIIndex As Integer = oRecipe.MarkIndex(.MarkX, .MarkY)
+                        Dim nAIIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
 
                         oAI.DefectBoundary.Width = oRecipe.ModelSize.Width
                         oAI.DefectBoundary.Height = oRecipe.ModelSize.Height
                         oAI.DefectPosition = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nAIIndex).PositionX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nAIIndex).PositionY))
-                        oAI.DefectCoordinate = New CITVPointWapper(.MarkX, .MarkY)  '' Augustin 220726 Add for Wafer Map
-                        oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - .MarkX, .MarkY + 1)
+                        oAI.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 Add for Wafer Map
+                        oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
                         oInspectSum.ReceiveTime = DateTime.Now
 
                         If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記
                             sResult = "NoDie"
                             oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                               oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - .MarkX, .MarkY + 1, oInspectSum.ReceiveTime, sResult)
+                                                               oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult)
                         Else
                             sResult = "OK"
                             oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                oInspectSum.InspectResult.AIOKPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                               oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - .MarkX, .MarkY + 1, oInspectSum.ReceiveTime, sResult)
+                                                               oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult)
                         End If
 
                         MIL.MbufChild2d(oCameraSourceImage, oAI.DefectPosition.X, oAI.DefectPosition.Y, oAI.DefectBoundary.Width, oAI.DefectBoundary.Height, oAIModelImage)
@@ -1190,25 +1190,25 @@ Module modLibrary
                             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                             Dim oAI As New CMyDefect
                             Dim oAIModelImage As MIL_ID = 0
-                            Dim nAIIndex As Integer = oRecipe.MarkIndex(.MarkX, .MarkY)
+                            Dim nAIIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
 
                             oAI.DefectBoundary.Width = oRecipe.ModelSize.Width
                             oAI.DefectBoundary.Height = oRecipe.ModelSize.Height
                             oAI.DefectPosition = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nAIIndex).PositionX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nAIIndex).PositionY))
-                            oAI.DefectCoordinate = New CITVPointWapper(.MarkX, .MarkY)  '' Augustin 220726 Add for Wafer Map
-                            oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - .MarkX, .MarkY + 1)
+                            oAI.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 Add for Wafer Map
+                            oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
                             oInspectSum.ReceiveTime = DateTime.Now
 
                             If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記
                                 sResult = "NoDie"
                                 oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                    oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                                   oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - .MarkX, .MarkY + 1, oInspectSum.ReceiveTime, sResult)
+                                                                   oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult)
                             Else
                                 sResult = "OK"
                                 oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                    oInspectSum.InspectResult.AIOKPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                                   oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - .MarkX, .MarkY + 1, oInspectSum.ReceiveTime, sResult)
+                                                                   oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult)
                             End If
 
                             MIL.MbufChild2d(oCameraSourceImage, oAI.DefectPosition.X, oAI.DefectPosition.Y, oAI.DefectBoundary.Width, oAI.DefectBoundary.Height, oAIModelImage)
@@ -1262,13 +1262,13 @@ Module modLibrary
                     oDefect.DefectSize = New CITVPointWapper(oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height)
                     oDefect.DefectPosition = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionY))
                     oDefect.DefectCenter = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionCenterX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionCenterY))
-                    oDefect.DefectCoordinate = New CITVPointWapper(.MarkX, .MarkY)  '' Augustin 220726 for Wafer Map
-                    oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - .MarkX, .MarkY + 1)
+                    oDefect.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 for Wafer Map
+                    oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
 
                     sResult = "NG"
                     oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                  oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                                 oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - .MarkX, .MarkY + 1, oInspectSum.ReceiveTime, sResult)
+                                                                 oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult)
 
                     oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 

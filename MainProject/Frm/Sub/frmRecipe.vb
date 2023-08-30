@@ -274,12 +274,12 @@ Public Class frmRecipe
 
                         Select Case True
                             Case .RecipeMarkList.RecipeMarkList.Count <= 1
-                                .RecipeMarkList.RecipeMarkList.Item(0).IndexX = 0
-                                .RecipeMarkList.RecipeMarkList.Item(0).IndexY = 0
-                                .RecipeMarkList.RecipeMarkList.Item(0).MarkX = 0
-                                .RecipeMarkList.RecipeMarkList.Item(0).MarkY = 0
-                                .RecipeMarkList.RecipeMarkList.Item(0).PositionX = nMinX
-                                .RecipeMarkList.RecipeMarkList.Item(0).PositionY = nMinY
+                                moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Item(0).IndexX = 0
+                                moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Item(0).IndexY = 0
+                                moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Item(0).MarkX = 0
+                                moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Item(0).MarkY = 0
+                                moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Item(0).PositionX = nMinX
+                                moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Item(0).PositionY = nMinY
                             Case .RecipeMarkList.RecipeMarkList.Item(.RecipeMarkList.RecipeMarkList.Count - 2).IndexX = mnMarkXCount - 1
                                 .RecipeMarkList.RecipeMarkList.Item(.RecipeMarkList.RecipeMarkList.Count - 1).IndexX = 0
                                 .RecipeMarkList.RecipeMarkList.Item(.RecipeMarkList.RecipeMarkList.Count - 1).IndexY = .RecipeMarkList.RecipeMarkList.Item(.RecipeMarkList.RecipeMarkList.Count - 2).IndexY + 1
@@ -299,7 +299,7 @@ Public Class frmRecipe
                 Next
             Next
 
-            For nIndex As Integer = .RecipeMarkList.RecipeMarkList.Count - 1 To 0 Step -1
+            For nIndex As Integer = moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Count - 1 To 0 Step -1
                 If .RecipeMarkList.RecipeMarkList.Item(nIndex).IsUse = False Then .RecipeMarkList.RecipeMarkList.RemoveAt(nIndex)
             Next
         End With
