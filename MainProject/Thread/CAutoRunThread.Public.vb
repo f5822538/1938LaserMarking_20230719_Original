@@ -359,7 +359,7 @@ Partial Class CAutoRunThread
                 moMyEquipment.MainRecipe.RecipeCamera.RecipeModelDiff.UpLoadMarkShiftPictureToIT = "OFF"
             End If
 
-            oFileInfoLoseAndRotateList = CType(oDirectoryLoseAndRotateInfoList.ToArray(GetType(FileInfo)), FileInfo())
+            oFileInfoLoseAndRotateList = CType(oDirectoryLoseAndRotateInfoList.ToArray(GetType(FileInfo)), FileInfo()) '蓋印漏雷/蓋印轉置
             If oFileInfoLoseAndRotateList.Count > 0 Then
                 For i = 0 To oFileInfoLoseAndRotateList.Count - 1
                     Dim sImageName As String = ""

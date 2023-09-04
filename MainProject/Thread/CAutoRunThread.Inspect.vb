@@ -72,7 +72,7 @@
         With moMyEquipment
             Try
                 Dim aDataTime As DateTime = DateTime.Now
-                Dim sPath As String = String.Format("{0}\Report\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, aDataTime)
+                Dim sPath As String = String.Format("{0}\Report\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, aDataTime) '報告-重要路徑
                 Dim oInspectResult As New CInspectResult
                 Dim oMyDefectList As New CMyDefectList
                 Dim oInspectSum As CInspectSum
@@ -82,7 +82,7 @@
                 oInspectResult.RecipeID = moMainRecipe.RecipeID
                 oInspectResult.CodeID = moMyEquipment.CodeText
                 oMyDefectList.CodeID = moMyEquipment.CodeText
-                oInspectResult.InspectPath = sPath
+                oInspectResult.InspectPath = sPath '報告-重要路徑
 
                 ''0928
                 '' Augustin 220503 Modify
@@ -127,11 +127,11 @@
                 oInspectResult.AIXMLFileName = String.Format("{0}\ExportXML", moMyEquipment.HardwareConfig.MiscConfig.AIPath)
                 ''oInspectResult.AIXMLFileName = String.Format("{0}\{1}_{2:yyyyMMdd}", moMyEquipment.HardwareConfig.MiscConfig.AIPath, oInspectResult.CodeID, aDataTime)
 
-                oInspectResult.Name = String.Format("{0:yyyy-MM-dd_HH_mm_ss_fff}", aDataTime)
+                oInspectResult.Name = String.Format("{0:yyyy-MM-dd_HH_mm_ss_fff}", aDataTime) '報告-重要路徑
                 oInspectResult.Sequnce = mnSequence
                 oInspectResult.AlignStatus = mbAlignStatus '定位結果-狀態(True:異常, False:正常)
-                oProductConfig = New CMyProductConfig(sPath, oInspectResult.Name, "INI")
-                oInspectSum = New CInspectSum(oInspectResult, aDataTime, oMyDefectList, oProductConfig)
+                oProductConfig = New CMyProductConfig(sPath, oInspectResult.Name, "INI") '報告-重要路徑
+                oInspectSum = New CInspectSum(oInspectResult, aDataTime, oMyDefectList, oProductConfig) '報告-重要路徑
 
                 If Directory.Exists(oInspectResult.InspectPath) = False Then
                     Call Directory.CreateDirectory(oInspectResult.InspectPath)
@@ -226,7 +226,7 @@
                 'End If
 
                 If moMyEquipment.HardwareConfig.MiscConfig.IsSaveAINGImage = True Then
-                    Dim oCopyAIImageFileTask As Task = Task.Factory.StartNew(Sub() CopyAIImageFileForMulti(sPath, oInspectResult, oInspectSum))
+                    Dim oCopyAIImageFileTask As Task = Task.Factory.StartNew(Sub() CopyAIImageFileForMulti(sPath, oInspectResult, oInspectSum)) '報告-重要路徑
                 End If
 
                 moMyEquipment.IsNotUpdateMap = False '預設值-資料上報
