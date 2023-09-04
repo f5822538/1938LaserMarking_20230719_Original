@@ -562,7 +562,7 @@ Module modLibrary
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-結果
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-結果(位移/偏移)
                         oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
@@ -610,7 +610,7 @@ Module modLibrary
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-位移/偏移(灰階)
                         oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
@@ -659,7 +659,7 @@ Module modLibrary
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '蓋印漏雷/蓋印轉置
                         oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
@@ -722,7 +722,7 @@ Module modLibrary
                             oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                             oDefect.InspectType = InspectType.ModelDiff
                             oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                            oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result
+                            oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-蓋印不清
                             oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
                             oDefect.MeanGray = 0
                             oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
@@ -1152,7 +1152,7 @@ Module modLibrary
                         oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
                         oInspectSum.ReceiveTime = DateTime.Now
 
-                        If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記
+                        If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記 (重要判斷條件)
                             sResult = "NoDie"
                             oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
@@ -1338,12 +1338,12 @@ Module modLibrary
                        (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then 'No Die-重要判斷條件
 
                         '++++++ First judge OriginalType ------> Second judge ResultType ++++++
-                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記
+                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記 (重要判斷條件)
                             oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                             oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
                         End If
                     Else
-                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記
+                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記 (重要判斷條件)
                             If oProduct.MarkList(i_oProduct).Result <> ResultType.NoDie Then
                                 oProduct.MarkList(i_oProduct).Result = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                                 oInspectSum.InspectResult.NotDefectNoDieCount += 1 'No Die數量(NotDefect)
