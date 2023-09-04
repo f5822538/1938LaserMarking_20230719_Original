@@ -54,7 +54,7 @@ Partial Class CAutoRunThread
     End Function
 
     Public Sub FinishReoprt(oInspectSum As CInspectSum)
-        Call moHtmlReport.OutPutReport(oInspectSum.InspectResult, oInspectSum.DefectList)
+        moHtmlReport.OutPutReport(oInspectSum.InspectResult, oInspectSum.DefectList)
         Call SaveDMFile(oInspectSum.InspectResult, oInspectSum.DefectListDraw)
     End Sub
 

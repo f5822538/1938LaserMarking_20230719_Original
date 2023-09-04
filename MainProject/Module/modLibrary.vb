@@ -536,7 +536,7 @@ Module modLibrary
             With oInspectSum
                 Dim oModelImagePosition As Rectangle = New Rectangle(oModelImage.PositionX, oModelImage.PositionY, oRecipe.ModelSize.Width, oRecipe.ModelSize.Height)
                 SyncLock CAutoRunThread.ProcessDefectListLock
-                    .DefectList.ModelList.Add(oModelImagePosition)
+                    oInspectSum.DefectList.ModelList.Add(oModelImagePosition)
                 End SyncLock
                 Dim nIndex As Integer = 0
 
