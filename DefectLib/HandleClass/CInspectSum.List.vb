@@ -2,6 +2,11 @@ Imports System.Windows.Forms.ListView
 
 Partial Class CInspectSum
 
+    ''' <summary>
+    ''' usrDefectView.AddData -> CInspectSum.AddItem
+    ''' </summary>
+    ''' <param name="oItemList"></param>
+    ''' <remarks></remarks>
     Public Sub AddItem(oItemList As ListViewItemCollection)
         With oItemList.Insert(0, InspectResult.Sequnce.ToString()) '列表序
             .SubItems.Add(Now.ToString())
@@ -9,7 +14,7 @@ Partial Class CInspectSum
             .SubItems.Add(InspectResult.CodeID)
             .SubItems.Add((InspectResult.DefectCount - InspectResult.DefectNoDieCount).ToString())
 
-            If InspectResult.AlignStatus = True Then
+            If InspectResult.AlignStatus = True Then '對位異常
                 .ForeColor = Drawing.Color.Red
                 .SubItems.Add("Y")
             Else
@@ -38,7 +43,7 @@ Partial Class CInspectSum
                 .SubItems.Add("N")
             End If
 
-            If InspectResult.ModleOffsetStatus = True Then
+            If InspectResult.ModleOffsetStatus = True Then '檢測異常 (偏移)
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
                 .SubItems.Add("Y")
             Else

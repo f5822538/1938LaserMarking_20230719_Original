@@ -3,8 +3,13 @@ Public Class usrDefectView
     Private moImgList As New List(Of PictureBox)
     Public moBitmap As New Bitmap(10, 10)
 
+    ''' <summary>
+    ''' frmMain.moAutoRunThread_AutoRunFinished -> usrDefectView.AddData
+    ''' </summary>
+    ''' <param name="oInspectSumCamera"></param>
+    ''' <remarks></remarks>
     Public Sub AddData(oInspectSumCamera As CInspectSum)
-        oInspectSumCamera.AddItem(DefectViewCamera.Items)
+        oInspectSumCamera.AddItem(DefectViewCamera.Items) '¦Cªí§Ç
 
         If DefectViewCamera.Items.Count > 1000 Then
             DefectViewCamera.Items.RemoveAt(DefectViewCamera.Items.Count - 1)

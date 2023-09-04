@@ -924,7 +924,7 @@ Public Class frmMain
                  Call usrDefectView.AddToPictureName(e.InspectSum.DefectList.DefectList(nCount - 1).DefectImage.FileName) '系統執行畫面
              Next
 
-             Call usrDefectView.AddData(e.InspectSum) '序列-Lead Frame-瑕疵檢測結果列表
+             Call usrDefectView.AddData(e.InspectSum) '序列-Lead Frame-瑕疵檢測結果列表-ListViewItemCollection
              Call moMyEquipment.LogInspectCSV.Log(e.InspectSum.InspectResult.TOCSVLine())
              '系統執行畫面-結果(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
