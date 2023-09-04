@@ -19,6 +19,17 @@ RecipeLib
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
+</member><member name="M:RecipeLib.CMyPatternMatching.FindModelAll(Matrox.MatroxImagingLibrary.MIL_ID,RecipeLib.CRecipeModelDiff,System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+	<summary>
+ modLibrary.FindModelAll -&gt; CMyPatternMatching.FindModelAll
+ </summary>
+	<param name="nImageHeader"></param>
+	<param name="oRecipe"></param>
+	<param name="nX"></param>
+	<param name="nY"></param>
+	<param name="nAngle"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member>
 </members>
 </doc>

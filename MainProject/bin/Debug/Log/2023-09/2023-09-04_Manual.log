@@ -1,0 +1,12 @@
+12:05:04.432 [Error] 元件顯示錯誤，Error：System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 iTVisionService.iTVControl.usrIn8Out8.UpdateStatus()
+   於 LaserMarkingX64.frmIntegrateTest.bkUpdate_ProgressChanged(Object sender, ProgressChangedEventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\Sub\frmIntegrateTest.vb: 行 615
+12:05:04.945 [Error] 元件顯示錯誤，Error：System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 iTVisionService.iTVControl.usrIn8Out8.UpdateStatus()
+   於 LaserMarkingX64.frmIntegrateTest.bkUpdate_ProgressChanged(Object sender, ProgressChangedEventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\Sub\frmIntegrateTest.vb: 行 615
+12:05:06.544 [Error] 元件顯示錯誤，Error：System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 iTVisionService.iTVControl.usrIn8Out8.UpdateStatus()
+   於 LaserMarkingX64.frmIntegrateTest.bkUpdate_ProgressChanged(Object sender, ProgressChangedEventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\Sub\frmIntegrateTest.vb: 行 615
+12:05:07.057 [Error] 元件顯示錯誤，Error：System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 iTVisionService.iTVControl.usrIn8Out8.UpdateStatus()
+   於 LaserMarkingX64.frmIntegrateTest.bkUpdate_ProgressChanged(Object sender, ProgressChangedEventArgs e) 於 D:\GitHub\1938LaserMarking_20230719_Original\MainProject\Frm\Sub\frmIntegrateTest.vb: 行 615

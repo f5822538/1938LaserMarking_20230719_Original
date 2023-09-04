@@ -6,7 +6,58 @@ LaserMarkingX64
 </name>
 </assembly>
 <members>
-<member name="P:LaserMarkingX64.CMyLocater.Result">
+<member name="M:LaserMarkingX64.FrmRecipeList.btnLoadRecipe_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 載入製程參數 Load Recipe
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.SendStripMapUpload(DefectLib.CMyProduct@,iTVisionService.II_LogTraceExtend)">
+	<summary>
+ 發送-Lead Frame上的每個Die映射圖上傳
+ </summary>
+	<param name="oProduct"></param>
+	<param name="moLog"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.UpdateAIInfo(DefectLib.CMyProduct,DefectLib.CInspectSum,iTVisionService.II_LogTraceExtend)">
+	<summary>
+ 呼叫-Handshake.UpdateAIInfo(寫入 AI XML 檔案)
+ </summary>
+	<param name="oProduct"></param>
+	<param name="oInspectSum"></param>
+	<param name="moLog"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyIO.IsUp">
+	<summary>
+ LightVacuum1UpSensor.IsOn() = True AndAlso LightVacuum2UpSensor.IsOn() = True
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyIO.IsDown">
+	<summary>
+ LightVacuum1DownSensor.IsOn() = True AndAlso LightVacuum2DownSensor.IsOn() = True
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.UpdateSizeDgvCodeReadResult(System.Windows.Forms.DataGridView,System.Int32)">
+	<summary>
+ MainProject\HandleClass\Handle\CMyEquipment.UpdateCodeReadResult.vb
+ </summary>
+	<param name="oDataGridView"></param>
+	<param name="nColumn"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.UpdateValueDgvCodeReadResult(System.Windows.Forms.DataGridView)">
+	<summary>
+ MainProject\HandleClass\Handle\CMyEquipment.UpdateCodeReadResult.vb
+ </summary>
+	<param name="oDataGridView"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:LaserMarkingX64.CMyLocater.Result">
 	<summary>
   'FindModel-的結果
  </summary>
@@ -22,9 +73,86 @@ LaserMarkingX64
 	<param name="nLocaterNo"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.modLibrary.ModelDiffForStandardDeviation(Matrox.MatroxImagingLibrary.MIL_ID,RecipeLib.CRecipeModelDiff,DefectLib.CInspectSum,DefectLib.CMyProduct,LaserMarkingX64.CMyEquipment,iTVisionService.II_LogTraceExtend,System.Int32,System.Boolean,System.Int32)">
+	<summary>
+ 標準差的模型差異(CAutoRunThread.RunInspect -&gt; modLibrary.ModelDiffForStandardDeviation)
+ </summary>
+	<param name="oCameraSourceImage"></param>
+	<param name="oRecipe"></param>
+	<param name="oInspectSum"></param>
+	<param name="oProduct"></param>
+	<param name="oMyEquipment"></param>
+	<param name="oLog"></param>
+	<param name="nSequence"></param>
+	<param name="bIsSaveImage"></param>
+	<param name="nDefectMaxCount"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.modLibrary.FindModelAll(Matrox.MatroxImagingLibrary.MIL_ID,System.Collections.Generic.List{LaserMarkingX64.CMyModelImage}@,RecipeLib.CRecipeModelDiff,DefectLib.CInspectSum,DefectLib.CMyProduct,iTVisionService.II_LogTraceExtend,RecipeLib.PatternMatchingType,System.Int32,System.Boolean)">
+	<summary>
+ modLibrary.ModelDiffForStandardDeviation -&gt; modLibrary.FindModelAll
+ </summary>
+	<param name="oCameraSourceImage"></param>
+	<param name="oModelImageList"></param>
+	<param name="oRecipe"></param>
+	<param name="oInspectSum"></param>
+	<param name="oProduct"></param>
+	<param name="oLog"></param>
+	<param name="oPatternMatchingType"></param>
+	<param name="nSequence"></param>
+	<param name="bIsSaveImage"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.modLibrary.BuildProductPosition(LaserMarkingX64.CMyModelImage@,RecipeLib.CRecipeModelDiff,DefectLib.CInspectSum,DefectLib.CMyProduct,RecipeLib.PatternMatchingType,iTVisionService.II_LogTraceExtend,System.Int32)">
+	<summary>
+ modLibrary.FindModelAll -&gt; modLibrary.BuildProductPosition
+ </summary>
+	<param name="oModelImage"></param>
+	<param name="oRecipeModelDiff"></param>
+	<param name="oInspectSum"></param>
+	<param name="oProduct"></param>
+	<param name="oPatternMatchingType"></param>
+	<param name="oLog"></param>
+	<param name="nSequence"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.modLibrary.StandardDeviation(LaserMarkingX64.CMyModelImage,System.Collections.Generic.List{LaserMarkingX64.CMyModelImage},RecipeLib.CRecipeModelDiff,DefectLib.CInspectSum@,DefectLib.CMyProduct@,Matrox.MatroxImagingLibrary.MIL_ID,Matrox.MatroxImagingLibrary.MIL_ID,LaserMarkingX64.CMyEquipment,System.Boolean,System.Boolean,System.Int32,iTVisionService.II_LogTraceExtend,System.Int32)">
+	<summary>
+	</summary>
+	<param name="oModelImage"></param>
+	<param name="oModelImageList2Nd"></param>
+	<param name="oRecipe"></param>
+	<param name="oInspectSum"></param>
+	<param name="oProduct"></param>
+	<param name="oStandardUpperLimitImage"></param>
+	<param name="oStandardLowerLimitImage"></param>
+	<param name="oMyEquipment"></param>
+	<param name="bIsSaveImage"></param>
+	<param name="bIsIndistinct"></param>
+	<param name="nDefectMaxCount"></param>
+	<param name="oLog"></param>
+	<param name="nSequence"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.modLibrary.CompareOriginalAndInspectNoDieSection(DefectLib.CInspectSum@,DefectLib.CMyProduct@,iTVisionService.II_LogTraceExtend,System.Int32)">
+	<summary>
+ 比較原始版本並檢查NoDie部分(CAutoRunThread.RunInspect -&gt; modLibrary.CompareOriginalAndInspectNoDieSection)
+ </summary>
+	<param name="oInspectSum"></param>
+	<param name="oProduct"></param>
+	<param name="oLog"></param>
+	<param name="nDefectMaxCount"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:LaserMarkingX64.CAutoRunThread.Locate">
 	<summary>
  定位及旋轉補正-回傳-SucceedFind-的結果(True:成功, False:失敗)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CAutoRunThread.RunInspect">
+	<summary>
+ CAutoRunThread.SingleRun -&gt; CAutoRunThread.RunInspect
  </summary>
 	<returns></returns>
 	<remarks></remarks>
@@ -51,10 +179,141 @@ LaserMarkingX64
 	<param name="oModelFinderShift"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.Send_ToolStripButtonSendStripMapUpload">
+	<summary>
+ 發送-工具條按鈕發送上傳產品分布
+ </summary>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.btnCameraExposure_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 修改曝光時間                      Eposure Time
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.btnCameraGain_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 修改增益                      Gain
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.txtCameraExpos_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ 相機-修改曝光時間
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.txtCameraGain_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ 相機-修改增益
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.txtCodeReaderCameraExpos_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ 條碼相機-修改曝光時間
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.txtCodeReaderCameraGain_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ 條碼相機-修改增益
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.bkCommand_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+	<summary>
+ BackgroundWorker-執行-相機參數設定
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmIntegrateTest.bkCommand_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)">
+	<summary>
+ BackgroundWorker-進度-相機參數設定
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CInnerThread.IsCanRunInspect">
+	<summary>
+ 判斷是否可以執行光學檢測(判斷是否有載入製程參數)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.Initial">
+	<summary>
+ frmMain.frmMain_Load -&gt; CMyEquipment.Initial
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyHandshake.BuildStripOriginalMapInfo(System.String,DefectLib.CMyProduct@,iTVisionService.II_LogTraceExtend)">
+	<summary>
+ 注意這裡的spath暫時用自訂設置，以便之後調整
+ </summary>
+	<param name="sPath"></param>
+	<param name="oProduct"></param>
+	<param name="olog"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyHandshake.SendStripMapUploadIncludeOriginalMapInfo(DefectLib.CMyProduct@)">
+	<summary>
+ 發送-Lead Frame上的每個Die映射圖上傳包含原始映射圖資訊
+ </summary>
+	<param name="oProduct"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyHandshake.UpdateAIInfo(DefectLib.CMyProduct,DefectLib.CInspectSum)">
+	<summary>
+ UpdateAIInfo-寫入 AI XML 檔案
+ </summary>
+	<param name="oProduct"></param>
+	<param name="oInspectSum"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyCamera.ChangeExposure(System.Double,System.String,iTVisionService.II_LogTraceExtend)">
+	<summary>
+ 修改曝光時間
+ </summary>
+	<param name="nExposureTime"></param>
+	<param name="sCameraName"></param>
+	<param name="oLog"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.CreateDIO3208">
+	<summary>
+ "創建-DIO3208
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.Update3208Interface">
+	<summary>
+ 更新-DIO3208B-介面
+ </summary>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CMyEquipment.SetEroorOn(iTVisionService.II_LogTraceExtend)">
+	<summary>
+ SetEroorOn
+ </summary>
+	<param name="oLog"></param>
+	<remarks></remarks>
 </member><member name="T:LaserMarkingX64.frmHardwareConfig">
 	<summary>frmHardwareConfig</summary>
 	<remarks>
 	</remarks>
+</member><member name="M:LaserMarkingX64.CAutoRunThread.CopyAIImageFileForMulti(System.String,DefectLib.CInspectResult,DefectLib.CInspectSum)">
+	<summary>
+ 複製 AI 影像
+ </summary>
+	<param name="sSourcePath"></param>
+	<param name="oInspectResult"></param>
+	<param name="oInspectSum"></param>
+	<remarks></remarks>
 </member><member name="P:LaserMarkingX64.My.Resources.Resources.ResourceManager">
 	<summary>
   傳回這個類別使用的快取的 ResourceManager 執行個體。
@@ -68,14 +327,171 @@ LaserMarkingX64
 	<summary>
   用於查詢當地語系化字串等的強類型資源類別。
 </summary>
+</member><member name="M:LaserMarkingX64.CInnerThread.#ctor(LaserMarkingX64.CMyEquipment)">
+	<summary>
+ moInnerThread = New CInnerThread(Me)
+ CInnerThread -&gt; CAutoRunThread, CHandshakeThread, CTowerThread, CClearBufferThread, CEraseThreadExtend, CEraseThreadExtend
+ </summary>
+	<param name="oMyEquipment"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmRecipe.btnSave_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 儲存參數       Save Recpe
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmRecipe.ToolStripButtonFindModel_Click(System.Object,System.EventArgs)">
+	<summary>
+ FindModel-尋找樣本
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmRecipe.ToolStripButtonBuildMarkPosition_Click(System.Object,System.EventArgs)">
+	<summary>
+ BuildMarkPosition-創建標記位置
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmRecipe.btnRotate_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ btnRotate-轉正
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
 </member><member name="T:LaserMarkingX64.frmRecipe">
 	<summary>frmRecipeCamera</summary>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CHandshakeThread.ProcessSingleRun">
+	<summary>
+ 觸發-更換樣本-事件
+ </summary>
+	<remarks></remarks>
+</member><member name="P:LaserMarkingX64.CAutoRunThread.Statu">
+	<summary>
+ Number-3-執行順序
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CAutoRunThread.#ctor(LaserMarkingX64.CMyEquipment,iTVisionService.II_LogTraceExtend)">
+	<summary>
+ Number-1-執行順序
+ </summary>
+	<param name="oMyEquipment"></param>
+	<param name="oLog"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CAutoRunThread.Process">
+	<summary>
+ 執行緒工作處理流程:(AutoRunThread = New CAutoRunThread -&gt; AutoRunThread.Process)
+ Number-2-執行順序
+ </summary>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CAutoRunThread.WaitProcess">
+	<summary>
+ Number-5-執行順序
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.CAutoRunThread.SingleRun(System.Boolean)">
+	<summary>
+ CAutoRunThread.SingleRun
+ Number-4-執行順序
+ </summary>
+	<param name="bIsTestRun"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.frmMain_Load(System.Object,System.EventArgs)">
+	<summary>
+ System.Windows.Forms.Form (發生在表單第一次顯示之前)
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.btnContinusRun_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 連續執行 Continus Run
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.btnClearAlarm_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 清除(異常)
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.btnRecipeManager_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 製程管理 Recipe Manager
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.btnOpenHistory_ClickButtonArea(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ 打開歷史紀錄 Open History
+ </summary>
+	<param name="Sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.mnuRecipeCodeReader_Click(System.Object,System.EventArgs)">
+	<summary>
+ 點擊(20 - 條碼參數設定 Code)
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.mnuLogInOut_Click(System.Object,System.EventArgs)">
+	<summary>
+ 使用者登入 User Log In
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.bkUpdate_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+	<summary>
+ 當呼叫 System.ComponentModel.BackgroundWorker.RunWorkerAsync 時發生
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.bkUpdate_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)">
+	<summary>
+ 當呼叫 System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32) 時發生
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.bkTime_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+	<summary>
+ 當呼叫 System.ComponentModel.BackgroundWorker.RunWorkerAsync 時發生
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.bkTime_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)">
+	<summary>
+ 當呼叫 System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32) 時發生
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
 	<remarks></remarks>
 </member><member name="M:LaserMarkingX64.frmMain.moHandshakeThread_ChangeRecipe(System.Collections.Generic.List{DefectLib.CMyProduct})">
 	<summary>
  EventHandler-更換樣本-事件
  </summary>
 	<param name="oHandshakeProductList"></param>
+	<remarks></remarks>
+</member><member name="M:LaserMarkingX64.frmMain.mnuRecipeInspect_Click(System.Object,System.EventArgs)">
+	<summary>
+ 點擊(11 - 參數設定 Inspect)
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
 	<remarks></remarks>
 </member><member name="M:LaserMarkingX64.frmMain.frmMain_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
 	<summary>

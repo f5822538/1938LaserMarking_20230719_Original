@@ -76,6 +76,7 @@ Public Class frmMain
                     moMyEquipment.TriggerAlarm(oAlarmCode, moMyEquipment.MyLog.LogAlarm) '漏雷觸發Alarm
                     If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(處理 Process)
                     moMyEquipment.LogAlarm.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(警報 Alarm)
+                    moMyEquipment.SetEroorOn(moLog) '漏雷觸發Alarm(Error)
                 End If
             End If
             '------------------------Debug--漏雷觸發Alarm-結束--------------------------
