@@ -4,7 +4,7 @@
     Public Property DefectPosition As New CITVPointWapper()
     Public Property DefectCoordinate As New CITVPointWapper() '' Augustin 220726 Add for Wafer Map
     Public Property DefectIndex As New CITVPointWapper()
-    Public Property DefectImage As New CMyDefectImage()
+    Public Property DefectImage As New CMyDefectImage() '瑕疵點位小圖(可用於出報表)
 
     <XmlAttribute()> Public Property DefectType As Comp_InsperrorType
     <XmlAttribute()> Public Property BodyArea As Integer = 0
@@ -19,7 +19,7 @@
 
     <XmlAttribute()> Public Property DefectSizeJudge As COMP_DEFECTSIZE
     <XmlAttribute()> Public Property ResultType As ResultType
-    <XmlAttribute()> Public Property DefectName As String = ""
+    <XmlAttribute()> Public Property DefectName As String = "" '瑕疵名稱(可用於出報表)
     <XmlAttribute()> Public Property DefectGraySizeJudge As COMP_DEFECTGRAYLEVEOVERSIZE
     <XmlAttribute()> Public Property DefectShapeJudge As COMP_DEFECTSHAPE
     <XmlAttribute()> Public Property InspectType As InspectType

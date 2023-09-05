@@ -570,7 +570,7 @@ Module modLibrary
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
                         oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-結果(位移/偏移)
-                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
+                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '瑕疵名稱(可用於出報表)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -589,7 +589,7 @@ Module modLibrary
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                     oInspectSum.ReceiveTime, sResult)
+                                                                     oInspectSum.ReceiveTime, sResult) '瑕疵點位小圖(可用於出報表)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -618,7 +618,7 @@ Module modLibrary
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
                         oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-位移/偏移(灰階)
-                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
+                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '瑕疵名稱(可用於出報表)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -638,7 +638,7 @@ Module modLibrary
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                     oInspectSum.ReceiveTime, sResult)
+                                                                     oInspectSum.ReceiveTime, sResult) '瑕疵點位小圖(可用於出報表)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -667,7 +667,7 @@ Module modLibrary
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
                         oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '蓋印漏雷/蓋印轉置
-                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
+                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '瑕疵名稱(可用於出報表) [oModelImage.IsLose = True]
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -691,10 +691,11 @@ Module modLibrary
                                                                      oRecipe.MarkXCount - oModelImage.MarkX,
                                                                      oModelImage.MarkY + 1,
                                                                      oInspectSum.ReceiveTime,
-                                                                     sResult)
+                                                                     sResult) '瑕疵點位小圖(可用於出報表)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
+                        'oModelImage.IsLose = True ------> oInspectSum.InspectResult.ModleLoseStatus = True
                         If oInspectSum.InspectResult.ModleLoseStatus = False Then
                             oInspectSum.InspectResult.ModleLoseStatus = True 'StandardDeviation 漏雷(CInspectResult)
                         End If
@@ -734,7 +735,7 @@ Module modLibrary
                             oDefect.InspectType = InspectType.ModelDiff
                             oDefect.DefectType = Comp_InsperrorType.Comp_Corner
                             oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '標記-蓋印不清
-                            oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result)
+                            oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '瑕疵名稱(可用於出報表)
                             oDefect.MeanGray = 0
                             oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                             oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -754,7 +755,7 @@ Module modLibrary
                             oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                          oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                          oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                         oInspectSum.ReceiveTime, sResult)
+                                                                         oInspectSum.ReceiveTime, sResult) '瑕疵點位小圖(可用於出報表)
 
                             oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -957,7 +958,7 @@ Module modLibrary
                                                               oDefect.InspectType = InspectType.ModelDiff
                                                               oDefect.DefectType = If(oDefectType = ResultType.NGDark, Comp_InsperrorType.Comp_Dark, Comp_InsperrorType.Comp_Bright)
                                                               oDefect.ResultType = If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)
-                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright))
+                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)) '瑕疵名稱(可用於出報表)
                                                               oDefect.MeanGray = nDefectMean
                                                               oDefect.BodyArea = AreaPositive(nIndexPositive)
                                                               oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -977,7 +978,7 @@ Module modLibrary
                                                               oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                                                            oMyEquipment.MainRecipe.RecipeID, .InspectResult.CodeID, .ProductConfig.EQPID,
                                                                                                            oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                                                           .ReceiveTime, sResult)
+                                                                                                           .ReceiveTime, sResult) '瑕疵點位小圖(可用於出報表)
 
                                                               oDefect.DefectFileName = String.Format("{0}\{1}", .InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -1059,7 +1060,7 @@ Module modLibrary
                                                               oDefect.InspectType = InspectType.ModelDiff
                                                               oDefect.DefectType = If(oDefectType = ResultType.NGDark, Comp_InsperrorType.Comp_Dark, Comp_InsperrorType.Comp_Bright)
                                                               oDefect.ResultType = If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)
-                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright))
+                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)) '瑕疵名稱(可用於出報表)
                                                               oDefect.MeanGray = nDefectMean
                                                               oDefect.BodyArea = AreaNegative(nIndexNegative)
                                                               oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -1079,7 +1080,7 @@ Module modLibrary
                                                               oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                                                            oMyEquipment.MainRecipe.RecipeID, .InspectResult.CodeID, .ProductConfig.EQPID,
                                                                                                            oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                                                           .ReceiveTime, sResult)
+                                                                                                           .ReceiveTime, sResult) '瑕疵點位小圖(可用於出報表)
 
                                                               oDefect.DefectFileName = String.Format("{0}\{1}", .InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -1260,7 +1261,7 @@ Module modLibrary
                     oDefect.InspectType = InspectType.ModelDiff
                     oDefect.DefectType = Comp_InsperrorType.Comp_Corner
                     oDefect.ResultType = oMarkInfo.Result
-                    oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result)
+                    oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result) '瑕疵名稱(可用於出報表) [oMarkInfo.Result = ResultType.Lose]
                     oDefect.MeanGray = 0
                     oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                     oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -1284,10 +1285,11 @@ Module modLibrary
                                                                  oRecipe.MarkXCount - oMarkInfo.MarkX,
                                                                  oMarkInfo.MarkY + 1,
                                                                  oInspectSum.ReceiveTime,
-                                                                 sResult) '重要-產出Report的圖片用(漏雷)
+                                                                 sResult) '重要-產出Report的圖片用(蓋印漏雷)
 
-                    oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
+                    oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName) '瑕疵點位小圖(可用於出報表)
 
+                    'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
                     oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult)
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
