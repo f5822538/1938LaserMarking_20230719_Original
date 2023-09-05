@@ -596,8 +596,8 @@ Module modLibrary
                         If .InspectResult.ModleOffsetStatus = False Then .InspectResult.ModleOffsetStatus = True
                         If oProduct.MarkList.Item(nIndex).OriginalType <> ResultType.NoDie Then 'No Die-標記
                             SyncLock CAutoRunThread.ProcessDefectListLock
-                                .DefectList.DefectList.Add(oDefect)
-                                .DefectListDraw.Add(oDefect)
+                                oInspectSum.DefectList.DefectList.Add(oDefect)
+                                oInspectSum.DefectListDraw.Add(oDefect)
                             End SyncLock
                         End If
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
@@ -644,8 +644,8 @@ Module modLibrary
 
                         If .InspectResult.ModleOffsetStatus = False Then .InspectResult.ModleOffsetStatus = True
                         SyncLock CAutoRunThread.ProcessDefectListLock
-                            .DefectList.DefectList.Add(oDefect)
-                            .DefectListDraw.Add(oDefect)
+                            oInspectSum.DefectList.DefectList.Add(oDefect)
+                            oInspectSum.DefectListDraw.Add(oDefect)
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
@@ -683,11 +683,15 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                        sResult = "NG" '重要-產出Report的圖片用(蓋印漏雷/蓋印轉置)
+                        sResult = "NG" 'StandardDeviation 重要-產出Report的圖片用(蓋印漏雷/蓋印轉置)
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
-                                                                     oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
-                                                                     oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                     oInspectSum.ReceiveTime, sResult)
+                                                                     oMyEquipment.MainRecipe.RecipeID,
+                                                                     oInspectSum.InspectResult.CodeID,
+                                                                     oInspectSum.ProductConfig.EQPID,
+                                                                     oRecipe.MarkXCount - oModelImage.MarkX,
+                                                                     oModelImage.MarkY + 1,
+                                                                     oInspectSum.ReceiveTime,
+                                                                     sResult)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -696,8 +700,8 @@ Module modLibrary
                         End If
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
-                            .DefectList.DefectList.Add(oDefect)
-                            .DefectListDraw.Add(oDefect)
+                            oInspectSum.DefectList.DefectList.Add(oDefect)
+                            oInspectSum.DefectListDraw.Add(oDefect)
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
@@ -756,8 +760,8 @@ Module modLibrary
 
                             SyncLock CAutoRunThread.ProcessDefectListLock
                                 If .InspectResult.ModleOffsetStatus = False Then .InspectResult.ModleOffsetStatus = True
-                                .DefectList.DefectList.Add(oDefect)
-                                .DefectListDraw.Add(oDefect)
+                                oInspectSum.DefectList.DefectList.Add(oDefect)
+                                oInspectSum.DefectListDraw.Add(oDefect)
                             End SyncLock
 
                             MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
@@ -1272,10 +1276,15 @@ Module modLibrary
                     oDefect.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 for Wafer Map
                     oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
 
-                    sResult = "NG" '重要-產出Report的圖片用
+                    sResult = "NG" 'BuildLoseModel 重要-產出Report的圖片用(蓋印漏雷/蓋印轉置)
                     oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
-                                                                 oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                                 oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult) '重要-產出Report的圖片用
+                                                                 oMyEquipment.MainRecipe.RecipeID,
+                                                                 oInspectSum.InspectResult.CodeID,
+                                                                 oInspectSum.ProductConfig.EQPID,
+                                                                 oRecipe.MarkXCount - oMarkInfo.MarkX,
+                                                                 oMarkInfo.MarkY + 1,
+                                                                 oInspectSum.ReceiveTime,
+                                                                 sResult) '重要-產出Report的圖片用(漏雷)
 
                     oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
