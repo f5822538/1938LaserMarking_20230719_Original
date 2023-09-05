@@ -128,6 +128,8 @@ Module modLibrary
 
     ''' <summary>
     ''' ¼Ð·Ç®tªº¼Ò«¬®t²§(CAutoRunThread.RunInspect -> modLibrary.ModelDiffForStandardDeviation)
+    ''' StandardDeviation
+    ''' BuildLoseModel
     ''' </summary>
     ''' <param name="oCameraSourceImage"></param>
     ''' <param name="oRecipe"></param>
@@ -304,6 +306,7 @@ Module modLibrary
 
     ''' <summary>
     ''' modLibrary.ModelDiffForStandardDeviation -> modLibrary.FindModelAll
+    ''' »\¦Lº|¹p/»\¦LÂà¸m,¦ì²¾/°¾²¾,»\¦L¤£²M
     ''' </summary>
     ''' <param name="oCameraSourceImage"></param>
     ''' <param name="oModelImageList"></param>
@@ -391,7 +394,7 @@ Module modLibrary
             If oPatternMatchingType = PatternMatchingType.PatternMatching1St AndAlso bIsCountDisable = True Then oRecipe.IsGatherStandardDeviation = False
 
             If oProduct IsNot Nothing Then Parallel.ForEach(oModelImageList, Sub(o)
-                                                                                 BuildProductPosition(o, oRecipe, oInspectSum, oProduct, oPatternMatchingType, oLog, nSequence)
+                                                                                 BuildProductPosition(o, oRecipe, oInspectSum, oProduct, oPatternMatchingType, oLog, nSequence) '»\¦Lº|¹p/»\¦LÂà¸m,¦ì²¾/°¾²¾,»\¦L¤£²M
                                                                              End Sub)
 
             Return bIsOK
@@ -403,6 +406,10 @@ Module modLibrary
 
     ''' <summary>
     ''' modLibrary.FindModelAll -> modLibrary.BuildProductPosition
+    ''' »\¦Lº|¹p/»\¦LÂà¸m
+    ''' ¦ì²¾/°¾²¾
+    ''' ¦ì²¾/°¾²¾(¦Ç¶¥)
+    ''' »\¦L¤£²M
     ''' </summary>
     ''' <param name="oModelImage"></param>
     ''' <param name="oRecipeModelDiff"></param>
