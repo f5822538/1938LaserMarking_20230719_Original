@@ -702,7 +702,7 @@ Module modLibrary
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.DefectList.DefectList.Add(oDefect)
-                            oInspectSum.DefectListDraw.Add(oDefect)
+                            oInspectSum.DefectListDraw.Add(oDefect) '用於畫框(oModelImage.IsLose = True,蓋印漏雷/蓋印轉置)
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
@@ -1294,7 +1294,7 @@ Module modLibrary
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.DefectList.DefectList.Add(oDefect)
-                        oInspectSum.DefectListDraw.Add(oDefect)
+                        oInspectSum.DefectListDraw.Add(oDefect) '用於畫框(oMarkInfo.Result = ResultType.Lose,蓋印漏雷/蓋印轉置)
 
                         '-------------------------瑕疵結果訊息-開始--------------------------
                         oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)

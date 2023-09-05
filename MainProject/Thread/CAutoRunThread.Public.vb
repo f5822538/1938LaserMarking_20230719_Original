@@ -105,13 +105,15 @@ Partial Class CAutoRunThread
                     For nIndex As Integer = 0 To oList.Count - 1
                         If oList(nIndex).ResultType = ResultType.NGBright Then ROIBright.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio))
                         If oList(nIndex).ResultType = ResultType.NGDark Then ROIDark.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio))
-                        If oList(nIndex).ResultType = ResultType.Offset OrElse oList(nIndex).ResultType = ResultType.Lose Then ROIOffset.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '重要判斷條件
+                        If oList(nIndex).ResultType = ResultType.Offset OrElse oList(nIndex).ResultType = ResultType.Lose Then '位移,蓋印漏雷/蓋印轉置
+                            ROIOffset.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '重要判斷條件
+                        End If
                         'If oList(nIndex).ResultType = ResultType.Pass Then ROIPass.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio))
                         If oList(nIndex).ResultType = ResultType.Indistinct Then ROIIndistinct.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '標記-蓋印不清
                     Next
                     If ROIDark.Count > 0 Then oGC.DrawRectangles(oPenDark, ROIDark.ToArray)
                     If ROIBright.Count > 0 Then oGC.DrawRectangles(oPenBright, ROIBright.ToArray)
-                    If ROIOffset.Count > 0 Then oGC.DrawRectangles(oPenOffset, ROIOffset.ToArray)
+                    If ROIOffset.Count > 0 Then oGC.DrawRectangles(oPenOffset, ROIOffset.ToArray) '畫框(畫筆為紅色)
                     'If ROIPass.Count > 0 Then oGC.DrawRectangles(oPenPass, ROIPass.ToArray)
                     If ROIIndistinct.Count > 0 Then oGC.DrawRectangles(oPenIndistinct, ROIIndistinct.ToArray)
                 End If
@@ -123,33 +125,33 @@ Partial Class CAutoRunThread
                 Dim nFinalY As Integer = moRecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList(nListcount).MarkY
                 For Each oRecipeMark As CRecipeMark In moRecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList
                     If oRecipeMark.MarkX = 0 Then
-                        drawString = CStr(oRecipeMark.MarkY + 1)
+                        drawString = CStr(oRecipeMark.MarkY + 1) 'Y軸
                         drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 100, CInt(oRecipeMark.PositionCenterY) \ nRatio - 25, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
-                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect)
+                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect) '畫Die位置的數字-右(畫筆為白色)
                     End If
                     If oRecipeMark.MarkX = nFinalX Then
-                        drawString = CStr(oRecipeMark.MarkY + 1)
+                        drawString = CStr(oRecipeMark.MarkY + 1) 'Y軸
                         drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio + 50, CInt(oRecipeMark.PositionCenterY) \ nRatio - 25, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
-                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect)
+                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect) '畫Die位置的數字-左(畫筆為白色)
                     End If
                     If oRecipeMark.MarkY = 0 Then
-                        drawString = CStr(nFinalX - oRecipeMark.MarkX)
+                        drawString = CStr(nFinalX - oRecipeMark.MarkX) 'X軸
                         If oRecipeMark.MarkX < 10 Then
                             drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 10, CInt(oRecipeMark.PositionCenterY) \ nRatio - 100, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
                         Else
                             drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 30, CInt(oRecipeMark.PositionCenterY) \ nRatio - 100, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
                         End If
 
-                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect)
+                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect) '畫Die位置的數字-上(畫筆為白色)
                     End If
                     If oRecipeMark.MarkY = nFinalY Then
-                        drawString = CStr(nFinalX - oRecipeMark.MarkX)
+                        drawString = CStr(nFinalX - oRecipeMark.MarkX) 'X軸
                         If oRecipeMark.MarkX < 10 Then
                             drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 18, CInt(oRecipeMark.PositionCenterY) \ nRatio + 50, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
                         Else
                             drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 30, CInt(oRecipeMark.PositionCenterY) \ nRatio + 50, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
                         End If
-                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect)
+                        Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect) '畫Die位置的數字-下(畫筆為白色)
                     End If
                 Next
 
