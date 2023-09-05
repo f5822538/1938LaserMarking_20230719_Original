@@ -11,6 +11,10 @@ Public Enum ResultType
     <Description("蓋印不清")> Indistinct = 6
     ''0928
     <Description("NoDie")> NoDie = 7
+    '-------------------------20230905-開始--------------------------
+    <Description("蓋印漏雷1")> DieLoseLaser1 = 8
+    <Description("蓋印漏雷2")> DieLoseLaser2 = 9
+    '-------------------------20230905-結束--------------------------
 End Enum
 
 Public Class CMyMarkInfo

@@ -326,7 +326,11 @@ Partial Class CAutoRunThread
             If oFileInfoNoDieList.Count > 0 Then
                 For i = 0 To oFileInfoNoDieList.Count - 1
                     Dim sImageName As String = ""
-                    sImageName = oFileInfoNoDieList(i).Name.Replace("_NG", "_NoDie")
+                    '-------------------------20230905-開始--------------------------
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                    sImageName = oFileInfoNoDieList(i).Name.Replace("_NG", "_NoDie") '重要檔名修正
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                    '-------------------------20230905-結束--------------------------
                     oFileInfoNoDieList(i).CopyTo(String.Format("{0}\{1}", oInspectResult.AINODIEPath, sImageName))
                 Next
             End If
@@ -365,7 +369,11 @@ Partial Class CAutoRunThread
             If oFileInfoLoseAndRotateList.Count > 0 Then
                 For i = 0 To oFileInfoLoseAndRotateList.Count - 1
                     Dim sImageName As String = ""
-                    sImageName = oFileInfoLoseAndRotateList(i).Name.Replace("_NG", "_LoseAndRotate")
+                    '-------------------------20230905-開始--------------------------
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                    sImageName = oFileInfoLoseAndRotateList(i).Name.Replace("_NG", "_LoseAndRotate") '重要檔名修正
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                    '-------------------------20230905-結束--------------------------
                     oFileInfoLoseAndRotateList(i).CopyTo(String.Format("{0}\{1}", oInspectResult.AILoseAndRotatePath, sImageName))
                 Next
             End If

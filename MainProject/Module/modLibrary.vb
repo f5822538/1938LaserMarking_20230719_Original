@@ -634,7 +634,7 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                        sResult = "NG" '重要-產出Report的圖片用(位移/偏移(灰階))
+                        sResult = "NG" '重要-產出Report的圖片用[位移/偏移(灰階)]
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
@@ -658,8 +658,17 @@ Module modLibrary
                             Return True
                         End If
 
-                        '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.Lose
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                        '-------------------------20230905-開始--------------------------
+                        If Debugger.IsAttached = True Then
+                            '原本的寫法
+                            '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.Lose
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                        ElseIf Debugger.IsAttached = False Then
+                            '測試的寫法
+                            '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser1 '漏雷(CMyMarkInfo)
+                        End If
+                        '-------------------------20230905-結束--------------------------
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
@@ -887,7 +896,7 @@ Module modLibrary
                 MIL.MblobGetResult(oBlobResultNegativeResult, MIL.M_MEAN_PIXEL + MIL.M_TYPE_DOUBLE, DefectMeanGrayNegative)
 
                 Dim sImageName As String = ""
-                Dim bIsAddDefect As Boolean = False
+                Dim bIsAddDefect As Boolean = False '檢查oInspectSum.DefectList.DefectList是否已經加入了元素(CMyDefect)
                 Dim oDefectIndex As Integer = 0
                 Dim bIsGray As Boolean = oProduct.MarkList.Item(nIndex).IsGray
                 Dim oResult As ResultType = oProduct.MarkList.Item(nIndex).Result
@@ -984,10 +993,10 @@ Module modLibrary
 
                                                               sImageName = oDefect.DefectFileName
                                                               SyncLock CAutoRunThread.ProcessDefectListLock
-                                                                  .DefectListDraw.Add(oDefect)
-                                                                  oDefectIndex = .DefectListDraw.Count - 1
+                                                                  .DefectListDraw.Add(oDefect) '把oDefect(CMyDefect)加入至oInspectSum.DefectListDraw
+                                                                  oDefectIndex = .DefectListDraw.Count - 1 'oInspectSum.DefectListDraw集合的索引值抓取最後一筆
                                                               End SyncLock
-                                                              bIsAddDefect = True
+                                                              bIsAddDefect = True '檢查oInspectSum.DefectList.DefectList是否已經加入了元素(CMyDefect)
                                                               'Next
                                                               '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
@@ -1086,10 +1095,10 @@ Module modLibrary
 
                                                               sImageName = oDefect.DefectFileName
                                                               SyncLock CAutoRunThread.ProcessDefectListLock
-                                                                  .DefectListDraw.Add(oDefect)
-                                                                  oDefectIndex = .DefectListDraw.Count - 1
+                                                                  .DefectListDraw.Add(oDefect) '把oDefect(CMyDefect)加入至oInspectSum.DefectListDraw
+                                                                  oDefectIndex = .DefectListDraw.Count - 1 'oInspectSum.DefectListDraw集合的索引值抓取最後一筆
                                                               End SyncLock
-                                                              bIsAddDefect = True
+                                                              bIsAddDefect = True '檢查oInspectSum.DefectList.DefectList是否已經加入了元素(CMyDefect)
                                                               'Next
                                                               '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
@@ -1097,7 +1106,9 @@ Module modLibrary
                 'End If
 
                 SyncLock CAutoRunThread.ProcessDefectListLock
-                    If bIsAddDefect = True Then .DefectList.DefectList.Add(CType(.DefectListDraw.Item(oDefectIndex).Clone(), CMyDefect))
+                    If bIsAddDefect = True Then
+                        oInspectSum.DefectList.DefectList.Add(CType(oInspectSum.DefectListDraw.Item(oDefectIndex).Clone(), CMyDefect)) '把oDefect(CMyDefect)加入至oInspectSum.DefectList.DefectList
+                    End If
                 End SyncLock
 
                 oProduct.MarkList.Item(nIndex).IsGray = bIsGray
@@ -1237,7 +1248,16 @@ Module modLibrary
                         'Return True
                     End If
 
-                    oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                    '-------------------------20230905-開始--------------------------
+                    If Debugger.IsAttached = True Then
+                        '原本的寫法
+                        oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                    ElseIf Debugger.IsAttached = False Then
+                        '測試的寫法
+                        oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
+                    End If
+                    '-------------------------20230905-結束--------------------------
+
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.InspectResult.DefectCount += 1
 
@@ -1260,7 +1280,7 @@ Module modLibrary
                     oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                     oDefect.InspectType = InspectType.ModelDiff
                     oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                    oDefect.ResultType = oMarkInfo.Result
+                    oDefect.ResultType = oMarkInfo.Result '蓋印漏雷
                     oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result) '瑕疵名稱(可用於出報表) [oMarkInfo.Result = ResultType.Lose]
                     oDefect.MeanGray = 0
                     oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
