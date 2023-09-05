@@ -32,30 +32,30 @@ End Class
 Partial Class CInspectResult : Implements II_InspectReport
 
     Public Function GetDMFileName() As String Implements iTVisionService.II_InspectReport.GetDMFileName
-        Return String.Format("{0}\{1}.JPG", InspectPath, Name)
+        Return String.Format("{0}\{1}.JPG", InspectPath, Name) '例如:15_37_17_448\2023-08-31_15_37_17_448.JPG
     End Function
 
     Public Function GetHtmlFileName() As String Implements iTVisionService.II_InspectReport.GetHtmlFileName
-        Return String.Format("{0}\{1}.html", InspectPath, Name)
+        Return String.Format("{0}\{1}.html", InspectPath, Name) '例如:15_37_17_448\2023-08-31_15_37_17_448.html
     End Function
 
     Public Function GetPath() As String Implements iTVisionService.II_InspectReport.GetPath
-        Return InspectPath
+        Return InspectPath '例如:15_37_17_448
     End Function
 
     Public Function GetShortDMFileName() As String Implements iTVisionService.II_InspectReport.GetShortDMFileName
-        Return String.Format("{0}.JPG", Name)
+        Return String.Format("{0}.JPG", Name) '例如:2023-08-31_15_37_17_448.JPG
     End Function
 
     Public Function GetXmlFileName() As String Implements iTVisionService.II_InspectReport.GetXmlFileName
-        Return String.Format("{0}\{1}.xml", InspectPath, Name)
+        Return String.Format("{0}\{1}.xml", InspectPath, Name) '例如:15_37_17_448\2023-08-31_15_37_17_448.xml
     End Function
 
     Public Function GetCode1FileName() As String
-        Return String.Format("{0}\{1}_Code1.JPG", InspectPath, Name)
+        Return String.Format("{0}\{1}_Code1.JPG", InspectPath, Name) '例如:15_37_17_448\2023-08-31_15_37_17_448_Code1.JPG
     End Function
 
     Public Function GetCode2FileName() As String
-        Return String.Format("{0}\{1}_Code2.JPG", InspectPath, Name)
+        Return String.Format("{0}\{1}_Code2.JPG", InspectPath, Name) '例如:15_37_17_448\2023-08-31_15_37_17_448_Code2.JPG
     End Function
 End Class

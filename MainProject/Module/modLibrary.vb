@@ -547,7 +547,7 @@ Module modLibrary
                 End SyncLock
                 Dim nIndex As Integer = 0
 
-                Dim sResult As String = ""
+                Dim sResult As String = "" '重要-產出Report的圖片用
                 If oModelImage.IsProcess = False Then '大部分是走這個流程(oModelImage.IsProcess = False)
                     nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
                     If nIndex < 0 Then
@@ -562,7 +562,7 @@ Module modLibrary
                         End If
 
                         oProduct.MarkList.Item(nIndex).Result = ResultType.Offset '標記-位移/偏移
-                        sResult = "NG"
+                        sResult = "NG" '重要-產出Report的圖片用
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
@@ -634,7 +634,7 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                        sResult = "NG"
+                        sResult = "NG" '重要-產出Report的圖片用
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
@@ -683,7 +683,7 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                        sResult = "NG"
+                        sResult = "NG" '重要-產出Report的圖片用
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
@@ -692,7 +692,7 @@ Module modLibrary
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
                         If oInspectSum.InspectResult.ModleLoseStatus = False Then
-                            oInspectSum.InspectResult.ModleLoseStatus = True '漏雷(CInspectResult)
+                            oInspectSum.InspectResult.ModleLoseStatus = True 'StandardDeviation 漏雷(CInspectResult)
                         End If
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
@@ -746,7 +746,7 @@ Module modLibrary
                             oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                             oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                            sResult = "NG"
+                            sResult = "NG" '重要-產出Report的圖片用
                             oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                          oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                          oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
@@ -969,7 +969,7 @@ Module modLibrary
                                                               oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                                                               oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                                                              sResult = "NG"
+                                                              sResult = "NG" '重要-產出Report的圖片用
                                                               oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                                                            oMyEquipment.MainRecipe.RecipeID, .InspectResult.CodeID, .ProductConfig.EQPID,
                                                                                                            oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
@@ -1071,7 +1071,7 @@ Module modLibrary
                                                               oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                                                               oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                                                              sResult = "NG"
+                                                              sResult = "NG" '重要-產出Report的圖片用
                                                               oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                                                            oMyEquipment.MainRecipe.RecipeID, .InspectResult.CodeID, .ProductConfig.EQPID,
                                                                                                            oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
@@ -1256,7 +1256,7 @@ Module modLibrary
                     oDefect.InspectType = InspectType.ModelDiff
                     oDefect.DefectType = Comp_InsperrorType.Comp_Corner
                     oDefect.ResultType = oMarkInfo.Result
-                    oDefect.DefectName = EnumHelper.GetDescription(.Result)
+                    oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result)
                     oDefect.MeanGray = 0
                     oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                     oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -1272,14 +1272,14 @@ Module modLibrary
                     oDefect.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 for Wafer Map
                     oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
 
-                    sResult = "NG"
+                    sResult = "NG" '重要-產出Report的圖片用
                     oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                  oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
-                                                                 oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult)
+                                                                 oInspectSum.ProductConfig.EQPID, oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1, oInspectSum.ReceiveTime, sResult) '重要-產出Report的圖片用
 
                     oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
-                    oInspectSum.InspectResult.ModleLoseStatus = True '漏雷(CInspectResult)
+                    oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult)
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.DefectList.DefectList.Add(oDefect)
