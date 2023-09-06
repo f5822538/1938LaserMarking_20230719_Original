@@ -110,11 +110,17 @@
                     End If
                     sReportStripID = moProductProcess.SubstrateID
                 End If
+
                 oInspectResult.AIOKPath = String.Format("{0}\{1}\{2}\{3}\OK", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, sReportStripID)
                 oInspectResult.AINGPath = String.Format("{0}\{1}\{2}\{3}\NG", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, sReportStripID)
+                '-------------------------20230906-開始--------------------------
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                 oInspectResult.AINODIEPath = String.Format("{0}\{1}\{2}\{3}\NO die", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, sReportStripID)
                 oInspectResult.AIOffsetPath = String.Format("{0}\{1}\{2}\{3}\Marking shift", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, sReportStripID)
                 oInspectResult.AILoseAndRotatePath = String.Format("{0}\{1}\{2}\{3}\Marking lost and rotate", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, sReportStripID)
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                '-------------------------20230906-結束--------------------------
+
                 'oInspectResult.AIOKPath = String.Format("{0}\{1}\{2}\{3}\OK", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
                 'oInspectResult.AINGPath = String.Format("{0}\{1}\{2}\{3}\NG", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
                 'oInspectResult.AINODIEPath = String.Format("{0}\{1}\{2}\{3}\NO die", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
