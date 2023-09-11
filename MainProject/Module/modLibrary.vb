@@ -1146,7 +1146,14 @@ Module modLibrary
             With oMarkInfo
                 Dim sResult As String = ""
 
-                If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                '-------------------------20230911-開始--------------------------
+                'If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
+                If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse _
+                   .Result = ResultType.Indistinct OrElse .Result = ResultType.DieLoseLaser1 Then
+                    '-------------------------20230911-結束--------------------------
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.InspectResult.DefectCount += 1
 
