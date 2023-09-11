@@ -239,10 +239,6 @@
                 '-------------------------漏雷扣除No Die-開始--------------------------
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False Then '交握-不要Bypass
                     'Die上沒有雷刻字串(漏雷是異常, No Die不是異常)
-                    If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > 0 AndAlso _
-                        oInspectSum.InspectResult.ModleLoseStatus = True Then '漏雷(CInspectResult) 判斷條件
-                        oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
-                    End If
 
                     If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap AndAlso _
                         oInspectSum.InspectResult.ModleLoseStatus = True Then '判斷條件

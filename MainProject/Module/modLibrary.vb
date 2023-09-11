@@ -704,14 +704,18 @@ Module modLibrary
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
-                        'oModelImage.IsLose = True ------> oInspectSum.InspectResult.ModleLoseStatus = True
-                        If oInspectSum.InspectResult.ModleLoseStatus = False Then
-                            oInspectSum.InspectResult.ModleLoseStatus = True 'StandardDeviation 漏雷(CInspectResult)
-                        End If
-
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.DefectList.DefectList.Add(oDefect)
                             oInspectSum.DefectListDraw.Add(oDefect) '用於畫框(oModelImage.IsLose = True,蓋印漏雷/蓋印轉置)
+
+                            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                            '-------------------------20230911-開始--------------------------
+                            'oModelImage.IsLose = True ------> oInspectSum.InspectResult.ModleLoseStatus = True
+                            If oInspectSum.InspectResult.ModleLoseStatus = False Then
+                                oInspectSum.InspectResult.ModleLoseStatus = True 'StandardDeviation 漏雷(CInspectResult)
+                            End If
+                            '-------------------------20230911-結束--------------------------
+                            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
@@ -1309,9 +1313,6 @@ Module modLibrary
 
                     oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName) '瑕疵點位小圖(可用於出報表)
 
-                    'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
-                    oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult)
-
                     SyncLock CAutoRunThread.ProcessDefectListLock
                         oInspectSum.DefectList.DefectList.Add(oDefect)
                         oInspectSum.DefectListDraw.Add(oDefect) '用於畫框(oMarkInfo.Result = ResultType.Lose,蓋印漏雷/蓋印轉置)
@@ -1320,6 +1321,13 @@ Module modLibrary
                         oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)
                         oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log 日誌(處理 Process)
                         '-------------------------瑕疵結果訊息-結束--------------------------
+
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                        '-------------------------20230911-開始--------------------------
+                        'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
+                        'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-11 11:50 因為生產線頻繁跳出,所以先註解掉以利測試
+                        '-------------------------20230911-結束--------------------------
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     End SyncLock
 
                     Dim oModelImage As MIL_ID = 0
