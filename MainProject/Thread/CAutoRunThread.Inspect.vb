@@ -207,7 +207,7 @@
                 '標準差,漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                 If bIsOK = False Then
-                    oInspectSum.InspectResult.FindStatus = True '瑕疵-Y
+                    oInspectSum.InspectResult.FindStatus = True '瑕疵-Y(樣板異常)
                     Call moLog.LogError(String.Format("[{0:d4}] Model Diff Failed", mnSequence))
                 End If
 
@@ -216,7 +216,7 @@
                     bIsOK = CompareOriginalAndInspectNoDieSection(oInspectSum, moProductProcess, moLog, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
                     'No Die(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     If bIsOK = False Then
-                        oInspectSum.InspectResult.FindStatus = True '瑕疵-Y
+                        oInspectSum.InspectResult.FindStatus = True '瑕疵-Y(樣板異常)
                         Call moLog.LogError(String.Format("[{0:d4}] CompareOriginalAndInspectNoDieSection Failed", mnSequence))
                     End If
                 End If

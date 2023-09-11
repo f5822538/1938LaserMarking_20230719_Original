@@ -12,7 +12,7 @@ Partial Class CInspectSum
             .SubItems.Add(Now.ToString())
             .SubItems.Add(InspectResult.RecipeID)
             .SubItems.Add(InspectResult.CodeID)
-            .SubItems.Add((InspectResult.DefectCount - InspectResult.DefectNoDieCount).ToString())
+            .SubItems.Add((InspectResult.DefectCount - InspectResult.DefectNoDieCount).ToString()) '·å²«-¼Æ¶q
 
             If InspectResult.AlignStatus = True Then '¹ï¦ì²§±`
                 .ForeColor = Drawing.Color.Red
@@ -21,7 +21,7 @@ Partial Class CInspectSum
                 .SubItems.Add("N")
             End If
 
-            If InspectResult.FindStatus = True Then '·å²«-Y
+            If InspectResult.FindStatus = True Then '·å²«-Y(¼ËªO²§±`)
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
                 .SubItems.Add("Y")
             Else
@@ -52,7 +52,7 @@ Partial Class CInspectSum
             End If
 
             If InspectResult.ModleLoseStatus = True AndAlso (InspectResult.DefectCount - InspectResult.DefectNoDieCount) > 0 Then  '' Augustin 230310 'º|¹p(CInspectResult)
-                If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
+                If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red 'ÀË´ú²§±` (º|¹p)
                 .SubItems.Add("Y")
             Else
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Green

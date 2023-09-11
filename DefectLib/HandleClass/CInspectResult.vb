@@ -7,7 +7,7 @@ Public Class CInspectResult
     Public RecipeID As String = ""
     Public CodeID As String = ""
     Public AlignStatus As Boolean = False '對位異常
-    Public FindStatus As Boolean = False '瑕疵-N(預設值/初始值)
+    Public FindStatus As Boolean = False '瑕疵-N(預設值/初始值)(樣板異常)
     Public CycleInspectStatus As Boolean = False
     Public ModleInspectStatus As Boolean = False '樣板異常/檢測異常 (樣板)-異常:True,正常:False
     Public ModleOffsetStatus As Boolean = False '檢測異常 (偏移)

@@ -14,7 +14,7 @@ Partial Class CInspectResult
             oSB.Append("N" & ",")
         End If
 
-        If FindStatus = True Then '·å²«-Y
+        If FindStatus = True Then '·å²«-Y(¼ËªO²§±`)
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")

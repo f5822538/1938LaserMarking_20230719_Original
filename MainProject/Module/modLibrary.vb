@@ -552,7 +552,7 @@ Module modLibrary
                     nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
                     If nIndex < 0 Then
                         Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed！(Recipe)", nSequence))
-                        Return False
+                        Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
                     End If
 
                     If oModelImage.IsOffset = True Then '位移/偏移
@@ -603,7 +603,7 @@ Module modLibrary
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                        Return False
+                        Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
                     ElseIf oModelImage.IsOffsetGray = True Then '標記-位移/偏移(灰階)
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                             oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
@@ -651,7 +651,7 @@ Module modLibrary
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                        Return False
+                        Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
                     ElseIf oModelImage.IsLose = True Then '蓋印漏雷/蓋印轉置
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                             oProduct.MarkList.Item(nIndex).Result = ResultType.OK '標記-OK
@@ -717,7 +717,7 @@ Module modLibrary
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                        Return False
+                        Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
                         'ElseIf oModelImage.IsPass = True Then
                         '    oProduct.MarkList.Item(nIndex).Result = ResultType.Pass
                         '    Return True
@@ -729,7 +729,7 @@ Module modLibrary
                     nIndex = oProduct.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
                     If nIndex < 0 Then
                         Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed！(Product)", nSequence))
-                        Return False
+                        Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
                     End If
 
                     If bIsIndistinct = True Then '標記-蓋印不清
@@ -777,7 +777,7 @@ Module modLibrary
                             MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
                             '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                            Return False
+                            Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
                         End If
                     End If
                 End If
@@ -1133,7 +1133,7 @@ Module modLibrary
             End With
         Catch ex As Exception
             Call oLog.LogError(String.Format("[{0:d4}] StandardDeviation Failed！Error：{1}", nSequence, ex.ToString()))
-            Return False
+            Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何
         End Try
     End Function
 
