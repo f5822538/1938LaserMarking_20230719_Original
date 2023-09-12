@@ -1166,6 +1166,16 @@ Module modLibrary
                             End If
                         Next
                         oLog.LogError(String.Format("[{0:d4}] A瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
+                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                        Dim fileName1 As String = stFrame1.GetFileName
+                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                        oLog.LogError("FileName:" & fileName1)
+                        oLog.LogError("FileLineNumber:" & fileLineNum1)
+                        oLog.LogError("FileColumnNumber:" & fileColNum1)
+                        oLog.LogError("MethodName:" & fileMethodName1)
                         oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
                         '-------------------------瑕疵結果訊息-結束--------------------------
                     End SyncLock
@@ -1281,6 +1291,16 @@ Module modLibrary
                             End If
                         Next
                         oLog.LogError(String.Format("[{0:d4}] B瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
+                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                        Dim fileName1 As String = stFrame1.GetFileName
+                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                        oLog.LogError("FileName:" & fileName1)
+                        oLog.LogError("FileLineNumber:" & fileLineNum1)
+                        oLog.LogError("FileColumnNumber:" & fileColNum1)
+                        oLog.LogError("MethodName:" & fileMethodName1)
                         oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
                         '-------------------------瑕疵結果訊息-結束--------------------------
                     End SyncLock
@@ -1326,12 +1346,23 @@ Module modLibrary
 
                         '-------------------------瑕疵結果訊息-開始--------------------------
                         oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)
+                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                        Dim fileName1 As String = stFrame1.GetFileName
+                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                        oLog.LogError("FileName:" & fileName1)
+                        oLog.LogError("FileLineNumber:" & fileLineNum1)
+                        oLog.LogError("FileColumnNumber:" & fileColNum1)
+                        oLog.LogError("MethodName:" & fileMethodName1)
                         oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log 日誌(處理 Process)
                         '-------------------------瑕疵結果訊息-結束--------------------------
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         '-------------------------20230911-開始--------------------------
                         'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
+                        '************************ 真正應該要跳漏雷的區塊在這裡 '************************
                         'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-11 11:50 因為生產線頻繁跳出,所以先註解掉以利測試
                         '-------------------------20230911-結束--------------------------
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))

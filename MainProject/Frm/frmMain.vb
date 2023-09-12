@@ -64,6 +64,16 @@ Public Class frmMain
                     End If
                 Next
                 moLog.LogError(String.Format("[{0:d4}] A瑕疵:" & defectResultMsg, 0)) 'Log 日誌(處理 Process)
+                Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                Dim fileName1 As String = stFrame1.GetFileName
+                Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                moLog.LogError("FileName:" & fileName1)
+                moLog.LogError("FileLineNumber:" & fileLineNum1)
+                moLog.LogError("FileColumnNumber:" & fileColNum1)
+                moLog.LogError("MethodName:" & fileMethodName1)
                 moLog.LogError(String.Format("[{0:d4}] DefectCount:" & 11, 0)) 'Log 日誌(處理 Process)
             End If
             '------------------------Debug-瑕疵結果訊息-結束--------------------------
