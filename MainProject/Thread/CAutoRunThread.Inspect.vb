@@ -243,6 +243,17 @@
                     If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap AndAlso _
                         oInspectSum.InspectResult.ModleLoseStatus = True Then '判斷條件
                         oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
+
+                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                        Dim fileName1 As String = stFrame1.GetFileName
+                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                        moLog.LogError("FileName:" & fileName1)
+                        moLog.LogError("FileLineNumber:" & fileLineNum1)
+                        moLog.LogError("FileColumnNumber:" & fileColNum1)
+                        moLog.LogError("MethodName:" & fileMethodName1)
                     End If
 
                     If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
@@ -286,14 +297,36 @@
                     moMyEquipment.IsNotUpdateMap = False AndAlso moProductProcess.SubstrateID <> "" Then '交握-不要Bypass
                     oAlarmCode = moMyEquipment.SendStripMapUpload(moProductProcess, moMyEquipment.LogHandshake) 'TCP 發送上傳產品分布
 
+                    Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                    Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                    Dim fileName1 As String = stFrame1.GetFileName
+                    Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                    Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                    Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                    moLog.LogError("FileName:" & fileName1)
+                    moLog.LogError("FileLineNumber:" & fileLineNum1)
+                    moLog.LogError("FileColumnNumber:" & fileColNum1)
+                    moLog.LogError("MethodName:" & fileMethodName1)
+
                     oAlarmCodeWaitMap = moMyEquipment.WaitMapUploadACK(moProductProcess, Function() moStopRun.IsSet() = True)
 
                     If moMyEquipment.HardwareConfig.AIHandshakeBypass = False Then 'AI交握-不要Bypass
                         oAlarmCode = moMyEquipment.UpdateAIInfo(moProductProcess, oInspectSum, moMyEquipment.LogHandshake)
+
+                        stTrace1 = New StackTrace(fNeedFileInfo:=True)
+                        stFrame1 = stTrace1.GetFrames(0)
+                        fileName1 = stFrame1.GetFileName
+                        fileLineNum1 = stFrame1.GetFileLineNumber
+                        fileColNum1 = stFrame1.GetFileColumnNumber
+                        fileMethodName1 = stFrame1.GetMethod().Name
+                        moLog.LogError("FileName:" & fileName1)
+                        moLog.LogError("FileLineNumber:" & fileLineNum1)
+                        moLog.LogError("FileColumnNumber:" & fileColNum1)
+                        moLog.LogError("MethodName:" & fileMethodName1)
                     End If
 
                     If oAlarmCode <> AlarmCode.IsOK Then
-                        Call moMyEquipment.SetEroorOn()
+                        moMyEquipment.SetEroorOn() '停止機台動作
                         Return oAlarmCode
                     End If
                 End If
@@ -340,7 +373,7 @@
                     Return oAlarmCodeWaitMap
                 End If
             Catch ex As Exception
-                Call moLog.LogError(String.Format("[{0:d4}] 檢測錯誤，Error：{1}", mnSequence, ex.ToString()))
+                Call moLog.LogError(String.Format("[{0:d4}] 檢測錯誤:{1}", mnSequence, ex.Message & Environment.NewLine & ex.StackTrace))
                 Call moMyEquipment.LogAlarm.LogError("檢測錯誤")
                 Return AlarmCode.IsInspectError
             End Try
