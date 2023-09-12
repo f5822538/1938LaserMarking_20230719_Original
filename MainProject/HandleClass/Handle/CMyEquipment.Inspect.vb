@@ -115,7 +115,14 @@ Partial Class CMyEquipment
         Return bFindModelSuccess
     End Function
 
-    '' Augustin 230202 New Find Model Test
+    ''' <summary>
+    ''' Augustin 230202 New Find Model Test
+    ''' </summary>
+    ''' <param name="oBitmap"></param>
+    ''' <param name="nSequence"></param>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindModelChangeModel(oBitmap As Bitmap, nSequence As Integer, oLog As II_LogTraceExtend) As Boolean
         Dim bFindModelSuccess As Boolean = True
 
@@ -162,6 +169,12 @@ Partial Class CMyEquipment
         Return bFindModelSuccess
     End Function
 
+    ''' <summary>
+    ''' 重要區塊
+    ''' </summary>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function ChangeModel(oLog As II_LogTraceExtend) As Boolean
         Try
             Dim oBitmap As Bitmap = UpdateImage(ImageHeader)
@@ -170,7 +183,10 @@ Partial Class CMyEquipment
             Dim nOffset As Point = Point.Empty
             Dim nOffsetLimit As Integer = CInt(moHardwareConfig.OffsetLimitValue / moHardwareConfig.CameraConfig.PixelSize)
 
-            Call FindModelChangeModel(oBitmap, -1, oLog)
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+            FindModelChangeModel(oBitmap, -1, oLog)
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
             nRectangle.X = CInt(FindMark1X - (moMainRecipe.RecipeCamera.Locate1.PatternZone.Width / 2))
             nRectangle.Y = CInt(FindMark1Y - (moMainRecipe.RecipeCamera.Locate1.PatternZone.Height / 2))
             nRectangle.Width = moMainRecipe.RecipeCamera.Locate1.PatternZone.Width
@@ -187,8 +203,15 @@ Partial Class CMyEquipment
             Call ClearStandardDeviationModel(moMainRecipe.RecipeCamera.RecipeModelDiff)
             Call SaveStandardDeviationModel(moMainRecipe.RecipeCamera.RecipeModelDiff, Application.StartupPath & "\Recipe", moMainRecipe.RecipeID)
 
-            Call Locater1.UpdateModelCenter(ImageHeader, moMainRecipe.RecipeCamera.Locate1.FindModelZone, moMainRecipe.RecipeCamera.Locate1.PatternZone, MainRecipe.Threshold, MainRecipe.RecipeCamera.Locate1.Area)
-            Call Locater2.UpdateModelCenter(ImageHeader, moMainRecipe.RecipeCamera.Locate2.FindModelZone, moMainRecipe.RecipeCamera.Locate2.PatternZone, MainRecipe.Threshold, MainRecipe.RecipeCamera.Locate2.Area)
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+            '參數1: ImageHeader
+            '參數2: 設定-尋找區域 (X,Y,W,H)
+            '參數3: 設定-樣本區域 (X,Y,W,H)
+            '參數4: 設定-定位孔灰階門檻值 (10)
+            '參數5: 設定-定位孔最小面積 (100)
+            Locater1.UpdateModelCenter(ImageHeader, moMainRecipe.RecipeCamera.Locate1.FindModelZone, moMainRecipe.RecipeCamera.Locate1.PatternZone, MainRecipe.Threshold, MainRecipe.RecipeCamera.Locate1.Area)
+            Locater2.UpdateModelCenter(ImageHeader, moMainRecipe.RecipeCamera.Locate2.FindModelZone, moMainRecipe.RecipeCamera.Locate2.PatternZone, MainRecipe.Threshold, MainRecipe.RecipeCamera.Locate2.Area)
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
             nOffset.X = nPatternZone.X - moMainRecipe.RecipeCamera.Locate1.PatternZone.X '定位孔1-X軸-位移量
             nOffset.Y = nPatternZone.Y - moMainRecipe.RecipeCamera.Locate1.PatternZone.Y '定位孔1-Y軸-位移量

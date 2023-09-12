@@ -198,7 +198,7 @@ Public Class CMyLocater
         End If
 
         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-        moResult.Succeed = moFinder.FindModel(oBinarizeBitmap) '設定-FindModel-的結果
+        moResult.Succeed = moFinder.FindModel(oBinarizeBitmap) '設定-FindModel-的結果(底層方法:成員屬於 iTVisionService.ImageLibMil.CMultipleFinder) -> MainProject\BaseService\iTVisionImageLibMilV10X64.dll
         'moResult.Succeed = moFinder.FindModel(oBitmap)
         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
@@ -231,7 +231,14 @@ Public Class CMyLocater
         Return True
     End Function
 
-    '' Augustin 230202 New Find Test
+    ''' <summary>
+    ''' Augustin 230202 New Find Test
+    ''' </summary>
+    ''' <param name="oBitmap"></param>
+    ''' <param name="oROI"></param>
+    ''' <param name="nLocaterNo"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindChangeModel(oBitmap As Bitmap, oROI As Rectangle, nLocaterNo As Integer) As Boolean
         '' Augustin 230109 
         Dim oBinarieImage As New ITVImage
@@ -251,7 +258,11 @@ Public Class CMyLocater
         'If moFinder.ModelCount = 0 Then Return False
         'moResult.Succeed = moFinder.FindModel(oBinarizeBitmap)
         'moResult.Succeed = moFinder.FindModel(oBitmap)
+
+        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
         moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo) '設定-FindModel-的結果
+        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
         If moResult.Succeed = True AndAlso nLocaterNo = 0 Then
             'moResult.Angle = If(moFinder.ModelResult(0).Angle > 180, moFinder.ModelResult(0).Angle - 360, moFinder.ModelResult(0).Angle)
             'moResult.X = moFinder.ModelResult(0).X
@@ -355,9 +366,21 @@ Public Class CMyLocater
         Dim RadiusMax As Double = moMyEquipment.MainRecipe.RecipeCamera.Locate1.CircleRadius + moMyEquipment.MainRecipe.RecipeCamera.Locate1.CircleRadiusTolerance
         Dim RadiusMin As Double = moMyEquipment.MainRecipe.RecipeCamera.Locate1.CircleRadius - moMyEquipment.MainRecipe.RecipeCamera.Locate1.CircleRadiusTolerance
 
-        moCircleFinder.FindCircles(oBinarieImage, RadiusMin, RadiusMax, LineThresholdMode.ThresholdVeryLow, 0, 100, oROI)
+        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+        'Public Sub FindCircles(
+        '參數1: ByRef SourceImage As iTVisionService.iTVImageLib.ITVImage, 
+        '參數2: MinRadius As Double, 
+        '參數3: MaxRadius As Double, 
+        '參數4: ThresholdMode As iTVisionService.iTVImageLib.LineThresholdMode, 
+        '參數5: ThresholdHigh As Integer, 
+        '參數6: ThresholdLow As Integer, 
+        '參數7: Optional ROI As iTVisionService.iTVImageLib.ITVImageROI = Nothing)
+        moCircleFinder.FindCircles(oBinarieImage, RadiusMin, RadiusMax, LineThresholdMode.ThresholdVeryLow, 0, 100, oROI) '尋找-定位孔圓形(底層方法:成員屬於 iTVisionService.iTVImageLib.ITVCircleDetector) -> MainProject\BaseService\iTVisionImageLib.dll
+        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
+        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
         If moCircleFinder.NumberOfResult = 0 Then Return False
+        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
         For i As Integer = 0 To moCircleFinder.NumberOfResult - 1
             If nLocaterNo = 0 Then

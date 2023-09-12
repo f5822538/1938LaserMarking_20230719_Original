@@ -621,7 +621,9 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 Call moLog.LogInformation(String.Format("[{0:d4}] 條碼：{1}。產品條碼：{2}", mnSequence, moMyEquipment.CodeText, moProductProcess.SubstrateID))
 
                 If moMyEquipment.IsChangeModel = True Then '如果要更換樣本
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     bIsOK = moMyEquipment.ChangeModel(moLog) '更換樣本
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     If bIsOK = False Then '更換樣本失敗
                         Call moLog.LogError(String.Format("[{0:d4}] 更換樣本失敗", mnSequence))
                         Call moMyEquipment.LogAlarm.LogError("更換樣本失敗")

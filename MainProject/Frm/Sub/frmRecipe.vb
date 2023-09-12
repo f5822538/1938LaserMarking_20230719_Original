@@ -309,6 +309,19 @@ Public Class frmRecipe
         Call MsgBox(String.Format("樣板數量：[{0}]", MarkCount), MsgBoxStyle.OkOnly, "銓發科技股份有限公司")
     End Sub
 
+    ''' <summary>
+    ''' Mark 1 - 樣本 ROI
+    ''' Mark 1 - 尋找範圍 ROI
+    ''' Mark 1 - 清除 ROI
+    ''' Mark 2 - 樣本 ROI
+    ''' Mark 2 - 尋找範圍 ROI
+    ''' Mark 2 - 清除 ROI
+    ''' Code - 尋找範圍 ROI
+    ''' Code - 清除 ROI
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub mnuMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuMark1PatternROI.Click, mnuMark1FindModelROI.Click, mnuMark1ClearROI.Click, mnuMark2PatternROI.Click, mnuMark2FindModelROI.Click, mnuMark2ClearROI.Click, mnuCodeSearchROI.Click, mnuCodeClearROI.Click
         Dim aRectangle As Rectangle = CType(moCanvas.SelectStructure(RecipeDrawType.DrawZone), Rectangle)
         Dim NewRectangle As Rectangle
