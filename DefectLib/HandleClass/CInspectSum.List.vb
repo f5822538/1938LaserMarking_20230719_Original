@@ -35,13 +35,18 @@ Partial Class CInspectSum
             '    .SubItems.Add("N")
             'End If
 
-            If InspectResult.ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)-異常:True
+
+            '-------------------------20230912-開始--------------------------
+            'If InspectResult.ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)-異常:True
+            If InspectResult.ModleInspectStatus = True AndAlso (InspectResult.DefectCount - InspectResult.DefectNoDieCount) > 0 Then '樣板異常/檢測異常 (樣板)-異常:True
+                '-------------------------20230912-結束--------------------------
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red
-                .SubItems.Add("Y")
+                .SubItems.Add("Y") '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
             Else
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Green
                 .SubItems.Add("N")
             End If
+
 
             If InspectResult.ModleOffsetStatus = True Then '檢測異常 (偏移)
                 If .ForeColor <> Drawing.Color.Red Then .ForeColor = Drawing.Color.Red

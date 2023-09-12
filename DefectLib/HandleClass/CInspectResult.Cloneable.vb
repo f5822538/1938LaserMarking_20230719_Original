@@ -26,11 +26,15 @@ Partial Class CInspectResult
         '    oSB.Append("N" & ",")
         'End If
 
-        If ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)-異常:True
-            oSB.Append("Y" & ",")
+        '-------------------------20230912-開始--------------------------
+        'If ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)-異常:True
+        If ModleInspectStatus = True AndAlso (DefectCount - DefectNoDieCount) > 0 Then '樣板異常/檢測異常 (樣板)-異常:True
+            '-------------------------20230912-結束--------------------------
+            oSB.Append("Y" & ",") '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
         Else
             oSB.Append("N" & ",")
         End If
+
 
         If ModleOffsetStatus = True Then '檢測異常 (偏移)
             oSB.Append("Y" & ",")
