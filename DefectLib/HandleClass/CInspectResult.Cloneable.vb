@@ -26,7 +26,7 @@ Partial Class CInspectResult
         '    oSB.Append("N" & ",")
         'End If
 
-        If ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)
+        If ModleInspectStatus = True Then '樣板異常/檢測異常 (樣板)-異常:True
             oSB.Append("Y" & ",")
         Else
             oSB.Append("N" & ",")
