@@ -103,8 +103,8 @@ Partial Class CAutoRunThread
                     'Dim ROIPass As New List(Of Rectangle)
                     Dim ROIIndistinct As New List(Of Rectangle)
                     For nIndex As Integer = 0 To oList.Count - 1
-                        If oList(nIndex).ResultType = ResultType.NGBright Then ROIBright.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio))
-                        If oList(nIndex).ResultType = ResultType.NGDark Then ROIDark.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio))
+                        If oList(nIndex).ResultType = ResultType.NGBright Then ROIBright.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '表面瑕疵 (字)
+                        If oList(nIndex).ResultType = ResultType.NGDark Then ROIDark.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '表面瑕疵 (背)
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         '-------------------------20230911-開始--------------------------
@@ -118,11 +118,11 @@ Partial Class CAutoRunThread
                         'If oList(nIndex).ResultType = ResultType.Pass Then ROIPass.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio))
                         If oList(nIndex).ResultType = ResultType.Indistinct Then ROIIndistinct.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '標記-蓋印不清
                     Next
-                    If ROIDark.Count > 0 Then oGC.DrawRectangles(oPenDark, ROIDark.ToArray)
-                    If ROIBright.Count > 0 Then oGC.DrawRectangles(oPenBright, ROIBright.ToArray)
-                    If ROIOffset.Count > 0 Then oGC.DrawRectangles(oPenOffset, ROIOffset.ToArray) '用於畫框(畫筆為紅色)
+                    If ROIDark.Count > 0 Then oGC.DrawRectangles(oPenDark, ROIDark.ToArray) '表面瑕疵 (背)-用於畫框(畫筆為淺藍色)
+                    If ROIBright.Count > 0 Then oGC.DrawRectangles(oPenBright, ROIBright.ToArray) '表面瑕疵 (字)-用於畫框(畫筆為深藍色)
+                    If ROIOffset.Count > 0 Then oGC.DrawRectangles(oPenOffset, ROIOffset.ToArray) '位移,蓋印漏雷/蓋印轉置-用於畫框(畫筆為紅色)
                     'If ROIPass.Count > 0 Then oGC.DrawRectangles(oPenPass, ROIPass.ToArray)
-                    If ROIIndistinct.Count > 0 Then oGC.DrawRectangles(oPenIndistinct, ROIIndistinct.ToArray)
+                    If ROIIndistinct.Count > 0 Then oGC.DrawRectangles(oPenIndistinct, ROIIndistinct.ToArray) '蓋印不清-用於畫框(畫筆為黃色)
                 End If
 
                 Dim drawString As String = ""
