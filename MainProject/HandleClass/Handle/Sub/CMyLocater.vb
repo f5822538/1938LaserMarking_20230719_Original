@@ -155,6 +155,12 @@ Public Class CMyLocater
         Return True
     End Function
 
+    ''' <summary>
+    ''' 重要區塊
+    ''' </summary>
+    ''' <param name="oBitmap"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function Find(oBitmap As Bitmap) As Boolean
         '' Augustin 230109 
         Dim oBinarieImage As New ITVImage
@@ -171,7 +177,7 @@ Public Class CMyLocater
         'oBinarizeBitmap.Save(sSavePath, Imaging.ImageFormat.Bmp)
 
         moResult.Clear()
-        If moFinder.ModelCount = 0 Then
+        If moFinder.ModelCount = 0 Then '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
             '-------------------------定位孔異常圖片-開始--------------------------
             Dim holeBinBmpDirPath As String = "D:\img\HoleLocateBinBmpNg\" '定位孔異常圖片-資料夾路徑
             Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Bin.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
@@ -191,10 +197,12 @@ Public Class CMyLocater
             Return False
         End If
 
+        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
         moResult.Succeed = moFinder.FindModel(oBinarizeBitmap) '設定-FindModel-的結果
         'moResult.Succeed = moFinder.FindModel(oBitmap)
+        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-        If moResult.Succeed = True Then
+        If moResult.Succeed = True Then '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
             moResult.Angle = If(moFinder.ModelResult(0).Angle > 180, moFinder.ModelResult(0).Angle - 360, moFinder.ModelResult(0).Angle)
             moResult.X = moFinder.ModelResult(0).X
             moResult.Y = moFinder.ModelResult(0).Y

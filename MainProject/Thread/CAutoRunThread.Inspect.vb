@@ -26,7 +26,9 @@
                 mnShiftX = 0
 
                 '取得-FindModel-的結果
-                moMyEquipment.SucceedFind = If(.HardwareConfig.MiscConfig.IsUseModelFinder = True, .FindModel(moCamera.Camera.BitmapImage(True), mnSequence, moLog), .GetAlign(mnSequence, moLog)) 'Locate定位
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                moMyEquipment.SucceedFind = If(.HardwareConfig.MiscConfig.IsUseModelFinder = True, moMyEquipment.FindModel(moCamera.Camera.BitmapImage(True), mnSequence, moLog), moMyEquipment.GetAlign(mnSequence, moLog)) 'Locate定位
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                 If moMyEquipment.SucceedFind = True Then 'FindModel-成功
                     CalculationShift(oModelFinderShift, .FindMark1X, .FindMark1Y, .FindMark2X, .FindMark2Y) '計算旋轉補正角度

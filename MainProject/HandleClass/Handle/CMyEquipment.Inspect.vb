@@ -61,6 +61,14 @@ Partial Class CMyEquipment
         End Try
     End Function
 
+    ''' <summary>
+    ''' 重要區塊
+    ''' </summary>
+    ''' <param name="oBitmap"></param>
+    ''' <param name="nSequence"></param>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindModel(oBitmap As Bitmap, nSequence As Integer, oLog As II_LogTraceExtend) As Boolean
         Dim bFindModelSuccess As Boolean = True
 
