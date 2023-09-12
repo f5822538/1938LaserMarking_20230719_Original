@@ -1155,7 +1155,7 @@ Module modLibrary
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
-                        oInspectSum.InspectResult.DefectCount += 1
+                        oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
                         '-------------------------瑕疵結果訊息-開始--------------------------
                         Dim defectResultMsg As String = String.Empty
@@ -1280,7 +1280,7 @@ Module modLibrary
                     '-------------------------20230905-結束--------------------------
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
-                        oInspectSum.InspectResult.DefectCount += 1
+                        oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
                         '-------------------------瑕疵結果訊息-開始--------------------------
                         Dim defectResultMsg As String = String.Empty
