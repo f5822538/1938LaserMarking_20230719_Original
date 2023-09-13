@@ -118,10 +118,10 @@ Public Class frmMain
                 Dim locater2 As New CMyLocater(moMyEquipment) '定位孔-2
                 Dim testBitMap1 As Bitmap = New Bitmap("D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp")
                 Dim aRectangle As Rectangle = Rectangle.FromLTRB(0, 0, testBitMap1.Width, testBitMap1.Height)
-                Dim findChangeModelResult1 As Boolean = locater1.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=0) '定位孔-1
-                Dim findChangeModelResult2 As Boolean = locater2.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=1) '定位孔-2
-                Dim findResult1 As Boolean = locater1.Find(testBitMap1) '定位孔-1
-                Dim findResult2 As Boolean = locater2.Find(testBitMap1) '定位孔-2
+                Dim findChangeModelResult1 As Boolean = locater1.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=0) '定位孔-1(True)
+                Dim findChangeModelResult2 As Boolean = locater2.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=1) '定位孔-2(True)
+                Dim findResult1 As Boolean = locater1.Find(testBitMap1) '定位孔-1(False)
+                Dim findResult2 As Boolean = locater2.Find(testBitMap1) '定位孔-2(False)
             End If
             '------------------------Debug-定位孔異常圖片-結束--------------------------
 

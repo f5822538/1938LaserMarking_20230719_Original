@@ -55,7 +55,7 @@
 
                 Return moMyEquipment.SucceedFind
             Catch ex As Exception
-                moLog.LogError(String.Format("[{0:d4}] 定位錯誤，Error：{1}", mnSequence, ex.ToString()))
+                moLog.LogError(String.Format("[{0:d4}] 定位錯誤:{1}", mnSequence, ex.Message & Environment.NewLine & ex.StackTrace))
                 moMyEquipment.LogAlarm.LogError("定位錯誤")
                 Return False
             End Try
@@ -137,7 +137,11 @@
 
                 oInspectResult.Name = String.Format("{0:yyyy-MM-dd_HH_mm_ss_fff}", aDataTime) '報告-重要路徑
                 oInspectResult.Sequnce = mnSequence
+
+                '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                 oInspectResult.AlignStatus = mbAlignStatus '定位結果-狀態(True:異常, False:正常)
+                '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                 oProductConfig = New CMyProductConfig(sPath, oInspectResult.Name, "INI") '報告-重要路徑
                 oInspectSum = New CInspectSum(oInspectResult, aDataTime, oMyDefectList, oProductConfig) '報告-重要路徑
 

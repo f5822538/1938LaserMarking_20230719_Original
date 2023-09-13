@@ -180,13 +180,13 @@ Public Class CMyLocater
         If moFinder.ModelCount = 0 Then '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
             '-------------------------定位孔異常圖片-開始--------------------------
             Dim holeBinBmpDirPath As String = "D:\img\HoleLocateBinBmpNg\" '定位孔異常圖片-資料夾路徑
-            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Bin.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
-            Dim holeOrgBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Org.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
+            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Bin.bmp", holeBinBmpDirPath, DateTime.Now, "moFinder.ModelCount.0")
+            Dim holeOrgBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Org.bmp", holeBinBmpDirPath, DateTime.Now, "moFinder.ModelCount.0")
             If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
             If Debugger.IsAttached = True Then
                 holeBinBmpDirPath = "D:\ASE_ProgramReleaseReport_202307\SourceImage\"
-                holeBinBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "Default" & "-Bin" & ".Bmp")
-                holeOrgBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "Default" & "-Org" & ".Bmp")
+                holeBinBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "moFinder.ModelCount.0" & "-Bin" & ".Bmp") '原本的檔名:2023-08-14_14_22_08-Default-Bin.bmp
+                holeOrgBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "moFinder.ModelCount.0" & "-Org" & ".Bmp") '原本的檔名:2023-08-14_14_22_08-Default-Org.bmp
             End If
             If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
             If File.Exists(holeBinBmpFilePath) = True Then File.Delete(holeBinBmpFilePath)
@@ -210,13 +210,13 @@ Public Class CMyLocater
         Else
             '-------------------------定位孔異常圖片-開始--------------------------
             Dim holeBinBmpDirPath As String = "D:\img\HoleLocateBinBmpNg\" '定位孔異常圖片-資料夾路徑
-            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Bin.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
-            Dim holeOrgBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Org.bmp", holeBinBmpDirPath, DateTime.Now, "Default")
+            Dim holeBinBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Bin.bmp", holeBinBmpDirPath, DateTime.Now, "moResult.Succeed.False")
+            Dim holeOrgBmpFilePath As String = String.Format("{0}{1:yyyy-MM-dd_HH_mm_ss}-{2}-Org.bmp", holeBinBmpDirPath, DateTime.Now, "moResult.Succeed.False")
             If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
             If Debugger.IsAttached = True Then
                 holeBinBmpDirPath = "D:\ASE_ProgramReleaseReport_202307\SourceImage\"
-                holeBinBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "Default" & "-Bin" & ".Bmp")
-                holeOrgBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "Default" & "-Org" & ".Bmp")
+                holeBinBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "moResult.Succeed.False" & "-Bin" & ".Bmp") '原本的檔名:2023-08-14_14_22_08-Default-Bin.bmp
+                holeOrgBmpFilePath = Path.Combine(holeBinBmpDirPath, "20220822_103727.735_Locate_NG_Test-" & "moResult.Succeed.False" & "-Org" & ".Bmp") '原本的檔名:2023-08-14_14_22_08-Default-Org.bmp
             End If
             If Directory.Exists(holeBinBmpDirPath) = False Then Directory.CreateDirectory(holeBinBmpDirPath)
             If File.Exists(holeBinBmpFilePath) = True Then File.Delete(holeBinBmpFilePath)
