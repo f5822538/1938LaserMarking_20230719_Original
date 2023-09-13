@@ -76,8 +76,11 @@ Partial Class CMyEquipment
             FindMark1X = 0.0
             FindMark1Y = 0.0
         ElseIf Locater1.Find(oBitmap) = True AndAlso Locater1.Result.Succeed = True Then '定位孔-1
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
             If nSequence = -1 Then
                 oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModel Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, Locater1.Result.Score)) '定位重要訊息
             Else
@@ -96,8 +99,11 @@ Partial Class CMyEquipment
             FindMark2X = 0.0
             FindMark2Y = 0.0
         ElseIf Locater2.Find(oBitmap) = True AndAlso Locater2.Result.Succeed = True Then '定位孔-2
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
             If nSequence = -1 Then
                 oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModel Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, Locater2.Result.Score)) '定位重要訊息
             Else
@@ -130,8 +136,11 @@ Partial Class CMyEquipment
             FindMark1X = 0.0
             FindMark1Y = 0.0
         ElseIf Locater1.FindChangeModel(oBitmap, moMainRecipe.RecipeCamera.Locate1.FindModelZone, 0) = True AndAlso Locater1.Result.Succeed = True Then
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
             If nSequence = -1 Then
                 oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModelChangeModel Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, Locater1.Result.Score)) '定位重要訊息
             Else
@@ -150,8 +159,11 @@ Partial Class CMyEquipment
             FindMark2X = 0.0
             FindMark2Y = 0.0
         ElseIf Locater2.FindChangeModel(oBitmap, moMainRecipe.RecipeCamera.Locate2.FindModelZone, 1) = True AndAlso Locater2.Result.Succeed = True Then
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
             If nSequence = -1 Then
                 oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModelChangeModel Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, Locater2.Result.Score)) '定位重要訊息
             Else
