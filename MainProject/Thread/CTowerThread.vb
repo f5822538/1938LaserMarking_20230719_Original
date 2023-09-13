@@ -8,6 +8,10 @@ Public Class CTowerThread : Inherits CThreadBaseExtend
         Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("{0} 流程啟動", moThread.Name))
     End Sub
 
+    ''' <summary>
+    ''' Process
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Overrides Sub Process()
         While True
             If mbStopSlim.IsSet = True Then
@@ -24,13 +28,20 @@ Public Class CTowerThread : Inherits CThreadBaseExtend
         End While
     End Sub
 
+    ''' <summary>
+    ''' ProcessSingleRun
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function ProcessSingleRun() As Boolean
         Try
             If moMyEquipment.HardwareConfig.BuzzerBypass = False AndAlso (moMyEquipment.IsAlarm.IsSet() = True OrElse moMyEquipment.IsErrorOn.IsSet() = True) Then
-                moMyEquipment.IO.Buzzer.SetOn(moLog)
-                Thread.Sleep(1000)
-                moMyEquipment.IO.Buzzer.SetOff(moLog)
-                Thread.Sleep(1000)
+                If moMyEquipment.IO.Buzzer IsNot Nothing Then
+                    moMyEquipment.IO.Buzzer.SetOn(moLog)
+                    Thread.Sleep(1000)
+                    moMyEquipment.IO.Buzzer.SetOff(moLog)
+                    Thread.Sleep(1000)
+                End If
             End If
             Return True
         Catch ex As Exception
