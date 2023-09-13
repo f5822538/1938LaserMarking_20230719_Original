@@ -97,53 +97,85 @@ Partial Class CMyEquipment
 
         IsErrorOn.Set() '將事件的狀態設定為已收到訊號，讓正在等候該事件的一個或多個執行緒繼續執行
 
-        If oLog Is Nothing Then
-            IO.Error.SetOn()
-        Else
-            IO.Error.SetOn(oLog)
+        '-------------------------20230913-開始--------------------------
+        If IO.Error IsNot Nothing Then
+            If oLog Is Nothing Then
+                IO.Error.SetOn()
+            Else
+                IO.Error.SetOn(oLog)
+            End If
+
+            Thread.Sleep(200)
+
+            If oLog Is Nothing Then
+                IO.Error.SetOff()
+            Else
+                IO.Error.SetOff(oLog)
+            End If
         End If
-        Thread.Sleep(200)
-        If oLog Is Nothing Then
-            IO.Error.SetOff()
-        Else
-            IO.Error.SetOff(oLog)
-        End If
+        '-------------------------20230913-結束--------------------------
     End Sub
 
     Public Sub SetEroorOff(Optional oLog As II_LogTraceExtend = Nothing)
         If moHardwareConfig.IOBypass = True Then Exit Sub
 
-        If oLog Is Nothing Then
-            IO.Error.SetOff()
-        Else
-            IO.Error.SetOff(oLog)
+        '-------------------------20230913-開始--------------------------
+        If IO.Error IsNot Nothing Then
+            If oLog Is Nothing Then
+                IO.Error.SetOff()
+            Else
+                IO.Error.SetOff(oLog)
+            End If
         End If
+        '-------------------------20230913-結束--------------------------
 
         IsErrorOn.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
     End Sub
 
     Public Sub SetLightOn(Optional oLog As II_LogTraceExtend = Nothing)
         If moHardwareConfig.IOBypass = True Then Exit Sub
-        If oLog Is Nothing Then
-            IO.LightOn.SetOn()
-        Else
-            IO.LightOn.SetOn(oLog)
+
+        '-------------------------20230913-開始--------------------------
+        If IO.LightOn IsNot Nothing Then
+            If oLog Is Nothing Then
+                IO.LightOn.SetOn()
+            Else
+                IO.LightOn.SetOn(oLog)
+            End If
         End If
+        '-------------------------20230913-結束--------------------------
     End Sub
 
     Public Sub SetLightOff(Optional oLog As II_LogTraceExtend = Nothing)
         If moHardwareConfig.IOBypass = True Then Exit Sub
-        If oLog Is Nothing Then
-            IO.LightOn.SetOff()
-        Else
-            IO.LightOn.SetOff(oLog)
+
+        '-------------------------20230913-開始--------------------------
+        If IO.LightOn IsNot Nothing Then
+            If oLog Is Nothing Then
+                IO.LightOn.SetOff()
+            Else
+                IO.LightOn.SetOff(oLog)
+            End If
         End If
+        '-------------------------20230913-結束--------------------------
     End Sub
 
     Public Function LightVacuumUp(oLog As II_LogTraceExtend) As AlarmCode
         If moHardwareConfig.IOBypass = True Then Return AlarmCode.IsOK
-        If IO.SafeSensor1.IsOn = True OrElse IO.SafeSensor2.IsOn = True Then Return AlarmCode.IsNotSafe '動作失敗，非安全
-        If IO.LightVacuum1UpSensor.IsOn() = True AndAlso IO.LightVacuum1DownSensor.IsOn() = False Then Return AlarmCode.IsOK
+
+        '-------------------------20230913-開始--------------------------
+        If IO.SafeSensor1 IsNot Nothing OrElse IO.SafeSensor2 IsNot Nothing Then
+            If IO.SafeSensor1.IsOn = True OrElse IO.SafeSensor2.IsOn = True Then
+                Return AlarmCode.IsNotSafe '動作失敗，非安全
+            End If
+        End If
+
+        If IO.LightVacuum1UpSensor IsNot Nothing AndAlso IO.LightVacuum1DownSensor IsNot Nothing Then
+            If IO.LightVacuum1UpSensor.IsOn() = True AndAlso IO.LightVacuum1DownSensor.IsOn() = False Then
+                Return AlarmCode.IsOK
+            End If
+        End If
+        '-------------------------20230913-結束--------------------------
 
         Dim oAlarmCode As AlarmCode = AlarmCode.IsOK
 
@@ -168,12 +200,23 @@ Partial Class CMyEquipment
 
     Public Function LightVacuumDown(oLog As II_LogTraceExtend) As AlarmCode
         If moHardwareConfig.IOBypass = True Then Return AlarmCode.IsOK
-        If IO.LightVacuum1UpSensor.IsOn() = False AndAlso IO.LightVacuum1DownSensor.IsOn() = True Then Return AlarmCode.IsOK
+
+        '-------------------------20230913-開始--------------------------
+        If IO.LightVacuum1UpSensor IsNot Nothing AndAlso IO.LightVacuum1DownSensor IsNot Nothing AndAlso _
+           IO.LightVacuum1UpSensor.IsOn() = False AndAlso IO.LightVacuum1DownSensor.IsOn() = True Then
+            Return AlarmCode.IsOK
+        End If
 
         Dim oAlarmCode As AlarmCode = AlarmCode.IsOK
 
-        Call IO.LightVacuumUp1.SetOff()
-        Call IO.LightVacuumUp2.SetOff()
+        If IO.LightVacuumUp1 IsNot Nothing Then
+            IO.LightVacuumUp1.SetOff()
+        End If
+
+        If IO.LightVacuumUp2 IsNot Nothing Then
+            IO.LightVacuumUp2.SetOff()
+        End If
+        '-------------------------20230913-結束--------------------------
 
         oAlarmCode = IsTimeOutOrStop(moHardwareConfig.HandshakeConfig.WaitLightTimeout, Function() IO.IsDown)
 

@@ -168,7 +168,7 @@ Public Class frmMain
             Call bkTime.RunWorkerAsync() '開始執行背景作業
             Call moLog.LogInformation(Me.Text)
         Catch ex As System.Exception
-            Call moLog.LogError(ex.ToString)
+            moLog.LogError(ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
         Call moLog.LogInformation(String.Format("系統啟動完成，時間：[{0:F4}]ms", aTact.CurrentSpan))
     End Sub

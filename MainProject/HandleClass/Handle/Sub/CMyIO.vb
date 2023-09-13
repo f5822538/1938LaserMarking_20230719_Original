@@ -42,7 +42,13 @@
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function IsUp() As Boolean
-        Return LightVacuum1UpSensor.IsOn() = True AndAlso LightVacuum2UpSensor.IsOn() = True AndAlso LightVacuum1DownSensor.IsOn() = False AndAlso LightVacuum2DownSensor.IsOn() = False
+        '-------------------------20230913-開始--------------------------
+        If LightVacuum1UpSensor IsNot Nothing AndAlso LightVacuum2UpSensor IsNot Nothing AndAlso LightVacuum1DownSensor IsNot Nothing AndAlso LightVacuum2DownSensor IsNot Nothing Then
+            Return LightVacuum1UpSensor.IsOn() = True AndAlso LightVacuum2UpSensor.IsOn() = True AndAlso LightVacuum1DownSensor.IsOn() = False AndAlso LightVacuum2DownSensor.IsOn() = False
+        Else
+            Return False
+        End If
+        '-------------------------20230913-結束--------------------------
     End Function
 
     ''' <summary>
@@ -51,7 +57,13 @@
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function IsDown() As Boolean
-        Return LightVacuum1UpSensor.IsOn() = False AndAlso LightVacuum2UpSensor.IsOn() = False AndAlso LightVacuum1DownSensor.IsOn() = True AndAlso LightVacuum2DownSensor.IsOn() = True
+        '-------------------------20230913-開始--------------------------
+        If LightVacuum1UpSensor IsNot Nothing AndAlso LightVacuum2UpSensor IsNot Nothing AndAlso LightVacuum1DownSensor IsNot Nothing AndAlso LightVacuum2DownSensor IsNot Nothing Then
+            Return LightVacuum1UpSensor.IsOn() = False AndAlso LightVacuum2UpSensor.IsOn() = False AndAlso LightVacuum1DownSensor.IsOn() = True AndAlso LightVacuum2DownSensor.IsOn() = True
+        Else
+            Return False
+        End If
+        '-------------------------20230913-結束--------------------------
     End Function
 
 End Class
