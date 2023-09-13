@@ -33,6 +33,17 @@ Public Class CMyPatternMatching
         Return moModelID <> 0
     End Function
 
+    ''' <summary>
+    ''' 特徵比對算法
+    ''' </summary>
+    ''' <param name="nImageHeader"></param>
+    ''' <param name="oROI"></param>
+    ''' <param name="nX"></param>
+    ''' <param name="nY"></param>
+    ''' <param name="nScore"></param>
+    ''' <param name="nCenter"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function FindModel(nImageHeader As MIL_ID, oROI As Rectangle, ByRef nX As Double, ByRef nY As Double, ByRef nScore As Double, nCenter As Point) As Boolean
         nX = 0 : nY = 0
         If moModelID = 0 Then Return False

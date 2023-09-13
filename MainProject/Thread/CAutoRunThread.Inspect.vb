@@ -27,12 +27,18 @@
 
                 '取得-FindModel-的結果
                 '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                moMyEquipment.SucceedFind = If(.HardwareConfig.MiscConfig.IsUseModelFinder = True, moMyEquipment.FindModel(moCamera.Camera.BitmapImage(True), mnSequence, moLog), moMyEquipment.GetAlign(mnSequence, moLog)) 'Locate定位
+                '-------------------------20230913-開始--------------------------
+                If moMyEquipment.HardwareConfig.MiscConfig.IsUseModelFinder = True Then
+                    moMyEquipment.SucceedFind = moMyEquipment.FindModel(moCamera.Camera.BitmapImage(True), mnSequence, moLog) '利用FindModel算法尋找定位孔
+                Else
+                    moMyEquipment.SucceedFind = moMyEquipment.GetAlign(mnSequence, moLog) '利用特徵比對算法尋找定位孔
+                End If
+                '-------------------------20230913-結束--------------------------
                 '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                 If moMyEquipment.SucceedFind = True Then 'FindModel-成功
                     CalculationShift(oModelFinderShift, .FindMark1X, .FindMark1Y, .FindMark2X, .FindMark2Y) '計算旋轉補正角度
-                    moLog.LogInformation(String.Format("[{0:d4}] Shift：dX = {1}, dY = {2}, dAngle = {3}", mnSequence, oModelFinderShift.shiftX, oModelFinderShift.shiftY, oModelFinderShift.Angle))
+                    moLog.LogInformation(String.Format("[{0:d4}] Shift：dX = {1}, dY = {2}, dAngle = {3}", mnSequence, oModelFinderShift.shiftX, oModelFinderShift.shiftY, oModelFinderShift.Angle)) '定位重要訊息
                     mnShiftX = CInt(oModelFinderShift.shiftX)
 
                     If IsNumeric(oModelFinderShift.Angle) = True Then

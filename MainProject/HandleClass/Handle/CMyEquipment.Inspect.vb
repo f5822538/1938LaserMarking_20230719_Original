@@ -62,7 +62,7 @@ Partial Class CMyEquipment
     End Function
 
     ''' <summary>
-    ''' 重要區塊
+    ''' 重要區塊 (利用FindModel算法尋找定位孔)
     ''' </summary>
     ''' <param name="oBitmap"></param>
     ''' <param name="nSequence"></param>
@@ -79,16 +79,16 @@ Partial Class CMyEquipment
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
             If nSequence = -1 Then
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, Locater1.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModel Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, Locater1.Result.Score)) '定位重要訊息
             Else
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] Find [Model 1]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark1X, FindMark1Y, Locater1.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] FindModel Find [Model 1]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark1X, FindMark1Y, Locater1.Result.Score)) '定位重要訊息
             End If
         Else
             bFindModelSuccess = False
             If nSequence = -1 Then
-                Call oLog.LogError(String.Format("Find [Model 1] Failed"))
+                Call oLog.LogError(String.Format("FindModel Find [Model 1] Failed"))
             Else
-                Call oLog.LogError(String.Format("[{0:d4}] Find [Model 1] Failed", nSequence))
+                Call oLog.LogError(String.Format("[{0:d4}] FindModel Find [Model 1] Failed", nSequence))
             End If
         End If
 
@@ -99,16 +99,16 @@ Partial Class CMyEquipment
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
             If nSequence = -1 Then
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, Locater2.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModel Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, Locater2.Result.Score)) '定位重要訊息
             Else
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] Find [Model 2]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark2X, FindMark2Y, Locater2.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] FindModel Find [Model 2]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark2X, FindMark2Y, Locater2.Result.Score)) '定位重要訊息
             End If
         Else
             bFindModelSuccess = False
             If nSequence = -1 Then
-                Call oLog.LogError(String.Format("Find [Model 2] Failed"))
+                Call oLog.LogError(String.Format("FindModel Find [Model 2] Failed"))
             Else
-                Call oLog.LogError(String.Format("[{0:d4}] Find [Model 2] Failed", nSequence))
+                Call oLog.LogError(String.Format("[{0:d4}] FindModel Find [Model 2] Failed", nSequence))
             End If
         End If
 
@@ -116,7 +116,7 @@ Partial Class CMyEquipment
     End Function
 
     ''' <summary>
-    ''' Augustin 230202 New Find Model Test
+    ''' Augustin 230202 New Find Model Test (使用FindCircle算法尋找定位孔)
     ''' </summary>
     ''' <param name="oBitmap"></param>
     ''' <param name="nSequence"></param>
@@ -133,16 +133,16 @@ Partial Class CMyEquipment
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
             If nSequence = -1 Then
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, Locater1.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModelChangeModel Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, Locater1.Result.Score)) '定位重要訊息
             Else
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] Find [Model 1]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark1X, FindMark1Y, Locater1.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] FindModelChangeModel Find [Model 1]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark1X, FindMark1Y, Locater1.Result.Score)) '定位重要訊息
             End If
         Else
             bFindModelSuccess = False
             If nSequence = -1 Then
-                Call oLog.LogError(String.Format("Find [Model 1] Failed"))
+                Call oLog.LogError(String.Format("FindModelChangeModel Find [Model 1] Failed"))
             Else
-                Call oLog.LogError(String.Format("[{0:d4}] Find [Model 1] Failed", nSequence))
+                Call oLog.LogError(String.Format("[{0:d4}] FindModelChangeModel Find [Model 1] Failed", nSequence))
             End If
         End If
 
@@ -153,16 +153,16 @@ Partial Class CMyEquipment
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
             If nSequence = -1 Then
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, Locater2.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("FindModelChangeModel Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, Locater2.Result.Score)) '定位重要訊息
             Else
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] Find [Model 2]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark2X, FindMark2Y, Locater2.Result.Score))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] FindModelChangeModel Find [Model 2]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark2X, FindMark2Y, Locater2.Result.Score)) '定位重要訊息
             End If
         Else
             bFindModelSuccess = False
             If nSequence = -1 Then
-                Call oLog.LogError(String.Format("Find [Model 2] Failed"))
+                Call oLog.LogError(String.Format("FindModelChangeModel Find [Model 2] Failed"))
             Else
-                Call oLog.LogError(String.Format("[{0:d4}] Find [Model 2] Failed", nSequence))
+                Call oLog.LogError(String.Format("[{0:d4}] FindModelChangeModel Find [Model 2] Failed", nSequence))
             End If
         End If
 
@@ -170,7 +170,7 @@ Partial Class CMyEquipment
     End Function
 
     ''' <summary>
-    ''' 重要區塊
+    ''' 重要區塊 (使用FindCircle算法尋找定位孔)
     ''' </summary>
     ''' <param name="oLog"></param>
     ''' <returns></returns>
@@ -184,7 +184,7 @@ Partial Class CMyEquipment
             Dim nOffsetLimit As Integer = CInt(moHardwareConfig.OffsetLimitValue / moHardwareConfig.CameraConfig.PixelSize)
 
             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-            FindModelChangeModel(oBitmap, -1, oLog)
+            FindModelChangeModel(oBitmap, -1, oLog) '使用FindCircle算法尋找定位孔
             '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
             nRectangle.X = CInt(FindMark1X - (moMainRecipe.RecipeCamera.Locate1.PatternZone.Width / 2))

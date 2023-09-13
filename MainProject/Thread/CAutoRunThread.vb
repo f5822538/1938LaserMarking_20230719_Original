@@ -622,7 +622,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
                 If moMyEquipment.IsChangeModel = True Then '如果要更換樣本
                     '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                    bIsOK = moMyEquipment.ChangeModel(moLog) '更換樣本
+                    bIsOK = moMyEquipment.ChangeModel(moLog) '更換樣本 (使用FindCircle算法尋找定位孔)
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     If bIsOK = False Then '更換樣本失敗
                         Call moLog.LogError(String.Format("[{0:d4}] 更換樣本失敗", mnSequence))

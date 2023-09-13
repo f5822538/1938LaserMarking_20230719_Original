@@ -156,7 +156,7 @@ Public Class CMyLocater
     End Function
 
     ''' <summary>
-    ''' 重要區塊
+    ''' 重要區塊 (利用FindModel算法尋找定位孔)
     ''' </summary>
     ''' <param name="oBitmap"></param>
     ''' <returns></returns>
@@ -232,7 +232,7 @@ Public Class CMyLocater
     End Function
 
     ''' <summary>
-    ''' Augustin 230202 New Find Test
+    ''' Augustin 230202 New Find Test (使用FindCircle算法尋找定位孔)
     ''' </summary>
     ''' <param name="oBitmap"></param>
     ''' <param name="oROI"></param>
@@ -260,7 +260,7 @@ Public Class CMyLocater
         'moResult.Succeed = moFinder.FindModel(oBitmap)
 
         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-        moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo) '設定-FindModel-的結果
+        moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo) '設定-FindModel-的結果 (使用FindCircle算法尋找定位孔)
         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
         If moResult.Succeed = True AndAlso nLocaterNo = 0 Then
@@ -339,7 +339,7 @@ Public Class CMyLocater
     End Function
 
     ''' <summary>
-    ''' FindCircleChangeModel
+    ''' 使用FindCircle算法尋找定位孔
     ''' </summary>
     ''' <param name="oBitmap"></param>
     ''' <param name="ROI"></param>

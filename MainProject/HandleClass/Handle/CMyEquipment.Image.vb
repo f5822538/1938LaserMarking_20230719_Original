@@ -299,15 +299,22 @@
         Return bIsOK
     End Function
 
+    ''' <summary>
+    ''' 利用特徵比對算法尋找定位孔
+    ''' </summary>
+    ''' <param name="nSequence"></param>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetAlign(nSequence As Integer, oLog As II_LogTraceExtend) As Boolean
         Dim bFindModelSuccess As Boolean = True
         Dim nScore As Double = 0.0
 
         If moPatternMatchingMark1.FindModel(ImageID, moMainRecipe.RecipeCamera.Locate1.FindModelZone, FindMark1X, FindMark1Y, nScore, moMainRecipe.RecipeCamera.Locate1.PatternZone.Location) = True Then
             If nSequence = -1 Then
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, nScore))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("定位孔 GetAlign Find [Model 1]：X = {0}, Y = {1}, Score = {2}", FindMark1X, FindMark1Y, nScore)) '定位重要訊息
             Else
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] Find [Model 1]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark1X, FindMark1Y, nScore))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] 定位孔 GetAlign Find [Model 1]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark1X, FindMark1Y, nScore)) '定位重要訊息
             End If
         ElseIf moMainRecipe.RecipeCamera.Locate1.FindModelZone = Rectangle.Empty Then
             FindMark1X = 0.0
@@ -315,17 +322,17 @@
         Else
             bFindModelSuccess = False
             If nSequence = -1 Then
-                Call oLog.LogError(String.Format("Find [Model 1] Failed"))
+                Call oLog.LogError(String.Format("定位孔 GetAlign Find [Model 1] Failed"))
             Else
-                Call oLog.LogError(String.Format("[{0:d4}] Find [Model 1] Failed", nSequence))
+                Call oLog.LogError(String.Format("[{0:d4}] 定位孔 GetAlign Find [Model 1] Failed", nSequence))
             End If
         End If
 
         If moPatternMatchingMark2.FindModel(ImageID, moMainRecipe.RecipeCamera.Locate2.FindModelZone, FindMark2X, FindMark2Y, nScore, moMainRecipe.RecipeCamera.Locate2.PatternZone.Location) = True Then
             If nSequence = -1 Then
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, nScore))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("定位孔 GetAlign Find [Model 2]：X = {0}, Y = {1}, Score = {2}", FindMark2X, FindMark2Y, nScore)) '定位重要訊息
             Else
-                Call oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] Find [Model 2]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark2X, FindMark2Y, nScore))
+                oLog.Log(LOGHandle.HANDLE_INSPECT, String.Format("[{0:d4}] 定位孔 GetAlign Find [Model 2]：X = {1}, Y = {2}, Score = {3}", nSequence, FindMark2X, FindMark2Y, nScore)) '定位重要訊息
             End If
         ElseIf moMainRecipe.RecipeCamera.Locate2.FindModelZone = Rectangle.Empty Then
             FindMark2X = 0.0
@@ -333,9 +340,9 @@
         Else
             bFindModelSuccess = False
             If nSequence = -1 Then
-                Call oLog.LogError(String.Format("Find [Model 2] Failed"))
+                Call oLog.LogError(String.Format("定位孔 GetAlign Find [Model 2] Failed"))
             Else
-                Call oLog.LogError(String.Format("[{0:d4}] Find [Model 2] Failed", nSequence))
+                Call oLog.LogError(String.Format("[{0:d4}] 定位孔 GetAlign Find [Model 2] Failed", nSequence))
             End If
         End If
 
