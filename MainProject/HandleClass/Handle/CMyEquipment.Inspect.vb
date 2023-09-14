@@ -75,7 +75,8 @@ Partial Class CMyEquipment
         If moMainRecipe.RecipeCamera.Locate1.FindModelZone = Rectangle.Empty Then
             FindMark1X = 0.0
             FindMark1Y = 0.0
-        ElseIf Locater1.Find(oBitmap) = True AndAlso Locater1.Result.Succeed = True Then '定位孔-1
+        ElseIf Locater1.Find(oBitmap) = True AndAlso _
+               Locater1.Result.Succeed = True Then '定位孔-1 [Locater1.Result.Succeed的值從moResult.Succeed = moFinder.FindModel(oBinarizeBitmap)而來]
             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
@@ -98,7 +99,8 @@ Partial Class CMyEquipment
         If moMainRecipe.RecipeCamera.Locate2.FindModelZone = Rectangle.Empty Then
             FindMark2X = 0.0
             FindMark2Y = 0.0
-        ElseIf Locater2.Find(oBitmap) = True AndAlso Locater2.Result.Succeed = True Then '定位孔-2
+        ElseIf Locater2.Find(oBitmap) = True AndAlso _
+               Locater2.Result.Succeed = True Then '定位孔-2 [Locater2.Result.Succeed的值從moResult.Succeed = moFinder.FindModel(oBinarizeBitmap)而來]
             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
@@ -135,7 +137,8 @@ Partial Class CMyEquipment
         If moMainRecipe.RecipeCamera.Locate1.FindModelZone = Rectangle.Empty Then
             FindMark1X = 0.0
             FindMark1Y = 0.0
-        ElseIf Locater1.FindChangeModel(oBitmap, moMainRecipe.RecipeCamera.Locate1.FindModelZone, 0) = True AndAlso Locater1.Result.Succeed = True Then
+        ElseIf Locater1.FindChangeModel(oBitmap, moMainRecipe.RecipeCamera.Locate1.FindModelZone, 0) = True AndAlso _
+               Locater1.Result.Succeed = True Then '[Locater1.Result.Succeed的值從moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo)而來]
             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark1X = Locater1.Result.X
             FindMark1Y = Locater1.Result.Y
@@ -158,7 +161,8 @@ Partial Class CMyEquipment
         If moMainRecipe.RecipeCamera.Locate2.FindModelZone = Rectangle.Empty Then
             FindMark2X = 0.0
             FindMark2Y = 0.0
-        ElseIf Locater2.FindChangeModel(oBitmap, moMainRecipe.RecipeCamera.Locate2.FindModelZone, 1) = True AndAlso Locater2.Result.Succeed = True Then
+        ElseIf Locater2.FindChangeModel(oBitmap, moMainRecipe.RecipeCamera.Locate2.FindModelZone, 1) = True AndAlso _
+               Locater2.Result.Succeed = True Then '[Locater2.Result.Succeed的值從moResult.Succeed = FindCircleChangeModel(oBinarizeBitmap, oROI, nLocaterNo)而來]
             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             FindMark2X = Locater2.Result.X
             FindMark2Y = Locater2.Result.Y
