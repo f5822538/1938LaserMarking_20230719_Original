@@ -339,10 +339,12 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call oCameraSnap.Start() '開始-檢測相機-取像任務
                     Call oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
 
-                    Call Task.WaitAll({oCodeReaderCameraSnap}) '等候-條碼相機-任務完成執行
+                    Task.WaitAll({oCodeReaderCameraSnap}) '等候-條碼相機-任務完成執行
 
                     Call oTact.CalSpan()
                     Call moLog.LogInformation(String.Format("[{0:d4}] 取像完畢 (1)。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
+
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     If oCodeReaderCameraSnap.Result = True Then '條碼相機-取像完成
                         If .BuildImageForCopy(moCodeReaderCamera.Camera.BitmapImage(True), moCodeReaderImageID1, moCodeReaderImageHeader, mnSequence, moLog) = False Then
                             Call moLog.LogError(String.Format("[{0:d4}] 條碼取像失敗 (1)", mnSequence))
@@ -387,10 +389,12 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call moLog.LogInformation(String.Format("[{0:d4}] 取像完畢 (2)。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
                         Call oTact.ReSetTime()
                     End If
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                    Call Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
+                    Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
 
-                    If oCameraSnap.Result = False OrElse oCodeReaderCameraSnap.Result = False Then
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                    If oCameraSnap.Result = False OrElse oCodeReaderCameraSnap.Result = False Then '檢測相機-取像完成
                         Call moMyEquipment.LightVacuumDown(moLog)
                         Call moMyEquipment.SetLightOff(moLog)
                         Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
@@ -403,6 +407,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call moMyEquipment.InnerThread.Inspect.Reset()
                         Exit Sub
                     End If
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                     Call oTact.CalSpan()
                     Call moLog.LogInformation(String.Format("[{0:d4}] 等待檢測相機取像完畢。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
