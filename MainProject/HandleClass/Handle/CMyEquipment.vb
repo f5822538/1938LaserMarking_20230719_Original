@@ -53,8 +53,8 @@ Public Class CMyEquipment
         Dim IsOk As Boolean = True
 
         If CreateDIO3208() = False Then IsOk = False
-        If InitialCamera() = False Then IsOk = False
-        If InitialHandshake() = False Then IsOk = False
+        If InitialCamera() = False Then IsOk = False '初始化-相機
+        If InitialHandshake() = False Then IsOk = False 'Server 開啟
 
         If moHardwareConfig.MiscConfig.IsUseModelFinder = True Then
             If InitialLocater() = False Then

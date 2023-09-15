@@ -2,6 +2,11 @@
 
     Private WithEvents moSnapMultiple As II_SnapMultiple
 
+    ''' <summary>
+    ''' 開啟相機
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function Create() As Boolean
         Dim bIsOpen = True
         Try

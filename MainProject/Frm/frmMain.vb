@@ -164,7 +164,10 @@ Public Class frmMain
             Call moLog.LogInformation(String.Format("載入設定資料，時間：[{0:F4}]ms", aTact.CurrentSpan))
             Call aTact.ReSetTime()
 
-            Call moMyEquipment.Initial() 'CreateDIO3208,InitialCamera,InitialHandshake,InitialLocater,InitialCodeReader,LightVacuumDown,SetLightOff
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+            moMyEquipment.Initial() 'CreateDIO3208,InitialCamera,InitialHandshake,InitialLocater,InitialCodeReader,LightVacuumDown,SetLightOff
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
             Call moMyEquipment.SetSystemCache()
             Call aTact.CalSpan()
             Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("初始化硬體，時間：[{0:F4}]ms", aTact.CurrentSpan))

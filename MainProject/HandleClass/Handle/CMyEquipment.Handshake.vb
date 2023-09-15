@@ -4,6 +4,11 @@
     Public IsChangeModel As Boolean = False
     Public IsHandshakeCanProcess As Boolean = True
 
+    ''' <summary>
+    ''' Server 開啟
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function InitialHandshake() As Boolean
         Try
             Handshake = New CMyHandshake(Me)

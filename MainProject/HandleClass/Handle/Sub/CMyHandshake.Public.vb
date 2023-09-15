@@ -18,6 +18,11 @@ Partial Class CMyHandshake
     Private msSOH As Char = Chr(SOH)
     Private msEOT As Char = Chr(EOT)
 
+    ''' <summary>
+    ''' Server ¶}±Ò
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function CreateHandshakeThread() As Boolean
         Dim bIsOpen = True
         Try

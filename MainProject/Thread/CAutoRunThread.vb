@@ -265,7 +265,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         If mbStopSlim.IsSet() = True OrElse moStopRun.IsSet() = True OrElse moRunInspect.IsSet() = False OrElse moStatu = InspectStatu.StopRun Then
             Call moStopRun.Set()
             Call moRunInspect.Reset()
-            Exit Sub
+            Exit Sub '離開方法
         End If
 
         '' Augustin 220726 Add for Wafer Map
@@ -294,7 +294,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 If oAlarmCode <> AlarmCode.IsOK Then
                     Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
                     Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
-                    Exit Sub
+                    Exit Sub '離開方法
                 End If
 
                 mnSequence += 1
@@ -308,7 +308,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
             Dim oTact As New CTactTimeSpan '條碼相機/檢測相機取像-TactTimeSpan
             'Dim oTactForInspectSnap As New CTactTimeSpan
             Try
-                Dim oLightVacuumDown As Task(Of AlarmCode) = New Task(Of AlarmCode)(Function() .LightVacuumDown(moLog)) '任務-燈源下降
+                Dim oLightVacuumDown As Task(Of AlarmCode) = New Task(Of AlarmCode)(Function() .LightVacuumDown(moLog)) '燈源下降-任務
 
                 '-------------------------20230828-開始--------------------------
                 If bIsTestRun = False Then '如果不是測試執行
@@ -328,16 +328,19 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
                         Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
                         oLightVacuumDown = Nothing
-                        Call moMyEquipment.InnerThread.Inspect.Reset() '封鎖執行緒
-                        Exit Sub
+                        moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                        Exit Sub '離開方法
                     End If
                     Call moLog.LogInformation(String.Format("[{0:d4}] Vacuum Up", mnSequence))
 
                     Call Thread.Sleep(moMyEquipment.HardwareConfig.MiscConfig.CaptureDelayTime)
                     Call oTact.ReSetTime()
                     Call moLog.LogInformation(String.Format("[{0:d4}] Snap Start (1)", mnSequence))
-                    Call oCameraSnap.Start() '開始-檢測相機-取像任務
-                    Call oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
+
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                    oCameraSnap.Start() '開始-檢測相機-取像任務
+                    oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                     Task.WaitAll({oCodeReaderCameraSnap}) '等候-條碼相機-任務完成執行
 
@@ -359,8 +362,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
                             Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
                             oLightVacuumDown = Nothing
-                            Call moMyEquipment.InnerThread.Inspect.Reset() '封鎖執行緒
-                            Exit Sub
+                            moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                            Exit Sub '離開方法
                         End If
 
                         If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
@@ -381,8 +384,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             Call oCameraSnap.Dispose()
                             Call oCodeReaderCameraSnap.Dispose()
                             oLightVacuumDown = Nothing
-                            Call moMyEquipment.InnerThread.Inspect.Reset()
-                            Exit Sub
+                            moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                            Exit Sub '離開方法
                         End If
 
                         Call oTact.CalSpan()
@@ -404,8 +407,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call oCameraSnap.Dispose()
                         Call oCodeReaderCameraSnap.Dispose()
                         oLightVacuumDown = Nothing
-                        Call moMyEquipment.InnerThread.Inspect.Reset()
-                        Exit Sub
+                        moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                        Exit Sub '離開方法
                     End If
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
@@ -420,12 +423,15 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call moLog.LogInformation(String.Format("[{0:d4}] 相機停止取像。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
                     Call oTact.ReSetTime()
 
-                    Call oLightVacuumDown.Start()
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                    oLightVacuumDown.Start() '開始-燈源下降-任務
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                     Call moMyEquipment.SetLightOff(moLog)
                 End If
                 '-------------------------20230828-結束--------------------------
 
-                If .BuildImageForCopy(moCamera.Camera.BitmapImage(True), moImageID, moImageHeader, mnSequence, moLog) = False Then
+                If moMyEquipment.BuildImageForCopy(moCamera.Camera.BitmapImage(True), moImageID, moImageHeader, mnSequence, moLog) = False Then '檢測相機
                     Call moLog.LogError(String.Format("[{0:d4}] 取像失敗", mnSequence))
                     Call moMyEquipment.LogAlarm.LogError("取像失敗")
                     Call moMyEquipment.TriggerAlarm(AlarmCode.IsUpdateImageFailed)
@@ -439,11 +445,11 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     oLightVacuumDown = Nothing
-                    Call moMyEquipment.InnerThread.Inspect.Reset()
-                    Exit Sub
+                    moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                    Exit Sub '離開方法
                 End If
 
-                If .BuildImageForCopy(moCodeReaderCamera.Camera.BitmapImage(True), moCodeReaderImageID2, moCodeReaderImageHeader, mnSequence, moLog) = False Then
+                If moMyEquipment.BuildImageForCopy(moCodeReaderCamera.Camera.BitmapImage(True), moCodeReaderImageID2, moCodeReaderImageHeader, mnSequence, moLog) = False Then '條碼相機
                     Call moLog.LogError(String.Format("[{0:d4}] 條碼取像失敗 (2)", mnSequence))
                     Call moMyEquipment.LogAlarm.LogError("條碼取像失敗 (2)")
                     Call moMyEquipment.TriggerAlarm(AlarmCode.IsCodeReaderUpdateImageFailed)
@@ -457,8 +463,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     oLightVacuumDown = Nothing
-                    Call moMyEquipment.InnerThread.Inspect.Reset()
-                    Exit Sub
+                    moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                    Exit Sub '離開方法
                 End If
 
                 Call oTact.CalSpan()
@@ -483,8 +489,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     oLightVacuumDown = Nothing
-                    Call moMyEquipment.InnerThread.Inspect.Reset()
-                    Exit Sub
+                    moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                    Exit Sub '離開方法
                 End If
 
                 If moMyEquipment.HardwareConfig.CodeReaderBypass = False Then '條碼讀取不Bypass
@@ -503,8 +509,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         End If
 
                         oLightVacuumDown = Nothing
-                        Call moMyEquipment.InnerThread.Inspect.Reset()
-                        Exit Sub
+                        moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                        Exit Sub '離開方法
                     End If
 
                     moMyEquipment.CleanCodeReadValue()
@@ -525,8 +531,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             End If
 
                             oLightVacuumDown = Nothing
-                            Call moMyEquipment.InnerThread.Inspect.Reset()
-                            Exit Sub
+                            moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                            Exit Sub '離開方法
                         End If
                     Else
                         Call moLog.LogInformation(String.Format("[{0:d4}] 第一次讀取條碼失敗！進行第二次讀取。", mnSequence))
@@ -547,8 +553,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                 End If
 
                                 oLightVacuumDown = Nothing
-                                Call moMyEquipment.InnerThread.Inspect.Reset()
-                                Exit Sub
+                                moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                                Exit Sub '離開方法
                             End If
                         Else
                             Call moLog.LogInformation(String.Format("[{0:d4}] 第二次讀取條碼失敗！進行第三次讀取。", mnSequence))
@@ -566,8 +572,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                 End If
 
                                 oLightVacuumDown = Nothing
-                                Call moMyEquipment.InnerThread.Inspect.Reset()
-                                Exit Sub
+                                moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                                Exit Sub '離開方法
                             End If
 
                             oAlarmCode = moMyEquipment.FindForInspect(moImageID, moMainRecipe.RecipeCamera.CodeReaderForInspect, moLog)
@@ -598,8 +604,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                     End If
 
                                     oLightVacuumDown = Nothing
-                                    Call moMyEquipment.InnerThread.Inspect.Reset()
-                                    Exit Sub
+                                    moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                                    Exit Sub '離開方法
                                 End If
                             Else
                                 moProductProcess = moMyEquipment.CopyProduct(moMyEquipment.ProductList.Item(0))
@@ -647,7 +653,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         End If
 
                         oLightVacuumDown = Nothing
-                        Call moMyEquipment.InnerThread.Inspect.Reset() '封鎖執行緒
+                        moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
                         Exit Try
                     End If
                 End If
@@ -685,7 +691,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 Call moMyEquipment.SetEroorOn(moLog)
             End Try
 
-            Call moMyEquipment.InnerThread.Inspect.Reset() '封鎖執行緒
+            moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
             Call oRunOnceTact.CalSpan()
             Call moLog.LogInformation(String.Format("======================= [{0:d4}] 單次執行，完成。[{1:f4}]ms =======================", mnSequence, oRunOnceTact.CurrentSpan))
             Call Thread.Sleep(200)
