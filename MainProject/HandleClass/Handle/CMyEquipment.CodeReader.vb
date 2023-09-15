@@ -66,7 +66,7 @@
             msCodeText = ""
             oRecipeCodeReader.CodeZone = Rectangle.Empty
 
-            '0923 修改使用FindMore 作為 Find 延伸 可以讀出多個結果，如果有毒到其中一個則直接回報不用再往下讀
+            '0923 修改使用FindMore 作為 Find 延伸 可以讀出多個結果，如果有讀到其中一個則直接回報不用再往下讀
             'If CodeReaderForInspect.Find(oImageID, oRecipeCodeReader) = False Then Return AlarmCode.IsReadCodeFailed
             If CodeReaderForInspect.FindMore(oImageID, oRecipeCodeReader) = False Then Return AlarmCode.IsReadCodeFailed
 

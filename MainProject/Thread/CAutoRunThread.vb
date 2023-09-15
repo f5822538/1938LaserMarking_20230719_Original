@@ -514,7 +514,11 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     End If
 
                     moMyEquipment.CleanCodeReadValue()
+
+                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     oAlarmCode = moMyEquipment.Find(moCodeReaderImageID1, moMainRecipe.RecipeCamera.CodeReader, moLog)
+                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                     If oAlarmCode = AlarmCode.IsOK Then
                         Call moLog.LogInformation(String.Format("[{0:d4}] 第一次讀取條碼成功！條碼：{1}。", mnSequence, moMyEquipment.CodeText))
                         oAlarmCode = LoadProduct()
@@ -536,7 +540,11 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         End If
                     Else
                         Call moLog.LogInformation(String.Format("[{0:d4}] 第一次讀取條碼失敗！進行第二次讀取。", mnSequence))
+
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         oAlarmCode = moMyEquipment.Find(moCodeReaderImageID2, moMainRecipe.RecipeCamera.CodeReader, moLog)
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
                         If oAlarmCode = AlarmCode.IsOK Then
                             Call moLog.LogInformation(String.Format("[{0:d4}] 第二次讀取條碼成功！條碼：{1}。", mnSequence, moMyEquipment.CodeText))
                             oAlarmCode = LoadProduct()
@@ -576,7 +584,9 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                                 Exit Sub '離開方法
                             End If
 
+                            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                             oAlarmCode = moMyEquipment.FindForInspect(moImageID, moMainRecipe.RecipeCamera.CodeReaderForInspect, moLog)
+                            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                             If oAlarmCode <> AlarmCode.IsOK Then
                                 oAlarmCode = moMyEquipment.FindForInspect2(moImageID, moMainRecipe.RecipeCamera.CodeReaderForInspect2, moLog)
