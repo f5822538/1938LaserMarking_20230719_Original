@@ -44,6 +44,8 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
                 moMyEquipment.LogSystem.LogError("安全 Sensor 已啟動")
                 moMyEquipment.LogAlarm.LogError("安全 Sensor 已啟動")
             End If
+
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             If moMyEquipment.IO.HomeSensor IsNot Nothing AndAlso moMyEquipment.IO.HomeSensor.IsOn = True AndAlso (moMyEquipment.IO.LightVacuumUp1.IsOn() = True OrElse moMyEquipment.IO.LightVacuumUp2.IsOn() = True) Then
                 Call Thread.Sleep(moMyEquipment.HardwareConfig.MiscConfig.HomeSensorDelayTime)
                 If moMyEquipment.IO.LightVacuumUp1.IsOn() = True OrElse moMyEquipment.IO.LightVacuumUp2.IsOn() = True Then
@@ -57,12 +59,18 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
                     End If
                 End If
             End If
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-            If moMyEquipment.IsCanInspect.IsSet() = False AndAlso moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then
-                Call Thread.Sleep(100)
-                moMyEquipment.LogSystem.LogInformation("檢測已啟動")
-                Call moMyEquipment.IsCanInspect.Set()
+
+            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+            'Wait()方法內部檢測到IsSet屬性的值，如果為false，線程會掛起。如果為IsSet為True，線程不會掛起會繼續執行。
+            If moMyEquipment.IsCanInspect.IsSet() = False AndAlso moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then '產品在席檢知
+                Thread.Sleep(100)
+                moMyEquipment.LogSystem.LogInformation("檢測已啟動") '在Log檔中，完全沒出現過此訊息(必須解析問題為何?)
+                moMyEquipment.IsCanInspect.Set() '會把IsSet設成True,將事件的狀態設定為已收到訊號，讓正在等候該事件的一個或多個執行緒繼續執行
             End If
+            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
 
             If moMyEquipment.InnerThread.Inspect.IsSet() = False AndAlso moMyEquipment.IsAlarm.IsSet() = False Then
                 If moProductProcess.MarkList.Count > 0 Then moProductProcess.ClearMark()

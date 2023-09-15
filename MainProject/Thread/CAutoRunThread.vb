@@ -225,12 +225,13 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         Dim oTimeStart As Date = DateAndTime.Now
         Dim bIsTimeOut As Boolean = True
 
-        While True
+        While True '第一層While True
             If moMyEquipment.HardwareConfig.TriggerBypass = False Then
-                If moMyEquipment.IsCanInspect.IsSet() = True AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = True AndAlso moMyEquipment.IO.SafeSensor1.IsOn() = False AndAlso _
-                   moMyEquipment.IO.SafeSensor2.IsOn() = False AndAlso moMyEquipment.InnerThread.HandshakeProcess.IsSet() = False Then
+                If moMyEquipment.IsCanInspect.IsSet() = True AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = True AndAlso _
+                   moMyEquipment.IO.SafeSensor1.IsOn() = False AndAlso _
+                   moMyEquipment.IO.SafeSensor2.IsOn() = False AndAlso moMyEquipment.InnerThread.HandshakeProcess.IsSet() = False Then '產品在席檢知
                     moMyEquipment.InnerThread.Inspect.Set() '將事件的狀態設定為已收到訊號，讓正在等候該事件的一個或多個執行緒繼續執行
-                    While True
+                    While True '第二層While True
                         If moMyEquipment.InnerThread.HandshakeProcess.IsSet() = False Then
                             Return AlarmCode.IsOK '取得值，表示事件是否已設定
                         End If
