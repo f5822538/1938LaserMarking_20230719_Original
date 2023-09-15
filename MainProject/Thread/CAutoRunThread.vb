@@ -312,8 +312,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
                 '-------------------------20230828-開始--------------------------
                 If bIsTestRun = False Then '如果不是測試執行
-                    Call moMyEquipment.Camera.SnapStart(-1, "檢測相機", moLog) '檢測相機-取像開始
-                    Call moMyEquipment.CodeReaderCamera.SnapStart(-1, "條碼相機", moLog) '條碼相機-取像開始
+                    moMyEquipment.Camera.SnapStart(-1, "檢測相機", moLog) '檢測相機-取像開始 (不使用)
+                    moMyEquipment.CodeReaderCamera.SnapStart(-1, "條碼相機", moLog) '條碼相機-取像開始 (不使用)
                     Call moMyEquipment.SetLightOn(moLog) '打開-燈源
                     Call moLog.LogInformation(String.Format("[{0:d4}] Light On", mnSequence))
 
@@ -323,8 +323,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call moMyEquipment.SetLightOff(moLog) '關閉-燈源
                         Call moMyEquipment.TriggerAlarm(oAlarmCode) '觸發Alarm
                         Call moMyEquipment.SetEroorOn(moLog) '設定-錯誤訊息
-                        Call moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束
-                        Call moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束
+                        moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                        moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
                         Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
                         Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
                         oLightVacuumDown = Nothing
@@ -352,8 +352,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             Call moMyEquipment.TriggerAlarm(AlarmCode.IsCodeReaderUpdateImageFailed)
                             Call moMyEquipment.SetEroorOn(moLog)
                             Call Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
-                            Call moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束
-                            Call moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束
+                            moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                            moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
                             Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
                             Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
                             oLightVacuumDown = Nothing
@@ -374,8 +374,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             Call moMyEquipment.SetLightOff(moLog)
                             Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
                             Call moMyEquipment.SetEroorOn(moLog)
-                            Call moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog)
-                            Call moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog)
+                            moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                            moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
                             Call oCameraSnap.Dispose()
                             Call oCodeReaderCameraSnap.Dispose()
                             oLightVacuumDown = Nothing
@@ -395,8 +395,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                         Call moMyEquipment.SetLightOff(moLog)
                         Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
                         Call moMyEquipment.SetEroorOn(moLog)
-                        Call moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog)
-                        Call moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog)
+                        moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                        moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
                         Call oCameraSnap.Dispose()
                         Call oCodeReaderCameraSnap.Dispose()
                         oLightVacuumDown = Nothing
@@ -407,8 +407,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call oTact.CalSpan()
                     Call moLog.LogInformation(String.Format("[{0:d4}] 等待檢測相機取像完畢。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
                     Call oTact.ReSetTime()
-                    Call moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog)
-                    Call moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog)
+                    moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                    moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
                     Call oCameraSnap.Dispose()
                     Call oCodeReaderCameraSnap.Dispose()
                     Call oTact.CalSpan()

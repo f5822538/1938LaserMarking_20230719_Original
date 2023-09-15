@@ -129,28 +129,54 @@
         Return True
     End Function
 
+    ''' <summary>
+    ''' 在本專案中,不使用此方法
+    ''' </summary>
+    ''' <param name="nSequence"></param>
+    ''' <param name="sCameraName"></param>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function SnapStart(nSequence As Integer, sCameraName As String, oLog As II_LogTraceExtend) As Boolean
-        Return True
+        '-------------------------20230915-開始--------------------------
+        If sCameraName IsNot Nothing Then
+            Return True '強制Return True,導致下方代碼不會被執行
+        End If
+        '-------------------------20230915-結束--------------------------
+
         If moCamera.IsNullCamera = True Then Return True
         Try
             Call oLog.LogInformation(String.Format("[{0:d4}] {1} 取像開始！", nSequence, sCameraName))
-            Call moSnapContinus.SnapStart()
+            moSnapContinus.SnapStart() '拍照取像 (底層方法:成員屬於 iTVisionService.AreaCameraLib.II_SnapContinus) -> MainProject\BaseService\iTVisionAreaCameraX64.dll
             Return True
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] {1} 開始取像錯誤！Error：{2}", nSequence, sCameraName, ex.ToString()))
+            oLog.LogError(String.Format("[{0:d4}] {1} 開始取像錯誤！Error：{2}", nSequence, sCameraName, ex.Message & Environment.NewLine & ex.StackTrace))
             Return False
         End Try
     End Function
 
+    ''' <summary>
+    ''' 在本專案中,不使用此方法
+    ''' </summary>
+    ''' <param name="nSequence"></param>
+    ''' <param name="sCameraName"></param>
+    ''' <param name="oLog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function SnapStop(nSequence As Integer, sCameraName As String, oLog As II_LogTraceExtend) As Boolean
-        Return True
+        '-------------------------20230915-開始--------------------------
+        If sCameraName IsNot Nothing Then
+            Return True '強制Return True,導致下方代碼不會被執行
+        End If
+        '-------------------------20230915-結束--------------------------
+
         If moCamera.IsNullCamera = True Then Return True
         Try
             Call moSnapContinus.SnapStop()
             Call oLog.LogInformation(String.Format("[{0:d4}] {1} 停止取像！", nSequence, sCameraName))
             Return True
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] {1} 停止取像錯誤！Error：{1}", nSequence, sCameraName, ex.ToString()))
+            oLog.LogError(String.Format("[{0:d4}] {1} 停止取像錯誤！Error：{2}", nSequence, sCameraName, ex.Message & Environment.NewLine & ex.StackTrace))
             Return False
         End Try
     End Function
@@ -160,7 +186,7 @@
 
         For nCount As Integer = 1 To 10
             Try
-                bSnapSuccess = moCamera.Snap(True)
+                bSnapSuccess = moCamera.Snap(True) '拍照取像 (底層方法:成員屬於 iTVisionService.AreaCameraLib.II_Camera) -> MainProject\BaseService\iTVisionAreaCameraX64.dll
                 'If moCamera.IsNullCamera() = True Then
                 '    bSnapSuccess = moCamera.Snap(True)
                 'Else
