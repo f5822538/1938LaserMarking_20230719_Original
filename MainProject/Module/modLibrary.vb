@@ -1150,7 +1150,7 @@ Module modLibrary
                 '-------------------------20230911-開始--------------------------
                 'If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
                 If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse _
-                   .Result = ResultType.Indistinct OrElse .Result = ResultType.DieLoseLaser1 Then
+                   .Result = ResultType.Indistinct OrElse .Result = ResultType.DieLoseLaser1 Then '判斷條件1
                     '-------------------------20230911-結束--------------------------
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
@@ -1182,7 +1182,7 @@ Module modLibrary
                 End If
 
                 '-------------------------If oMarkInfo.Result = ResultType.OK-開始--------------------------
-                If oMarkInfo.Result = ResultType.OK Then
+                If oMarkInfo.Result = ResultType.OK Then '判斷條件2
                     If bIsSaveAIOKImage = True Then
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         Dim oAI As New CMyDefect
@@ -1223,10 +1223,13 @@ Module modLibrary
                 End If
                 '-------------------------If oMarkInfo.Result = ResultType.OK-結束--------------------------
 
+
+                '************************ 20230919-日月光反映現場實際測試漏雷和NoDie都會執行到以下的程式區塊-開始 ************************
+
                 Dim nIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
 
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-開始--------------------------
-                If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then
+                If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then '判斷條件3
 
                     If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                         oMarkInfo.Result = ResultType.OK
@@ -1380,13 +1383,11 @@ Module modLibrary
                 End If
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-結束--------------------------
 
+                '************************ 20230919-日月光反映現場實際測試漏雷和NoDie都會執行到以下的程式區塊-結束 ************************
             End With
-            'Return True
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] BuildLoseModel Failed！Error：{1}", nSequence, ex.ToString()))
-            'Return False
+            oLog.LogError(String.Format("[{0:d4}] BuildLoseModel Failed！Error：{1}", nSequence, ex.Message & Environment.NewLine & ex.StackTrace))
         End Try
-
     End Sub
 
     Public Function CameraImageClear(ByRef oModelImage As CMyModelImage) As Boolean
