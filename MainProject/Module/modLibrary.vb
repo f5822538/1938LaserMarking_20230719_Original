@@ -1367,6 +1367,7 @@ Module modLibrary
                         '-------------------------20230911-開始--------------------------
                         'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
                         '************************ 真正應該要跳漏雷的區塊在這裡 '************************
+                        'oInspectSum.InspectResult.ModleLoseStatus:這個Flag(全域變數)會影響到漏雷TriggerAlarm及停機SetEroorOn,要謹慎決定是否要被註解掉
                         'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-11 11:50 因為生產線頻繁跳出,所以先註解掉以利測試
                         '-------------------------20230911-結束--------------------------
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
