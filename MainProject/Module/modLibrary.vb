@@ -1230,6 +1230,7 @@ Module modLibrary
 
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-開始--------------------------
                 If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then '判斷條件3
+                    Dim oAIModelImage As MIL_ID = 0
 
                     If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                         oMarkInfo.Result = ResultType.OK
@@ -1237,7 +1238,6 @@ Module modLibrary
                         If bIsSaveAIOKImage = True Then
                             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                             Dim oAI As New CMyDefect
-                            Dim oAIModelImage As MIL_ID = 0
                             Dim nAIIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
 
                             oAI.DefectBoundary.Width = oRecipe.ModelSize.Width
@@ -1373,11 +1373,10 @@ Module modLibrary
                         '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     End SyncLock
 
-                    Dim oModelImage As MIL_ID = 0
-                    MIL.MbufChild2d(oCameraSourceImage, oDefect.DefectPosition.X, oDefect.DefectPosition.Y, oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height, oModelImage)
-                    MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage)
-                    MIL.MbufFree(oModelImage)
-                    oModelImage = MIL.M_NULL
+                    MIL.MbufChild2d(oCameraSourceImage, oDefect.DefectPosition.X, oDefect.DefectPosition.Y, oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height, oAIModelImage)
+                    MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oAIModelImage)
+                    MIL.MbufFree(oAIModelImage)
+                    oAIModelImage = MIL.M_NULL
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
 
