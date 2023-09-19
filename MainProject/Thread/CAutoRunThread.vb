@@ -273,6 +273,13 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
         Call moMyEquipment.WaferMapReset()
         RaiseEvent AutoRunUpdateWaferMap()
 
+        '-------------------------20230919-開始--------------------------
+        Dim oCameraSnapTokenSrc As New CancellationTokenSource()
+        Dim oCameraSnapToken As CancellationToken = oCameraSnapTokenSrc.Token
+        Dim oCodeReaderCameraSnapTokenSrc As New CancellationTokenSource()
+        Dim oCodeReaderCameraSnapToken As CancellationToken = oCodeReaderCameraSnapTokenSrc.Token
+        '-------------------------20230919-結束--------------------------
+
         Dim oAlarmCode As AlarmCode = AlarmCode.IsOK
         Dim oCameraSnap As Task(Of Boolean) = Nothing '檢測相機-取像任務
         Dim oCodeReaderCameraSnap As Task(Of Boolean) = Nothing
@@ -288,8 +295,14 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call moLog.LogError(String.Format("[{0:d4}] 更換條碼相機曝光時間失敗 (1)", mnSequence))
                 End If
 
-                oCameraSnap = New Task(Of Boolean)(Function() moCamera.Snap(mnSequence, "檢測相機", moLog)) '檢測相機-取像任務
-                oCodeReaderCameraSnap = New Task(Of Boolean)(Function() moCodeReaderCamera.Snap(mnSequence, "條碼相機", moLog)) '條碼相機-取像任務
+                '-------------------------20230919-開始--------------------------
+                oCameraSnap = New Task(Of Boolean)(Function()
+                                                       Return moCamera.Snap(mnSequence, "檢測相機", moLog)
+                                                   End Function, oCameraSnapToken) '檢測相機-取像任務
+                oCodeReaderCameraSnap = New Task(Of Boolean)(Function()
+                                                                 Return moCodeReaderCamera.Snap(mnSequence, "條碼相機", moLog)
+                                                             End Function, oCodeReaderCameraSnapToken) '條碼相機-取像任務
+                '-------------------------20230919-結束--------------------------
 
                 oAlarmCode = WaitProcess()
                 If oAlarmCode <> AlarmCode.IsOK Then
@@ -309,7 +322,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
             Dim oTact As New CTactTimeSpan '條碼相機/檢測相機取像-TactTimeSpan
             'Dim oTactForInspectSnap As New CTactTimeSpan
             Try
-                Dim oLightVacuumDown As Task(Of AlarmCode) = New Task(Of AlarmCode)(Function() .LightVacuumDown(moLog)) '燈源下降-任務
+                Dim oLightVacuumDown As Task(Of AlarmCode) = New Task(Of AlarmCode)(Function() moMyEquipment.LightVacuumDown(moLog)) '燈源下降-任務
 
                 '-------------------------20230828-開始--------------------------
                 If bIsTestRun = False Then '如果不是測試執行
@@ -339,8 +352,22 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call moLog.LogInformation(String.Format("[{0:d4}] Snap Start (1)", mnSequence))
 
                     '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                    oCameraSnap.Start() '開始-檢測相機-取像任務
-                    oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
+                    '-------------------------20230919-開始--------------------------
+                    If moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then '產品在席檢知
+                        oCameraSnap.Start() '開始-檢測相機-取像任務
+                        oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
+                    Else
+                        If oCameraSnapToken.CanBeCanceled = True Then
+                            oCameraSnapTokenSrc.Cancel()
+                            oCameraSnapTokenSrc.Dispose()
+                        End If
+
+                        If oCodeReaderCameraSnapToken.CanBeCanceled = True Then
+                            oCodeReaderCameraSnapTokenSrc.Cancel()
+                            oCodeReaderCameraSnapTokenSrc.Dispose()
+                        End If
+                    End If
+                    '-------------------------20230919-結束--------------------------
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                     Task.WaitAll({oCodeReaderCameraSnap}) '等候-條碼相機-任務完成執行

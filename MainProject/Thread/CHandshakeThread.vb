@@ -64,7 +64,7 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
 
             '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
             'Wait()方法內部檢測到IsSet屬性的值，如果為false，線程會掛起。如果為IsSet為True，線程不會掛起會繼續執行。
-            If moMyEquipment.IsCanInspect.IsSet() = False AndAlso moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then '產品在席檢知
+            If moMyEquipment.IsCanInspect.IsSet = False AndAlso moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then '產品在席檢知
                 Thread.Sleep(100)
                 moMyEquipment.LogSystem.LogInformation("檢測已啟動") '在Log檔中，完全沒出現過此訊息(必須解析問題為何?)
                 moMyEquipment.IsCanInspect.Set() '會把IsSet設成True,將事件的狀態設定為已收到訊號，讓正在等候該事件的一個或多個執行緒繼續執行
