@@ -1227,6 +1227,7 @@ Module modLibrary
 
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-開始--------------------------
                 If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then
+
                     If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                         oMarkInfo.Result = ResultType.OK
 
@@ -1243,7 +1244,7 @@ Module modLibrary
                             oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
                             oInspectSum.ReceiveTime = DateTime.Now
 
-                            If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記
+                            If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-標記 (重要判斷條件)
                                 sResult = "NoDie"
                                 oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                    oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
@@ -1376,9 +1377,6 @@ Module modLibrary
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
 
-                    'Return False
-                Else
-                    'Return True
                 End If
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-結束--------------------------
 
