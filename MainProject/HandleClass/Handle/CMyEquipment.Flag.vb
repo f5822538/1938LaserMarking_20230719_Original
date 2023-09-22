@@ -4,7 +4,7 @@
     Private moIsStop As New ManualResetEventSlim(False)
     Private moIsAlarm As New ManualResetEventSlim(False)
     '-------------------------20230919-開始--------------------------
-    Private moIsCanInspect As New ManualResetEventSlim(initialState:=False)
+    Private moIsCanInspect As New ManualResetEventSlim(initialState:=True) '20230922:參數一定要設為True否則一開始執行時,會無法檢測
     '-------------------------20230919-結束--------------------------
     'Private moIsRunning As New ManualResetEventSlim(False)
 
