@@ -353,17 +353,21 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
                     '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                     '-------------------------20230919-開始--------------------------
-                    If moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then '產品在席檢知
+                    If moMyEquipment.IsCanInspect IsNot Nothing AndAlso moMyEquipment.IsCanInspect.IsSet = True AndAlso _
+                       moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = True Then '產品在席檢知
                         oCameraSnap.Start() '開始-檢測相機-取像任務
                         oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
                     Else
+                        moMyEquipment.LightVacuumDown(moLog) '燈源汽缸-下降
+                        moMyEquipment.SetLightOff(moLog) '關閉-燈源
+
                         If oCameraSnapToken.CanBeCanceled = True Then
-                            oCameraSnapTokenSrc.Cancel()
+                            oCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
                             oCameraSnapTokenSrc.Dispose()
                         End If
 
                         If oCodeReaderCameraSnapToken.CanBeCanceled = True Then
-                            oCodeReaderCameraSnapTokenSrc.Cancel()
+                            oCodeReaderCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
                             oCodeReaderCameraSnapTokenSrc.Dispose()
                         End If
                     End If
