@@ -352,7 +352,7 @@ Module modLibrary
             End If
 
             '-------------------------20230828-開始--------------------------
-            For nIndex As Integer = 0 To nRefX.Count - 1
+            For nIndex As Integer = 0 To nRefX.Count - 1 '我是nIndex
                 Dim oModelImage As New CMyModelImage
                 oModelImage.CenterX = CInt(Math.Round(nRefX.Item(nIndex) + oRecipe.SearchRange.X))
                 oModelImage.CenterY = CInt(Math.Round(nRefY.Item(nIndex) + oRecipe.SearchRange.Y))
@@ -472,7 +472,7 @@ Module modLibrary
                     If nPositionX < .PositionX - nOffsetGrayMin OrElse nPositionX > .PositionX + nOffsetGrayMin OrElse nPositionY < .PositionY - nOffsetGrayMin OrElse nPositionY > .PositionY + nOffsetGrayMin Then
                         oModelImage.IsOffset = True '位移/偏移
                         oModelImage.IsProcess = False
-                        Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY)
+                        Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY) '我是nIndex
                         If nIndex < 0 Then
                             oModelImage.MarkX = -1
                             oModelImage.MarkY = -1
@@ -495,7 +495,7 @@ Module modLibrary
             End If
 
             If oRecipeMarkList.Item(0).MarkX < oProduct.DimensionX AndAlso oRecipeMarkList.Item(0).MarkY < oProduct.DimensionY Then
-                Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY)
+                Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY) '我是nIndex
                 If nIndex < 0 Then
                     oModelImage.IsProcess = False
                     oModelImage.MarkX = -1
@@ -545,11 +545,11 @@ Module modLibrary
                 SyncLock CAutoRunThread.ProcessDefectListLock
                     oInspectSum.DefectList.ModelList.Add(oModelImagePosition)
                 End SyncLock
-                Dim nIndex As Integer = 0
+                Dim nIndex As Integer = 0 '我是nIndex
 
                 Dim sResult As String = "" '重要-產出Report的圖片用
                 If oModelImage.IsProcess = False Then '大部分是走這個流程(oModelImage.IsProcess = False)
-                    nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
+                    nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) '我是nIndex
                     If nIndex < 0 Then
                         Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed！(Recipe)", nSequence))
                         Return False '在結果Result列表顯示-瑕疵:0,檢測異常(樣板):Y,顯示為紅字原因為何[oModelImage.IsProcess = False, oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) < 0]
@@ -1226,7 +1226,7 @@ Module modLibrary
 
                 '************************ 20230919-日月光反映現場實際測試漏雷和NoDie都會執行到以下的程式區塊-開始 ************************
 
-                Dim nIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
+                Dim nIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY) '我是nIndex
 
                 '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-開始--------------------------
                 If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then '判斷條件3
@@ -1273,111 +1273,122 @@ Module modLibrary
                         'Return True
                     End If
 
-                    '-------------------------20230905-開始--------------------------
-                    If Debugger.IsAttached = True Then
-                        '原本的寫法
-                        oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
-                    ElseIf Debugger.IsAttached = False Then
-                        '測試的寫法
-                        oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
-                    End If
-                    '-------------------------20230905-結束--------------------------
-
-                    SyncLock CAutoRunThread.ProcessDefectListLock
-                        oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
-
-                        '-------------------------瑕疵結果訊息-開始--------------------------
-                        Dim defectResultMsg As String = String.Empty
-                        For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
-                            If oMarkInfo.Result = value Then
-                                defectResultMsg = frmMain.GetDescriptionText(oMarkInfo.Result)
-                                Exit For
-                            End If
-                        Next
-                        oLog.LogError(String.Format("[{0:d4}] B瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
-                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
-                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
-                        Dim fileName1 As String = stFrame1.GetFileName
-                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
-                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
-                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
-                        oLog.LogError("FileName:" & fileName1)
-                        oLog.LogError("FileLineNumber:" & fileLineNum1)
-                        oLog.LogError("FileColumnNumber:" & fileColNum1)
-                        oLog.LogError("MethodName:" & fileMethodName1)
-                        oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
-                        '-------------------------瑕疵結果訊息-結束--------------------------
-                    End SyncLock
 
 
-                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                    Dim oDefect As New CMyDefect
-                    oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
-                    oDefect.InspectType = InspectType.ModelDiff
-                    oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                    oDefect.ResultType = oMarkInfo.Result '蓋印漏雷
-                    oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result) '瑕疵名稱(可用於出報表) [oMarkInfo.Result = ResultType.Lose]
-                    oDefect.MeanGray = 0
-                    oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
-                    oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
-                    oDefect.DefectBoundary.Top = CInt(oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionY)
-                    oDefect.DefectBoundary.Left = CInt(oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionX)
-                    oDefect.DefectBoundary.Bottom = CInt(oRecipe.ModelSize.Height + oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionY)
-                    oDefect.DefectBoundary.Right = CInt(oRecipe.ModelSize.Width + oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionX)
-                    oDefect.DefectBoundary.Width = oRecipe.ModelSize.Width
-                    oDefect.DefectBoundary.Height = oRecipe.ModelSize.Height
-                    oDefect.DefectSize = New CITVPointWapper(oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height)
-                    oDefect.DefectPosition = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionY))
-                    oDefect.DefectCenter = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionCenterX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionCenterY))
-                    oDefect.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 for Wafer Map
-                    oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
+                    '=================================== 20230922-開始 ===================================
+                    If oMarkInfo.OriginalType = ResultType.NoDie AndAlso oInspectSum.InspectResult.DefectNoDieCount > 0 Then 'No Die-標記 (重要判斷條件)
+                        oMarkInfo.Result = ResultType.NoDie
+                        oInspectSum.InspectResult.ModleLoseStatus = False 'BuildLoseModel 漏雷(CInspectResult) '2023-09-22 17:30 因為要除錯漏雷與NoDie無法分開的問題
+                    Else
+                        '-------------------------20230905-開始--------------------------
+                        If Debugger.IsAttached = True Then
+                            '原本的寫法
+                            oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                        ElseIf Debugger.IsAttached = False Then
+                            '測試的寫法
+                            oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
+                        End If
+                        '-------------------------20230905-結束--------------------------
 
-                    sResult = "NG" 'BuildLoseModel 重要-產出Report的圖片用(蓋印漏雷/蓋印轉置)
-                    oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
-                                                                 oMyEquipment.MainRecipe.RecipeID,
-                                                                 oInspectSum.InspectResult.CodeID,
-                                                                 oInspectSum.ProductConfig.EQPID,
-                                                                 oRecipe.MarkXCount - oMarkInfo.MarkX,
-                                                                 oMarkInfo.MarkY + 1,
-                                                                 oInspectSum.ReceiveTime,
-                                                                 sResult) '重要-產出Report的圖片用(蓋印漏雷)
+                        SyncLock CAutoRunThread.ProcessDefectListLock
+                            oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
-                    oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName) '瑕疵點位小圖(可用於出報表)
+                            '-------------------------瑕疵結果訊息-開始--------------------------
+                            Dim defectResultMsg As String = String.Empty
+                            For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
+                                If oMarkInfo.Result = value Then
+                                    defectResultMsg = frmMain.GetDescriptionText(oMarkInfo.Result)
+                                    Exit For
+                                End If
+                            Next
+                            oLog.LogError(String.Format("[{0:d4}] B瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
+                            Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                            Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                            Dim fileName1 As String = stFrame1.GetFileName
+                            Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                            Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                            Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                            oLog.LogError("FileName:" & fileName1)
+                            oLog.LogError("FileLineNumber:" & fileLineNum1)
+                            oLog.LogError("FileColumnNumber:" & fileColNum1)
+                            oLog.LogError("MethodName:" & fileMethodName1)
+                            oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
+                            '-------------------------瑕疵結果訊息-結束--------------------------
+                        End SyncLock
 
-                    SyncLock CAutoRunThread.ProcessDefectListLock
-                        oInspectSum.DefectList.DefectList.Add(oDefect)
-                        oInspectSum.DefectListDraw.Add(oDefect) '用於畫框(oMarkInfo.Result = ResultType.Lose,蓋印漏雷/蓋印轉置)
-
-                        '-------------------------瑕疵結果訊息-開始--------------------------
-                        oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)
-                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
-                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
-                        Dim fileName1 As String = stFrame1.GetFileName
-                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
-                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
-                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
-                        oLog.LogError("FileName:" & fileName1)
-                        oLog.LogError("FileLineNumber:" & fileLineNum1)
-                        oLog.LogError("FileColumnNumber:" & fileColNum1)
-                        oLog.LogError("MethodName:" & fileMethodName1)
-                        oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log 日誌(處理 Process)
-                        '-------------------------瑕疵結果訊息-結束--------------------------
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                        '-------------------------20230911-開始--------------------------
-                        'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
-                        '************************ 真正應該要跳漏雷的區塊在這裡 '************************
-                        'oInspectSum.InspectResult.ModleLoseStatus:這個Flag(全域變數)會影響到漏雷TriggerAlarm及停機SetEroorOn,要謹慎決定是否要被註解掉
-                        'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-11 11:50 因為生產線頻繁跳出,所以先註解掉以利測試
-                        '-------------------------20230911-結束--------------------------
-                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
-                    End SyncLock
+                        Dim oDefect As New CMyDefect
+                        oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
+                        oDefect.InspectType = InspectType.ModelDiff
+                        oDefect.DefectType = Comp_InsperrorType.Comp_Corner
+                        oDefect.ResultType = oMarkInfo.Result '蓋印漏雷
+                        oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result) '瑕疵名稱(可用於出報表) [oMarkInfo.Result = ResultType.Lose]
+                        oDefect.MeanGray = 0
+                        oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
+                        oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
+                        oDefect.DefectBoundary.Top = CInt(oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionY)
+                        oDefect.DefectBoundary.Left = CInt(oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionX)
+                        oDefect.DefectBoundary.Bottom = CInt(oRecipe.ModelSize.Height + oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionY)
+                        oDefect.DefectBoundary.Right = CInt(oRecipe.ModelSize.Width + oRecipe.RecipeMarkList.RecipeMarkList.Item(nIndex).PositionX)
+                        oDefect.DefectBoundary.Width = oRecipe.ModelSize.Width
+                        oDefect.DefectBoundary.Height = oRecipe.ModelSize.Height
+                        oDefect.DefectSize = New CITVPointWapper(oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height)
+                        oDefect.DefectPosition = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionY))
+                        oDefect.DefectCenter = New CITVPointWapper(CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionCenterX), CInt(oRecipe.RecipeMarkList.RecipeMarkList(nIndex).PositionCenterY))
+                        oDefect.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 for Wafer Map
+                        oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
 
-                    MIL.MbufChild2d(oCameraSourceImage, oDefect.DefectPosition.X, oDefect.DefectPosition.Y, oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height, oAIModelImage)
-                    MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oAIModelImage)
-                    MIL.MbufFree(oAIModelImage)
-                    oAIModelImage = MIL.M_NULL
-                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                        sResult = "NG" 'BuildLoseModel 重要-產出Report的圖片用(蓋印漏雷/蓋印轉置)
+                        oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
+                                                                     oMyEquipment.MainRecipe.RecipeID,
+                                                                     oInspectSum.InspectResult.CodeID,
+                                                                     oInspectSum.ProductConfig.EQPID,
+                                                                     oRecipe.MarkXCount - oMarkInfo.MarkX,
+                                                                     oMarkInfo.MarkY + 1,
+                                                                     oInspectSum.ReceiveTime,
+                                                                     sResult) '重要-產出Report的圖片用(蓋印漏雷)
+
+                        oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName) '瑕疵點位小圖(可用於出報表)
+
+                        SyncLock CAutoRunThread.ProcessDefectListLock
+                            oInspectSum.DefectList.DefectList.Add(oDefect)
+                            oInspectSum.DefectListDraw.Add(oDefect) '用於畫框(oMarkInfo.Result = ResultType.Lose,蓋印漏雷/蓋印轉置)
+
+                            '-------------------------瑕疵結果訊息-開始--------------------------
+                            oLog.LogError(String.Format("[{0:d4}] C瑕疵:", nSequence)) 'Log 日誌(處理 Process)
+                            Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                            Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                            Dim fileName1 As String = stFrame1.GetFileName
+                            Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                            Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                            Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                            oLog.LogError("FileName:" & fileName1)
+                            oLog.LogError("FileLineNumber:" & fileLineNum1)
+                            oLog.LogError("FileColumnNumber:" & fileColNum1)
+                            oLog.LogError("MethodName:" & fileMethodName1)
+                            oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log 日誌(處理 Process)
+                            '-------------------------瑕疵結果訊息-結束--------------------------
+
+                            '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                            '-------------------------20230911-開始--------------------------
+                            'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
+                            '************************ 真正應該要跳漏雷的區塊在這裡 '************************
+                            'oInspectSum.InspectResult.ModleLoseStatus:這個Flag(全域變數)會影響到漏雷TriggerAlarm及停機SetEroorOn,要謹慎決定是否要被註解掉
+                            'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-11 11:50 因為生產線頻繁跳出,所以先註解掉以利測試
+                            oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-22 17:30 因為要除錯漏雷與NoDie無法分開的問題 
+                            '-------------------------20230911-結束--------------------------
+                            '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                        End SyncLock
+
+                        MIL.MbufChild2d(oCameraSourceImage, oDefect.DefectPosition.X, oDefect.DefectPosition.Y, oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height, oAIModelImage)
+                        MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oAIModelImage)
+                        MIL.MbufFree(oAIModelImage)
+                        oAIModelImage = MIL.M_NULL
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                    End If
+                    '=================================== 20230922-結束 ===================================
+
 
 
                 End If

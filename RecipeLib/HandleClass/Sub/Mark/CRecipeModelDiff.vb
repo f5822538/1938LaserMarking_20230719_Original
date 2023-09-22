@@ -290,9 +290,9 @@ Public Class CRecipeModelDiff : Inherits CConfigBase
     Public ReadOnly Property MarkIndex(nMarkX As Integer, nMarkY As Integer) As Integer
         Get
             If nMarkX < 0 OrElse nMarkY < 0 OrElse nMarkX >= MarkXCount OrElse nMarkY >= MarkYCount Then Return -1
-            Dim nIndex As Integer = nMarkY * MarkXCount + nMarkX
+            Dim nIndex As Integer = nMarkY * MarkXCount + nMarkX '我是nIndex
             If RecipeMarkList.RecipeMarkList.Count <= nIndex OrElse RecipeMarkList.RecipeMarkList.Item(nIndex).MarkX <> nMarkX OrElse RecipeMarkList.RecipeMarkList.Item(nIndex).MarkY <> nMarkY Then
-                For nIndex = 0 To RecipeMarkList.RecipeMarkList.Count - 1
+                For nIndex = 0 To RecipeMarkList.RecipeMarkList.Count - 1 '我是nIndex
                     If RecipeMarkList.RecipeMarkList.Item(nIndex).MarkX = nMarkX AndAlso RecipeMarkList.RecipeMarkList.Item(nIndex).MarkY = nMarkY Then Return nIndex
                 Next
             Else

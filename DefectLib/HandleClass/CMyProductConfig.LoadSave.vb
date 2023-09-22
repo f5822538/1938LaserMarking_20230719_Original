@@ -24,7 +24,7 @@
             MarkList.Clear()
             For nMarkIndex = 0 To nMarkCount - 1
                 Dim oMarkInfo As New CMyMarkInfo()
-                Dim nIndex As Integer = nMarkIndex * 5
+                Dim nIndex As Integer = nMarkIndex * 5 '我是nIndex
                 'oMarkInfo.IsProcess = CBool(sMarkList(nIndex + 0))
                 oMarkInfo.AfterInspectBinCode = sMarkList(nIndex + 0)
                 oMarkInfo.MarkX = CInt(sMarkList(nIndex + 1))
@@ -41,7 +41,7 @@
 
         If MarkList.Count > 0 Then
             MarkListString = String.Format("{0},{1},{2},{3},{4}", MarkList.Item(0).AfterInspectBinCode, MarkList.Item(0).MarkX, MarkList.Item(0).MarkY, CInt(MarkList.Item(0).Result), MarkList.Item(0).IsGray)
-            For nIndex = 1 To MarkCount - 1
+            For nIndex = 1 To MarkCount - 1 '我是nIndex
                 MarkListString = String.Format("{0},{1},{2},{3},{4},{5}", MarkListString, MarkList.Item(nIndex).AfterInspectBinCode, MarkList.Item(nIndex).MarkX, MarkList.Item(nIndex).MarkY, CInt(MarkList.Item(nIndex).Result), MarkList.Item(0).IsGray)
             Next
         End If

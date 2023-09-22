@@ -54,7 +54,7 @@
 
     Public Function RemoveProduct(CodeID As String) As AlarmCode
         If moHardwareConfig.HandshakeBypass = False Then
-            For nIndex As Integer = 0 To ProductList.Count - 1
+            For nIndex As Integer = 0 To ProductList.Count - 1 '我是nIndex
                 If ProductList.Item(nIndex).SubstrateID = CodeID Then
                     Call ProductList.RemoveAt(nIndex)
                     Return AlarmCode.IsOK

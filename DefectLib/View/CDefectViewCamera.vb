@@ -70,7 +70,7 @@ Public Class CDefectViewCamera : Inherits ListView
     Public Sub AddLineList(sReaded() As String, nData As Integer, nMax As Integer)
         Dim oList As New List(Of ListViewItem)
 
-        For nIndex As Integer = 1 To sReaded.Length
+        For nIndex As Integer = 1 To sReaded.Length '我是nIndex
             Dim aStr() As String = Split(sReaded(nIndex - 1), ",")
             If aStr.Length = nMax Then
                 Dim o As New ListViewItem(aStr(0))

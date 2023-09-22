@@ -41,7 +41,7 @@ Partial Class CAutoRunThread
 
     Private Function UpdateProduct() As AlarmCode
         If moMyEquipment.HardwareConfig.HandshakeBypass = False Then
-            For nIndex As Integer = 0 To moMyEquipment.ProductList.Count - 1
+            For nIndex As Integer = 0 To moMyEquipment.ProductList.Count - 1 '我是nIndex
                 If moMyEquipment.ProductList.Item(nIndex).SubstrateID = moProductProcess.SubstrateID Then
                     moMyEquipment.ProductList.Item(nIndex) = moMyEquipment.CopyProduct(moProductProcess)
                     Return AlarmCode.IsOK
@@ -69,7 +69,7 @@ Partial Class CAutoRunThread
 
             oBitmap = New Bitmap(.Width, .Height, .Stride, PixelFormat.Format8bppIndexed, .Ptr)
             Dim aPalette As Imaging.ColorPalette = oBitmap.Palette
-            For nIndex As Integer = 0 To 255
+            For nIndex As Integer = 0 To 255 '我是nIndex
                 aPalette.Entries(nIndex) = Color.FromArgb(nIndex, nIndex, nIndex)
             Next
             oBitmap.Palette = aPalette
@@ -102,7 +102,7 @@ Partial Class CAutoRunThread
                     Dim ROIOffset As New List(Of Rectangle)
                     'Dim ROIPass As New List(Of Rectangle)
                     Dim ROIIndistinct As New List(Of Rectangle)
-                    For nIndex As Integer = 0 To oList.Count - 1
+                    For nIndex As Integer = 0 To oList.Count - 1 '我是nIndex
                         If oList(nIndex).ResultType = ResultType.NGBright Then ROIBright.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '表面瑕疵 (字)
                         If oList(nIndex).ResultType = ResultType.NGDark Then ROIDark.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '表面瑕疵 (背)
 

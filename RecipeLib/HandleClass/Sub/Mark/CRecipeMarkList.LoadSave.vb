@@ -11,7 +11,7 @@
             Dim sMarkList As String() = Split(MarkListString, ",")
             For nMarkIndex = 0 To RecipeMarkCount - 1
                 Dim oRecipeMark As New CRecipeMark(moSetting)
-                Dim nIndex As Integer = nMarkIndex * 6
+                Dim nIndex As Integer = nMarkIndex * 6 '我是nIndex
                 oRecipeMark.MarkX = CInt(sMarkList(nIndex + 0))
                 oRecipeMark.MarkY = CInt(sMarkList(nIndex + 1))
                 oRecipeMark.PositionCenterX = CInt(sMarkList(nIndex + 2))
@@ -27,7 +27,7 @@
         RecipeMarkCount = RecipeMarkList.Count
         MarkListString = ""
         MarkListString = String.Format("{0},{1},{2},{3},{4},{5}", RecipeMarkList.Item(0).MarkX, RecipeMarkList.Item(0).MarkY, RecipeMarkList.Item(0).PositionCenterX, RecipeMarkList.Item(0).PositionCenterY, RecipeMarkList.Item(0).PositionX, RecipeMarkList.Item(0).PositionY)
-        For nIndex = 1 To RecipeMarkCount - 1
+        For nIndex = 1 To RecipeMarkCount - 1 '我是nIndex
             MarkListString = String.Format("{0},{1},{2},{3},{4},{5},{6}", MarkListString, RecipeMarkList.Item(nIndex).MarkX, RecipeMarkList.Item(nIndex).MarkY, RecipeMarkList.Item(nIndex).PositionCenterX, RecipeMarkList.Item(nIndex).PositionCenterY, RecipeMarkList.Item(nIndex).PositionX, RecipeMarkList.Item(nIndex).PositionY)
         Next
 

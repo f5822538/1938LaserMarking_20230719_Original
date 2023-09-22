@@ -195,7 +195,7 @@ Public Class frmRecipe
         With moRecipe.RecipeCamera.RecipeModelDiff
             Call .RecipeMarkList.RecipeMarkList.Clear()
 
-            For nIndex As Integer = 0 To moModelImageList.Count - 1
+            For nIndex As Integer = 0 To moModelImageList.Count - 1 '我是nIndex
                 If nMinX > moModelImageList.Item(nIndex).PositionX Then nMinX = CInt(moModelImageList.Item(nIndex).PositionX)
                 If nMaxX < moModelImageList.Item(nIndex).PositionX Then nMaxX = CInt(moModelImageList.Item(nIndex).PositionX)
                 If nMinY > moModelImageList.Item(nIndex).PositionY Then nMinY = CInt(moModelImageList.Item(nIndex).PositionY)
@@ -237,7 +237,7 @@ Public Class frmRecipe
                         nModelPositionMaxY = nMinY + nMarkPitchY
                     End If
 
-                    For nIndex As Integer = 0 To moModelImageList.Count - 1
+                    For nIndex As Integer = 0 To moModelImageList.Count - 1 '我是nIndex
                         If oMarkList(nIndex) = True Then Continue For
                         If moModelImageList.Item(nIndex).PositionX > nModelPositionMinX AndAlso moModelImageList.Item(nIndex).PositionX < nModelPositionMaxX AndAlso moModelImageList.Item(nIndex).PositionY > nModelPositionMinY AndAlso moModelImageList.Item(nIndex).PositionY < nModelPositionMaxY Then
                             Dim oRecipeMark As CRecipeMark = .CreateRecipeMarkConfig()
@@ -299,7 +299,7 @@ Public Class frmRecipe
                 Next
             Next
 
-            For nIndex As Integer = moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Count - 1 To 0 Step -1
+            For nIndex As Integer = moRecipe.RecipeCamera.RecipeModelDiff.RecipeMarkList.RecipeMarkList.Count - 1 To 0 Step -1 '我是nIndex
                 If .RecipeMarkList.RecipeMarkList.Item(nIndex).IsUse = False Then .RecipeMarkList.RecipeMarkList.RemoveAt(nIndex)
             Next
         End With

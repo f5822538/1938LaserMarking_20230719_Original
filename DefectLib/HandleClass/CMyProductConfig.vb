@@ -43,9 +43,9 @@
     Public ReadOnly Property MarkIndex(nMarkX As Integer, nMarkY As Integer) As Integer
         Get
             If nMarkX < 0 OrElse nMarkY < 0 OrElse nMarkX >= DimensionX OrElse nMarkY >= DimensionY Then Return -1
-            Dim nIndex As Integer = nMarkY * DimensionX + nMarkX
+            Dim nIndex As Integer = nMarkY * DimensionX + nMarkX '我是nIndex
             If MarkList.Item(nIndex).MarkX <> nMarkX OrElse MarkList.Item(nIndex).MarkY <> nMarkY Then
-                For nIndex = 0 To MarkList.Count - 1
+                For nIndex = 0 To MarkList.Count - 1 '我是nIndex
                     If MarkList.Item(nIndex).MarkX = nMarkX AndAlso MarkList.Item(nIndex).MarkY = nMarkY Then Return nIndex
                 Next
             End If

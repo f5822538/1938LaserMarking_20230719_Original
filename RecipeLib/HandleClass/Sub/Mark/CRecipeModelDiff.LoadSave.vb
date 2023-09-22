@@ -32,7 +32,7 @@ Partial Class CRecipeModelDiff : Implements II_LoadSave
         ModelCenterDrawListStart.Clear()
         ModelCenterDrawListEnd.Clear()
 
-        For nIndex As Integer = 0 To RecipeMarkList.RecipeMarkList.Count - 1
+        For nIndex As Integer = 0 To RecipeMarkList.RecipeMarkList.Count - 1 '§Ú¬OnIndex
             If RecipeMarkList.RecipeMarkList.Item(nIndex).IsEmpty = True Then Continue For
             Dim pStart As Point = New Point(CInt(RecipeMarkList.RecipeMarkList.Item(nIndex).PositionCenterX - 20), CInt(RecipeMarkList.RecipeMarkList.Item(nIndex).PositionCenterY))
             Dim pEnd As Point = New Point(CInt(RecipeMarkList.RecipeMarkList.Item(nIndex).PositionCenterX + 20), CInt(RecipeMarkList.RecipeMarkList.Item(nIndex).PositionCenterY))

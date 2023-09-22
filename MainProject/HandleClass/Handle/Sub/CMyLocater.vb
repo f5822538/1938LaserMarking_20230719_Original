@@ -93,7 +93,7 @@ Public Class CMyLocater
             Call moBlob.GetResults(oBlobResultList)
 
             Dim nMaxArea As Double = 0.0
-            For nIndex As Integer = 0 To oBlobResultList.Count - 1
+            For nIndex As Integer = 0 To oBlobResultList.Count - 1 '我是nIndex
                 If oBlobResultList(nIndex).Area > nMaxArea Then
                     oSearchRange.X = CInt(oBlobResultList(nIndex).DefectCenterX - (oSearchRange.Width / 2) + oModel.X)
                     oSearchRange.Y = CInt(oBlobResultList(nIndex).DefectCenterY - (oSearchRange.Height / 2) + oModel.Y)

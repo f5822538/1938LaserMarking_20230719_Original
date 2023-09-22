@@ -202,7 +202,7 @@ Public Class frmIntegrateTest
     End Sub
 
     Private Sub ToolStripButtonAddProduct_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButtonAddProduct.Click
-        Dim nIndex As Integer = 0
+        Dim nIndex As Integer = 0 '我是nIndex
         Dim oProduct As New CMyProduct
         If dgvProduct.SelectedCells.Count > 0 Then nIndex = dgvProduct.SelectedCells(0).RowIndex + 1
         BindingSourceProduct.DataSource = Nothing
