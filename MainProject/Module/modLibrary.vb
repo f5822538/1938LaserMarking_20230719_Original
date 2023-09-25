@@ -662,7 +662,8 @@ Module modLibrary
                         If Debugger.IsAttached = True Then
                             '原本的寫法
                             '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.Lose
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                            'oProduct.MarkList.Item(nIndex).Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser1 '漏雷(CMyMarkInfo)
                         ElseIf Debugger.IsAttached = False Then
                             '測試的寫法
                             '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser
@@ -1283,7 +1284,8 @@ Module modLibrary
                         '-------------------------20230905-開始--------------------------
                         If Debugger.IsAttached = True Then
                             '原本的寫法
-                            oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                            'oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                            oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
                         ElseIf Debugger.IsAttached = False Then
                             '測試的寫法
                             oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)

@@ -56,107 +56,107 @@ Public Class frmMain
 
             '------------------------Debug-瑕疵結果訊息-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim defectResultMsg As String = String.Empty
-                For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
-                    If ResultType.Lose = value Then
-                        defectResultMsg = frmMain.GetDescriptionText(ResultType.Lose)
-                        Exit For
-                    End If
-                Next
-                moLog.LogError(String.Format("[{0:d4}] A瑕疵:" & defectResultMsg, 0)) 'Log 日誌(處理 Process)
-                Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
-                Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
-                Dim fileName1 As String = stFrame1.GetFileName
-                Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
-                Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
-                Dim fileMethodName1 As String = stFrame1.GetMethod().Name
-                moLog.LogError("FileName:" & fileName1)
-                moLog.LogError("FileLineNumber:" & fileLineNum1)
-                moLog.LogError("FileColumnNumber:" & fileColNum1)
-                moLog.LogError("MethodName:" & fileMethodName1)
-                moLog.LogError(String.Format("[{0:d4}] DefectCount:" & 11, 0)) 'Log 日誌(處理 Process)
+                'Dim defectResultMsg As String = String.Empty
+                'For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
+                '    If ResultType.Lose = value Then
+                '        defectResultMsg = frmMain.GetDescriptionText(ResultType.Lose)
+                '        Exit For
+                '    End If
+                'Next
+                'moLog.LogError(String.Format("[{0:d4}] A瑕疵:" & defectResultMsg, 0)) 'Log 日誌(處理 Process)
+                'Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
+                'Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
+                'Dim fileName1 As String = stFrame1.GetFileName
+                'Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
+                'Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
+                'Dim fileMethodName1 As String = stFrame1.GetMethod().Name
+                'moLog.LogError("FileName:" & fileName1)
+                'moLog.LogError("FileLineNumber:" & fileLineNum1)
+                'moLog.LogError("FileColumnNumber:" & fileColNum1)
+                'moLog.LogError("MethodName:" & fileMethodName1)
+                'moLog.LogError(String.Format("[{0:d4}] DefectCount:" & 11, 0)) 'Log 日誌(處理 Process)
             End If
             '------------------------Debug-瑕疵結果訊息-結束--------------------------
 
             '------------------------Debug--漏雷觸發Alarm-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim oAlarmCode As AlarmCode = AlarmCode.IsDieLoseLaser '漏雷
-                If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
-                    moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
-                    moMyEquipment.TriggerAlarm(oAlarmCode, moMyEquipment.MyLog.LogAlarm) '漏雷觸發Alarm
-                    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(處理 Process)
-                    moMyEquipment.LogAlarm.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(警報 Alarm)
-                    moMyEquipment.SetEroorOn(moLog) '漏雷觸發Alarm(Error)
-                End If
+                'Dim oAlarmCode As AlarmCode = AlarmCode.IsDieLoseLaser '漏雷
+                'If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
+                '    moMyEquipment.TriggerAlarm(oAlarmCode) '漏雷觸發Alarm
+                '    moMyEquipment.TriggerAlarm(oAlarmCode, moMyEquipment.MyLog.LogAlarm) '漏雷觸發Alarm
+                '    If moLog IsNot Nothing Then moLog.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(處理 Process)
+                '    moMyEquipment.LogAlarm.LogError(String.Format("[{0:yyyy-MM-dd HH:mm:ss:fff}] 漏雷觸發Alarm", DateTime.Now)) 'Log 日誌(警報 Alarm)
+                '    moMyEquipment.SetEroorOn(moLog) '漏雷觸發Alarm(Error)
+                'End If
             End If
             '------------------------Debug--漏雷觸發Alarm-結束--------------------------
 
             '------------------------Debug--Run Inspect 失敗-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim oAlarmCode As AlarmCode = AlarmCode.IsDoorOpen '開門
-                Dim mnSequence As Integer = 0
-                Dim runInspectErrMsg As String = "Run Inspect 失敗"
+                'Dim oAlarmCode As AlarmCode = AlarmCode.IsDoorOpen '開門
+                'Dim mnSequence As Integer = 0
+                'Dim runInspectErrMsg As String = "Run Inspect 失敗"
 
-                If oAlarmCode <> AlarmCode.IsOK Then '檢測失敗
-                    For Each value As AlarmCode In [Enum].GetValues(GetType(AlarmCode))
-                        If oAlarmCode = value Then
-                            Dim descriptionText As String = GetDescriptionText(oAlarmCode)
-                            runInspectErrMsg += ":在" & descriptionText & "時,發生異常情況"
-                            Exit For
-                        End If
-                    Next
-                    moLog.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(處理 Process)
-                    moMyEquipment.LogAlarm.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(警報 Alarm)
-                End If
+                'If oAlarmCode <> AlarmCode.IsOK Then '檢測失敗
+                '    For Each value As AlarmCode In [Enum].GetValues(GetType(AlarmCode))
+                '        If oAlarmCode = value Then
+                '            Dim descriptionText As String = GetDescriptionText(oAlarmCode)
+                '            runInspectErrMsg += ":在" & descriptionText & "時,發生異常情況"
+                '            Exit For
+                '        End If
+                '    Next
+                '    moLog.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(處理 Process)
+                '    moMyEquipment.LogAlarm.LogError(String.Format("[{0:d4}] " & runInspectErrMsg, mnSequence)) 'Log 日誌(警報 Alarm)
+                'End If
 
             End If
             '------------------------Debug--Run Inspect 失敗-結束--------------------------
 
             '------------------------Debug-定位孔異常圖片-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim locater1 As New CMyLocater(moMyEquipment) '定位孔-1
-                Dim locater2 As New CMyLocater(moMyEquipment) '定位孔-2
+                'Dim locater1 As New CMyLocater(moMyEquipment) '定位孔-1
+                'Dim locater2 As New CMyLocater(moMyEquipment) '定位孔-2
 
-                'Dim imgPath0 As String = "D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp"
-                'Dim imgPath01 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-14_14_22_08-Default-Org.bmp"
-                'Dim imgPath02 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-15_19_31_54-Default-Org.bmp"
-                'Dim imgPath03 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-16_14_20_03-Default-Org.bmp"
-                Dim imgPath04 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-16_21_15_56-Default-Org.bmp"
-                Dim imgPath05 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_14_28_56-Default-Org.bmp"
-                Dim imgPath06 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_14_31_24-Default-Org.bmp"
-                Dim imgPath07 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_18_26_36-Default-Org.bmp"
-                Dim imgPath08 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_21_08_57-Default-Org.bmp"
-                Dim imgPath09 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-18_13_01_53-Default-Org.bmp"
-                Dim imgPath10 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-18_19_38_50-Default-Org.bmp"
-                Dim imgPath11 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-25_16_31_18-Default-Org.bmp"
-                'Dim imgPath12 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-25_16_34_26-Default-Org.bmp"
+                ''Dim imgPath0 As String = "D:\ASE_ProgramReleaseReport_202307\SourceImage\20220822_103727.735.Bmp"
+                ''Dim imgPath01 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-14_14_22_08-Default-Org.bmp"
+                ''Dim imgPath02 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-15_19_31_54-Default-Org.bmp"
+                ''Dim imgPath03 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-16_14_20_03-Default-Org.bmp"
+                'Dim imgPath04 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-16_21_15_56-Default-Org.bmp"
+                'Dim imgPath05 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_14_28_56-Default-Org.bmp"
+                'Dim imgPath06 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_14_31_24-Default-Org.bmp"
+                'Dim imgPath07 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_18_26_36-Default-Org.bmp"
+                'Dim imgPath08 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-17_21_08_57-Default-Org.bmp"
+                'Dim imgPath09 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-18_13_01_53-Default-Org.bmp"
+                'Dim imgPath10 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-18_19_38_50-Default-Org.bmp"
+                'Dim imgPath11 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-25_16_31_18-Default-Org.bmp"
+                ''Dim imgPath12 As String = "D:\日月光-定位孔異常解析\HoleLocateBinBmpNg\2023-08-25_16_34_26-Default-Org.bmp"
 
-                If File.Exists(imgPath04) = True Then
-                    Dim testBitMap1 As Bitmap = New Bitmap(imgPath04)
-                    Dim aRectangle As Rectangle = Rectangle.FromLTRB(0, 0, testBitMap1.Width, testBitMap1.Height)
+                'If File.Exists(imgPath04) = True Then
+                '    Dim testBitMap1 As Bitmap = New Bitmap(imgPath04)
+                '    Dim aRectangle As Rectangle = Rectangle.FromLTRB(0, 0, testBitMap1.Width, testBitMap1.Height)
 
-                    '-------------------------20230913-開始--------------------------
-                    Dim findResult1 As Boolean = locater1.Find(testBitMap1) '定位孔-1(False)
-                    Dim findResult2 As Boolean = locater2.Find(testBitMap1) '定位孔-2(False)
-                    '-------------------------20230913-結束--------------------------
+                '    '-------------------------20230913-開始--------------------------
+                '    Dim findResult1 As Boolean = locater1.Find(testBitMap1) '定位孔-1(False)
+                '    Dim findResult2 As Boolean = locater2.Find(testBitMap1) '定位孔-2(False)
+                '    '-------------------------20230913-結束--------------------------
 
-                    '-------------------------20230913-開始--------------------------
-                    Dim moPatternMatchingMark1 As CMyPatternMatching = New CMyPatternMatching()
-                    Dim moPatternMatchingMark2 As CMyPatternMatching = New CMyPatternMatching()
-                    Dim FindMark1X As Double = 0.0
-                    Dim FindMark1Y As Double = 0.0
-                    Dim FindMark2X As Double = 0.0
-                    Dim FindMark2Y As Double = 0.0
-                    Dim nScore As Double = 0.0
-                    Dim findCircle1 As Boolean = moPatternMatchingMark1.FindModel(1, aRectangle, FindMark1X, FindMark1Y, nScore, moMainRecipe.RecipeCamera.Locate1.PatternZone.Location) '定位孔-1
-                    Dim findCircle2 As Boolean = moPatternMatchingMark2.FindModel(1, aRectangle, FindMark2X, FindMark2Y, nScore, moMainRecipe.RecipeCamera.Locate2.PatternZone.Location) '定位孔-2
-                    '-------------------------20230913-結束--------------------------
+                '    '-------------------------20230913-開始--------------------------
+                '    Dim moPatternMatchingMark1 As CMyPatternMatching = New CMyPatternMatching()
+                '    Dim moPatternMatchingMark2 As CMyPatternMatching = New CMyPatternMatching()
+                '    Dim FindMark1X As Double = 0.0
+                '    Dim FindMark1Y As Double = 0.0
+                '    Dim FindMark2X As Double = 0.0
+                '    Dim FindMark2Y As Double = 0.0
+                '    Dim nScore As Double = 0.0
+                '    Dim findCircle1 As Boolean = moPatternMatchingMark1.FindModel(1, aRectangle, FindMark1X, FindMark1Y, nScore, moMainRecipe.RecipeCamera.Locate1.PatternZone.Location) '定位孔-1
+                '    Dim findCircle2 As Boolean = moPatternMatchingMark2.FindModel(1, aRectangle, FindMark2X, FindMark2Y, nScore, moMainRecipe.RecipeCamera.Locate2.PatternZone.Location) '定位孔-2
+                '    '-------------------------20230913-結束--------------------------
 
-                    '-------------------------20230913-開始--------------------------
-                    Dim findChangeModelResult1 As Boolean = locater1.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=0) '定位孔-1(True)
-                    Dim findChangeModelResult2 As Boolean = locater2.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=1) '定位孔-2(True)
-                    '-------------------------20230913-結束--------------------------
-                End If
+                '    '-------------------------20230913-開始--------------------------
+                '    Dim findChangeModelResult1 As Boolean = locater1.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=0) '定位孔-1(True)
+                '    Dim findChangeModelResult2 As Boolean = locater2.FindChangeModel(testBitMap1, aRectangle, nLocaterNo:=1) '定位孔-2(True)
+                '    '-------------------------20230913-結束--------------------------
+                'End If
             End If
             '------------------------Debug-定位孔異常圖片-結束--------------------------
 

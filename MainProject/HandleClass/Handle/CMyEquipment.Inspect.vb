@@ -254,13 +254,13 @@ Partial Class CMyEquipment
 
                 '------------------------Debug-定位孔尋找區域位移-開始--------------------------
                 If Debugger.IsAttached = True Then
-                    Call nROI.Offset(nOffset) '位移-矩形的位置(現行執行處)
-                    moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI '設定-定位孔1-尋找區域 (X,Y,W,H)為nROI
+                    'Call nROI.Offset(nOffset) '位移-矩形的位置(現行執行處)
+                    'moMainRecipe.RecipeCamera.Locate1.FindModelZone = nROI '設定-定位孔1-尋找區域 (X,Y,W,H)為nROI
 
-                    nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone '設定nROI-定位孔2-尋找區域 (X,Y,W,H)
+                    'nROI = moMainRecipe.RecipeCamera.Locate2.FindModelZone '設定nROI-定位孔2-尋找區域 (X,Y,W,H)
 
-                    Call nROI.Offset(nOffset) '位移-矩形的位置(現行執行處)
-                    moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI '設定-定位孔2-尋找區域 (X,Y,W,H)為nROI
+                    'Call nROI.Offset(nOffset) '位移-矩形的位置(現行執行處)
+                    'moMainRecipe.RecipeCamera.Locate2.FindModelZone = nROI '設定-定位孔2-尋找區域 (X,Y,W,H)為nROI
                 End If
                 '------------------------Debug-定位孔尋找區域位移-結束--------------------------
             End If
@@ -269,13 +269,13 @@ Partial Class CMyEquipment
 
             '------------------------Debug-定位孔樣本區域位移-開始--------------------------
             If Debugger.IsAttached = True Then
-                nROI = moMainRecipe.RecipeCamera.Locate1.PatternZone '設定nROI-定位孔1-樣本區域 (X,Y,W,H)
-                Call nROI.Offset(nOffset) '樣本區域-定位孔1-位移-矩形的位置(現行執行處)
-                moMainRecipe.RecipeCamera.Locate1.PatternZone = nROI '設定-定位孔1-樣本區域 (X,Y,W,H)為nROI
+                'nROI = moMainRecipe.RecipeCamera.Locate1.PatternZone '設定nROI-定位孔1-樣本區域 (X,Y,W,H)
+                'Call nROI.Offset(nOffset) '樣本區域-定位孔1-位移-矩形的位置(現行執行處)
+                'moMainRecipe.RecipeCamera.Locate1.PatternZone = nROI '設定-定位孔1-樣本區域 (X,Y,W,H)為nROI
 
-                nROI = moMainRecipe.RecipeCamera.Locate2.PatternZone '設定nROI-定位孔2-樣本區域 (X,Y,W,H)
-                Call nROI.Offset(nOffset) '樣本區域-定位孔2-位移-矩形的位置(現行執行處)
-                moMainRecipe.RecipeCamera.Locate2.PatternZone = nROI '設定-定位孔2-樣本區域 (X,Y,W,H)為nROI
+                'nROI = moMainRecipe.RecipeCamera.Locate2.PatternZone '設定nROI-定位孔2-樣本區域 (X,Y,W,H)
+                'Call nROI.Offset(nOffset) '樣本區域-定位孔2-位移-矩形的位置(現行執行處)
+                'moMainRecipe.RecipeCamera.Locate2.PatternZone = nROI '設定-定位孔2-樣本區域 (X,Y,W,H)為nROI
             End If
             '------------------------Debug-定位孔樣本區域位移-結束--------------------------
 
