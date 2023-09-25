@@ -355,8 +355,15 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     '-------------------------20230919-開始--------------------------
                     If moMyEquipment.IsCanInspect IsNot Nothing AndAlso moMyEquipment.IsCanInspect.IsSet = True AndAlso _
                        moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = True Then '產品在席檢知
-                        oCameraSnap.Start() '開始-檢測相機-取像任務
-                        oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
+
+                        If oCameraSnap.Status = TaskStatus.Created Then
+                            oCameraSnap.Start() '開始-檢測相機-取像任務
+                        End If
+
+                        If oCodeReaderCameraSnap.Status = TaskStatus.Created Then
+                            oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
+                        End If
+
                     Else
                         moMyEquipment.LightVacuumDown(moLog) '燈源汽缸-下降
                         moMyEquipment.SetLightOff(moLog) '關閉-燈源
@@ -374,62 +381,80 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     '-------------------------20230919-結束--------------------------
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                    Task.WaitAll({oCodeReaderCameraSnap}) '等候-條碼相機-任務完成執行
-
-                    Call oTact.CalSpan()
-                    Call moLog.LogInformation(String.Format("[{0:d4}] 取像完畢 (1)。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
-
-                    '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                    If oCodeReaderCameraSnap.Result = True Then '條碼相機-取像完成
-                        If .BuildImageForCopy(moCodeReaderCamera.Camera.BitmapImage(True), moCodeReaderImageID1, moCodeReaderImageHeader, mnSequence, moLog) = False Then
-                            Call moLog.LogError(String.Format("[{0:d4}] 條碼取像失敗 (1)", mnSequence))
-                            Call moMyEquipment.LogAlarm.LogError("條碼取像失敗 (1)")
-                            Call moMyEquipment.LightVacuumDown(moLog)
-                            Call moMyEquipment.SetLightOff(moLog)
-                            Call moMyEquipment.TriggerAlarm(AlarmCode.IsCodeReaderUpdateImageFailed)
-                            Call moMyEquipment.SetEroorOn(moLog)
-                            Call Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
-                            moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
-                            moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
-                            Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
-                            Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
-                            oLightVacuumDown = Nothing
-                            moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
-                            Exit Sub '離開方法
-                        End If
-
-                        If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
-                            moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime2, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-2
-                            Call moLog.LogError(String.Format("[{0:d4}] 更換條碼相機曝光時間失敗 (2)", mnSequence))
-                        End If
-
-                        Call oTact.ReSetTime()
-                        Call moLog.LogInformation(String.Format("[{0:d4}] Snap Start (2)", mnSequence))
-
-                        If moCodeReaderCamera.Snap(mnSequence, "條碼相機", moLog) = False Then  '條碼相機-取像失敗
-                            Call moMyEquipment.LightVacuumDown(moLog)
-                            Call moMyEquipment.SetLightOff(moLog)
-                            Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
-                            Call moMyEquipment.SetEroorOn(moLog)
-                            moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
-                            moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
-                            Call oCameraSnap.Dispose()
-                            Call oCodeReaderCameraSnap.Dispose()
-                            oLightVacuumDown = Nothing
-                            moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
-                            Exit Sub '離開方法
-                        End If
-
-                        Call oTact.CalSpan()
-                        Call moLog.LogInformation(String.Format("[{0:d4}] 取像完畢 (2)。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
-                        Call oTact.ReSetTime()
+                    If oCodeReaderCameraSnap.Status = TaskStatus.Running OrElse oCodeReaderCameraSnap.Status = TaskStatus.WaitingForChildrenToComplete Then
+                        'Task.WaitAll({oCodeReaderCameraSnap}) '等候-條碼相機-任務完成執行
+                        oCodeReaderCameraSnap.Wait(oCodeReaderCameraSnapToken) '等候-條碼相機-任務完成執行
                     End If
-                    '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
-                    Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
+                    oTact.CalSpan()
+
+                    If oCodeReaderCameraSnap.Status = TaskStatus.RanToCompletion Then
+                        moLog.LogInformation(String.Format("[{0:d4}] 條碼相機:取像完畢 (1)。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
+
+                        '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                        If oCodeReaderCameraSnap.Result = True Then '條碼相機-取像完成
+                            If .BuildImageForCopy(moCodeReaderCamera.Camera.BitmapImage(True), moCodeReaderImageID1, moCodeReaderImageHeader, mnSequence, moLog) = False Then
+                                Call moLog.LogError(String.Format("[{0:d4}] 條碼取像失敗 (1)", mnSequence))
+                                Call moMyEquipment.LogAlarm.LogError("條碼取像失敗 (1)")
+                                Call moMyEquipment.LightVacuumDown(moLog)
+                                Call moMyEquipment.SetLightOff(moLog)
+                                Call moMyEquipment.TriggerAlarm(AlarmCode.IsCodeReaderUpdateImageFailed)
+                                Call moMyEquipment.SetEroorOn(moLog)
+
+                                If oCameraSnap.Status = TaskStatus.Running OrElse oCameraSnap.Status = TaskStatus.WaitingForChildrenToComplete Then
+                                    'Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
+                                    oCameraSnap.Wait(oCameraSnapToken) '等候-檢測相機-任務完成執行
+                                End If
+
+                                moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                                moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
+                                Call oCameraSnap.Dispose() '釋放-檢測相機-取像任務
+                                Call oCodeReaderCameraSnap.Dispose() '釋放-條碼相機-取像任務
+                                oLightVacuumDown = Nothing
+                                moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                                Exit Sub '離開方法
+                            End If
+
+                            If moMyEquipment.CodeReaderCamera.Camera.IsNullCamera() = False AndAlso _
+                                moMyEquipment.CodeReaderCamera.ChangeExposure(moMainRecipe.RecipeCamera.CodeReader.CodeReaderExposureTime2, "條碼相機", moLog) = False Then '更換條碼相機曝光時間-2
+                                Call moLog.LogError(String.Format("[{0:d4}] 更換條碼相機曝光時間失敗 (2)", mnSequence))
+                            End If
+
+                            Call oTact.ReSetTime()
+                            Call moLog.LogInformation(String.Format("[{0:d4}] Snap Start (2)", mnSequence))
+
+                            If moCodeReaderCamera.Snap(mnSequence, "條碼相機", moLog) = False Then  '條碼相機-取像失敗
+                                Call moMyEquipment.LightVacuumDown(moLog)
+                                Call moMyEquipment.SetLightOff(moLog)
+                                Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
+                                Call moMyEquipment.SetEroorOn(moLog)
+                                moMyEquipment.Camera.SnapStop(mnSequence, "檢測相機", moLog) '檢測相機-取像結束 (不使用)
+                                moMyEquipment.CodeReaderCamera.SnapStop(mnSequence, "條碼相機", moLog) '條碼相機-取像結束 (不使用)
+                                Call oCameraSnap.Dispose()
+                                Call oCodeReaderCameraSnap.Dispose()
+                                oLightVacuumDown = Nothing
+                                moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
+                                Exit Sub '離開方法
+                            End If
+
+                            oTact.CalSpan()
+
+                            moLog.LogInformation(String.Format("[{0:d4}] 檢測相機:取像完畢 (2)。[{1:f4}]ms", mnSequence, oTact.CurrentSpan))
+
+                            Call oTact.ReSetTime()
+                        End If
+                        '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+                    End If
+
+
+                    If oCameraSnap.Status = TaskStatus.Running OrElse oCameraSnap.Status = TaskStatus.WaitingForChildrenToComplete Then
+                        'Task.WaitAll({oCameraSnap}) '等候-檢測相機-任務完成執行
+                        oCameraSnap.Wait(oCameraSnapToken) '等候-檢測相機-任務完成執行
+                    End If
+
 
                     '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                    If oCameraSnap.Result = False OrElse oCodeReaderCameraSnap.Result = False Then '檢測相機-取像完成
+                    If oCameraSnap.Result = False OrElse oCodeReaderCameraSnap.Result = False Then '檢測相機:取像失敗 或 條碼相機:取像失敗
                         Call moMyEquipment.LightVacuumDown(moLog)
                         Call moMyEquipment.SetLightOff(moLog)
                         Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
@@ -464,8 +489,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 '-------------------------20230828-結束--------------------------
 
                 If moMyEquipment.BuildImageForCopy(moCamera.Camera.BitmapImage(True), moImageID, moImageHeader, mnSequence, moLog) = False Then '檢測相機
-                    Call moLog.LogError(String.Format("[{0:d4}] 取像失敗", mnSequence))
-                    Call moMyEquipment.LogAlarm.LogError("取像失敗")
+                    moLog.LogError(String.Format("[{0:d4}] 檢測相機:取像失敗", mnSequence))
+                    moMyEquipment.LogAlarm.LogError("檢測相機:取像失敗")
                     Call moMyEquipment.TriggerAlarm(AlarmCode.IsUpdateImageFailed)
                     Call moMyEquipment.SetEroorOn(moLog)
 
@@ -508,10 +533,10 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
 
                 If bIsOK = False Then '定位錯誤/定位失敗
-                    Call moLog.LogError(String.Format("[{0:d4}] 定位失敗", mnSequence))
-                    Call moMyEquipment.LogAlarm.LogError("定位失敗")
-                    Call moMyEquipment.TriggerAlarm(AlarmCode.IsLocateFailed)
-                    Call moMyEquipment.SetEroorOn(moLog)
+                    moLog.LogError(String.Format("[{0:d4}] 定位失敗", mnSequence))
+                    moMyEquipment.LogAlarm.LogError("定位失敗")
+                    moMyEquipment.TriggerAlarm(AlarmCode.IsLocateFailed) 'D:\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.Alarm.vb
+                    moMyEquipment.SetEroorOn(moLog)
 
                     If oLightVacuumDown IsNot Nothing AndAlso oLightVacuumDown.Status <> TaskStatus.Created Then
                         Call Task.WaitAll({oLightVacuumDown}, moMyEquipment.HardwareConfig.HandshakeConfig.WaitLightTimeout * 1000) '等候-燈源汽缸下降-任務完成執行
@@ -729,7 +754,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                 Call moMyEquipment.SetLightOff(moLog)
                 moLog.LogError(String.Format("[{0:d4}] SingleRun-檢測錯誤:{1}", mnSequence, ex.Message))
                 moMyEquipment.LogAlarm.LogError("SingleRun-檢測錯誤:" & ex.Message & Environment.NewLine & ex.StackTrace)
-                Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
+                moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed) 'D:\1938LaserMarking_20230719_Original\MainProject\HandleClass\Handle\CMyEquipment.Alarm.vb
                 Call moMyEquipment.SetEroorOn(moLog)
             End Try
 

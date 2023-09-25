@@ -166,7 +166,7 @@ Module modLibrary
             Dim oTact As New CTactTimeSpan
             Call oFindModelAllTask1St.Start()
             Call oFindModelAllTask2Nd.Start()
-            Call Task.WaitAll(oFindModelAllTask1St, oFindModelAllTask2Nd)
+            Task.WaitAll(oFindModelAllTask1St, oFindModelAllTask2Nd) 'µ¥­Ô-FindModelAll
 
             If oFindModelAllTask1St.Status <> TaskStatus.RanToCompletion OrElse oFindModelAllTask2Nd.Status <> TaskStatus.RanToCompletion Then
                 oFindModelAllTask1St = Nothing

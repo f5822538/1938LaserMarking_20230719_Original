@@ -2,6 +2,11 @@
 
     Public CurrentAlarmCode As AlarmCode = AlarmCode.IsOK
 
+    ''' <summary>
+    ''' TriggerWarning
+    ''' </summary>
+    ''' <param name="aAlarmCode"></param>
+    ''' <remarks></remarks>
     Public Sub TriggerWarning(aAlarmCode As AlarmCode)
         CurrentAlarmCode = aAlarmCode
         SRAlarmCode.TriggerWarning(aAlarmCode, LogAlarm)
@@ -12,6 +17,11 @@
         SRAlarmCode.TriggerWarning(aAlarmCode, LogAlarm)
     End Sub
 
+    ''' <summary>
+    ''' TriggerAlarm
+    ''' </summary>
+    ''' <param name="aAlarmCode"></param>
+    ''' <remarks></remarks>
     Public Sub TriggerAlarm(aAlarmCode As AlarmCode)
         If moIsAlarm.IsSet = False Then
             TriggerWarning(aAlarmCode)
