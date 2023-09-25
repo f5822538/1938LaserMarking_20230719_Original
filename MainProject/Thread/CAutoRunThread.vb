@@ -727,8 +727,8 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
             Catch ex As Exception
                 Call moMyEquipment.LightVacuumDown(moLog)
                 Call moMyEquipment.SetLightOff(moLog)
-                Call moLog.LogError(String.Format("[{0:d4}] 檢測錯誤，Error：{1}", mnSequence, ex.ToString()))
-                Call moMyEquipment.LogAlarm.LogError("檢測錯誤")
+                moLog.LogError(String.Format("[{0:d4}] SingleRun-檢測錯誤:{1}", mnSequence, ex.Message))
+                moMyEquipment.LogAlarm.LogError("SingleRun-檢測錯誤:" & ex.Message & Environment.NewLine & ex.StackTrace)
                 Call moMyEquipment.TriggerAlarm(AlarmCode.IsSnapFailed)
                 Call moMyEquipment.SetEroorOn(moLog)
             End Try

@@ -385,8 +385,8 @@
                     Return oAlarmCodeWaitMap
                 End If
             Catch ex As Exception
-                Call moLog.LogError(String.Format("[{0:d4}] 檢測錯誤:{1}", mnSequence, ex.Message & Environment.NewLine & ex.StackTrace))
-                Call moMyEquipment.LogAlarm.LogError("檢測錯誤")
+                moLog.LogError(String.Format("[{0:d4}] RunInspect-檢測錯誤:{1}", mnSequence, ex.Message))
+                moMyEquipment.LogAlarm.LogError("RunInspect-檢測錯誤:" & ex.Message & Environment.NewLine & ex.StackTrace)
                 Return AlarmCode.IsInspectError
             End Try
         End With
