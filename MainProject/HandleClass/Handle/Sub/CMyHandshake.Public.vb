@@ -301,6 +301,8 @@ Partial Class CMyHandshake
                                     Case ResultType.NGBright : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                     Case ResultType.Offset : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                     Case ResultType.Lose : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
+                                    Case ResultType.DieLoseLaser1 : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
+                                    Case ResultType.DieLoseLaser2 : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                     Case ResultType.Indistinct : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                     Case Else : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsGrayCode
                                 End Select
@@ -529,6 +531,8 @@ Partial Class CMyHandshake
                                 Case ResultType.NGBright : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                 Case ResultType.Offset : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                 Case ResultType.Lose : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
+                                Case ResultType.DieLoseLaser1 : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
+                                Case ResultType.DieLoseLaser2 : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                 Case ResultType.Indistinct : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                                     'Case ResultType.NGDark : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGDarkCode
                                     'Case ResultType.NGBright : sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGBrightCode

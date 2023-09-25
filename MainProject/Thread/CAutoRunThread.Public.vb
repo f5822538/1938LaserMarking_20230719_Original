@@ -295,24 +295,21 @@ Partial Class CAutoRunThread
 
                     Case ResultType.NoDie 'No Die-標記
                         oDirectoryNoDieInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
-
                         'oDirectoryNoDieInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.ProductConfig.DimensionX - oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y+1)))
-
                     Case ResultType.NA
                         Dim sNA As String = ""
-
                     Case ResultType.NGBright
                         oDirectoryNGInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
-
                     Case ResultType.NGDark
                         oDirectoryNGInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
-
                     Case ResultType.Indistinct
                         oDirectoryNGInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
-
                     Case ResultType.Lose
                         oDirectoryLoseAndRotateInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
-
+                    Case ResultType.DieLoseLaser1
+                        oDirectoryLoseAndRotateInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
+                    Case ResultType.DieLoseLaser2
+                        oDirectoryLoseAndRotateInfoList.AddRange(oDirectoryInfo.GetFiles(String.Format("*R{0:d3}*C{1:d3}*.bmp", oInspectSum.DefectList.DefectList(i).DefectIndex.X, oInspectSum.DefectList.DefectList(i).DefectIndex.Y)))
                     Case ResultType.OK
                         Dim sOK As String = ""
                 End Select
