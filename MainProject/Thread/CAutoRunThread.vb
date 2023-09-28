@@ -348,6 +348,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                     Call moLog.LogInformation(String.Format("[{0:d4}] Vacuum Up", mnSequence))
 
                     Call Thread.Sleep(moMyEquipment.HardwareConfig.MiscConfig.CaptureDelayTime)
+
                     Call oTact.ReSetTime()
                     Call moLog.LogInformation(String.Format("[{0:d4}] Snap Start (1)", mnSequence))
 
@@ -364,19 +365,43 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
                             oCodeReaderCameraSnap.Start() '開始-條碼相機-取像任務
                         End If
 
+                    ElseIf moMyEquipment.IO.ProductPresentSensor IsNot Nothing AndAlso moMyEquipment.IO.ProductPresentSensor.IsOn() = False Then '產品在席檢知
+                        Try
+                            moMyEquipment.LightVacuumDown(moLog) '燈源汽缸-下降
+                            moMyEquipment.SetLightOff(moLog) '關閉-燈源
+
+                            If oCameraSnapToken.CanBeCanceled = True Then
+                                oCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
+                                oCameraSnapTokenSrc.Dispose()
+                            End If
+
+                            If oCodeReaderCameraSnapToken.CanBeCanceled = True Then
+                                oCodeReaderCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
+                                oCodeReaderCameraSnapTokenSrc.Dispose()
+                            End If
+                        Catch ex As OperationCanceledException
+                            moLog.LogError(String.Format("序列[{0:d4}] 拍照取像任務已被取消{1}", mnSequence, Environment.NewLine & ex.StackTrace))
+                            moLog.LogInformation(String.Format("序列[{0:d4}] 拍照取像任務已被取消{1}", mnSequence, Environment.NewLine & ex.StackTrace))
+                            'Thread.SpinWait(1000)
+                            SpinWait.SpinUntil(Function() False, TimeSpan.FromSeconds(1))
+                        End Try
                     Else
-                        moMyEquipment.LightVacuumDown(moLog) '燈源汽缸-下降
-                        moMyEquipment.SetLightOff(moLog) '關閉-燈源
+                        Try
+                            If oCameraSnapToken.CanBeCanceled = True Then
+                                oCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
+                                oCameraSnapTokenSrc.Dispose()
+                            End If
 
-                        If oCameraSnapToken.CanBeCanceled = True Then
-                            oCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
-                            oCameraSnapTokenSrc.Dispose()
-                        End If
-
-                        If oCodeReaderCameraSnapToken.CanBeCanceled = True Then
-                            oCodeReaderCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
-                            oCodeReaderCameraSnapTokenSrc.Dispose()
-                        End If
+                            If oCodeReaderCameraSnapToken.CanBeCanceled = True Then
+                                oCodeReaderCameraSnapTokenSrc.Cancel() '解決-重複拍照問題
+                                oCodeReaderCameraSnapTokenSrc.Dispose()
+                            End If
+                        Catch ex As OperationCanceledException
+                            moLog.LogError(String.Format("序列[{0:d4}] 取像任務已被取消{1}", mnSequence, Environment.NewLine & ex.StackTrace))
+                            moLog.LogInformation(String.Format("序列[{0:d4}] 取像任務已被取消{1}", mnSequence, Environment.NewLine & ex.StackTrace))
+                            'Thread.SpinWait(1000)
+                            SpinWait.SpinUntil(Function() False, TimeSpan.FromSeconds(1))
+                        End Try
                     End If
                     '-------------------------20230919-結束--------------------------
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
