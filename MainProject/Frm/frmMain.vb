@@ -54,6 +54,24 @@ Public Class frmMain
             End With
             moLog = moMyEquipment.LogSystem
 
+            'NoDieIndexFile------------------------Debug-20231002-開始--------------------------
+            If Debugger.IsAttached = True Then
+                'Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:yyyy-MM-dd HH_mm_ss_fff}", Application.StartupPath, DateTime.Now) '報告-重要路徑
+                'If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
+                'Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
+                'Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
+                'Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
+                'If File.Exists(strNoDieFilePath) = True Then
+                '    stwNoDieWriter.WriteLine("recipeId" & "," & "lotId" & "," & "stripId" & "," & "mnSequence" & "," & "X" & "," & "Y")
+                '    For index = 1 To 10
+                '        stwNoDieWriter.WriteLine("RRRRRRRR" & "," & "LLLLLLLLLL" & "," & "SSSSSSSSSSSSS" & "," & 1111 & "," & New Random().Next(1, 41) & "," & New Random().Next(1, 41))
+                '    Next
+                '    stwNoDieWriter.Flush()
+                '    stwNoDieWriter.Close()
+                'End If
+            End If
+            'NoDieIndexFile------------------------Debug-20231002-結束--------------------------
+
             '------------------------Debug-瑕疵結果訊息-開始--------------------------
             If Debugger.IsAttached = True Then
                 'Dim defectResultMsg As String = String.Empty

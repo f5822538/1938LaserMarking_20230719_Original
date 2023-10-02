@@ -224,7 +224,7 @@
 
                 If moMyEquipment.HardwareConfig.HandshakeBypass = False Then '交握-不要Bypass
                     'No Die(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-                    bIsOK = CompareOriginalAndInspectNoDieSection(oInspectSum, moProductProcess, moLog, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount)
+                    bIsOK = CompareOriginalAndInspectNoDieSection1(oInspectSum, moProductProcess, moLog, moMyEquipment.HardwareConfig.MiscConfig.DefectMaxCount, moMainRecipe.RecipeID, sLotID, sReportStripID, mnSequence)
                     'No Die(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                     If bIsOK = False Then
                         oInspectSum.InspectResult.FindStatus = True '瑕疵-Y(樣板異常)
@@ -287,10 +287,13 @@
 
                         Dim defectMsgText As String = "瑕疵數量：[{0}] (漏雷部分已扣除No Die), 請問是否要上報 Map?"
                         If Debugger.IsAttached = True Then
-                            If MsgBox(finalStr1, MsgBoxStyle.OkOnly, "漏雷資訊") = MsgBoxResult.Ok Then
-                                If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
-                                    moMyEquipment.IsNotUpdateMap = True '資料不上報
-                                End If
+                            'If MsgBox(finalStr1, MsgBoxStyle.OkOnly, "漏雷資訊") = MsgBoxResult.Ok Then
+                            '    If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
+                            '        moMyEquipment.IsNotUpdateMap = True '資料不上報
+                            '    End If
+                            'End If
+                            If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
+                                moMyEquipment.IsNotUpdateMap = True '資料不上報
                             End If
                         ElseIf Debugger.IsAttached = False Then
                             If MsgBox(String.Format(defectMsgText, oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount), MsgBoxStyle.YesNo, "銓發科技") = MsgBoxResult.No Then
