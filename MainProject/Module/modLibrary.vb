@@ -1,4 +1,4 @@
-Module modLibrary
+ï»¿Module modLibrary
 
     <System.Runtime.InteropServices.DllImport("gdi32.dll")> _
     Public Function DeleteObject(hObject As IntPtr) As Boolean
@@ -127,7 +127,7 @@ Module modLibrary
     End Function
 
     ''' <summary>
-    ''' ¼Ğ·Ç®tªº¼Ò«¬®t²§(CAutoRunThread.RunInspect -> modLibrary.ModelDiffForStandardDeviation)
+    ''' æ¨™æº–å·®çš„æ¨¡å‹å·®ç•°(CAutoRunThread.RunInspect -> modLibrary.ModelDiffForStandardDeviation)
     ''' StandardDeviation
     ''' BuildLoseModel
     ''' </summary>
@@ -160,13 +160,13 @@ Module modLibrary
             Dim nLongResultCountPositive As Long = 0
             Dim nLongResultCountNegative As Long = 0
 
-            Dim oFindModelAllTask1St As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList1St, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching1St, nSequence, bIsSaveImage)) '»\¦Lº|¹p/»\¦LÂà¸m
-            Dim oFindModelAllTask2Nd As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList2Nd, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching2Nd, nSequence, bIsSaveImage)) '»\¦Lº|¹p/»\¦LÂà¸m
+            Dim oFindModelAllTask1St As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList1St, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching1St, nSequence, bIsSaveImage)) 'è“‹å°æ¼é›·/è“‹å°è½‰ç½®
+            Dim oFindModelAllTask2Nd As New Task(Of Boolean)(Function() FindModelAll(oCameraSourceImage, oModelImageList2Nd, oRecipe, oInspectSum, oProduct, oLog, PatternMatchingType.PatternMatching2Nd, nSequence, bIsSaveImage)) 'è“‹å°æ¼é›·/è“‹å°è½‰ç½®
 
             Dim oTact As New CTactTimeSpan
             Call oFindModelAllTask1St.Start()
             Call oFindModelAllTask2Nd.Start()
-            Task.WaitAll(oFindModelAllTask1St, oFindModelAllTask2Nd) 'µ¥­Ô-FindModelAll
+            Task.WaitAll(oFindModelAllTask1St, oFindModelAllTask2Nd) 'ç­‰å€™-FindModelAll
 
             If oFindModelAllTask1St.Status <> TaskStatus.RanToCompletion OrElse oFindModelAllTask2Nd.Status <> TaskStatus.RanToCompletion Then
                 oFindModelAllTask1St = Nothing
@@ -188,7 +188,7 @@ Module modLibrary
             oFindModelAllTask2Nd = Nothing
 
             Call oTact.CalSpan()
-            Call oLog.LogInformation(String.Format("[{0:d4}] ¼ËªO¼Æ¶q 1St¡G[{1}]¡C¼ËªO¼Æ¶q 2Nd¡G[{2}]¡C[{3:f4}]ms", nSequence, oModelImageList1St.Count, oModelImageList2Nd.Count, oTact.CurrentSpan))
+            Call oLog.LogInformation(String.Format("[{0:d4}] æ¨£æ¿æ•¸é‡ 1Stï¼š[{1}]ã€‚æ¨£æ¿æ•¸é‡ 2Ndï¼š[{2}]ã€‚[{3:f4}]ms", nSequence, oModelImageList1St.Count, oModelImageList2Nd.Count, oTact.CurrentSpan))
             oTact.ReSetTime()
 
             MIL.MbufAlloc2d(MIL.M_DEFAULT_HOST, oRecipe.ModelSize.Width, oRecipe.ModelSize.Height, 32 + MIL.M_FLOAT, MIL.M_IMAGE + MIL.M_PROC, oInspectImageFloat)
@@ -248,35 +248,35 @@ Module modLibrary
             oInspectImageUnsigned = MIL.M_NULL
 
             Call oTact.CalSpan()
-            Call oLog.LogInformation(String.Format("[{0:d4}] ¼Ğ·Ç®t­pºâ§¹²¦¡I[{1:f4}]ms", nSequence, oTact.CurrentSpan))
+            Call oLog.LogInformation(String.Format("[{0:d4}] æ¨™æº–å·®è¨ˆç®—å®Œç•¢ï¼[{1:f4}]ms", nSequence, oTact.CurrentSpan))
             oTact.ReSetTime()
 
-            Dim bIsIndistinct As Boolean = False '¼Ğ°O-»\¦L¤£²M
+            Dim bIsIndistinct As Boolean = False 'æ¨™è¨˜-è“‹å°ä¸æ¸…
             If oModelImageList1St.Count >= 0 Then bIsIndistinct = oModelImageList2Nd.Count < (oModelImageList1St.Count \ 2)
 
-            '¼Ğ·Ç®t(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+            'æ¨™æº–å·®(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
             oInspectSum.InspectResult.ModleInspectStatus = False
             Parallel.ForEach(oModelImageList1St, Sub(o)
                                                      If StandardDeviation(o, oModelImageList2Nd, oRecipe, oInspectSum, oProduct, oStandardUpperLimitImage, oStandardLowerLimitImage, oMyEquipment, bIsSaveImage, bIsIndistinct, nDefectMaxCount, oLog, nSequence) = False _
                                                          AndAlso oInspectSum.InspectResult.ModleInspectStatus = False Then
-                                                         oInspectSum.InspectResult.ModleInspectStatus = True '¼ËªO²§±`/ÀË´ú²§±` (¼ËªO)-²§±`:True
+                                                         oInspectSum.InspectResult.ModleInspectStatus = True 'æ¨£æ¿ç•°å¸¸/æª¢æ¸¬ç•°å¸¸ (æ¨£æ¿)-ç•°å¸¸:True
                                                      End If
                                                  End Sub)
-            '¼Ğ·Ç®t(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+            'æ¨™æº–å·®(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
             Call oTact.CalSpan()
-            Call oLog.LogInformation(String.Format("[{0:d4}] ¼Ğ·Ç®tÀË´ú§¹²¦¡I[{1:f4}]ms", nSequence, oTact.CurrentSpan))
+            Call oLog.LogInformation(String.Format("[{0:d4}] æ¨™æº–å·®æª¢æ¸¬å®Œç•¢ï¼[{1:f4}]ms", nSequence, oTact.CurrentSpan))
             oTact.ReSetTime()
 
-            'º|¹p(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+            'æ¼é›·(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
             Parallel.ForEach(oProduct.MarkList, Sub(o)
                                                     BuildLoseModel(oCameraSourceImage, oRecipe, oInspectSum, o, oMyEquipment, oLog, nSequence, oMyEquipment.HardwareConfig.MiscConfig.IsSaveAIOKImage)
                                                 End Sub)
-            'º|¹p(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+            'æ¼é›·(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
             Call oTact.CalSpan()
-            Call oLog.LogInformation(String.Format("[{0:d4}] Àx¦sº|¹p·å²«§¹²¦¡I[{1:f4}]ms", nSequence, oTact.CurrentSpan))
-            Call oLog.LogInformation(String.Format("[{0:d4}] ·å²«¼Æ¶q (³æ¤¸)¡G{1} ­Ó", nSequence, oInspectSum.InspectResult.DefectCount))
+            Call oLog.LogInformation(String.Format("[{0:d4}] å„²å­˜æ¼é›·ç‘•ç–µå®Œç•¢ï¼[{1:f4}]ms", nSequence, oTact.CurrentSpan))
+            Call oLog.LogInformation(String.Format("[{0:d4}] ç‘•ç–µæ•¸é‡ (å–®å…ƒ)ï¼š{1} å€‹", nSequence, oInspectSum.InspectResult.DefectCount))
             oTact.ReSetTime()
 
             Parallel.ForEach(oModelImageList1St, Sub(o)
@@ -291,7 +291,7 @@ Module modLibrary
             oModelImageList2Nd.Clear()
 
             Call oTact.CalSpan()
-            Call oLog.LogInformation(String.Format("[{0:d4}] ²M°£¼ËªO§¹²¦¡I[{1:f4}]ms", nSequence, oTact.CurrentSpan))
+            Call oLog.LogInformation(String.Format("[{0:d4}] æ¸…é™¤æ¨£æ¿å®Œç•¢ï¼[{1:f4}]ms", nSequence, oTact.CurrentSpan))
 
             MIL.MbufFree(oStandardUpperLimitImage)
             MIL.MbufFree(oStandardLowerLimitImage)
@@ -299,14 +299,14 @@ Module modLibrary
             oStandardLowerLimitImage = MIL.M_NULL
             Return True
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] ModelDiffForStandardDeviation Failed¡IError¡G{1}", nSequence, ex.ToString()))
+            Call oLog.LogError(String.Format("[{0:d4}] ModelDiffForStandardDeviation Failedï¼Errorï¼š{1}", nSequence, ex.ToString()))
             Return False
         End Try
     End Function
 
     ''' <summary>
     ''' modLibrary.ModelDiffForStandardDeviation -> modLibrary.FindModelAll
-    ''' »\¦Lº|¹p/»\¦LÂà¸m,¦ì²¾/°¾²¾,»\¦L¤£²M
+    ''' è“‹å°æ¼é›·/è“‹å°è½‰ç½®,ä½ç§»/åç§»,è“‹å°ä¸æ¸…
     ''' </summary>
     ''' <param name="oCameraSourceImage"></param>
     ''' <param name="oModelImageList"></param>
@@ -351,8 +351,8 @@ Module modLibrary
                 bIsCountDisable = True
             End If
 
-            '-------------------------20230828-¶}©l--------------------------
-            For nIndex As Integer = 0 To nRefX.Count - 1 '§Ú¬OnIndex
+            '-------------------------20230828-é–‹å§‹--------------------------
+            For nIndex As Integer = 0 To nRefX.Count - 1 'æˆ‘æ˜¯nIndex
                 Dim oModelImage As New CMyModelImage
                 oModelImage.CenterX = CInt(Math.Round(nRefX.Item(nIndex) + oRecipe.SearchRange.X))
                 oModelImage.CenterY = CInt(Math.Round(nRefY.Item(nIndex) + oRecipe.SearchRange.Y))
@@ -363,7 +363,7 @@ Module modLibrary
                 If oPatternMatchingType = PatternMatchingType.PatternMatching1St Then
                     MIL.MbufChild2d(oCameraSourceImage, oModelImage.PositionX, oModelImage.PositionY, oRecipe.ModelSize.Width, oRecipe.ModelSize.Height, oModelImage.ModelImage)
                 End If
-                oModelImageList.Add(oModelImage) 'List(Of CMyModelImage) [oModelImageList] ¼W¥[ CMyModelImage [oModelImage]
+                oModelImageList.Add(oModelImage) 'List(Of CMyModelImage) [oModelImageList] å¢åŠ  CMyModelImage [oModelImage]
 
                 If oPatternMatchingType = PatternMatchingType.PatternMatching1St Then
                     If oRecipe.IsGatherStandardDeviation = True AndAlso bIsOK = True Then
@@ -381,10 +381,10 @@ Module modLibrary
                         End If
                     End If
 
-                    'moLog.LogInformation(String.Format("[{0:d4}] [Model {1}]¡GRefX = {2}, RefY = {3}", nSequence, (nRecipeIndex + 1), nRefX.Item(nIndex), nRefY.Item(nIndex)))
+                    'moLog.LogInformation(String.Format("[{0:d4}] [Model {1}]ï¼šRefX = {2}, RefY = {3}", nSequence, (nRecipeIndex + 1), nRefX.Item(nIndex), nRefY.Item(nIndex)))
                 End If
             Next
-            '-------------------------20230828-µ²§ô--------------------------
+            '-------------------------20230828-çµæŸ--------------------------
 
             If oPatternMatchingType = PatternMatchingType.PatternMatching1St Then
                 If bIsSaveImage = True Then MIL.MbufSave(String.Format("{0}\I01Summation.BMP", oInspectSum.InspectResult.InspectPath), oRecipe.SummationID)
@@ -394,22 +394,22 @@ Module modLibrary
             If oPatternMatchingType = PatternMatchingType.PatternMatching1St AndAlso bIsCountDisable = True Then oRecipe.IsGatherStandardDeviation = False
 
             If oProduct IsNot Nothing Then Parallel.ForEach(oModelImageList, Sub(o)
-                                                                                 BuildProductPosition(o, oRecipe, oInspectSum, oProduct, oPatternMatchingType, oLog, nSequence) '»\¦Lº|¹p/»\¦LÂà¸m,¦ì²¾/°¾²¾,»\¦L¤£²M
+                                                                                 BuildProductPosition(o, oRecipe, oInspectSum, oProduct, oPatternMatchingType, oLog, nSequence) 'è“‹å°æ¼é›·/è“‹å°è½‰ç½®,ä½ç§»/åç§»,è“‹å°ä¸æ¸…
                                                                              End Sub)
 
             Return bIsOK
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] FindModelAll Failed¡IError¡G{1}", nSequence, ex.ToString()))
+            Call oLog.LogError(String.Format("[{0:d4}] FindModelAll Failedï¼Errorï¼š{1}", nSequence, ex.ToString()))
             Return False
         End Try
     End Function
 
     ''' <summary>
     ''' modLibrary.FindModelAll -> modLibrary.BuildProductPosition
-    ''' »\¦Lº|¹p/»\¦LÂà¸m
-    ''' ¦ì²¾/°¾²¾
-    ''' ¦ì²¾/°¾²¾(¦Ç¶¥)
-    ''' »\¦L¤£²M
+    ''' è“‹å°æ¼é›·/è“‹å°è½‰ç½®
+    ''' ä½ç§»/åç§»
+    ''' ä½ç§»/åç§»(ç°éš)
+    ''' è“‹å°ä¸æ¸…
     ''' </summary>
     ''' <param name="oModelImage"></param>
     ''' <param name="oRecipeModelDiff"></param>
@@ -461,7 +461,7 @@ Module modLibrary
                                                             nPositionAngle < oRecipeModelDiff.AngleMin).ToList
 
             If oRecipeMarkList.Count < 1 Then
-                oModelImage.IsLose = True '»\¦Lº|¹p/»\¦LÂà¸m
+                oModelImage.IsLose = True 'è“‹å°æ¼é›·/è“‹å°è½‰ç½®
                 oModelImage.IsProcess = False
                 oModelImage.MarkX = -1
                 oModelImage.MarkY = -1
@@ -470,9 +470,9 @@ Module modLibrary
             Else
                 With oRecipeMarkList.Item(0)
                     If nPositionX < .PositionX - nOffsetGrayMin OrElse nPositionX > .PositionX + nOffsetGrayMin OrElse nPositionY < .PositionY - nOffsetGrayMin OrElse nPositionY > .PositionY + nOffsetGrayMin Then
-                        oModelImage.IsOffset = True '¦ì²¾/°¾²¾
+                        oModelImage.IsOffset = True 'ä½ç§»/åç§»
                         oModelImage.IsProcess = False
-                        Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY) '§Ú¬OnIndex
+                        Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY) 'æˆ‘æ˜¯nIndex
                         If nIndex < 0 Then
                             oModelImage.MarkX = -1
                             oModelImage.MarkY = -1
@@ -484,7 +484,7 @@ Module modLibrary
                         Return False
                     End If
                     If nPositionX < .PositionX - nOffsetMin OrElse nPositionX > .PositionX + nOffsetMin OrElse nPositionY < .PositionY - nOffsetMin OrElse nPositionY > .PositionY + nOffsetMin Then
-                        oModelImage.IsOffsetGray = True '¦ì²¾/°¾²¾(¦Ç¶¥)
+                        oModelImage.IsOffsetGray = True 'ä½ç§»/åç§»(ç°éš)
                         oModelImage.IsProcess = False
                         oModelImage.MarkX = -1
                         oModelImage.MarkY = -1
@@ -495,14 +495,14 @@ Module modLibrary
             End If
 
             If oRecipeMarkList.Item(0).MarkX < oProduct.DimensionX AndAlso oRecipeMarkList.Item(0).MarkY < oProduct.DimensionY Then
-                Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY) '§Ú¬OnIndex
+                Dim nIndex As Integer = oProduct.MarkIndex(oRecipeMarkList.Item(0).MarkX, oRecipeMarkList.Item(0).MarkY) 'æˆ‘æ˜¯nIndex
                 If nIndex < 0 Then
                     oModelImage.IsProcess = False
                     oModelImage.MarkX = -1
                     oModelImage.MarkY = -1
                 Else
                     'oModelImage.IsProcess = If(bIsBypass = True, True, oProduct.MarkList.Item(nIndex).IsProcess)
-                    oModelImage.IsProcess = True '»\¦L¤£²M
+                    oModelImage.IsProcess = True 'è“‹å°ä¸æ¸…
                     'oModelImage.IsPass = Not oModelImage.IsProcess
                     oModelImage.MarkX = oProduct.MarkList.Item(nIndex).MarkX
                     oModelImage.MarkY = oProduct.MarkList.Item(nIndex).MarkY
@@ -515,7 +515,7 @@ Module modLibrary
             End If
             Return True
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] BuildProductPosition Failed¡IError¡G{1}", nSequence, ex.ToString()))
+            Call oLog.LogError(String.Format("[{0:d4}] BuildProductPosition Failedï¼Errorï¼š{1}", nSequence, ex.ToString()))
             Return False
         End Try
     End Function
@@ -545,32 +545,32 @@ Module modLibrary
                 SyncLock CAutoRunThread.ProcessDefectListLock
                     oInspectSum.DefectList.ModelList.Add(oModelImagePosition)
                 End SyncLock
-                Dim nIndex As Integer = 0 '§Ú¬OnIndex
+                Dim nIndex As Integer = 0 'æˆ‘æ˜¯nIndex
 
-                Dim sResult As String = "" '­«­n-²£¥XReportªº¹Ï¤ù¥Î
-                If oModelImage.IsProcess = False Then '¤j³¡¤À¬O¨«³o­Ó¬yµ{(oModelImage.IsProcess = False)
-                    nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) '§Ú¬OnIndex
+                Dim sResult As String = "" 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨
+                If oModelImage.IsProcess = False Then 'å¤§éƒ¨åˆ†æ˜¯èµ°é€™å€‹æµç¨‹(oModelImage.IsProcess = False)
+                    nIndex = oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) 'æˆ‘æ˜¯nIndex
                     If nIndex < 0 Then
-                        Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed¡I(Recipe)", nSequence))
-                        Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó[oModelImage.IsProcess = False, oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) < 0]
+                        Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failedï¼(Recipe)", nSequence))
+                        Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•[oModelImage.IsProcess = False, oRecipe.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) < 0]
                     End If
 
-                    If oModelImage.IsOffset = True Then '¦ì²¾/°¾²¾
+                    If oModelImage.IsOffset = True Then 'ä½ç§»/åç§»
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK '¼Ğ°O-OK
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK 'æ¨™è¨˜-OK
                             Return True
                         End If
 
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset '¼Ğ°O-¦ì²¾/°¾²¾
-                        sResult = "NG" '­«­n-²£¥XReportªº¹Ï¤ù¥Î(¦ì²¾/°¾²¾)
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset 'æ¨™è¨˜-ä½ç§»/åç§»
+                        sResult = "NG" 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨(ä½ç§»/åç§»)
 
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '¼Ğ°O-µ²ªG(¦ì²¾/°¾²¾)
-                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí)-¦ì²¾/°¾²¾
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result 'æ¨™è¨˜-çµæœ(ä½ç§»/åç§»)
+                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨)-ä½ç§»/åç§»
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -589,36 +589,36 @@ Module modLibrary
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                     oInspectSum.ReceiveTime, sResult) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                                                                     oInspectSum.ReceiveTime, sResult) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
                         If .InspectResult.ModleOffsetStatus = False Then .InspectResult.ModleOffsetStatus = True
-                        If oProduct.MarkList.Item(nIndex).OriginalType <> ResultType.NoDie Then 'No Die-¼Ğ°O
+                        If oProduct.MarkList.Item(nIndex).OriginalType <> ResultType.NoDie Then 'No Die-æ¨™è¨˜
                             SyncLock CAutoRunThread.ProcessDefectListLock
                                 oInspectSum.DefectList.DefectList.Add(oDefect)
                                 oInspectSum.DefectListDraw.Add(oDefect)
                             End SyncLock
                         End If
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
-                        Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó[oModelImage.IsOffset = True,¦ì²¾/°¾²¾]
-                    ElseIf oModelImage.IsOffsetGray = True Then '¼Ğ°O-¦ì²¾/°¾²¾(¦Ç¶¥)
+                        Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•[oModelImage.IsOffset = True,ä½ç§»/åç§»]
+                    ElseIf oModelImage.IsOffsetGray = True Then 'æ¨™è¨˜-ä½ç§»/åç§»(ç°éš)
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK '¼Ğ°O-OK
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK 'æ¨™è¨˜-OK
                             Return True
                         End If
                         oProduct.MarkList.Item(nIndex).IsGray = True
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset '¼Ğ°O-¦ì²¾/°¾²¾
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.Offset 'æ¨™è¨˜-ä½ç§»/åç§»
 
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '¼Ğ°O-¦ì²¾/°¾²¾(¦Ç¶¥)
-                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí)-¦ì²¾/°¾²¾(¦Ç¶¥)
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result 'æ¨™è¨˜-ä½ç§»/åç§»(ç°éš)
+                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨)-ä½ç§»/åç§»(ç°éš)
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -634,11 +634,11 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                        sResult = "NG" '­«­n-²£¥XReportªº¹Ï¤ù¥Î[¦ì²¾/°¾²¾(¦Ç¶¥)]
+                        sResult = "NG" 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨[ä½ç§»/åç§»(ç°éš)]
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                      oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                     oInspectSum.ReceiveTime, sResult) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                                                                     oInspectSum.ReceiveTime, sResult) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -649,35 +649,35 @@ Module modLibrary
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
-                        Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó[oModelImage.IsOffsetGray = True,¦ì²¾/°¾²¾(¦Ç¶¥)]
-                    ElseIf oModelImage.IsLose = True Then '»\¦Lº|¹p/»\¦LÂà¸m
+                        Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•[oModelImage.IsOffsetGray = True,ä½ç§»/åç§»(ç°éš)]
+                    ElseIf oModelImage.IsLose = True Then 'è“‹å°æ¼é›·/è“‹å°è½‰ç½®
                         If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK '¼Ğ°O-OK
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.OK 'æ¨™è¨˜-OK
                             Return True
                         End If
 
-                        '-------------------------20230905-¶}©l--------------------------
+                        '-------------------------20230905-é–‹å§‹--------------------------
                         If Debugger.IsAttached = True Then
-                            '­ì¥»ªº¼gªk
+                            'åŸæœ¬çš„å¯«æ³•
                             '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.Lose
-                            'oProduct.MarkList.Item(nIndex).Result = ResultType.Lose 'º|¹p(CMyMarkInfo)
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser1 'º|¹p(CMyMarkInfo)
+                            'oProduct.MarkList.Item(nIndex).Result = ResultType.Lose 'æ¼é›·(CMyMarkInfo)
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser1 'æ¼é›·(CMyMarkInfo)
                         ElseIf Debugger.IsAttached = False Then
-                            '´ú¸Õªº¼gªk
+                            'æ¸¬è©¦çš„å¯«æ³•
                             '++++++ oModelImage.IsLose ------> oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser1 'º|¹p(CMyMarkInfo)
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.DieLoseLaser1 'æ¼é›·(CMyMarkInfo)
                         End If
-                        '-------------------------20230905-µ²§ô--------------------------
+                        '-------------------------20230905-çµæŸ--------------------------
 
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '»\¦Lº|¹p/»\¦LÂà¸m
-                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí) [oModelImage.IsLose = True]
+                        oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result 'è“‹å°æ¼é›·/è“‹å°è½‰ç½®
+                        oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨) [oModelImage.IsLose = True]
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -693,7 +693,7 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                        sResult = "NG" 'StandardDeviation ­«­n-²£¥XReportªº¹Ï¤ù¥Î(»\¦Lº|¹p/»\¦LÂà¸m)
+                        sResult = "NG" 'StandardDeviation é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨(è“‹å°æ¼é›·/è“‹å°è½‰ç½®)
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID,
                                                                      oInspectSum.InspectResult.CodeID,
@@ -701,55 +701,55 @@ Module modLibrary
                                                                      oRecipe.MarkXCount - oModelImage.MarkX,
                                                                      oModelImage.MarkY + 1,
                                                                      oInspectSum.ReceiveTime,
-                                                                     sResult) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                                                                     sResult) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                         oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.DefectList.DefectList.Add(oDefect)
-                            oInspectSum.DefectListDraw.Add(oDefect) '¥Î©óµe®Ø(oModelImage.IsLose = True,»\¦Lº|¹p/»\¦LÂà¸m)
+                            oInspectSum.DefectListDraw.Add(oDefect) 'ç”¨æ–¼ç•«æ¡†(oModelImage.IsLose = True,è“‹å°æ¼é›·/è“‹å°è½‰ç½®)
 
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
-                            '-------------------------20230911-¶}©l--------------------------
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
+                            '-------------------------20230911-é–‹å§‹--------------------------
                             'oModelImage.IsLose = True ------> oInspectSum.InspectResult.ModleLoseStatus = True
                             If oInspectSum.InspectResult.ModleLoseStatus = False Then
-                                oInspectSum.InspectResult.ModleLoseStatus = True 'StandardDeviation º|¹p(CInspectResult)
+                                oInspectSum.InspectResult.ModleLoseStatus = True 'StandardDeviation æ¼é›·(CInspectResult)
                             End If
-                            '-------------------------20230911-µ²§ô--------------------------
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                            '-------------------------20230911-çµæŸ--------------------------
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
                         End SyncLock
 
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
-                        Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó[oModelImage.IsLose = True,»\¦Lº|¹p/»\¦LÂà¸m]
+                        Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•[oModelImage.IsLose = True,è“‹å°æ¼é›·/è“‹å°è½‰ç½®]
                         'ElseIf oModelImage.IsPass = True Then
                         '    oProduct.MarkList.Item(nIndex).Result = ResultType.Pass
                         '    Return True
                     Else
-                        oProduct.MarkList.Item(nIndex).Result = ResultType.NA '¼Ğ°O-NA
+                        oProduct.MarkList.Item(nIndex).Result = ResultType.NA 'æ¨™è¨˜-NA
                         Return True
                     End If
                 ElseIf oModelImage.IsProcess = True Then
                     nIndex = oProduct.MarkIndex(oModelImage.MarkX, oModelImage.MarkY)
                     If nIndex < 0 Then
-                        Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failed¡I(Product)", nSequence))
-                        Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó[oModelImage.IsProcess = True, oProduct.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) < 0]
+                        Call oLog.LogError(String.Format("[{0:d4}] Mark Index Failedï¼(Product)", nSequence))
+                        Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•[oModelImage.IsProcess = True, oProduct.MarkIndex(oModelImage.MarkX, oModelImage.MarkY) < 0]
                     End If
 
-                    If bIsIndistinct = True Then '¼Ğ°O-»\¦L¤£²M
+                    If bIsIndistinct = True Then 'æ¨™è¨˜-è“‹å°ä¸æ¸…
                         Dim oSelectModelImageList2Nd As List(Of CMyModelImage) = (From o In oModelImageList2Nd Where o.MarkX = oModelImage.MarkX AndAlso o.MarkY = oModelImage.MarkY).ToList
 
                         If oSelectModelImageList2Nd.Count < 1 Then
-                            oProduct.MarkList.Item(nIndex).Result = ResultType.Indistinct '¼Ğ°O-»\¦L¤£²M
+                            oProduct.MarkList.Item(nIndex).Result = ResultType.Indistinct 'æ¨™è¨˜-è“‹å°ä¸æ¸…
 
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                             Dim oDefect As New CMyDefect
                             oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                             oDefect.InspectType = InspectType.ModelDiff
                             oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                            oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result '¼Ğ°O-»\¦L¤£²M
-                            oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí)-»\¦L¤£²M
+                            oDefect.ResultType = oProduct.MarkList.Item(nIndex).Result 'æ¨™è¨˜-è“‹å°ä¸æ¸…
+                            oDefect.DefectName = EnumHelper.GetDescription(oProduct.MarkList.Item(nIndex).Result) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨)-è“‹å°ä¸æ¸…
                             oDefect.MeanGray = 0
                             oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                             oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -765,11 +765,11 @@ Module modLibrary
                             oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                             oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                            sResult = "NG" '­«­n-²£¥XReportªº¹Ï¤ù¥Î(»\¦L¤£²M)
+                            sResult = "NG" 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨(è“‹å°ä¸æ¸…)
                             oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                          oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID, .ProductConfig.EQPID,
                                                                          oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                         oInspectSum.ReceiveTime, sResult) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                                                                         oInspectSum.ReceiveTime, sResult) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                             oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
@@ -780,9 +780,9 @@ Module modLibrary
                             End SyncLock
 
                             MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oModelImage.ModelImage)
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
-                            Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó[oModelImage.IsProcess = True, bIsIndistinct = True, oSelectModelImageList2Nd.Count < 1]
+                            Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•[oModelImage.IsProcess = True, bIsIndistinct = True, oSelectModelImageList2Nd.Count < 1]
                         End If
                     End If
                 End If
@@ -846,7 +846,7 @@ Module modLibrary
                 MIL.MblobGetNumber(oBlobResultNegativeResult, nLongResultCountNegative)
 
                 If nLongResultCountPositive = 0 AndAlso nLongResultCountNegative = 0 Then
-                    oProduct.MarkList.Item(nIndex).Result = ResultType.OK '¼Ğ°O-OK
+                    oProduct.MarkList.Item(nIndex).Result = ResultType.OK 'æ¨™è¨˜-OK
                     MIL.MbufFree(oPositiveDeviationImage)
                     MIL.MbufFree(oNegativeDeviationImage)
                     MIL.MblobFree(oBlobPositiveFeatureList)
@@ -901,7 +901,7 @@ Module modLibrary
                 MIL.MblobGetResult(oBlobResultNegativeResult, MIL.M_MEAN_PIXEL + MIL.M_TYPE_DOUBLE, DefectMeanGrayNegative)
 
                 Dim sImageName As String = ""
-                Dim bIsAddDefect As Boolean = False 'ÀË¬doInspectSum.DefectList.DefectList¬O§_¤w¸g¥[¤J¤F¤¸¯À(CMyDefect)
+                Dim bIsAddDefect As Boolean = False 'æª¢æŸ¥oInspectSum.DefectList.DefectListæ˜¯å¦å·²ç¶“åŠ å…¥äº†å…ƒç´ (CMyDefect)
                 Dim oDefectIndex As Integer = 0
                 Dim bIsGray As Boolean = oProduct.MarkList.Item(nIndex).IsGray
                 Dim oResult As ResultType = oProduct.MarkList.Item(nIndex).Result
@@ -930,7 +930,7 @@ Module modLibrary
 
                                                               oDefectType = If(nDefectMean < oRecipe.MeanGray, ResultType.NGDark, ResultType.NGBright)
 
-                                                              If oDefectType = ResultType.NGDark Then 'ªí­±·å²« (­I)
+                                                              If oDefectType = ResultType.NGDark Then 'è¡¨é¢ç‘•ç–µ (èƒŒ)
                                                                   If oMyEquipment.MainRecipe.CompoundDeafetBypass = True Then Exit Sub
                                                               Else
                                                                   If oMyEquipment.MainRecipe.WordDeafetBypass = True Then Exit Sub
@@ -943,36 +943,36 @@ Module modLibrary
                                                                   nDefectLength = Math.Pow(((nWidth * nWidth) + (nHeight * nHeight)), 0.5)
                                                               End If
 
-                                                              If oDefectType = ResultType.NGDark Then 'ªí­±·å²« (­I)
-                                                                  '·tÀË«G
+                                                              If oDefectType = ResultType.NGDark Then 'è¡¨é¢ç‘•ç–µ (èƒŒ)
+                                                                  'æš—æª¢äº®
                                                                   If nDefectLength < oRecipe.DarkDefectSizeMin Then Exit Sub
                                                                   If nDefectLength < (oRecipe.DarkDefectSizeMin + oRecipe.DarkDefectSizeGrayMin) Then bIsGray = True
                                                               Else
-                                                                  '«GÀË«G
+                                                                  'äº®æª¢äº®
                                                                   If DefectMeanGrayPositive(nIndexPositive) < (oRecipe.MeanGray * 3) Then Exit Sub
                                                                   If nDefectLength < oRecipe.BrightDefectSizeMin Then Exit Sub
                                                                   If nDefectLength < (oRecipe.BrightDefectSizeMin + oRecipe.BrightDefectSizeGrayMin) Then bIsGray = True
                                                               End If
 
                                                               If oResult = ResultType.NA Then
-                                                                  If oDefectType = ResultType.NGDark Then 'ªí­±·å²« (­I)
-                                                                      oResult = ResultType.NGDark 'ªí­±·å²« (­I)
+                                                                  If oDefectType = ResultType.NGDark Then 'è¡¨é¢ç‘•ç–µ (èƒŒ)
+                                                                      oResult = ResultType.NGDark 'è¡¨é¢ç‘•ç–µ (èƒŒ)
                                                                   Else
-                                                                      oResult = ResultType.NGBright 'ªí­±·å²« (¦r)
+                                                                      oResult = ResultType.NGBright 'è¡¨é¢ç‘•ç–µ (å­—)
                                                                   End If
                                                               End If
 
                                                               If .InspectResult.ModleInspectStatus = False Then
-                                                                  .InspectResult.ModleInspectStatus = True '¼ËªO²§±`/ÀË´ú²§±` (¼ËªO)-²§±`:True
+                                                                  .InspectResult.ModleInspectStatus = True 'æ¨£æ¿ç•°å¸¸/æª¢æ¸¬ç•°å¸¸ (æ¨£æ¿)-ç•°å¸¸:True
                                                               End If
 
-                                                              '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                                                              '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                                                               Dim oDefect As New CMyDefect
                                                               oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                                                               oDefect.InspectType = InspectType.ModelDiff
                                                               oDefect.DefectType = If(oDefectType = ResultType.NGDark, Comp_InsperrorType.Comp_Dark, Comp_InsperrorType.Comp_Bright)
                                                               oDefect.ResultType = If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)
-                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí)-ªí­±·å²«
+                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨)-è¡¨é¢ç‘•ç–µ
                                                               oDefect.MeanGray = nDefectMean
                                                               oDefect.BodyArea = AreaPositive(nIndexPositive)
                                                               oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -988,22 +988,22 @@ Module modLibrary
                                                               oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                                                               oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                                                              sResult = "NG" '­«­n-²£¥XReportªº¹Ï¤ù¥Î[ªí­±·å²« (­I)/ªí­±·å²« (¦r)]:nResultCountPositive
+                                                              sResult = "NG" 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨[è¡¨é¢ç‘•ç–µ (èƒŒ)/è¡¨é¢ç‘•ç–µ (å­—)]:nResultCountPositive
                                                               oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                                                            oMyEquipment.MainRecipe.RecipeID, .InspectResult.CodeID, .ProductConfig.EQPID,
                                                                                                            oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                                                           .ReceiveTime, sResult) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                                                                                                           .ReceiveTime, sResult) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                                                               oDefect.DefectFileName = String.Format("{0}\{1}", .InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
                                                               sImageName = oDefect.DefectFileName
                                                               SyncLock CAutoRunThread.ProcessDefectListLock
-                                                                  .DefectListDraw.Add(oDefect) '§âoDefect(CMyDefect)¥[¤J¦ÜoInspectSum.DefectListDraw
-                                                                  oDefectIndex = .DefectListDraw.Count - 1 'oInspectSum.DefectListDraw¶°¦Xªº¯Á¤Ş­È§ì¨ú³Ì«á¤@µ§
+                                                                  .DefectListDraw.Add(oDefect) 'æŠŠoDefect(CMyDefect)åŠ å…¥è‡³oInspectSum.DefectListDraw
+                                                                  oDefectIndex = .DefectListDraw.Count - 1 'oInspectSum.DefectListDrawé›†åˆçš„ç´¢å¼•å€¼æŠ“å–æœ€å¾Œä¸€ç­†
                                                               End SyncLock
-                                                              bIsAddDefect = True 'ÀË¬doInspectSum.DefectList.DefectList¬O§_¤w¸g¥[¤J¤F¤¸¯À(CMyDefect)
+                                                              bIsAddDefect = True 'æª¢æŸ¥oInspectSum.DefectList.DefectListæ˜¯å¦å·²ç¶“åŠ å…¥äº†å…ƒç´ (CMyDefect)
                                                               'Next
-                                                              '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                                                              '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
                                                           End Sub)
 
@@ -1032,7 +1032,7 @@ Module modLibrary
 
                                                               oDefectType = If(nDefectMean < oRecipe.MeanGray, ResultType.NGDark, ResultType.NGBright)
 
-                                                              If oDefectType = ResultType.NGDark Then 'ªí­±·å²« (­I)
+                                                              If oDefectType = ResultType.NGDark Then 'è¡¨é¢ç‘•ç–µ (èƒŒ)
                                                                   If oMyEquipment.MainRecipe.CompoundDeafetBypass = True Then Exit Sub
                                                               Else
                                                                   If oMyEquipment.MainRecipe.WordDeafetBypass = True Then Exit Sub
@@ -1045,36 +1045,36 @@ Module modLibrary
                                                                   nDefectLength = Math.Pow(((nWidth * nWidth) + (nHeight * nHeight)), 0.5)
                                                               End If
 
-                                                              If oDefectType = ResultType.NGDark Then 'ªí­±·å²« (­I)
-                                                                  '·tÀË·t
+                                                              If oDefectType = ResultType.NGDark Then 'è¡¨é¢ç‘•ç–µ (èƒŒ)
+                                                                  'æš—æª¢æš—
                                                                   If nDefectLength < oRecipe.DarkDefectSizeMin Then Exit Sub
                                                                   If nDefectLength < (oRecipe.DarkDefectSizeMin + oRecipe.DarkDefectSizeGrayMin) Then bIsGray = True
                                                               Else
-                                                                  '«GÀË·t
+                                                                  'äº®æª¢æš—
                                                                   If DefectMeanGrayNegative(nIndexNegative) > (oRecipe.MeanGray - (oRecipe.MeanGray * 0.4)) Then Exit Sub
                                                                   If nDefectLength < oRecipe.BrightDefectSizeMin Then Exit Sub
                                                                   If nDefectLength < (oRecipe.BrightDefectSizeMin + oRecipe.BrightDefectSizeGrayMin) Then bIsGray = True
                                                               End If
 
                                                               If oResult = ResultType.NA Then
-                                                                  If oDefectType = ResultType.NGDark Then 'ªí­±·å²« (­I)
-                                                                      oResult = ResultType.NGDark 'ªí­±·å²« (­I)
+                                                                  If oDefectType = ResultType.NGDark Then 'è¡¨é¢ç‘•ç–µ (èƒŒ)
+                                                                      oResult = ResultType.NGDark 'è¡¨é¢ç‘•ç–µ (èƒŒ)
                                                                   Else
-                                                                      oResult = ResultType.NGBright 'ªí­±·å²« (¦r)
+                                                                      oResult = ResultType.NGBright 'è¡¨é¢ç‘•ç–µ (å­—)
                                                                   End If
                                                               End If
 
                                                               If .InspectResult.ModleInspectStatus = False Then
-                                                                  .InspectResult.ModleInspectStatus = True '¼ËªO²§±`/ÀË´ú²§±` (¼ËªO)-²§±`:True
+                                                                  .InspectResult.ModleInspectStatus = True 'æ¨£æ¿ç•°å¸¸/æª¢æ¸¬ç•°å¸¸ (æ¨£æ¿)-ç•°å¸¸:True
                                                               End If
 
-                                                              '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                                                              '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                                                               Dim oDefect As New CMyDefect
                                                               oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                                                               oDefect.InspectType = InspectType.ModelDiff
                                                               oDefect.DefectType = If(oDefectType = ResultType.NGDark, Comp_InsperrorType.Comp_Dark, Comp_InsperrorType.Comp_Bright)
                                                               oDefect.ResultType = If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)
-                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí)-ªí­±·å²«
+                                                              oDefect.DefectName = EnumHelper.GetDescription(If(oDefectType = ResultType.NGDark, ResultType.NGDark, ResultType.NGBright)) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨)-è¡¨é¢ç‘•ç–µ
                                                               oDefect.MeanGray = nDefectMean
                                                               oDefect.BodyArea = AreaNegative(nIndexNegative)
                                                               oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -1090,34 +1090,34 @@ Module modLibrary
                                                               oDefect.DefectCoordinate = New CITVPointWapper(oModelImage.MarkX, oModelImage.MarkY)  '' Augustin 220726 Add for Wafer Map
                                                               oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1)
 
-                                                              sResult = "NG" '­«­n-²£¥XReportªº¹Ï¤ù¥Î[ªí­±·å²« (­I)/ªí­±·å²« (¦r)]:nResultCountNegative
+                                                              sResult = "NG" 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨[è¡¨é¢ç‘•ç–µ (èƒŒ)/è¡¨é¢ç‘•ç–µ (å­—)]:nResultCountNegative
                                                               oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                                                            oMyEquipment.MainRecipe.RecipeID, .InspectResult.CodeID, .ProductConfig.EQPID,
                                                                                                            oRecipe.MarkXCount - oModelImage.MarkX, oModelImage.MarkY + 1,
-                                                                                                           .ReceiveTime, sResult) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                                                                                                           .ReceiveTime, sResult) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                                                               oDefect.DefectFileName = String.Format("{0}\{1}", .InspectResult.InspectPath, oDefect.DefectImage.FileName)
 
                                                               sImageName = oDefect.DefectFileName
                                                               SyncLock CAutoRunThread.ProcessDefectListLock
-                                                                  .DefectListDraw.Add(oDefect) '§âoDefect(CMyDefect)¥[¤J¦ÜoInspectSum.DefectListDraw
-                                                                  oDefectIndex = .DefectListDraw.Count - 1 'oInspectSum.DefectListDraw¶°¦Xªº¯Á¤Ş­È§ì¨ú³Ì«á¤@µ§
+                                                                  .DefectListDraw.Add(oDefect) 'æŠŠoDefect(CMyDefect)åŠ å…¥è‡³oInspectSum.DefectListDraw
+                                                                  oDefectIndex = .DefectListDraw.Count - 1 'oInspectSum.DefectListDrawé›†åˆçš„ç´¢å¼•å€¼æŠ“å–æœ€å¾Œä¸€ç­†
                                                               End SyncLock
-                                                              bIsAddDefect = True 'ÀË¬doInspectSum.DefectList.DefectList¬O§_¤w¸g¥[¤J¤F¤¸¯À(CMyDefect)
+                                                              bIsAddDefect = True 'æª¢æŸ¥oInspectSum.DefectList.DefectListæ˜¯å¦å·²ç¶“åŠ å…¥äº†å…ƒç´ (CMyDefect)
                                                               'Next
-                                                              '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                                                              '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
                                                           End Sub)
                 'End If
 
                 SyncLock CAutoRunThread.ProcessDefectListLock
                     If bIsAddDefect = True Then
-                        oInspectSum.DefectList.DefectList.Add(CType(oInspectSum.DefectListDraw.Item(oDefectIndex).Clone(), CMyDefect)) '§âoDefect(CMyDefect)¥[¤J¦ÜoInspectSum.DefectList.DefectList
+                        oInspectSum.DefectList.DefectList.Add(CType(oInspectSum.DefectListDraw.Item(oDefectIndex).Clone(), CMyDefect)) 'æŠŠoDefect(CMyDefect)åŠ å…¥è‡³oInspectSum.DefectList.DefectList
                     End If
                 End SyncLock
 
                 oProduct.MarkList.Item(nIndex).IsGray = bIsGray
-                oProduct.MarkList.Item(nIndex).Result = oResult '¼Ğ°O-µ²ªG
+                oProduct.MarkList.Item(nIndex).Result = oResult 'æ¨™è¨˜-çµæœ
 
                 If oProduct.MarkList.Item(nIndex).Result = ResultType.NA Then oProduct.MarkList.Item(nIndex).Result = ResultType.OK
                 If sImageName <> "" AndAlso .DefectList.DefectList.Count < nDefectMaxCount Then MIL.MbufExport(sImageName, MIL.M_BMP, oModelImage.ModelImage)
@@ -1137,28 +1137,40 @@ Module modLibrary
                 Return bIsAddDefect = False
             End With
         Catch ex As Exception
-            Call oLog.LogError(String.Format("[{0:d4}] StandardDeviation Failed¡IError¡G{1}", nSequence, ex.ToString()))
-            Return False '¦bµ²ªGResult¦CªíÅã¥Ü-·å²«:0,ÀË´ú²§±`(¼ËªO):Y,Åã¥Ü¬°¬õ¦r­ì¦]¬°¦ó
+            Call oLog.LogError(String.Format("[{0:d4}] StandardDeviation Failedï¼Errorï¼š{1}", nSequence, ex.ToString()))
+            Return False 'åœ¨çµæœResultåˆ—è¡¨é¡¯ç¤º-ç‘•ç–µ:0,æª¢æ¸¬ç•°å¸¸(æ¨£æ¿):Y,é¡¯ç¤ºç‚ºç´…å­—åŸå› ç‚ºä½•
         End Try
     End Function
 
+    ''' <summary>
+    ''' BuildLoseModel
+    ''' </summary>
+    ''' <param name="oCameraSourceImage"></param>
+    ''' <param name="oRecipe"></param>
+    ''' <param name="oInspectSum"></param>
+    ''' <param name="oMarkInfo"></param>
+    ''' <param name="oMyEquipment"></param>
+    ''' <param name="oLog"></param>
+    ''' <param name="nSequence"></param>
+    ''' <param name="bIsSaveAIOKImage"></param>
+    ''' <remarks></remarks>
     Public Sub BuildLoseModel(oCameraSourceImage As MIL_ID, oRecipe As CRecipeModelDiff, ByRef oInspectSum As CInspectSum, ByRef oMarkInfo As CMyMarkInfo, oMyEquipment As CMyEquipment, oLog As II_LogTraceExtend, nSequence As Integer, bIsSaveAIOKImage As Boolean)
         Try
             With oMarkInfo
                 Dim sResult As String = ""
 
-                '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
-                '-------------------------20230911-¶}©l--------------------------
+                '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
+                '-------------------------20230911-é–‹å§‹--------------------------
                 'If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse .Result = ResultType.Indistinct OrElse .Result = ResultType.Lose Then
                 If .Result = ResultType.NGDark OrElse .Result = ResultType.NGBright OrElse .Result = ResultType.Offset OrElse _
-                   .Result = ResultType.Indistinct OrElse .Result = ResultType.DieLoseLaser1 Then '§PÂ_±ø¥ó1
-                    '-------------------------20230911-µ²§ô--------------------------
-                    '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                   .Result = ResultType.Indistinct OrElse .Result = ResultType.DieLoseLaser1 Then 'åˆ¤æ–·æ¢ä»¶1
+                    '-------------------------20230911-çµæŸ--------------------------
+                    '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
 
                     SyncLock CAutoRunThread.ProcessDefectListLock
-                        oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( ­«­n°Ï¶ô ))))))))))))))))))))))))))))))
+                        oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( é‡è¦å€å¡Š ))))))))))))))))))))))))))))))
 
-                        '-------------------------·å²«µ²ªG°T®§-¶}©l--------------------------
+                        '-------------------------ç‘•ç–µçµæœè¨Šæ¯-é–‹å§‹--------------------------
                         Dim defectResultMsg As String = String.Empty
                         For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
                             If oMarkInfo.Result = value Then
@@ -1166,7 +1178,7 @@ Module modLibrary
                                 Exit For
                             End If
                         Next
-                        oLog.LogError(String.Format("[{0:d4}] A·å²«:" & defectResultMsg, nSequence)) 'Log ¤é»x(³B²z Process)
+                        oLog.LogError(String.Format("[{0:d4}] Aç‘•ç–µ:" & defectResultMsg, nSequence)) 'Log æ—¥èªŒ(è™•ç† Process)
                         Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
                         Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
                         Dim fileName1 As String = stFrame1.GetFileName
@@ -1177,15 +1189,15 @@ Module modLibrary
                         oLog.LogError("FileLineNumber:" & fileLineNum1)
                         oLog.LogError("FileColumnNumber:" & fileColNum1)
                         oLog.LogError("MethodName:" & fileMethodName1)
-                        oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log ¤é»x(³B²z Process)
-                        '-------------------------·å²«µ²ªG°T®§-µ²§ô--------------------------
+                        oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log æ—¥èªŒ(è™•ç† Process)
+                        '-------------------------ç‘•ç–µçµæœè¨Šæ¯-çµæŸ--------------------------
                     End SyncLock
                 End If
 
-                '-------------------------If oMarkInfo.Result = ResultType.OK-¶}©l--------------------------
-                If oMarkInfo.Result = ResultType.OK Then '§PÂ_±ø¥ó2
+                '-------------------------If oMarkInfo.Result = ResultType.OK-é–‹å§‹--------------------------
+                If oMarkInfo.Result = ResultType.OK Then 'åˆ¤æ–·æ¢ä»¶2
                     If bIsSaveAIOKImage = True Then
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                         Dim oAI As New CMyDefect
                         Dim oAIModelImage As MIL_ID = 0
                         Dim nAIIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
@@ -1197,7 +1209,7 @@ Module modLibrary
                         oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
                         oInspectSum.ReceiveTime = DateTime.Now
 
-                        If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-¼Ğ°O (­«­n§PÂ_±ø¥ó)
+                        If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-æ¨™è¨˜ (é‡è¦åˆ¤æ–·æ¢ä»¶)
                             sResult = "NoDie"
                             oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
@@ -1217,27 +1229,27 @@ Module modLibrary
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.DefectList.OKList.Add(oAI)
                         End SyncLock
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
                     End If
 
                     'Return True
                 End If
-                '-------------------------If oMarkInfo.Result = ResultType.OK-µ²§ô--------------------------
+                '-------------------------If oMarkInfo.Result = ResultType.OK-çµæŸ--------------------------
 
 
-                '************************ 20230919-¤é¤ë¥ú¤Ï¬M²{³õ¹ê»Ú´ú¸Õº|¹p©MNoDie³£·|°õ¦æ¨ì¥H¤Uªºµ{¦¡°Ï¶ô-¶}©l ************************
+                '************************ 20230919-æ—¥æœˆå…‰åæ˜ ç¾å ´å¯¦éš›æ¸¬è©¦æ¼é›·å’ŒNoDieéƒ½æœƒåŸ·è¡Œåˆ°ä»¥ä¸‹çš„ç¨‹å¼å€å¡Š-é–‹å§‹ ************************
 
-                Dim nIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY) '§Ú¬OnIndex
+                Dim nIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY) 'æˆ‘æ˜¯nIndex
 
-                '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-¶}©l--------------------------
-                If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then '§PÂ_±ø¥ó3
+                '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-é–‹å§‹--------------------------
+                If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0 Then 'åˆ¤æ–·æ¢ä»¶3
                     Dim oAIModelImage As MIL_ID = 0
 
                     If oMyEquipment.MainRecipe.PositionDeafetBypass = True Then
                         oMarkInfo.Result = ResultType.OK
 
                         If bIsSaveAIOKImage = True Then
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                             Dim oAI As New CMyDefect
                             Dim nAIIndex As Integer = oRecipe.MarkIndex(oMarkInfo.MarkX, oMarkInfo.MarkY)
 
@@ -1248,7 +1260,7 @@ Module modLibrary
                             oAI.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
                             oInspectSum.ReceiveTime = DateTime.Now
 
-                            If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-¼Ğ°O (­«­n§PÂ_±ø¥ó)
+                            If oMarkInfo.OriginalType = ResultType.NoDie Then 'No Die-æ¨™è¨˜ (é‡è¦åˆ¤æ–·æ¢ä»¶)
                                 sResult = "NoDie"
                                 oAI.DefectFileName = String.Format("{0}\{1}_{2}_{3}_R{4:d3}_C{5:d3}_{6:yyyyMMddHHHmmss}_{7}.bmp",
                                                                    oInspectSum.InspectResult.AINODIEPath, oMyEquipment.MainRecipe.RecipeID, oInspectSum.InspectResult.CodeID,
@@ -1268,7 +1280,7 @@ Module modLibrary
                             SyncLock CAutoRunThread.ProcessDefectListLock
                                 oInspectSum.DefectList.OKList.Add(oAI)
                             End SyncLock
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
                         End If
 
                         'Return True
@@ -1276,26 +1288,26 @@ Module modLibrary
 
 
 
-                    '=================================== 20230922-¶}©l ===================================
-                    If oMarkInfo.OriginalType = ResultType.NoDie AndAlso oInspectSum.InspectResult.DefectNoDieCount > 0 Then 'No Die-¼Ğ°O (­«­n§PÂ_±ø¥ó)
+                    '=================================== 20230922-é–‹å§‹ ===================================
+                    If oMarkInfo.OriginalType = ResultType.NoDie AndAlso oInspectSum.InspectResult.DefectNoDieCount > 0 Then 'No Die-æ¨™è¨˜ (é‡è¦åˆ¤æ–·æ¢ä»¶)
                         oMarkInfo.Result = ResultType.NoDie
-                        oInspectSum.InspectResult.ModleLoseStatus = False 'BuildLoseModel º|¹p(CInspectResult) '2023-09-22 17:30 ¦]¬°­n°£¿ùº|¹p»PNoDieµLªk¤À¶}ªº°İÃD
+                        oInspectSum.InspectResult.ModleLoseStatus = False 'BuildLoseModel æ¼é›·(CInspectResult) '2023-09-22 17:30 å› ç‚ºè¦é™¤éŒ¯æ¼é›·èˆ‡NoDieç„¡æ³•åˆ†é–‹çš„å•é¡Œ
                     Else
-                        '-------------------------20230905-¶}©l--------------------------
+                        '-------------------------20230905-é–‹å§‹--------------------------
                         If Debugger.IsAttached = True Then
-                            '­ì¥»ªº¼gªk
-                            'oMarkInfo.Result = ResultType.Lose 'º|¹p(CMyMarkInfo)
-                            oMarkInfo.Result = ResultType.DieLoseLaser2 'º|¹p(CMyMarkInfo)
+                            'åŸæœ¬çš„å¯«æ³•
+                            'oMarkInfo.Result = ResultType.Lose 'æ¼é›·(CMyMarkInfo)
+                            oMarkInfo.Result = ResultType.DieLoseLaser2 'æ¼é›·(CMyMarkInfo)
                         ElseIf Debugger.IsAttached = False Then
-                            '´ú¸Õªº¼gªk
-                            oMarkInfo.Result = ResultType.DieLoseLaser2 'º|¹p(CMyMarkInfo)
+                            'æ¸¬è©¦çš„å¯«æ³•
+                            oMarkInfo.Result = ResultType.DieLoseLaser2 'æ¼é›·(CMyMarkInfo)
                         End If
-                        '-------------------------20230905-µ²§ô--------------------------
+                        '-------------------------20230905-çµæŸ--------------------------
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
-                            oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( ­«­n°Ï¶ô ))))))))))))))))))))))))))))))
+                            oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( é‡è¦å€å¡Š ))))))))))))))))))))))))))))))
 
-                            '-------------------------·å²«µ²ªG°T®§-¶}©l--------------------------
+                            '-------------------------ç‘•ç–µçµæœè¨Šæ¯-é–‹å§‹--------------------------
                             Dim defectResultMsg As String = String.Empty
                             For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
                                 If oMarkInfo.Result = value Then
@@ -1303,7 +1315,7 @@ Module modLibrary
                                     Exit For
                                 End If
                             Next
-                            oLog.LogError(String.Format("[{0:d4}] B·å²«:" & defectResultMsg, nSequence)) 'Log ¤é»x(³B²z Process)
+                            oLog.LogError(String.Format("[{0:d4}] Bç‘•ç–µ:" & defectResultMsg, nSequence)) 'Log æ—¥èªŒ(è™•ç† Process)
                             Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
                             Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
                             Dim fileName1 As String = stFrame1.GetFileName
@@ -1314,18 +1326,18 @@ Module modLibrary
                             oLog.LogError("FileLineNumber:" & fileLineNum1)
                             oLog.LogError("FileColumnNumber:" & fileColNum1)
                             oLog.LogError("MethodName:" & fileMethodName1)
-                            oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log ¤é»x(³B²z Process)
-                            '-------------------------·å²«µ²ªG°T®§-µ²§ô--------------------------
+                            oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log æ—¥èªŒ(è™•ç† Process)
+                            '-------------------------ç‘•ç–µçµæœè¨Šæ¯-çµæŸ--------------------------
                         End SyncLock
 
 
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
                         oDefect.DefectType = Comp_InsperrorType.Comp_Corner
-                        oDefect.ResultType = oMarkInfo.Result '»\¦Lº|¹p
-                        oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result) '·å²«¦WºÙ(¥i¥Î©ó¥X³øªí) [oMarkInfo.Result = ResultType.Lose]
+                        oDefect.ResultType = oMarkInfo.Result 'è“‹å°æ¼é›·
+                        oDefect.DefectName = EnumHelper.GetDescription(oMarkInfo.Result) 'ç‘•ç–µåç¨±(å¯ç”¨æ–¼å‡ºå ±è¡¨) [oMarkInfo.Result = ResultType.Lose]
                         oDefect.MeanGray = 0
                         oDefect.BodyArea = oRecipe.ModelSize.Width * oRecipe.ModelSize.Height
                         oDefect.DefectArea = CInt(oDefect.BodyArea * oMyEquipment.HardwareConfig.CameraConfig.PixelSize)
@@ -1341,7 +1353,7 @@ Module modLibrary
                         oDefect.DefectCoordinate = New CITVPointWapper(oMarkInfo.MarkX, oMarkInfo.MarkY)  '' Augustin 220726 for Wafer Map
                         oDefect.DefectIndex = New CITVPointWapper(oRecipe.MarkXCount - oMarkInfo.MarkX, oMarkInfo.MarkY + 1)
 
-                        sResult = "NG" 'BuildLoseModel ­«­n-²£¥XReportªº¹Ï¤ù¥Î(»\¦Lº|¹p/»\¦LÂà¸m)
+                        sResult = "NG" 'BuildLoseModel é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨(è“‹å°æ¼é›·/è“‹å°è½‰ç½®)
                         oDefect.DefectImage.FileName = String.Format("{0}_{1}_{2}_R{3:d3}_C{4:d3}_{5:yyyyMMddHHHmmss}_{6}.bmp",
                                                                      oMyEquipment.MainRecipe.RecipeID,
                                                                      oInspectSum.InspectResult.CodeID,
@@ -1349,16 +1361,16 @@ Module modLibrary
                                                                      oRecipe.MarkXCount - oMarkInfo.MarkX,
                                                                      oMarkInfo.MarkY + 1,
                                                                      oInspectSum.ReceiveTime,
-                                                                     sResult) '­«­n-²£¥XReportªº¹Ï¤ù¥Î(»\¦Lº|¹p)
+                                                                     sResult) 'é‡è¦-ç”¢å‡ºReportçš„åœ–ç‰‡ç”¨(è“‹å°æ¼é›·)
 
-                        oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName) '·å²«ÂI¦ì¤p¹Ï(¥i¥Î©ó¥X³øªí)
+                        oDefect.DefectFileName = String.Format("{0}\{1}", oInspectSum.InspectResult.InspectPath, oDefect.DefectImage.FileName) 'ç‘•ç–µé»ä½å°åœ–(å¯ç”¨æ–¼å‡ºå ±è¡¨)
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.DefectList.DefectList.Add(oDefect)
-                            oInspectSum.DefectListDraw.Add(oDefect) '¥Î©óµe®Ø(oMarkInfo.Result = ResultType.Lose,»\¦Lº|¹p/»\¦LÂà¸m)
+                            oInspectSum.DefectListDraw.Add(oDefect) 'ç”¨æ–¼ç•«æ¡†(oMarkInfo.Result = ResultType.Lose,è“‹å°æ¼é›·/è“‹å°è½‰ç½®)
 
-                            '-------------------------·å²«µ²ªG°T®§-¶}©l--------------------------
-                            oLog.LogError(String.Format("[{0:d4}] C·å²«:", nSequence)) 'Log ¤é»x(³B²z Process)
+                            '-------------------------ç‘•ç–µçµæœè¨Šæ¯-é–‹å§‹--------------------------
+                            oLog.LogError(String.Format("[{0:d4}] Cç‘•ç–µ:", nSequence)) 'Log æ—¥èªŒ(è™•ç† Process)
                             Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
                             Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
                             Dim fileName1 As String = stFrame1.GetFileName
@@ -1369,37 +1381,37 @@ Module modLibrary
                             oLog.LogError("FileLineNumber:" & fileLineNum1)
                             oLog.LogError("FileColumnNumber:" & fileColNum1)
                             oLog.LogError("MethodName:" & fileMethodName1)
-                            oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log ¤é»x(³B²z Process)
-                            '-------------------------·å²«µ²ªG°T®§-µ²§ô--------------------------
+                            oLog.LogError(String.Format("[{0:d4}] oInspectSum.DefectListDraw.Count:" & oInspectSum.DefectListDraw.Count, nSequence)) 'Log æ—¥èªŒ(è™•ç† Process)
+                            '-------------------------ç‘•ç–µçµæœè¨Šæ¯-çµæŸ--------------------------
 
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
-                            '-------------------------20230911-¶}©l--------------------------
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
+                            '-------------------------20230911-é–‹å§‹--------------------------
                             'oMarkInfo.Result = ResultType.Lose ------> oInspectSum.InspectResult.ModleLoseStatus = True
-                            '************************ ¯u¥¿À³¸Ó­n¸õº|¹pªº°Ï¶ô¦b³o¸Ì '************************
-                            'oInspectSum.InspectResult.ModleLoseStatus:³o­ÓFlag(¥ş°ìÅÜ¼Æ)·|¼vÅT¨ìº|¹pTriggerAlarm¤Î°±¾÷SetEroorOn,­nÂÔ·V¨M©w¬O§_­n³Qµù¸Ñ±¼
-                            'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel º|¹p(CInspectResult) '2023-09-11 11:50 ¦]¬°¥Í²£½uÀWÁc¸õ¥X,©Ò¥H¥ıµù¸Ñ±¼¥H§Q´ú¸Õ
-                            oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel º|¹p(CInspectResult) '2023-09-22 17:30 ¦]¬°­n°£¿ùº|¹p»PNoDieµLªk¤À¶}ªº°İÃD 
-                            '-------------------------20230911-µ²§ô--------------------------
-                            '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                            '************************ çœŸæ­£æ‡‰è©²è¦è·³æ¼é›·çš„å€å¡Šåœ¨é€™è£¡ '************************
+                            'oInspectSum.InspectResult.ModleLoseStatus:é€™å€‹Flag(å…¨åŸŸè®Šæ•¸)æœƒå½±éŸ¿åˆ°æ¼é›·TriggerAlarmåŠåœæ©ŸSetEroorOn,è¦è¬¹æ…æ±ºå®šæ˜¯å¦è¦è¢«è¨»è§£æ‰
+                            'oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel æ¼é›·(CInspectResult) '2023-09-11 11:50 å› ç‚ºç”Ÿç”¢ç·šé »ç¹è·³å‡º,æ‰€ä»¥å…ˆè¨»è§£æ‰ä»¥åˆ©æ¸¬è©¦
+                            oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel æ¼é›·(CInspectResult) '2023-09-22 17:30 å› ç‚ºè¦é™¤éŒ¯æ¼é›·èˆ‡NoDieç„¡æ³•åˆ†é–‹çš„å•é¡Œ 
+                            '-------------------------20230911-çµæŸ--------------------------
+                            '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
                         End SyncLock
 
                         MIL.MbufChild2d(oCameraSourceImage, oDefect.DefectPosition.X, oDefect.DefectPosition.Y, oDefect.DefectBoundary.Width, oDefect.DefectBoundary.Height, oAIModelImage)
                         MIL.MbufExport(oDefect.DefectFileName, MIL.M_BMP, oAIModelImage)
                         MIL.MbufFree(oAIModelImage)
                         oAIModelImage = MIL.M_NULL
-                        '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                        '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
                     End If
-                    '=================================== 20230922-µ²§ô ===================================
+                    '=================================== 20230922-çµæŸ ===================================
 
 
 
                 End If
-                '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-µ²§ô--------------------------
+                '-------------------------If oMarkInfo.Result = ResultType.NA AndAlso nIndex >= 0-çµæŸ--------------------------
 
-                '************************ 20230919-¤é¤ë¥ú¤Ï¬M²{³õ¹ê»Ú´ú¸Õº|¹p©MNoDie³£·|°õ¦æ¨ì¥H¤Uªºµ{¦¡°Ï¶ô-µ²§ô ************************
+                '************************ 20230919-æ—¥æœˆå…‰åæ˜ ç¾å ´å¯¦éš›æ¸¬è©¦æ¼é›·å’ŒNoDieéƒ½æœƒåŸ·è¡Œåˆ°ä»¥ä¸‹çš„ç¨‹å¼å€å¡Š-çµæŸ ************************
             End With
         Catch ex As Exception
-            oLog.LogError(String.Format("[{0:d4}] BuildLoseModel Failed¡IError¡G{1}", nSequence, ex.Message & Environment.NewLine & ex.StackTrace))
+            oLog.LogError(String.Format("[{0:d4}] BuildLoseModel Failedï¼Errorï¼š{1}", nSequence, ex.Message & Environment.NewLine & ex.StackTrace))
         End Try
     End Sub
 
@@ -1413,7 +1425,7 @@ Module modLibrary
     End Function
 
     ''' <summary>
-    ''' ¤ñ¸û­ì©lª©¥»¨ÃÀË¬dNoDie³¡¤À(CAutoRunThread.RunInspect -> modLibrary.CompareOriginalAndInspectNoDieSection)
+    ''' æ¯”è¼ƒåŸå§‹ç‰ˆæœ¬ä¸¦æª¢æŸ¥NoDieéƒ¨åˆ†(CAutoRunThread.RunInspect -> modLibrary.CompareOriginalAndInspectNoDieSection)
     ''' </summary>
     ''' <param name="oInspectSum"></param>
     ''' <param name="oProduct"></param>
@@ -1426,31 +1438,35 @@ Module modLibrary
             For i_InspectSum = 0 To oInspectSum.DefectList.DefectList.Count - 1
                 For i_oProduct = 0 To oProduct.MarkList.Count - 1
 
-                    '' 10 18´ú¸Õ­×§ï
+                    '' 10 18æ¸¬è©¦ä¿®æ”¹
                     'If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY AndAlso (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = oProduct.MarkList(i_oProduct).MarkX Then
 
-                    '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-¶}©l-Begin))))))))))))))))))))))))))))))
+                    '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-é–‹å§‹-Begin))))))))))))))))))))))))))))))
                     If (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y) = oProduct.MarkList(i_oProduct).MarkY + 1 AndAlso _
-                       (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then 'No Die-­«­n§PÂ_±ø¥ó
+                       (oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X) = (oProduct.DimensionX - oProduct.MarkList(i_oProduct).MarkX) Then 'No Die-é‡è¦åˆ¤æ–·æ¢ä»¶
+
+                        '-------------------------20231002-é–‹å§‹--------------------------
+
+                        '-------------------------20231002-çµæŸ--------------------------
 
                         '++++++ First judge OriginalType ------> Second judge ResultType ++++++
-                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-¼Ğ°O (­«­n§PÂ_±ø¥ó)
-                            oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie '(((((((((((((((((((((((((((((((­«­n°Ï¶ô))))))))))))))))))))))))))))))
-                            oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die¼Æ¶q(Defect)
+                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-æ¨™è¨˜ (é‡è¦åˆ¤æ–·æ¢ä»¶)
+                            oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š))))))))))))))))))))))))))))))
+                            oInspectSum.InspectResult.DefectNoDieCount += 1 'No Dieæ•¸é‡(Defect)
                         End If
                     Else
-                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-¼Ğ°O (­«­n§PÂ_±ø¥ó)
+                        If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-æ¨™è¨˜ (é‡è¦åˆ¤æ–·æ¢ä»¶)
                             If oProduct.MarkList(i_oProduct).Result <> ResultType.NoDie Then
-                                oProduct.MarkList(i_oProduct).Result = ResultType.NoDie '(((((((((((((((((((((((((((((((­«­n°Ï¶ô))))))))))))))))))))))))))))))
-                                oInspectSum.InspectResult.NotDefectNoDieCount += 1 'No Die¼Æ¶q(NotDefect)
+                                oProduct.MarkList(i_oProduct).Result = ResultType.NoDie '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š))))))))))))))))))))))))))))))
+                                oInspectSum.InspectResult.NotDefectNoDieCount += 1 'No Dieæ•¸é‡(NotDefect)
                             End If
                         End If
                     End If
-                    '(((((((((((((((((((((((((((((((­«­n°Ï¶ô-µ²§ô-End  ))))))))))))))))))))))))))))))
+                    '(((((((((((((((((((((((((((((((é‡è¦å€å¡Š-çµæŸ-End  ))))))))))))))))))))))))))))))
                 Next
             Next
         Catch ex As Exception
-            oLog.LogError(ex.ToString)
+            oLog.LogError("CompareOriginalAndInspectNoDieSection:" & ex.Message & Environment.NewLine & ex.StackTrace)
             Return False
         End Try
         Return True
