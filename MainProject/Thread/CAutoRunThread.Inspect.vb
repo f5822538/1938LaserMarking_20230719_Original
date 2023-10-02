@@ -134,7 +134,6 @@
                 'oInspectResult.AINODIEPath = String.Format("{0}\{1}\{2}\{3}\NO die", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
                 'oInspectResult.AIOffsetPath = String.Format("{0}\{1}\{2}\{3}\Marking shift", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
                 'oInspectResult.AILoseAndRotatePath = String.Format("{0}\{1}\{2}\{3}\Marking rotate", moMyEquipment.HardwareConfig.MiscConfig.AIPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
-
                 'oInspectResult.AIOffsetToFtpPath = String.Format("{0}\{1}\{2}\{3}\marking shift", moMyEquipment.HardwareConfig.MiscConfig.UpLoadOffsetToFtpPath, moMainRecipe.RecipeID, sLotID, moMyEquipment.CodeText)
 
                 '' Augustin 220407 IT HandShake Test

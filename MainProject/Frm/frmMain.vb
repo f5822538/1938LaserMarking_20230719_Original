@@ -203,7 +203,7 @@ Public Class frmMain
             picView.ContextMenuStrip = mnuDrawImage
             mnuLogInOut.Text = LOGIN
             Call moMyEquipment.UpdateSizeDgvCodeReadResult(dgvCodeReadResult, 1)
-            Call UpdateTitle()
+            UpdateTitle()
             Call moMyEquipment.UpdatePoolSetting() '' Augustin 220726 Add for Wafer Map
             Call bkUpdate.RunWorkerAsync() '開始執行背景作業
             Call bkTime.RunWorkerAsync() '開始執行背景作業
@@ -1029,7 +1029,7 @@ Public Class frmMain
              cbxIsAutoChangeModel.Checked = moMyEquipment.IsChangeModel 'CheckBox-勾選-自動更換樣本
 
              Call moAutoRunThread.UpdateImage()
-             Call UpdateTitle()
+             UpdateTitle()
              Call cbxIsAutoChangeModel.Refresh()
              Try
                  BindingSourceProduct.DataSource = Nothing
@@ -1049,6 +1049,10 @@ Public Class frmMain
         labGray.Text = String.Format("X = {0:d6}, Y = {1:d6} C = {2:d3}", e.X, e.Y, cGrey.G)
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub UpdateTitle() Handles moMyEquipment.UpdateTitle
         Me.Text = String.Format("{0} 版本{1} 使用者 = [{2}] Recipe = [{3}]", moHardwareConfig.Title, Application.ProductVersion.ToString, moMyEquipment.CurrentUser.UserName, moMainRecipe.RecipeID)
         labRecipeID.Text = moMainRecipe.RecipeID
