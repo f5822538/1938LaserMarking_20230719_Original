@@ -115,7 +115,7 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
                                     If File.Exists(moMyEquipment.MainRecipe.RecipeCamera.TempleteImagePath) = False Then
                                         moMyEquipment.LogProcess.LogInformation("Lot Info - 檢測影像不存在")
                                         Call moMyEquipment.TriggerAlarm(AlarmCode.IsRecipeImageIsNothing)
-                                        oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsRecipeImageIsNothing, "Recipe Image Is Nothing", moLog)
+                                        oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsRecipeImageIsNothing, "Templete Image Is Nothing", moLog)
                                         Call moMyEquipment.SetEroorOn()
                                         Exit Select
                                     End If
@@ -123,7 +123,7 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
                                     If File.Exists(moMyEquipment.MainRecipe.RecipeCamera.CodeReaderImagePath) = False Then
                                         moMyEquipment.LogProcess.LogInformation("Lot Info - 條碼影像不存在")
                                         Call moMyEquipment.TriggerAlarm(AlarmCode.IsRecipeImageIsNothing)
-                                        oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsRecipeImageIsNothing, "Recipe Image Is Nothing", moLog)
+                                        oAlarmCode = moMyEquipment.SendLotInfoACK(AlarmCode.IsRecipeImageIsNothing, "CodeReader Image Is Nothing", moLog)
                                         Call moMyEquipment.SetEroorOn()
                                         Exit Select
                                     End If
