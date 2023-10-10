@@ -61,14 +61,14 @@ Public Class frmMain
                 'Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
                 'Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
                 'Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
-                'If File.Exists(strNoDieFilePath) = True Then
-                '    stwNoDieWriter.WriteLine("recipeId" & "," & "lotId" & "," & "stripId" & "," & "mnSequence" & "," & "X" & "," & "Y")
-                '    For index = 1 To 10
+
+                'For index = 1 To 10
+                '    If File.Exists(strNoDieFilePath) = True Then
                 '        stwNoDieWriter.WriteLine("RRRRRRRR" & "," & "LLLLLLLLLL" & "," & "SSSSSSSSSSSSS" & "," & 1111 & "," & New Random().Next(1, 41) & "," & New Random().Next(1, 41))
-                '    Next
-                '    stwNoDieWriter.Flush()
-                '    stwNoDieWriter.Close()
-                'End If
+                '    End If
+                'Next
+                'stwNoDieWriter.Flush()
+                'stwNoDieWriter.Close()
             End If
             'NoDieIndexFile------------------------Debug-20231002-結束--------------------------
 
