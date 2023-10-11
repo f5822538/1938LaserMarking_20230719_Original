@@ -1503,7 +1503,7 @@
                             'NoDieIndexFile-------------------------20231002-開始--------------------------
                             Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
                             If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
-                            Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile", mnSequence)
+                            Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", mnSequence)
                             Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
                             stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                             'NoDieIndexFile-------------------------20231002-結束--------------------------
@@ -1523,7 +1523,7 @@
                                 'NotDefectNoDieIndexFile-------------------------20231002-開始--------------------------
                                 Dim sPath = String.Format("{0}\NotDefectNoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
                                 If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
-                                Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NotDefectNoDieIndexFile", mnSequence)
+                                Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NotDefectNoDieIndexFile.csv", mnSequence)
                                 Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
                                 stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                                 'NotDefectNoDieIndexFile-------------------------20231002-結束--------------------------
