@@ -1,9 +1,9 @@
-<TypeConverter(GetType(CEnumConvecter))>
+ï»¿<TypeConverter(GetType(CEnumConvecter))>
 Public Enum HandshakeType
     <Description("NA")> NA = 0
-    <Description("²£«~¸ê°T")> LotInfo = 1
-    '<Description("¤U¸ü²£«~¤À¥¬")> StripMapDownload = 2
-    <Description("¤W¶Ç²£«~¤À¥¬")> StripMapUpload = 3
+    <Description("ç”¢å“è³‡è¨Š")> LotInfo = 1
+    '<Description("ä¸‹è¼‰ç”¢å“åˆ†å¸ƒ")> StripMapDownload = 2
+    <Description("ä¸Šå‚³ç”¢å“åˆ†å¸ƒ")> StripMapUpload = 3
 End Enum
 
 Partial Class CMyHandshake
@@ -19,7 +19,7 @@ Partial Class CMyHandshake
     Private msEOT As Char = Chr(EOT)
 
     ''' <summary>
-    ''' Server ¶}±Ò
+    ''' Server é–‹å•Ÿ
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -28,10 +28,10 @@ Partial Class CMyHandshake
         Try
             HandshakeThread = New CThreadServerExtend(moMyEquipment.LogHandshake, SynchronizationContext.Current, moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort, 500)
             HandshakeThread.StartThread()
-            moMyEquipment.MyLog.LogSystem.Log(LOGHandle.HANDLE_CREATE, String.Format("Server ¶}±Ò¦¨¥\¡AIP¡G{0}¡CPort¡G{1}", moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort))
+            moMyEquipment.MyLog.LogSystem.Log(LOGHandle.HANDLE_CREATE, String.Format("Server é–‹å•ŸæˆåŠŸï¼ŒIPï¼š{0}ã€‚Portï¼š{1}", moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort))
         Catch ex As Exception
-            moMyEquipment.MyLog.LogSystem.LogError(String.Format("Server ¶}±Ò¥¢±Ñ¡AIP¡G{0}¡CPort¡G{1}¡AError¡G{2}", moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort, ex.ToString))
-            moMyEquipment.MyLog.LogAlarm.LogError(String.Format("Server ¶}±Ò¥¢±Ñ¡AIP¡G{0}¡CPort¡G{1}", moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort))
+            moMyEquipment.MyLog.LogSystem.LogError(String.Format("Server é–‹å•Ÿå¤±æ•—ï¼ŒIPï¼š{0}ã€‚Portï¼š{1}ï¼ŒErrorï¼š{2}", moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort, ex.ToString))
+            moMyEquipment.MyLog.LogAlarm.LogError(String.Format("Server é–‹å•Ÿå¤±æ•—ï¼ŒIPï¼š{0}ã€‚Portï¼š{1}", moHandshakeConfig.HandshakeIP, moHandshakeConfig.HandshakePort))
             bIsOpen = False
         End Try
         Return bIsOpen
@@ -62,7 +62,7 @@ Partial Class CMyHandshake
                     If sTextList.Length >= 2 Then
                         Return BuildLotInfo(sTextList(1), oProductList, sLotRecipeID)
                     Else
-                        ''2021201 ½Õ¾ã·í¨S¦³³r¸¹®É·|µo¥Íªº°İÃD
+                        ''2021201 èª¿æ•´ç•¶æ²’æœ‰é€—è™Ÿæ™‚æœƒç™¼ç”Ÿçš„å•é¡Œ
                         Return BuildLotInfo(sTextList(0), oProductList, sLotRecipeID)
                     End If
 
@@ -75,7 +75,7 @@ Partial Class CMyHandshake
                     End If
             End Select
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("Åª¨ú¥æ´¤¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sText, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("è®€å–äº¤æ¡éŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sText, ex.ToString))
         End Try
         Return False
     End Function
@@ -83,17 +83,17 @@ Partial Class CMyHandshake
     Public Function ReadType(sText As String, Optional ByRef sTextList As String() = Nothing) As HandshakeType
         If sText = "" Then Return HandshakeType.NA
         Try
-            moMyEquipment.LogProcess.LogInformation(String.Format("±µ¦¬¨ìIT²£«~°Ñ¼Æ¸ê°T¦r¦ê°T®§¡G{0}", sText))
+            moMyEquipment.LogProcess.LogInformation(String.Format("æ¥æ”¶åˆ°ITç”¢å“åƒæ•¸è³‡è¨Šå­—ä¸²è¨Šæ¯ï¼š{0}", sText))
 
             sTextList = Split(sText, ",")
             If sTextList.Length >= 2 Then
                 Return DecodeText(sTextList(1))
             Else
-                ''20211201  ½Õ¾ã·s¤èªk¨S¦³³r¸¹ªº±¡ªp®É
+                ''20211201  èª¿æ•´æ–°æ–¹æ³•æ²’æœ‰é€—è™Ÿçš„æƒ…æ³æ™‚
                 Return DecodeText(sTextList(0))
             End If
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("¸ÑªR¥æ´¤«¬ºA¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sText, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("è§£æäº¤æ¡å‹æ…‹éŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sText, ex.ToString))
             Return HandshakeType.NA
         End Try
         Return HandshakeType.NA
@@ -185,14 +185,14 @@ Partial Class CMyHandshake
                 oProductList.Add(oProduct)
             Next
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("¸ÑªR²£«~¸ê°T¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sText, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("è§£æç”¢å“è³‡è¨ŠéŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sText, ex.ToString))
             Return False
         End Try
         Return True
     End Function
 
     ''' <summary>
-    ''' ª`·N³o¸Ìªºspath¼È®É¥Î¦Û­q³]¸m¡A¥H«K¤§«á½Õ¾ã
+    ''' æ³¨æ„é€™è£¡çš„spathæš«æ™‚ç”¨è‡ªè¨‚è¨­ç½®ï¼Œä»¥ä¾¿ä¹‹å¾Œèª¿æ•´
     ''' </summary>
     ''' <param name="sPath"></param>
     ''' <param name="oProduct"></param>
@@ -208,7 +208,7 @@ Partial Class CMyHandshake
 
             xDoc.Load(String.Format("{0}\{1}.xml", sPath, oProduct.SubstrateID))
             If xDoc Is Nothing Then
-                olog.LogError("Åª¨ú²£«~XML¥¢±Ñ¡A½Ğ½T»{XMLÀÉ®×¦WºÙ")
+                olog.LogError("è®€å–ç”¢å“XMLå¤±æ•—ï¼Œè«‹ç¢ºèªXMLæª”æ¡ˆåç¨±")
                 Return False
             End If
 
@@ -226,22 +226,24 @@ Partial Class CMyHandshake
                     For nIndexX = 0 To oProduct.DimensionX - 1
 
                         'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4)
-                        ''10 18 ´ú¸Õ­×§ï
-                        oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4)
+                        ''10 18 æ¸¬è©¦ä¿®æ”¹
+
+                        'sBinCodeList.Substring(nIndexX * 4, 4)å¿…é ˆæ­é…D:\img\ImportXML\çš„K612345678901003_Download.xmlæª”æ¡ˆä¸­çš„<Layout LayoutId="Device" DefaultUnits="mm">åšNoDieçš„åº§æ¨™é»ä¾†ç´€éŒ„
+                        oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4) 'NoDie((((((((((((((((((((((((((((((( é‡è¦å€å¡Š ))))))))))))))))))))))))))))))
 
                         Select Case sBinCodeList.Substring(nIndexX * 4, 4)
-                            Case moHandshakeConfig.IsNoDieCode 'No Die ¤§¥N½X
+                            Case moHandshakeConfig.IsNoDieCode 'No Die ä¹‹ä»£ç¢¼
 
                                 'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie
-                                ''10 18 ´ú¸Õ­×§ï
-                                oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie 'No Die-¼Ğ°O
+                                ''10 18 æ¸¬è©¦ä¿®æ”¹
+                                oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie 'No Die-æ¨™è¨˜ 'NoDie((((((((((((((((((((((((((((((( é‡è¦å€å¡Š ))))))))))))))))))))))))))))))
                             Case Else
 
                         End Select
                     Next
                 Next
             Else
-                olog.LogError("Åª¨ú²£«~XML¥¢±Ñ¡A½Ğ½T»{XML¸`ÂI¦WºÙ¥¿½T©MX¡BY¼Æ¶q»PRCP¤@­P")
+                olog.LogError("è®€å–ç”¢å“XMLå¤±æ•—ï¼Œè«‹ç¢ºèªXMLç¯€é»åç¨±æ­£ç¢ºå’ŒXã€Yæ•¸é‡èˆ‡RCPä¸€è‡´")
                 Return False
             End If
         Catch ex As Exception
@@ -252,7 +254,7 @@ Partial Class CMyHandshake
     End Function
 
     ''' <summary>
-    ''' µo°e-Lead Frame¤Wªº¨C­ÓDie¬M®g¹Ï¤W¶Ç¥]§t­ì©l¬M®g¹Ï¸ê°T
+    ''' ç™¼é€-Lead Frameä¸Šçš„æ¯å€‹Dieæ˜ å°„åœ–ä¸Šå‚³åŒ…å«åŸå§‹æ˜ å°„åœ–è³‡è¨Š
     ''' </summary>
     ''' <param name="oProduct"></param>
     ''' <returns></returns>
@@ -273,7 +275,7 @@ Partial Class CMyHandshake
                 Dim sBinCodeLine As String = "<BinCode>"
                 For nIndexX As Integer = 0 To oProduct.DimensionX - 1
 
-                    ''10 18 ´ú¸Õ­×§ï
+                    ''10 18 æ¸¬è©¦ä¿®æ”¹
                     Dim nIndex As Integer = nIndexY * oProduct.DimensionX + nIndexX - nOffsetIndex
 
                     'Dim nIndex As Integer = (oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX + nOffsetIndex
@@ -282,15 +284,15 @@ Partial Class CMyHandshake
                     If oProduct.MarkList.Count <= nIndex Then
                         sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
 
-                        ''10 18 ´ú¸Õ­×§ï
+                        ''10 18 æ¸¬è©¦ä¿®æ”¹
                     ElseIf oProduct.MarkList.Item(nIndex).MarkX <> nIndexX OrElse oProduct.MarkList.Item(nIndex).MarkY <> nIndexY Then
                         'ElseIf oProduct.MarkList.Item(nIndex).MarkX <> (oProduct.DimensionX - 1 - nIndexX) OrElse oProduct.MarkList.Item(nIndex).MarkY <> nIndexY Then
 
                         sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNGCode
                         nOffsetIndex += 1
                     Else
-                        If oProduct.MarkList.Item(nIndex).Result = ResultType.NoDie Then 'No Die-¼Ğ°O
-                            sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNoDieCode 'No Die ¤§¥N½X
+                        If oProduct.MarkList.Item(nIndex).Result = ResultType.NoDie Then 'No Die-æ¨™è¨˜
+                            sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsNoDieCode 'No Die ä¹‹ä»£ç¢¼
                         Else
                             If oProduct.MarkList.Item(nIndex).IsGray = True Then
                                 sBinCodeResult = moMyEquipment.HardwareConfig.HandshakeConfig.IsGrayCode
@@ -346,7 +348,7 @@ Partial Class CMyHandshake
             Call HandshakeThread.Send(oProduct.StripMap)
 
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("µo°e²£«~ Map ¿ù»~¡ACommand¡G{0}¡CError¡G{1}", oProduct.StripMap, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("ç™¼é€ç”¢å“ Map éŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", oProduct.StripMap, ex.ToString))
             Return False
         End Try
         Return True
@@ -399,7 +401,7 @@ Partial Class CMyHandshake
     '            Return False
     '        End If
     '    Catch ex As Exception
-    '        moMyEquipment.LogHandshake.LogError(String.Format("¸ÑªR²£«~¸ê°T¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sText, ex.ToString))
+    '        moMyEquipment.LogHandshake.LogError(String.Format("è§£æç”¢å“è³‡è¨ŠéŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sText, ex.ToString))
     '        Return False
     '    End Try
 
@@ -415,7 +417,7 @@ Partial Class CMyHandshake
             oXmlNode = oXmlDoc.SelectSingleNode("Transaction/ErrorCode")
             If oXmlNode IsNot Nothing Then
                 If oXmlNode.InnerText <> "" Then
-                    moMyEquipment.LogHandshake.LogError(String.Format("Map Upload Error Code¡G{0}", oXmlNode.InnerText))
+                    moMyEquipment.LogHandshake.LogError(String.Format("Map Upload Error Codeï¼š{0}", oXmlNode.InnerText))
                     Return False
                 End If
             Else
@@ -424,14 +426,14 @@ Partial Class CMyHandshake
             oXmlNode = oXmlDoc.SelectSingleNode("Transaction/ErrorText")
             If oXmlNode IsNot Nothing Then
                 If oXmlNode.InnerText <> "" Then
-                    moMyEquipment.LogHandshake.LogError(String.Format("Map Upload Error Text¡G{0}", oXmlNode.InnerText))
+                    moMyEquipment.LogHandshake.LogError(String.Format("Map Upload Error Textï¼š{0}", oXmlNode.InnerText))
                     Return False
                 End If
             Else
                 Return False
             End If
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("¸ÑªR²£«~¸ê°T¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sText, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("è§£æç”¢å“è³‡è¨ŠéŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sText, ex.ToString))
             Return False
         End Try
         Return True
@@ -452,7 +454,7 @@ Partial Class CMyHandshake
             sContent = String.Format("{0},{1},{2}", msSOH, sContent, msEOT)
             Call HandshakeThread.Send(sContent)
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("µo°e²£«~¸ê°T¦^´_¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sContent, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("ç™¼é€ç”¢å“è³‡è¨Šå›å¾©éŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sContent, ex.ToString))
             Return False
         End Try
         Return True
@@ -474,7 +476,7 @@ Partial Class CMyHandshake
     '        sContent = String.Format("{0},{1},{2}", msSOH, sContent, msEOT)
     '        Call HandshakeThread.Send(sContent)
     '    Catch ex As Exception
-    '        moMyEquipment.LogHandshake.LogError(String.Format("¨ú±o²£«~¸ê°T¿ù»~¡ACommand¡G{0}¡CError¡G{1}", sContent, ex.ToString))
+    '        moMyEquipment.LogHandshake.LogError(String.Format("å–å¾—ç”¢å“è³‡è¨ŠéŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", sContent, ex.ToString))
     '        Return False
     '    End Try
     '    Return True
@@ -560,14 +562,14 @@ Partial Class CMyHandshake
             oProduct.StripMap = String.Format("{0},{1},{2}", msSOH, oProduct.StripMap, msEOT)
             Call HandshakeThread.Send(oProduct.StripMap)
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("µo°e²£«~ Map ¿ù»~¡ACommand¡G{0}¡CError¡G{1}", oProduct.StripMap, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("ç™¼é€ç”¢å“ Map éŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", oProduct.StripMap, ex.ToString))
             Return False
         End Try
         Return True
     End Function
 
     ''' <summary>
-    ''' UpdateAIInfo-¼g¤J AI XML ÀÉ®×
+    ''' UpdateAIInfo-å¯«å…¥ AI XML æª”æ¡ˆ
     ''' </summary>
     ''' <param name="oProduct"></param>
     ''' <param name="oInspectSum"></param>
@@ -619,12 +621,12 @@ Partial Class CMyHandshake
                 oFile.Write(oProduct.StripMap)
                 oFile.Close()
             Catch ex As Exception
-                moMyEquipment.LogProcess.LogError(String.Format("¼g¤J AI XML ÀÉ®×¿ù»~¡ACommand¡G{0}¡CError¡G{1}", oProduct.StripMap, ex.ToString))
+                moMyEquipment.LogProcess.LogError(String.Format("å¯«å…¥ AI XML æª”æ¡ˆéŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", oProduct.StripMap, ex.ToString))
             End Try
 
             Call HandshakeThread.Send(oProduct.StripMap)
         Catch ex As Exception
-            moMyEquipment.LogHandshake.LogError(String.Format("µo°e AI ¼v¹³¸ê°T¿ù»~¡ACommand¡G{0}¡CError¡G{1}", oProduct.StripMap, ex.ToString))
+            moMyEquipment.LogHandshake.LogError(String.Format("ç™¼é€ AI å½±åƒè³‡è¨ŠéŒ¯èª¤ï¼ŒCommandï¼š{0}ã€‚Errorï¼š{1}", oProduct.StripMap, ex.ToString))
             Return False
         End Try
         Return True
@@ -653,7 +655,7 @@ Partial Class CMyHandshake
 
             Return AlarmCode.IsOK
         Catch ex As Exception
-            moMyEquipment.MyLog.LogHandshake.LogError(String.Format("µ¥«İ¥æ´¤³q°T¦^´_¿ù»~¡AError¡G{0}", ex.ToString))
+            moMyEquipment.MyLog.LogHandshake.LogError(String.Format("ç­‰å¾…äº¤æ¡é€šè¨Šå›å¾©éŒ¯èª¤ï¼ŒErrorï¼š{0}", ex.ToString))
             Return AlarmCode.IsHandshakeFailed
         End Try
     End Function
@@ -673,7 +675,7 @@ Partial Class CMyHandshake
                 End Select
             End If
         Catch ex As Exception
-            moMyEquipment.MyLog.LogHandshake.LogError(String.Format("¸ÑÅª¥æ´¤®æ¦¡¿ù»~¡AError¡G{0}", ex.ToString))
+            moMyEquipment.MyLog.LogHandshake.LogError(String.Format("è§£è®€äº¤æ¡æ ¼å¼éŒ¯èª¤ï¼ŒErrorï¼š{0}", ex.ToString))
         End Try
         Return HandshakeType.NA
     End Function
