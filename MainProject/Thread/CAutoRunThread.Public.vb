@@ -142,7 +142,7 @@ Partial Class CAutoRunThread
                         Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect) '畫Die位置的數字-左(畫筆為白色)
                     End If
                     If oRecipeMark.MarkY = 0 Then
-                        drawString = CStr(nFinalX - oRecipeMark.MarkX + 1) 'X軸
+                        drawString = CStr(nFinalX - oRecipeMark.MarkX + 1) 'X軸(修正-瑕疵點位列表-Substrate大圖X座標起始從0的問題)
                         If oRecipeMark.MarkX < 10 Then
                             drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 10, CInt(oRecipeMark.PositionCenterY) \ nRatio - 100, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
                         Else
@@ -152,7 +152,7 @@ Partial Class CAutoRunThread
                         Call oGC.DrawString(drawString, oFont, oSolidBrush, drawRect) '畫Die位置的數字-上(畫筆為白色)
                     End If
                     If oRecipeMark.MarkY = nFinalY Then
-                        drawString = CStr(nFinalX - oRecipeMark.MarkX + 1) 'X軸
+                        drawString = CStr(nFinalX - oRecipeMark.MarkX + 1) 'X軸(修正-瑕疵點位列表-Substrate大圖X座標起始從0的問題)
                         If oRecipeMark.MarkX < 10 Then
                             drawRect = New Rectangle(CInt(oRecipeMark.PositionCenterX) \ nRatio - 18, CInt(oRecipeMark.PositionCenterY) \ nRatio + 50, moRecipeCamera.RecipeModelDiff.ModelSize.Width \ nRatio, moRecipeCamera.RecipeModelDiff.ModelSize.Height \ nRatio)
                         Else
