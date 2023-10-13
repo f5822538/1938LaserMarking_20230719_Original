@@ -220,8 +220,8 @@ Partial Class CMyHandshake
             If xNodesList IsNot Nothing AndAlso xNodesList.Count = oProduct.DimensionY Then
 
                 For nIndexY = 0 To oProduct.DimensionY - 1
-                    Dim sBinCodeList As String = ""
-                    sBinCodeList = xNodesList.ItemOf(nIndexY).InnerText
+
+                    Dim sBinCodeList As String = xNodesList.ItemOf(nIndexY).InnerText
 
                     For nIndexX = 0 To oProduct.DimensionX - 1
 
@@ -237,6 +237,93 @@ Partial Class CMyHandshake
                                 'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie
                                 ''10 18 測試修改
                                 oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+                            Case Else
+
+                        End Select
+                    Next
+                Next
+            Else
+                olog.LogError("讀取產品XML失敗，請確認XML節點名稱正確和X、Y數量與RCP一致")
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' 注意這裡的spath暫時用自訂設置，以便之後調整
+    ''' </summary>
+    ''' <param name="sPath"></param>
+    ''' <param name="oProduct"></param>
+    ''' <param name="olog"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function BuildStripOriginalMapInfo1(sPath As String, ByRef oProduct As CMyProduct, olog As II_LogTraceExtend) As Boolean
+        'If sPath = "" AndAlso moMyEquipment.HardwareConfig.HandshakeBypass = True Then Return True
+
+        Try
+            sPath = "D:\img\ImportXML"
+            Dim xDoc As XmlDocument = New XmlDocument
+
+            xDoc.Load(String.Format("{0}\{1}.xml", sPath, oProduct.SubstrateID))
+            If xDoc Is Nothing Then
+                olog.LogError("讀取產品XML失敗，請確認XML檔案名稱")
+                Return False
+            End If
+
+            Dim namespaceManager As XmlNamespaceManager = New XmlNamespaceManager(xDoc.NameTable)
+            namespaceManager.AddNamespace("pf", "urn:semi-org:xsd.E142-1.V1005.SubstrateMap")
+            Dim xNodesList As Xml.XmlNodeList = xDoc.SelectNodes("//pf:BinCode", namespaceManager)
+            oProduct.MapDownLoadInfo = xDoc.InnerXml
+
+            If xNodesList IsNot Nothing AndAlso xNodesList.Count = oProduct.DimensionY Then
+
+                For nIndexY = 0 To oProduct.DimensionY - 1
+
+                    Dim sBinCodeList As String = xNodesList.ItemOf(nIndexY).InnerText
+
+                    For nIndexX = 0 To oProduct.DimensionX - 1
+
+                        Dim ScoreIndex1 As Integer = nIndexX * 1000 + nIndexY
+
+                        'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4)
+                        ''10 18 測試修改
+
+                        'sBinCodeList.Substring(nIndexX * 4, 4)必須搭配D:\img\ImportXML\的K612345678901003_Download.xml檔案中的<Layout LayoutId="Device" DefaultUnits="mm">做NoDie的座標點來紀錄
+                        oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4) 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+
+                        oProduct.MarkList(ScoreIndex1).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4) 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+
+                        Select Case sBinCodeList.Substring(nIndexX * 4, 4)
+                            Case moHandshakeConfig.IsNoDieCode, moHandshakeConfig.IsNoDieCode1 'No Die 之代碼
+
+                                'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie
+                                ''10 18 測試修改
+                                oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+
+                                oProduct.MarkList(ScoreIndex1).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+
+                                '把NoDie存入csv檔中
+                                Dim dateTimeNow As Date = DateTime.Now
+                                Dim stwNoDieWriter As StreamWriter = Nothing
+
+                                'NoDieIndexFile-------------------------20231002-開始--------------------------
+                                Dim sPath1 As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
+                                If Directory.Exists(sPath1) = False Then Directory.CreateDirectory(sPath1)
+                                Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", nSequence)
+                                Dim strNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
+                                stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
+                                'NoDieIndexFile-------------------------20231002-結束--------------------------
+
+                                'NoDieIndexFile-------------------------20231002-開始--------------------------
+                                If File.Exists(strNoDieFilePath) = True Then
+                                    stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y)
+                                End If
+                                'NoDieIndexFile-------------------------20231002-結束--------------------------
+
                             Case Else
 
                         End Select

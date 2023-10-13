@@ -30,6 +30,8 @@ Public Class CHandshakeConfig : Inherits CConfigBase
     <Index2Display(21, SR.IsNGCode)> Public Property IsNGCode As String = "0100"
     <Index2Display(22, SR.IsGrayCode)> Public Property IsGrayCode As String = "0100"
     <Index2Display(23, SR.IsNoDieCode)> Public Property IsNoDieCode As String = "0000"
+    <Index2Display(23, SR.IsNoDieCode)> Public Property IsNoDieCode1 As String = "010F"
+
     '<Index2Display(21, SR.IsNACode)> Public Property IsNACode As String = "330F"
     '<Index2Display(23, SR.IsNGDarkCode)> Public Property IsNGDarkCode As String = "0100"
     '<Index2Display(24, SR.IsNGBrightCode)> Public Property IsNGBrightCode As String = "0100"
