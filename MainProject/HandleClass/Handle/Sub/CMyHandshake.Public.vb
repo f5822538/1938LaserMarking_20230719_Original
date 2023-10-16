@@ -259,9 +259,13 @@ Partial Class CMyHandshake
     ''' <param name="sPath"></param>
     ''' <param name="oProduct"></param>
     ''' <param name="olog"></param>
+    ''' <param name="recipeId"></param>
+    ''' <param name="lotId"></param>
+    ''' <param name="stripId"></param>
+    ''' <param name="mnSequence"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function BuildStripOriginalMapInfo1(sPath As String, ByRef oProduct As CMyProduct, olog As II_LogTraceExtend) As Boolean
+    Public Function BuildStripOriginalMapInfo1(sPath As String, ByRef oProduct As CMyProduct, olog As II_LogTraceExtend, recipeId As String, lotId As String, stripId As String, mnSequence As Integer) As Boolean
         'If sPath = "" AndAlso moMyEquipment.HardwareConfig.HandshakeBypass = True Then Return True
 
         Try
@@ -280,6 +284,10 @@ Partial Class CMyHandshake
             oProduct.MapDownLoadInfo = xDoc.InnerXml
 
             If xNodesList IsNot Nothing AndAlso xNodesList.Count = oProduct.DimensionY Then
+
+                '把NoDie座標存入csv檔中
+                Dim dateTimeNow As Date = DateTime.Now
+                Dim stwNoDieWriter As StreamWriter = Nothing
 
                 For nIndexY = 0 To oProduct.DimensionY - 1
 
@@ -306,21 +314,18 @@ Partial Class CMyHandshake
 
                                 oProduct.MarkList(ScoreIndex1).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
-                                '把NoDie存入csv檔中
-                                Dim dateTimeNow As Date = DateTime.Now
-                                Dim stwNoDieWriter As StreamWriter = Nothing
-
+                                '把NoDie座標存入csv檔中
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
                                 Dim sPath1 As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
                                 If Directory.Exists(sPath1) = False Then Directory.CreateDirectory(sPath1)
-                                Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", nSequence)
+                                Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", mnSequence)
                                 Dim strNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
                                 stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
 
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
                                 If File.Exists(strNoDieFilePath) = True Then
-                                    stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y)
+                                    stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1)
                                 End If
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
 
@@ -329,6 +334,11 @@ Partial Class CMyHandshake
                         End Select
                     Next
                 Next
+
+                If stwNoDieWriter IsNot Nothing Then
+                    stwNoDieWriter.Flush()
+                    stwNoDieWriter.Close()
+                End If
             Else
                 olog.LogError("讀取產品XML失敗，請確認XML節點名稱正確和X、Y數量與RCP一致")
                 Return False

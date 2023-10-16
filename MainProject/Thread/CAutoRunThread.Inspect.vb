@@ -203,8 +203,11 @@
                     If moProductProcess.SubstrateID = "" Then
                         moProductProcess.SubstrateID = "A123456789"
                     End If
+
+                    'moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
+
                     '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
-                    moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
+                    moMyEquipment.Handshake.BuildStripOriginalMapInfo1(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake, moMainRecipe.RecipeID, sLotID, sReportStripID, mnSequence) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
                 Else
                     '' Augustin 220407 IT HandShake Test
                     '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
