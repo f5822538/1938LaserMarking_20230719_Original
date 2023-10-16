@@ -1,4 +1,6 @@
-﻿Module modLibrary
+﻿Imports System.Collections.Concurrent
+
+Module modLibrary
 
     <System.Runtime.InteropServices.DllImport("gdi32.dll")> _
     Public Function DeleteObject(hObject As IntPtr) As Boolean
@@ -268,11 +270,48 @@
             Call oLog.LogInformation(String.Format("[{0:d4}] 標準差檢測完畢！[{1:f4}]ms", nSequence, oTact.CurrentSpan))
             oTact.ReSetTime()
 
-            '漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
-            Parallel.ForEach(oProduct.MarkList, Sub(o)
-                                                    BuildLoseModel(oCameraSourceImage, oRecipe, oInspectSum, o, oMyEquipment, oLog, nSequence, oMyEquipment.HardwareConfig.MiscConfig.IsSaveAIOKImage)
-                                                End Sub)
-            '漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+
+
+            '從csv檔中讀取NoDie的座標並記數
+            'NoDieIndexFile-------------------------20231016-開始--------------------------
+            Dim oProductMarkListIsOk As Boolean = True '檢查oProductMarkList集合是否有包含NoDie的座標
+            Dim conbag1 As New ConcurrentBag(Of Point)()
+            For index = 0 To oProduct.MarkList.Count - 1 Step 1
+                Dim x2 = oRecipe.MarkXCount - oProduct.MarkList(index).MarkX
+                Dim y2 = oProduct.MarkList(index).MarkY + 1
+                conbag1.Add(New Point(x2, y2))
+            Next
+
+            If File.Exists(AppMgr.StrNoDieFilePath) = True Then
+                Dim stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
+                While (stwNoDieReader.Peek() > -1)
+                    Dim readText As String = stwNoDieReader.ReadLine()
+                    Dim words As String() = readText.Split({","}, StringSplitOptions.None)
+                    If words.Length = 6 Then
+                        Dim x1 = Convert.ToInt32(words(4))
+                        Dim y1 = Convert.ToInt32(words(5))
+                        Dim point1 As Point = New Point(x1, y1)
+                        If conbag1.Count > 0 AndAlso conbag1.Contains(point1) = False Then '若oProductMarkList集合沒有包含NoDie的座標
+                            oProductMarkListIsOk = False
+                        End If
+                    End If
+                End While
+
+                If stwNoDieReader IsNot Nothing Then
+                    stwNoDieReader.Close()
+                End If
+            End If
+            'NoDieIndexFile-------------------------20231016-結束--------------------------
+
+
+
+            If oProductMarkListIsOk = True Then
+                '漏雷(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                Parallel.ForEach(oProduct.MarkList, Sub(o)
+                                                        BuildLoseModel(oCameraSourceImage, oRecipe, oInspectSum, o, oMyEquipment, oLog, nSequence, oMyEquipment.HardwareConfig.MiscConfig.IsSaveAIOKImage)
+                                                    End Sub)
+                '漏雷(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
+            End If
 
             Call oTact.CalSpan()
             Call oLog.LogInformation(String.Format("[{0:d4}] 儲存漏雷瑕疵完畢！[{1:f4}]ms", nSequence, oTact.CurrentSpan))
@@ -1332,6 +1371,36 @@
 
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
+                        '從csv檔中讀取NoDie的座標並記數
+                        Dim DefectNoDieCount As Integer = 0
+                        'NoDieIndexFile-------------------------20231016-開始--------------------------
+                        If File.Exists(AppMgr.StrNoDieFilePath) = True Then
+                            Dim stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
+                            While (stwNoDieReader.Peek() > -1)
+                                Dim readText As String = stwNoDieReader.ReadLine()
+                                Dim words As String() = readText.Split({","}, StringSplitOptions.None)
+                                If words.Length = 6 Then
+                                    DefectNoDieCount += 1 'No Die數量(Defect)
+                                    Dim x1 = Convert.ToInt32(words(4))
+                                    Dim y1 = Convert.ToInt32(words(5))
+                                    Dim point1 As Point = New Point(x1, y1)
+                                    Dim x2 = oRecipe.MarkXCount - oMarkInfo.MarkX
+                                    Dim y2 = oMarkInfo.MarkY + 1
+                                    Dim point2 As Point = New Point(x2, y2)
+                                    If point1.Equals(point2) = True Then
+                                        Exit Sub
+                                    End If
+                                End If
+                            End While
+
+                            If stwNoDieReader IsNot Nothing Then
+                                stwNoDieReader.Close()
+                            End If
+                        End If
+                        'NoDieIndexFile-------------------------20231016-結束--------------------------
+
+
+
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
                         oDefect.InspectType = InspectType.ModelDiff
@@ -1488,17 +1557,19 @@
             '從csv檔中讀取NoDie的座標並記數
             'recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1
             'NoDieIndexFile-------------------------20231016-開始--------------------------
-            stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
-            While (stwNoDieReader.Peek() > -1)
-                Dim readText As String = stwNoDieReader.ReadLine()
-                Dim words As String() = readText.Split({","}, StringSplitOptions.None)
-                If words.Length = 6 Then
-                    oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
-                End If
-            End While
+            If File.Exists(AppMgr.StrNoDieFilePath) = True Then
+                stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
+                While (stwNoDieReader.Peek() > -1)
+                    Dim readText As String = stwNoDieReader.ReadLine()
+                    Dim words As String() = readText.Split({","}, StringSplitOptions.None)
+                    If words.Length = 6 Then
+                        oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
+                    End If
+                End While
 
-            If stwNoDieReader IsNot Nothing Then
-                stwNoDieReader.Close()
+                If stwNoDieReader IsNot Nothing Then
+                    stwNoDieReader.Close()
+                End If
             End If
 
             If oInspectSum.InspectResult.DefectNoDieCount > 0 Then

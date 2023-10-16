@@ -320,11 +320,11 @@ Partial Class CMyHandshake
                                 If Directory.Exists(sPath1) = False Then Directory.CreateDirectory(sPath1)
                                 Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", mnSequence)
                                 AppMgr.StrNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
-                                stwNoDieWriter = New StreamWriter(Path:=AppMgr.StrNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
 
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
                                 If File.Exists(AppMgr.StrNoDieFilePath) = True Then
+                                    stwNoDieWriter = New StreamWriter(Path:=AppMgr.StrNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                                     stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1)
                                 End If
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------

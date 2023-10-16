@@ -1,6 +1,7 @@
 Imports MyHandleResult = System.Tuple(Of Boolean, String)
 Imports iTVisionService.DisplayLib
 Imports RecipeLib
+Imports System.Collections.Concurrent
 
 Public Class frmMain
 
@@ -57,23 +58,23 @@ Public Class frmMain
 
             'NoDieIndexFile------------------------Debug-20231002-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:yyyy-MM-dd HH_mm_ss_fff}", Application.StartupPath, DateTime.Now) '報告-重要路徑
-                If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
-                Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
-                Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
-                AppMgr.StrNoDieFilePath = strNoDieFilePath
-                Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
+                'Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:yyyy-MM-dd HH_mm_ss_fff}", Application.StartupPath, DateTime.Now) '報告-重要路徑
+                'If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
+                'Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
+                'Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
+                'AppMgr.StrNoDieFilePath = strNoDieFilePath
+                'Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
 
-                For index = 1 To 10
-                    If File.Exists(strNoDieFilePath) = True Then
-                        stwNoDieWriter.WriteLine("RRRRRRRR" & "," & "LLLLLLLLLL" & "," & "SSSSSSSSSSSSS" & "," & 1111 & "," & New Random().Next(1, 41) & "," & New Random().Next(1, 41))
-                    End If
-                Next
+                'For index = 1 To 10
+                '    If File.Exists(strNoDieFilePath) = True Then
+                '        stwNoDieWriter.WriteLine("RRRRRRRR" & "," & "LLLLLLLLLL" & "," & "SSSSSSSSSSSSS" & "," & 1111 & "," & New Random().Next(1, 41) & "," & New Random().Next(1, 41))
+                '    End If
+                'Next
 
-                If stwNoDieWriter IsNot Nothing Then
-                    stwNoDieWriter.Flush()
-                    stwNoDieWriter.Close()
-                End If
+                'If stwNoDieWriter IsNot Nothing Then
+                '    stwNoDieWriter.Flush()
+                '    stwNoDieWriter.Close()
+                'End If
             End If
             'NoDieIndexFile------------------------Debug-20231002-結束--------------------------
 
@@ -82,24 +83,31 @@ Public Class frmMain
             Dim DefectNoDieCount As Integer = 0
             'NoDieIndexFile------------------------Debug-20231016-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
-                While (stwNoDieReader.Peek() > -1)
-                    Dim readText As String = stwNoDieReader.ReadLine()
-                    Dim words As String() = readText.Split({","}, StringSplitOptions.None)
-                    If words.Length = 6 Then
-                        DefectNoDieCount += 1 'No Die數量(Defect)
-                        Dim x = Convert.ToInt32(words(4))
-						Dim y = Convert.ToInt32(words(5))
-                    End If
-                End While
+                'Dim stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
+                'While (stwNoDieReader.Peek() > -1)
+                '    Dim readText As String = stwNoDieReader.ReadLine()
+                '    Dim words As String() = readText.Split({","}, StringSplitOptions.None)
+                '    If words.Length = 6 Then
+                '        DefectNoDieCount += 1 'No Die數量(Defect)
+                '        Dim x1 = Convert.ToInt32(words(4))
+                '        Dim y1 = Convert.ToInt32(words(5))
+                '        Dim point1 As Point = New Point(x1, y1)
+                '        Dim x2 = -1
+                '        Dim y2 = -1
+                '        Dim point2 As Point = New Point(x2, y2)
+                '        If point1.Equals(point2) = True Then
+                '            Exit Sub
+                '        End If
+                '    End If
+                'End While
 
-                If stwNoDieReader IsNot Nothing Then
-                    stwNoDieReader.Close()
-                End If
+                'If stwNoDieReader IsNot Nothing Then
+                '    stwNoDieReader.Close()
+                'End If
 
-                If DefectNoDieCount > 0 Then
-                    MsgBox("DefectNoDieCount:" & DefectNoDieCount)
-                End If
+                'If DefectNoDieCount > 0 Then
+                '    MsgBox("DefectNoDieCount:" & DefectNoDieCount)
+                'End If
             End If
             'NoDieIndexFile------------------------Debug-20231016-結束--------------------------
 
