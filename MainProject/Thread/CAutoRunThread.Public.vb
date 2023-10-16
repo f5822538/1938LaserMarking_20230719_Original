@@ -109,7 +109,7 @@ Partial Class CAutoRunThread
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         '-------------------------20230911-開始--------------------------
                         'If oList(nIndex).ResultType = ResultType.Offset OrElse oList(nIndex).ResultType = ResultType.Lose Then '位移,蓋印漏雷/蓋印轉置
-                        If oList(nIndex).ResultType = ResultType.Offset OrElse oList(nIndex).ResultType = ResultType.DieLoseLaser1 Then '位移,蓋印漏雷/蓋印轉置
+                        If oList(nIndex).ResultType = ResultType.Offset OrElse oList(nIndex).ResultType = ResultType.DieLoseLaser1 OrElse oList(nIndex).ResultType = ResultType.DieLoseLaser2 Then '位移,蓋印漏雷/蓋印轉置
                             ROIOffset.Add(oList(nIndex).DefectBoundary.GetRatioRectangle(nRatio)) '重要判斷條件
                         End If
                         '-------------------------20230911-結束--------------------------

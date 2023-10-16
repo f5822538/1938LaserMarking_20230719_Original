@@ -303,7 +303,7 @@ Partial Class CMyHandshake
                         'sBinCodeList.Substring(nIndexX * 4, 4)必須搭配D:\img\ImportXML\的K612345678901003_Download.xml檔案中的<Layout LayoutId="Device" DefaultUnits="mm">做NoDie的座標點來紀錄
                         oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4) 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
-                        oProduct.MarkList(ScoreIndex1).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4) 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+                        'oProduct.MarkList(ScoreIndex1).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4) 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
                         Select Case sBinCodeList.Substring(nIndexX * 4, 4)
                             Case moHandshakeConfig.IsNoDieCode, moHandshakeConfig.IsNoDieCode1 'No Die 之代碼
@@ -312,7 +312,7 @@ Partial Class CMyHandshake
                                 ''10 18 測試修改
                                 oProduct.MarkList((nIndexX) + nIndexY * oProduct.DimensionX).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
-                                oProduct.MarkList(ScoreIndex1).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
+                                'oProduct.MarkList(ScoreIndex1).OriginalType = ResultType.NoDie 'No Die-標記 'NoDie((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
 
                                 '把NoDie座標存入csv檔中
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
