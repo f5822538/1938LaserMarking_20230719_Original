@@ -40,6 +40,8 @@ Public Class CMyMarkInfo
     <Index2Display(20, SR.OriginalBinCode), [ReadOnly](True)> Public Property OriginalBinCode As String = ""
     <Index2Display(21, SR.OriginalType)> Public Property OriginalType As ResultType = ResultType.NA
 
+    Public Shared Property StrNoDieFilePath As String = ""
+
     Public Sub Clear()
         'IsProcess = False
         OriginalBinCode = ""

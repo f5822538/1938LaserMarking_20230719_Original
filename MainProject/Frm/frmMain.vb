@@ -56,21 +56,49 @@ Public Class frmMain
 
             'NoDieIndexFile------------------------Debug-20231002-開始--------------------------
             If Debugger.IsAttached = True Then
-                'Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:yyyy-MM-dd HH_mm_ss_fff}", Application.StartupPath, DateTime.Now) '報告-重要路徑
-                'If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
-                'Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
-                'Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
-                'Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
+                Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:yyyy-MM-dd HH_mm_ss_fff}", Application.StartupPath, DateTime.Now) '報告-重要路徑
+                If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
+                Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
+                Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
+                CMyMarkInfo.StrNoDieFilePath = strNoDieFilePath
+                Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
 
-                'For index = 1 To 10
-                '    If File.Exists(strNoDieFilePath) = True Then
-                '        stwNoDieWriter.WriteLine("RRRRRRRR" & "," & "LLLLLLLLLL" & "," & "SSSSSSSSSSSSS" & "," & 1111 & "," & New Random().Next(1, 41) & "," & New Random().Next(1, 41))
-                '    End If
-                'Next
-                'stwNoDieWriter.Flush()
-                'stwNoDieWriter.Close()
+                For index = 1 To 10
+                    If File.Exists(strNoDieFilePath) = True Then
+                        stwNoDieWriter.WriteLine("RRRRRRRR" & "," & "LLLLLLLLLL" & "," & "SSSSSSSSSSSSS" & "," & 1111 & "," & New Random().Next(1, 41) & "," & New Random().Next(1, 41))
+                    End If
+                Next
+
+                If stwNoDieWriter IsNot Nothing Then
+                    stwNoDieWriter.Flush()
+                    stwNoDieWriter.Close()
+                End If
             End If
             'NoDieIndexFile------------------------Debug-20231002-結束--------------------------
+
+
+            '從csv檔中讀取NoDie的座標並記數
+            Dim DefectNoDieCount As Integer = 0
+            'NoDieIndexFile------------------------Debug-20231016-開始--------------------------
+            If Debugger.IsAttached = True Then
+                Dim stwNoDieReader = New StreamReader(CMyMarkInfo.StrNoDieFilePath, Encoding.UTF8)
+                While (stwNoDieReader.Peek() > -1)
+                    Dim readText As String = stwNoDieReader.ReadLine()
+                    Dim words As String() = readText.Split({","}, StringSplitOptions.None)
+                    If words.Length = 6 Then
+                        DefectNoDieCount += 1 'No Die數量(Defect)
+                    End If
+                End While
+
+                If stwNoDieReader IsNot Nothing Then
+                    stwNoDieReader.Close()
+                End If
+
+                If DefectNoDieCount > 0 Then
+                    MsgBox("DefectNoDieCount:" & DefectNoDieCount)
+                End If
+            End If
+            'NoDieIndexFile------------------------Debug-20231016-結束--------------------------
 
             '------------------------Debug-瑕疵結果訊息-開始--------------------------
             If Debugger.IsAttached = True Then

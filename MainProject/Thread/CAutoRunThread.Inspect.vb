@@ -210,8 +210,11 @@
                     moMyEquipment.Handshake.BuildStripOriginalMapInfo1(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake, moMainRecipe.RecipeID, sLotID, sReportStripID, mnSequence) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
                 Else
                     '' Augustin 220407 IT HandShake Test
+
+                    'moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
+
                     '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
-                    moMyEquipment.Handshake.BuildStripOriginalMapInfo(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
+                    moMyEquipment.Handshake.BuildStripOriginalMapInfo1(moMyEquipment.HardwareConfig.MiscConfig.ReadProductXmlPath, moProductProcess, moMyEquipment.LogHandshake, moMainRecipe.RecipeID, sLotID, sReportStripID, mnSequence) '判斷No Die: IsNoDieCode ------> OriginalType ------> ResultType ------> Result
                 End If
 
                 Call moProductProcess.GetEQPID(oProductConfig)

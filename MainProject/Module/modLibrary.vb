@@ -1483,8 +1483,29 @@
     ''' <remarks></remarks>
     Public Function CompareOriginalAndInspectNoDieSection1(ByRef oInspectSum As CInspectSum, ByRef oProduct As CMyProduct, oLog As II_LogTraceExtend, nDefectMaxCount As Integer, recipeId As String, lotId As String, stripId As String, mnSequence As Integer) As Boolean
         Try
-            Dim dateTimeNow As Date = DateTime.Now
-            Dim stwNoDieWriter As StreamWriter = Nothing
+            Dim stwNoDieReader As StreamReader = Nothing
+
+            '從csv檔中讀取NoDie的座標並記數
+            'recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1
+            'NoDieIndexFile-------------------------20231016-開始--------------------------
+            stwNoDieReader = New StreamReader(CMyMarkInfo.StrNoDieFilePath, Encoding.UTF8)
+            While (stwNoDieReader.Peek() > -1)
+                Dim readText As String = stwNoDieReader.ReadLine()
+                Dim words As String() = readText.Split({","}, StringSplitOptions.None)
+                If words.Length = 6 Then
+                    oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
+                End If
+            End While
+
+            If stwNoDieReader IsNot Nothing Then
+                stwNoDieReader.Close()
+            End If
+
+            If oInspectSum.InspectResult.DefectNoDieCount > 0 Then
+                Return True
+            End If
+            'NoDieIndexFile-------------------------20231016-結束--------------------------
+
             For i_InspectSum = 0 To oInspectSum.DefectList.DefectList.Count - 1
                 For i_oProduct = 0 To oProduct.MarkList.Count - 1
 
@@ -1499,53 +1520,20 @@
                         If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記 (重要判斷條件)
                             oInspectSum.DefectList.DefectList(i_InspectSum).ResultType = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                             oInspectSum.InspectResult.DefectNoDieCount += 1 'No Die數量(Defect)
-
-                            'NoDieIndexFile-------------------------20231002-開始--------------------------
-                            Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
-                            If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
-                            Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", mnSequence)
-                            Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
-                            stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
-                            'NoDieIndexFile-------------------------20231002-結束--------------------------
-
-                            'NoDieIndexFile-------------------------20231002-開始--------------------------
-                            If File.Exists(strNoDieFilePath) = True Then
-                                stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y)
-                            End If
-                            'NoDieIndexFile-------------------------20231002-結束--------------------------
                         End If
                     Else
                         If oProduct.MarkList(i_oProduct).OriginalType = ResultType.NoDie Then 'No Die-標記 (重要判斷條件)
                             If oProduct.MarkList(i_oProduct).Result <> ResultType.NoDie Then
                                 oProduct.MarkList(i_oProduct).Result = ResultType.NoDie '(((((((((((((((((((((((((((((((重要區塊))))))))))))))))))))))))))))))
                                 oInspectSum.InspectResult.NotDefectNoDieCount += 1 'No Die數量(NotDefect)
-
-                                'NotDefectNoDieIndexFile-------------------------20231002-開始--------------------------
-                                Dim sPath = String.Format("{0}\NotDefectNoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
-                                If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
-                                Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NotDefectNoDieIndexFile.csv", mnSequence)
-                                Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
-                                stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
-                                'NotDefectNoDieIndexFile-------------------------20231002-結束--------------------------
-
-                                'NotDefectNoDieIndexFile-------------------------20231002-開始--------------------------
-                                If File.Exists(strNoDieFilePath) = True Then
-                                    stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.X & "," & oInspectSum.DefectList.DefectList(i_InspectSum).DefectIndex.Y)
-                                End If
-                                'NotDefectNoDieIndexFile-------------------------20231002-結束--------------------------
                             End If
                         End If
                     End If
                     '(((((((((((((((((((((((((((((((重要區塊-結束-End  ))))))))))))))))))))))))))))))
                 Next
             Next
-
-            If stwNoDieWriter IsNot Nothing Then
-                stwNoDieWriter.Flush()
-                stwNoDieWriter.Close()
-            End If
         Catch ex As Exception
-            oLog.LogError("CompareOriginalAndInspectNoDieSection:" & ex.Message & Environment.NewLine & ex.StackTrace)
+            oLog.LogError("CompareOriginalAndInspectNoDieSection1:" & ex.Message & Environment.NewLine & ex.StackTrace)
             Return False
         End Try
         Return True

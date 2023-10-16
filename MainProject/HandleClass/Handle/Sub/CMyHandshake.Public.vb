@@ -295,7 +295,7 @@ Partial Class CMyHandshake
 
                     For nIndexX = 0 To oProduct.DimensionX - 1
 
-                        Dim ScoreIndex1 As Integer = nIndexX * 1000 + nIndexY
+                        Dim ScoreIndex1 As Integer = nIndexX * 1000 + nIndexY '用於一維陣列資料結構來反推NoDie座標用
 
                         'oProduct.MarkList((oProduct.DimensionX - 1 - nIndexX) + nIndexY * oProduct.DimensionX).OriginalBinCode = sBinCodeList.Substring(nIndexX * 4, 4)
                         ''10 18 測試修改
@@ -319,12 +319,12 @@ Partial Class CMyHandshake
                                 Dim sPath1 As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
                                 If Directory.Exists(sPath1) = False Then Directory.CreateDirectory(sPath1)
                                 Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", mnSequence)
-                                Dim strNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
-                                stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
+                                CMyMarkInfo.StrNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
+                                stwNoDieWriter = New StreamWriter(Path:=CMyMarkInfo.StrNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
 
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
-                                If File.Exists(strNoDieFilePath) = True Then
+                                If File.Exists(CMyMarkInfo.StrNoDieFilePath) = True Then
                                     stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1)
                                 End If
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
