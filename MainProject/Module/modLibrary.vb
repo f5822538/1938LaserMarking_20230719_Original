@@ -1488,7 +1488,7 @@
             '從csv檔中讀取NoDie的座標並記數
             'recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1
             'NoDieIndexFile-------------------------20231016-開始--------------------------
-            stwNoDieReader = New StreamReader(CMyMarkInfo.StrNoDieFilePath, Encoding.UTF8)
+            stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
             While (stwNoDieReader.Peek() > -1)
                 Dim readText As String = stwNoDieReader.ReadLine()
                 Dim words As String() = readText.Split({","}, StringSplitOptions.None)

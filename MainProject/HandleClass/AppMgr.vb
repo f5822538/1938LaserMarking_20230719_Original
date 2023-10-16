@@ -12,6 +12,7 @@ Public Class AppMgr
     Public Shared MILApp As MIL_ID = 0
     Public Shared MILSystem As MIL_ID = 0
     Public Shared MILDisplay As MIL_ID = 0
+    Public Shared Property StrNoDieFilePath As String = ""
 
     Shared Sub Main()
         Dim ofrmMain = New frmMain()

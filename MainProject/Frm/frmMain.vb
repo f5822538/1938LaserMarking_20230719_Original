@@ -54,13 +54,14 @@ Public Class frmMain
             End With
             moLog = moMyEquipment.LogSystem
 
+
             'NoDieIndexFile------------------------Debug-20231002-開始--------------------------
             If Debugger.IsAttached = True Then
                 Dim sPath As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:yyyy-MM-dd HH_mm_ss_fff}", Application.StartupPath, DateTime.Now) '報告-重要路徑
                 If Directory.Exists(sPath) = False Then Directory.CreateDirectory(sPath)
                 Dim strNoDieFileName = String.Format("RRRRRRRR" & "-" & "LLLLLLLLLL" & "-" & "SSSSSSSSSSSSS" & "-" & "[{0:d4}] NoDieIndexFile.csv", 1111)
                 Dim strNoDieFilePath = Path.Combine(sPath, strNoDieFileName)
-                CMyMarkInfo.StrNoDieFilePath = strNoDieFilePath
+                AppMgr.StrNoDieFilePath = strNoDieFilePath
                 Dim stwNoDieWriter = New StreamWriter(Path:=strNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
 
                 For index = 1 To 10
@@ -81,12 +82,14 @@ Public Class frmMain
             Dim DefectNoDieCount As Integer = 0
             'NoDieIndexFile------------------------Debug-20231016-開始--------------------------
             If Debugger.IsAttached = True Then
-                Dim stwNoDieReader = New StreamReader(CMyMarkInfo.StrNoDieFilePath, Encoding.UTF8)
+                Dim stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)
                 While (stwNoDieReader.Peek() > -1)
                     Dim readText As String = stwNoDieReader.ReadLine()
                     Dim words As String() = readText.Split({","}, StringSplitOptions.None)
                     If words.Length = 6 Then
                         DefectNoDieCount += 1 'No Die數量(Defect)
+                        Dim x = Convert.ToInt32(words(4))
+						Dim y = Convert.ToInt32(words(5))
                     End If
                 End While
 
@@ -99,6 +102,7 @@ Public Class frmMain
                 End If
             End If
             'NoDieIndexFile------------------------Debug-20231016-結束--------------------------
+
 
             '------------------------Debug-瑕疵結果訊息-開始--------------------------
             If Debugger.IsAttached = True Then

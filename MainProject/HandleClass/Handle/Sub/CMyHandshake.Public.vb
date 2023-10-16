@@ -319,12 +319,12 @@ Partial Class CMyHandshake
                                 Dim sPath1 As String = String.Format("{0}\NoDieIndexFile\{1:yyyy-MM}\{1:yyyy-MM-dd}\{1:HH_mm_ss_fff}", Application.StartupPath, dateTimeNow) '報告-重要路徑
                                 If Directory.Exists(sPath1) = False Then Directory.CreateDirectory(sPath1)
                                 Dim strNoDieFileName = String.Format(recipeId & "-" & lotId & "-" & stripId & "-" & "[{0:d4}] NoDieIndexFile.csv", mnSequence)
-                                CMyMarkInfo.StrNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
-                                stwNoDieWriter = New StreamWriter(Path:=CMyMarkInfo.StrNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
+                                AppMgr.StrNoDieFilePath = Path.Combine(sPath1, strNoDieFileName)
+                                stwNoDieWriter = New StreamWriter(Path:=AppMgr.StrNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
 
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
-                                If File.Exists(CMyMarkInfo.StrNoDieFilePath) = True Then
+                                If File.Exists(AppMgr.StrNoDieFilePath) = True Then
                                     stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1)
                                 End If
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
