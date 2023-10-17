@@ -1150,7 +1150,7 @@ Module modLibrary
                 'End If
 
                 SyncLock CAutoRunThread.ProcessDefectListLock
-                    If bIsAddDefect = True Then
+                    If bIsAddDefect = True Then '在此處StandardDeviation函數內只有亮瑕疵與暗瑕疵有加入oInspectSum.DefectList.DefectList中
                         oInspectSum.DefectList.DefectList.Add(CType(oInspectSum.DefectListDraw.Item(oDefectIndex).Clone(), CMyDefect)) '把oDefect(CMyDefect)加入至oInspectSum.DefectList.DefectList
                     End If
                 End SyncLock

@@ -260,17 +260,6 @@
                     If (oInspectSum.InspectResult.DefectCount - oInspectSum.InspectResult.DefectNoDieCount) > moMyEquipment.MaxDefectCountForUpdateMap AndAlso _
                         oInspectSum.InspectResult.ModleLoseStatus = True Then '判斷條件
                         oAlarmCode = AlarmCode.IsDieLoseLaser '漏雷
-
-                        Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
-                        Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
-                        Dim fileName1 As String = stFrame1.GetFileName
-                        Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
-                        Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
-                        Dim fileMethodName1 As String = stFrame1.GetMethod().Name
-                        moLog.LogError("FileName:" & fileName1)
-                        moLog.LogError("FileLineNumber:" & fileLineNum1)
-                        moLog.LogError("FileColumnNumber:" & fileColNum1)
-                        moLog.LogError("MethodName:" & fileMethodName1)
                     End If
 
                     If oAlarmCode = AlarmCode.IsDieLoseLaser Then '漏雷
