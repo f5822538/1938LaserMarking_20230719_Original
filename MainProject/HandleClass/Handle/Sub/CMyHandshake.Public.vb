@@ -286,8 +286,10 @@ Partial Class CMyHandshake
             If xNodesList IsNot Nothing AndAlso xNodesList.Count = oProduct.DimensionY Then
 
                 '把NoDie座標存入csv檔中
+                'NoDieIndexFile-------------------------20231002-開始--------------------------
                 Dim dateTimeNow As Date = DateTime.Now
                 Dim stwNoDieWriter As StreamWriter = Nothing
+                'NoDieIndexFile-------------------------20231002-結束--------------------------
 
                 For nIndexY = 0 To oProduct.DimensionY - 1
 
@@ -325,7 +327,7 @@ Partial Class CMyHandshake
                                 'NoDieIndexFile-------------------------20231002-開始--------------------------
                                 If File.Exists(AppMgr.StrNoDieFilePath) = True Then
                                     stwNoDieWriter = New StreamWriter(Path:=AppMgr.StrNoDieFilePath, append:=True, Encoding:=Encoding.UTF8)
-                                    stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & nIndexX + 1 & "," & nIndexY + 1)
+                                    stwNoDieWriter.WriteLine(recipeId & "," & lotId & "," & stripId & "," & mnSequence & "," & (oProduct.DimensionX - nIndexX) & "," & (nIndexY + 1))
                                 End If
                                 'NoDieIndexFile-------------------------20231002-結束--------------------------
 

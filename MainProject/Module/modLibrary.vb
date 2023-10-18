@@ -1370,6 +1370,7 @@ Module modLibrary
                         End SyncLock
 
 
+
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         '從csv檔中讀取NoDie的座標並記數
                         Dim DefectNoDieCount As Integer = 0
@@ -1388,6 +1389,8 @@ Module modLibrary
                                     Dim y2 = oMarkInfo.MarkY + 1
                                     Dim point2 As Point = New Point(x2, y2)
                                     If point1.Equals(point2) = True Then
+                                        oMarkInfo.Result = ResultType.NoDie
+                                        oInspectSum.InspectResult.ModleLoseStatus = False 'BuildLoseModel 漏雷(CInspectResult) '2023-09-22 17:30 因為要除錯漏雷與NoDie無法分開的問題
                                         Exit Sub
                                     End If
                                 End If
