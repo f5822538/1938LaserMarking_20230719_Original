@@ -80,7 +80,7 @@ Public Class frmMain
 
 
             '從csv檔中讀取NoDie的座標並記數
-            Dim DefectNoDieCount As Integer = 0
+            'Dim DefectNoDieCount As Integer = 0
             'NoDieIndexFile------------------------Debug-20231016-開始--------------------------
             If Debugger.IsAttached = True Then
                 'Dim stwNoDieReader = New StreamReader(AppMgr.StrNoDieFilePath, Encoding.UTF8)

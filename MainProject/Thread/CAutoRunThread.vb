@@ -786,6 +786,7 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
             moMyEquipment.InnerThread.Inspect.Reset() '將事件的狀態設定為未收到信號，會造成執行緒封鎖
             Call oRunOnceTact.CalSpan()
             Call moLog.LogInformation(String.Format("======================= [{0:d4}] 單次執行，完成。[{1:f4}]ms =======================", mnSequence, oRunOnceTact.CurrentSpan))
+            AppMgr.StrNoDieFilePath = String.Empty
             Call Thread.Sleep(200)
         End With
         '-----------------------moMyEquipment-End With-20230828-結束--------------------------
