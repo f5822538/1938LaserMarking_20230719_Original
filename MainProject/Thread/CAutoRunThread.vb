@@ -1,4 +1,4 @@
-Public Class CAutoRunThread : Inherits CThreadBaseExtend
+﻿Public Class CAutoRunThread : Inherits CThreadBaseExtend
 
     Private moMyEquipment As CMyEquipment
     Private moMainRecipe As CMainRecipe
@@ -75,8 +75,11 @@ Public Class CAutoRunThread : Inherits CThreadBaseExtend
     ''' <remarks></remarks>
     Public Sub New(oMyEquipment As CMyEquipment, oLog As II_LogTraceExtend)
         MyBase.New(oLog, " Auto Run", 256000)
-
         Try
+            '-------------------------20231019-開始--------------------------
+            SynchronizationContext.SetSynchronizationContext(frmMain.moSync)
+            '-------------------------20231019-結束--------------------------
+
             moMyEquipment = oMyEquipment
             moMainRecipe = oMyEquipment.MainRecipe
             moRecipeCamera = oMyEquipment.MainRecipe.RecipeCamera

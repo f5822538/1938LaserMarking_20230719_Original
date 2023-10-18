@@ -1,4 +1,4 @@
-Imports MyHandleResult = System.Tuple(Of Boolean, String)
+﻿Imports MyHandleResult = System.Tuple(Of Boolean, String)
 Imports iTVisionService.DisplayLib
 Imports RecipeLib
 Imports System.Collections.Concurrent
@@ -19,7 +19,7 @@ Public Class frmMain
     Private moCanvas As II_iTVCanvas
     Private moCanvasLocate1 As II_iTVCanvas
     Private moCanvasLocate2 As II_iTVCanvas
-    Private moSync As SynchronizationContext
+    Public Shared moSync As SynchronizationContext
 
     Private mnCounter As Integer = 0
 

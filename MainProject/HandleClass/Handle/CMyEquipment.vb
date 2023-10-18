@@ -1,4 +1,4 @@
-Imports System.Net.WebRequestMethods.Ftp
+ï»¿Imports System.Net.WebRequestMethods.Ftp
 Public Class CMyEquipment
 
     Private moHardwareConfig As CHardwareConfig
@@ -34,6 +34,11 @@ Public Class CMyEquipment
     End Property
 
     Public Sub New(oHardwareConfig As CHardwareConfig, oMainRecipe As CMainRecipe, oSync As SynchronizationContext)
+        '-------------------------20231019-é–‹å§‹--------------------------
+        SynchronizationContext.SetSynchronizationContext(oSync)
+        '-------------------------20231019-çµæŸ--------------------------
+
+
         moHardwareConfig = oHardwareConfig
         moMainRecipe = oMainRecipe
 
@@ -53,8 +58,8 @@ Public Class CMyEquipment
         Dim IsOk As Boolean = True
 
         If CreateDIO3208() = False Then IsOk = False
-        If InitialCamera() = False Then IsOk = False 'ªì©l¤Æ-¬Û¾÷
-        If InitialHandshake() = False Then IsOk = False 'Server ¶}±Ò
+        If InitialCamera() = False Then IsOk = False 'åˆå§‹åŒ–-ç›¸æ©Ÿ
+        If InitialHandshake() = False Then IsOk = False 'Server é–‹å•Ÿ
 
         If moHardwareConfig.MiscConfig.IsUseModelFinder = True Then
             If InitialLocater() = False Then
@@ -62,20 +67,20 @@ Public Class CMyEquipment
             End If
         End If
 
-        If moHardwareConfig.CodeReaderBypass = False Then '±ø½XÅª¨ú¤£Bypass
+        If moHardwareConfig.CodeReaderBypass = False Then 'æ¢ç¢¼è®€å–ä¸Bypass
             If InitialCodeReader() = False Then
                 IsOk = False
             End If
         End If
 
-        moInnerThread = New CInnerThread(Me) 'ªì©l¤Æ-CInnerThread
+        moInnerThread = New CInnerThread(Me) 'åˆå§‹åŒ–-CInnerThread
 
-        Dim oAlarmCode As AlarmCode = LightVacuumDown(LogSystem) '¿O·½¤U­°
+        Dim oAlarmCode As AlarmCode = LightVacuumDown(LogSystem) 'ç‡ˆæºä¸‹é™
         If oAlarmCode <> AlarmCode.IsOK Then
             TriggerAlarm(oAlarmCode) : Return False
         End If
 
-        Call SetLightOff(LogSystem) 'Ãö³¬-¿O·½
+        Call SetLightOff(LogSystem) 'é—œé–‰-ç‡ˆæº
 
         Dim sFileName As String = String.Format("{0:yyyy-MM-dd}", Date.Now)
         YieldConfig = New CYieldConfig(Application.StartupPath & "\Yield", sFileName, "INI")
@@ -86,7 +91,7 @@ Public Class CMyEquipment
 
     Public Sub Close()
         Call LightVacuumDown(LogSystem)
-        Call SetLightOff(LogSystem) 'Ãö³¬-¿O·½
+        Call SetLightOff(LogSystem) 'é—œé–‰-ç‡ˆæº
 
         Call CameraClose()
         Call CloseHandshake()
