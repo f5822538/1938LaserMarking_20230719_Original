@@ -1,4 +1,4 @@
-Public Class CHandshakeThread : Inherits CThreadBaseExtend
+﻿Public Class CHandshakeThread : Inherits CThreadBaseExtend
 
     Public Event ChangeRecipe(oHandshakeProductList As List(Of CMyProduct)) '更換樣本-事件
 
@@ -8,6 +8,11 @@ Public Class CHandshakeThread : Inherits CThreadBaseExtend
 
     Public Sub New(oMyEquipment As CMyEquipment)
         MyBase.New(oMyEquipment.LogHandshake, " Handshake")
+
+        '-------------------------20231019-開始--------------------------
+        SynchronizationContext.SetSynchronizationContext(frmMain.moSync)
+        '-------------------------20231019-結束--------------------------
+
         moMyEquipment = oMyEquipment
         Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("{0} 流程啟動", moThread.Name))
     End Sub

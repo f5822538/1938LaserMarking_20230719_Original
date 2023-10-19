@@ -1,4 +1,4 @@
-Public Class CInnerThread
+﻿Public Class CInnerThread
 
     Private moMyEquipment As CMyEquipment
     Public AutoRunThread As CAutoRunThread
@@ -22,6 +22,10 @@ Public Class CInnerThread
     ''' <remarks></remarks>
     Public Sub New(oMyEquipment As CMyEquipment)
         Try
+            '-------------------------20231019-開始--------------------------
+            SynchronizationContext.SetSynchronizationContext(frmMain.moSync)
+            '-------------------------20231019-結束--------------------------
+
             moMyEquipment = oMyEquipment
             moLog = moMyEquipment.LogSystem
 

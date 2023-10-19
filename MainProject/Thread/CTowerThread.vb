@@ -1,9 +1,14 @@
-Public Class CTowerThread : Inherits CThreadBaseExtend
+﻿Public Class CTowerThread : Inherits CThreadBaseExtend
 
     Private moMyEquipment As CMyEquipment
 
     Public Sub New(oMyEquipment As CMyEquipment)
         MyBase.New(oMyEquipment.LogControl, String.Format("Tower Thread"))
+
+        '-------------------------20231019-開始--------------------------
+        SynchronizationContext.SetSynchronizationContext(frmMain.moSync)
+        '-------------------------20231019-結束--------------------------
+
         moMyEquipment = oMyEquipment
         Call moLog.Log(LOGHandle.HANDLE_CREATE, String.Format("{0} 流程啟動", moThread.Name))
     End Sub

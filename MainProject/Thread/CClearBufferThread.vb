@@ -1,9 +1,14 @@
-Public Class CClearBufferThread : Inherits CThreadBaseExtend
+﻿Public Class CClearBufferThread : Inherits CThreadBaseExtend
 
     Private moMyEquipment As CMyEquipment
 
     Public Sub New(oMyEquipment As CMyEquipment)
         Call MyBase.New(oMyEquipment.LogSystem, "Buffer Clear Thread")
+
+        '-------------------------20231019-開始--------------------------
+        SynchronizationContext.SetSynchronizationContext(frmMain.moSync)
+        '-------------------------20231019-結束--------------------------
+
         moMyEquipment = oMyEquipment
     End Sub
 
