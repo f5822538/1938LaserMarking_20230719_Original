@@ -111,6 +111,8 @@
     ''' <remarks></remarks>
     Public Overrides Sub Process()
         While True
+            'CMyEquipment.NewBuildStripOriginalMapInfo("D:\img\ImportXML", moLog, "K612345678901003", 1111) 'NoDie-Debug-測試用
+
             WaitHandle.WaitAny({mbStopSlim.WaitHandle, moRunInspect.WaitHandle})
             Select Case True
                 Case mbStopSlim.IsSet() = True
