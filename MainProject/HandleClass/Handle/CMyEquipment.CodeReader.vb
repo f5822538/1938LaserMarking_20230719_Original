@@ -151,15 +151,16 @@
                 Dim value2 As String = xmlAttr2.Value
                 If value1 = "Device" AndAlso xmlAttr2.Value = "mm" Then
                     Dim elem As XmlNode = elemList(i)
-                    For j As Integer = 0 To elem.ChildNodes.Count - 1 Step 1
-                        Dim xAtrr As XmlAttribute = elem.ChildNodes(j).Attributes("X")
-                        Dim yAtrr As XmlAttribute = elem.ChildNodes(j).Attributes("Y")
-                        If xAtrr IsNot Nothing AndAlso yAtrr IsNot Nothing Then
-                            Int32.TryParse(xAtrr.Value, dimensionX)
-                            Int32.TryParse(yAtrr.Value, dimensionY)
-                        End If
-                    Next
-
+                    If elem.ChildNodes.Count = 1 Then
+                        For j As Integer = 0 To elem.ChildNodes.Count - 1 Step 1
+                            Dim xAtrr As XmlAttribute = elem.ChildNodes(j).Attributes("X")
+                            Dim yAtrr As XmlAttribute = elem.ChildNodes(j).Attributes("Y")
+                            If xAtrr IsNot Nothing AndAlso yAtrr IsNot Nothing Then
+                                Int32.TryParse(xAtrr.Value, dimensionX)
+                                Int32.TryParse(yAtrr.Value, dimensionY)
+                            End If
+                        Next
+                    End If
                 End If
             Next
 
