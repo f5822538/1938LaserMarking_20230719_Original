@@ -1332,44 +1332,10 @@ Module modLibrary
                         oMarkInfo.Result = ResultType.NoDie
                         oInspectSum.InspectResult.ModleLoseStatus = False 'BuildLoseModel 漏雷(CInspectResult) '2023-09-22 17:30 因為要除錯漏雷與NoDie無法分開的問題
                     Else
-                        '-------------------------20230905-開始--------------------------
-                        If Debugger.IsAttached = True Then
-                            '原本的寫法
-                            'oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
-                            oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
-                        ElseIf Debugger.IsAttached = False Then
-                            '測試的寫法
-                            oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
-                        End If
-                        '-------------------------20230905-結束--------------------------
 
                         SyncLock CAutoRunThread.ProcessDefectListLock
                             oInspectSum.InspectResult.DefectCount += 1 '((((((((((((((((((((((((((((((( 重要區塊 ))))))))))))))))))))))))))))))
-
-                            '-------------------------瑕疵結果訊息-開始--------------------------
-                            Dim defectResultMsg As String = String.Empty
-                            For Each value As ResultType In [Enum].GetValues(GetType(ResultType))
-                                If oMarkInfo.Result = value Then
-                                    defectResultMsg = frmMain.GetDescriptionText(oMarkInfo.Result)
-                                    Exit For
-                                End If
-                            Next
-                            oLog.LogError(String.Format("[{0:d4}] B瑕疵:" & defectResultMsg, nSequence)) 'Log 日誌(處理 Process)
-                            Dim stTrace1 As StackTrace = New StackTrace(fNeedFileInfo:=True)
-                            Dim stFrame1 As StackFrame = stTrace1.GetFrames(0)
-                            Dim fileName1 As String = stFrame1.GetFileName
-                            Dim fileLineNum1 As Integer = stFrame1.GetFileLineNumber
-                            Dim fileColNum1 As Integer = stFrame1.GetFileColumnNumber
-                            Dim fileMethodName1 As String = stFrame1.GetMethod().Name
-                            oLog.LogError("FileName:" & fileName1)
-                            oLog.LogError("FileLineNumber:" & fileLineNum1)
-                            oLog.LogError("FileColumnNumber:" & fileColNum1)
-                            oLog.LogError("MethodName:" & fileMethodName1)
-                            oLog.LogError(String.Format("[{0:d4}] DefectCount:" & oInspectSum.InspectResult.DefectCount, nSequence)) 'Log 日誌(處理 Process)
-                            '-------------------------瑕疵結果訊息-結束--------------------------
                         End SyncLock
-
-
 
                         '(((((((((((((((((((((((((((((((重要區塊-開始-Begin))))))))))))))))))))))))))))))
                         '從csv檔中讀取NoDie的座標並記數
@@ -1403,6 +1369,18 @@ Module modLibrary
                         'NoDieIndexFile-------------------------20231016-結束--------------------------
 
 
+                        '-------------------------20230905-開始--------------------------
+                        If Debugger.IsAttached = True Then
+                            '原本的寫法
+                            'oMarkInfo.Result = ResultType.Lose '漏雷(CMyMarkInfo)
+                            oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
+                        ElseIf Debugger.IsAttached = False Then
+                            '測試的寫法
+                            oMarkInfo.Result = ResultType.DieLoseLaser2 '漏雷(CMyMarkInfo)
+                        End If
+                        '-------------------------20230905-結束--------------------------
+
+                        oInspectSum.InspectResult.ModleLoseStatus = True 'BuildLoseModel 漏雷(CInspectResult) '2023-09-22 17:30 因為要除錯漏雷與NoDie無法分開的問題 
 
                         Dim oDefect As New CMyDefect
                         oDefect.InpsectMethod = Comp_Inspect_Method.Comp_Define2
